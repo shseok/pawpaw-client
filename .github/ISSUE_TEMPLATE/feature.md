@@ -1,7 +1,7 @@
 ---
 name: FEATURE
 about: 기능추가,기능보완 하고싶은 내용을 알려주세요
-title: "[FEATURE] :  "
+title: "[FE-FEATURE] :  "
 labels: ''
 assignees: ''
 

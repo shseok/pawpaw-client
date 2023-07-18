@@ -1,7 +1,7 @@
 ---
 name: BUG
 about: "\b버그를 알려주세요."
-title: "[BUG] :"
+title: "[FE-BUG] :"
 labels: ''
 assignees: ''
 
