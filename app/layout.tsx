@@ -5,6 +5,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const test = () => {
+    alert("d");
+  };
   return (
     <html lang="ko">
       <body>{children}</body>
