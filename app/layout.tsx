@@ -1,6 +1,5 @@
 import "../styles/globals.css";
-import Button from "@/components/ui/Button";
-import FlexBox from "@/components/ui/FlexBox";
+
 export default function RootLayout({
   children,
 }: {
