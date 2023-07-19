@@ -11,10 +11,10 @@ interface ButtonProps {
   onClickAction?: MouseEventHandler<HTMLButtonElement>;
 }
 const sizes = {
-  sm: "p-2 h-[36px] w-24",
-  md: "p-2 h-[42px] w-24",
-  lg: "p-2 h-[54px] w-24",
-  xl: "p-2 h-[66px] w-24",
+  sm: "h-[36px]",
+  md: "h-[42px]",
+  lg: "h-[54px]",
+  xl: "h-[66px]",
 };
 const variants = {
   primary: "bg-primary hover:bg-[#08995C] text-white",
@@ -37,7 +37,7 @@ export default function Button({
   const disabledClass = disabled && "opacity-50 cursor-not-allowed";
   return (
     <button
-      className={`rounded-[10px] ${sizeClass} ${variantClass} ${fullWidthClass} ${disabledClass} ${className}`}
+      className={`rounded-[10px] p-2 w-24 ${sizeClass} ${variantClass} ${fullWidthClass} ${disabledClass} ${className}`}
       onClick={onClickAction}
       disabled={disabled}
     >
