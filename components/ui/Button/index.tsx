@@ -21,6 +21,7 @@ const variants = {
   secondary:
     "bg-white border-2 border-primary  text-primary hover:border-[#08995C] hover:text-[#08995C]",
 };
+
 export default function Button({
   children,
   size = "md",

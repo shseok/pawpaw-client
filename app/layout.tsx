@@ -1,13 +1,11 @@
 import "../styles/globals.css";
 import Button from "@/components/ui/Button";
+import FlexBox from "@/components/ui/FlexBox";
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const test = () => {
-    alert("d");
-  };
   return (
     <html lang="ko">
       <body>
@@ -17,7 +15,6 @@ export default function RootLayout({
             <div className="h-screen border-2 border-black">피드</div>
             <div className="flex-col bg-white border-2 border-red-500 top-8 right-8">
               <div>ddddddddddddd</div>
-              <Button onClickAction={test}>Button</Button>
             </div>
           </div>
           {children}
