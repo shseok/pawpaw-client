@@ -46,7 +46,7 @@ export default function FlexBox({
   const gapSize = `gap-${gap}`;
   return (
     <div
-      className={`flex ${flexDirection} items- ${justifyContent} ${alignItems} ${gapSize} ${className}`}
+      className={`flex ${flexDirection} ${justifyContent} ${alignItems} ${gapSize} ${className}`}
     >
       {children}
     </div>
