@@ -13,7 +13,9 @@ export default function SideButton({ activeButton, onClick, svgComponent }: Side
   return (
     <div className="flex flex-row items-center h-20 ml-5 flex-nowrap" onClick={onClick}>
       {svgComponent({ color })}
-      <div className={`text-[${color}] text-2xl ml-3 cursor-pointer`}>{name}</div>
+      <div className={`text-2xl ml-3 cursor-pointer`} style={{ color }}>
+        {name}
+      </div>
     </div>
   );
 }
