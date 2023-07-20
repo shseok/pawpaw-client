@@ -37,7 +37,7 @@ export default function Button({
   const disabledClass = disabled && "opacity-50 cursor-not-allowed";
   return (
     <button
-      className={`rounded-[10px] p-2 w-24 ${sizeClass} ${variantClass} ${fullWidthClass} ${disabledClass} ${className}`}
+      className={`rounded-[10px] p-2 ${sizeClass} ${variantClass} ${fullWidthClass} ${disabledClass} ${className}`}
       onClick={onClickAction}
       disabled={disabled}
     >
