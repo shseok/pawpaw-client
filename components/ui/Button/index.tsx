@@ -33,7 +33,7 @@ export default function Button({
 }: ButtonProps) {
   const sizeClass = sizes[size];
   const variantClass = variants[variant];
-  const fullWidthClass = fullWidth && "w-full";
+  const fullWidthClass = fullWidth ? "w-full" : "w-24";
   const disabledClass = disabled && "opacity-50 cursor-not-allowed";
   return (
     <button
