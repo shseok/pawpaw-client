@@ -11,11 +11,20 @@ export default function SideButton({ activeButton, onClick, svgComponent }: Side
       ? "검색"
       : "알림";
   return (
-    <div className="flex flex-row items-center h-20 ml-5 flex-nowrap" onClick={onClick}>
-      {svgComponent({ color })}
-      <div className={`text-2xl ml-3 cursor-pointer`} style={{ color }}>
-        {name}
+    <>
+      <div className="flex flex-row items-center h-20 flex-nowrap" onClick={onClick}>
+        {activeButton === svgComponent.name ? (
+          <div className="relative h-20">
+            <div className="absolute w-3 h-20 transform -translate-x-1/2 -translate-y-1/2 bg-[#0ABE7D] border-2 top-1/2 left-1/2  border-[#0ABE7D]" />
+          </div>
+        ) : null}
+        <div className="flex flex-row items-center ml-5 flex-nowrap">
+          {svgComponent({ color })}
+          <div className={`text-2xl ml-3 cursor-pointer`} style={{ color }}>
+            {name}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
