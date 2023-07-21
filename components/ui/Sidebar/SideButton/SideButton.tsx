@@ -19,7 +19,7 @@ export default function SideButton({ activeButton, onClick, svgComponent }: Side
   return (
     <>
       <div className="flex flex-row items-center h-16 flex-nowrap" onClick={onClick}>
-        {activeButton === svgComponent.name ? (
+        {activeButton === svgComponent.name && svgComponent.name !== "Search" && svgComponent.name !== "Alert" ? (
           <div className="relative h-16">
             <div className="absolute w-3 h-20 transform -translate-x-1/2 -translate-y-1/2 bg-[#0ABE7D] border-2 top-1/2 left-1/2  border-[#0ABE7D]" />
           </div>
