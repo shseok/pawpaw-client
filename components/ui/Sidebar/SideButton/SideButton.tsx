@@ -1,35 +1,30 @@
-interface SidebarButtonProps {
-  svgComponent: (props: { color: string }) => JSX.Element;
-  activeButton: string;
-  onClick: () => void;
-}
-
-export default function SideButton({ activeButton, onClick, svgComponent }: SidebarButtonProps) {
+export default function SideButton({ activeButton, onClick, svgComponent, desktopWidth }: SidebarProps) {
   const color = activeButton === svgComponent.name ? "#0ABE7D" : "#74787D";
-  const name =
-    svgComponent.name === "Feed"
-      ? "피드"
-      : svgComponent.name === "Community"
-      ? "커뮤니티"
-      : svgComponent.name === "Mypage"
-      ? "마이 페이지"
-      : svgComponent.name === "Search"
-      ? "검색"
-      : "알림";
+  const names: { [key: string]: string } = {
+    Feed: "피드",
+    Community: "커뮤니티",
+    Mypage: "마이 페이지",
+    Search: "검색",
+    Alert: "알림",
+  };
+  const name = names[svgComponent.name];
+
   return (
     <>
-      <div className="flex flex-row items-center h-16 flex-nowrap" onClick={onClick}>
+      <div className={`relative flex flex-row ${desktopWidth === true ? "items" : "justify"}-center h-16 flex-nowrap`} onClick={onClick}>
         {activeButton === svgComponent.name && svgComponent.name !== "Search" && svgComponent.name !== "Alert" ? (
-          <div className="relative h-16">
-            <div className="absolute w-3 h-20 transform -translate-x-1/2 -translate-y-1/2 bg-[#0ABE7D] border-2 top-1/2 left-1/2  border-[#0ABE7D]" />
-          </div>
+          <div className="absolute left-0 w-[5px] h-16 bg-[#0ABE7D]" />
         ) : null}
-        <div className="flex flex-row items-center ml-5 flex-nowrap">
-          {svgComponent({ color })}
-          <div className={`text-xl ml-3 cursor-pointer`} style={{ color }}>
-            {name}
+        {desktopWidth === true ? (
+          <div className="flex flex-nowrap ml-7">
+            {svgComponent({ color })}
+            <div className={`text-xl ml-3 cursor-pointer`} style={{ color }}>
+              {name}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex flex-row items-center">{svgComponent({ color })}</div>
+        )}
       </div>
     </>
   );

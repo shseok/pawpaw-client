@@ -1,15 +1,21 @@
-import Image from "next/image";
+"use client";
+
 import SideButtonContainer from "./SideButtonContainer";
+import BottomToggle from "./BottomToggle";
+import { useState } from "react";
+import SidebarLogo from "./SidebarLogo";
 
 export default function Sidebar() {
+  const [toggle, setToggle] = useState(true);
+  const desktopWidth = toggle === true ? "w-64" : "w-24";
+
   return (
     <>
-      <section className="fixed left-0 w-64 h-screen bg-[#F7F8F9]">
-        <div className="my-7">
-          <Image src="/sidebar/desktop/desktop_logo.svg" alt="logo" width={140} height={42} className="mx-auto" />
-        </div>
-        <SideButtonContainer />
-      </section>
+      <nav className={`fixed left-0 ${desktopWidth} h-screen bg-[#F7F8F9]`}>
+        <SidebarLogo desktopWidth={toggle} />
+        <SideButtonContainer desktopWidth={toggle} />
+        <BottomToggle desktopWidth={toggle} onClick={() => setToggle(!toggle)} />
+      </nav>
     </>
   );
 }
