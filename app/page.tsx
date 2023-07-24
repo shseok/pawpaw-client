@@ -1,9 +1,9 @@
 import Image from "next/image";
-import ChatCard from "@/components/ui/ChatCard";
+import ChatCardList from "@/components/pages/main/ChatCardList";
 export default function Home() {
   return (
     <>
-      <ChatCard />
+      <ChatCardList />
     </>
   );
 }
