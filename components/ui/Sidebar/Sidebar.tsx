@@ -11,7 +11,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <nav className={`fixed left-0 ${desktopWidth} h-screen bg-[#F7F8F9]`}>
+      <nav className={`fixed left-0 ${desktopWidth} h-full bg-[#F7F8F9]`}>
         <SidebarLogo desktopWidth={toggle} />
         <SideButtonContainer desktopWidth={toggle} />
         <BottomToggle desktopWidth={toggle} onClick={() => setToggle(!toggle)} />
