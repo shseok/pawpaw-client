@@ -1,3 +1,5 @@
+import { SidebarProps } from "@/types/types";
+
 export default function SideButton({ activeButton, onClick, svgComponent, desktopWidth }: SidebarProps) {
   const color = activeButton === svgComponent.name ? "#0ABE7D" : "#74787D";
   const names: { [key: string]: string } = {
