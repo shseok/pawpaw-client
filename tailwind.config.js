@@ -15,6 +15,9 @@ module.exports = {
       colors: {
         primary: "#0ABE7D",
       },
+      boxShadow: {
+        chatCard: "0px 0px 20px 0px #00000014",
+      },
     },
   },
   plugins: [],
