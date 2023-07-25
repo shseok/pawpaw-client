@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SideButton from "./SideButton/SideButton";
 import { svgComponents } from "./SideButton/svgComponents";
+import { SidebarProps } from "@/types/types";
 
 export default function SideButtonContainer({ desktopWidth }: Pick<SidebarProps, "desktopWidth">) {
   const { Feed, Community, Mypage, Search, Alert } = svgComponents;

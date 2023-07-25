@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SidebarProps } from "@/types/types";
 
 export default function SidebarLogo({ desktopWidth }: Pick<SidebarProps, "desktopWidth">) {
   return (
