@@ -32,6 +32,7 @@ const alignOptions = {
  * @props gap : gap 속성 (기본값 : 0)
  * @props justify : justify-content 속성 (기본값 : center)
  * @props className : 기타 추가하고싶은 클래스명 작성 (기본값 :"")
+ * @props as : 태그를 설정할수있습니다 as="aside" 를 prop으로 넘겨주면 해당박스의태그는 aside가 됩니다. (기본값: "div")
  */
 export default function FlexBox({
   children,
