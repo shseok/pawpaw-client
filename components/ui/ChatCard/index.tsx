@@ -1,6 +1,7 @@
 import Button from "../Button";
 import FlexBox from "../FlexBox";
 import Tag from "../Tag";
+import Avatar from "../Avatar";
 export default function ChatCard() {
   return (
     <FlexBox
@@ -29,8 +30,13 @@ export default function ChatCard() {
         ...
       </FlexBox>
       <FlexBox justify="between" className="w-full">
-        <FlexBox className="gap-3 text-[#74787D]">
-          <div className="w-10 h-10 bg-black rounded-full"></div>
+        <FlexBox gap={3} className="text-[#74787D]">
+          <Avatar
+            height={10}
+            width={10}
+            user_img={"/default.png"}
+            user_name={"default"}
+          />
           <p className="font-bold ">닉네임</p>
           <p>42명</p>
         </FlexBox>
