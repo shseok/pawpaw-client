@@ -2,7 +2,6 @@
 import Button from "../Button";
 import FlexBox from "../FlexBox";
 import Tag from "../Tag";
-import Avatar from "../Avatar";
 import ChatCardTitle from "./ChatCardTitle";
 import ChatCardInfo from "./ChatCardInfo";
 export default function ChatCard() {
