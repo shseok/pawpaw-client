@@ -6,6 +6,7 @@ export default function ChatCardList() {
     <FlexBox
       direction="column"
       align="start"
+      as="aside"
       className="gap-3 max-w-[517px] invisible md:visible"
     >
       <FlexBox justify="between" className="w-full">

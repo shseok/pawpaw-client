@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ElementType, ReactNode } from "react";
 
 interface FlexBoxProps {
   children: ReactNode;
@@ -7,6 +7,7 @@ interface FlexBoxProps {
   justify?: "start" | "end" | "center" | "between" | "around";
   align?: "start" | "end" | "center";
   className?: string;
+  as?: ElementType;
 }
 const justifyOptions = {
   start: "justify-start",
@@ -39,16 +40,17 @@ export default function FlexBox({
   justify = "center",
   align = "center",
   gap = 0,
+  as: Container = "div",
 }: FlexBoxProps) {
   const justifyContent = justifyOptions[justify];
   const flexDirection = directionOptions[direction];
   const alignItems = alignOptions[align];
   const gapSize = `gap-${gap}`;
   return (
-    <div
+    <Container
       className={`flex ${flexDirection} ${justifyContent} ${alignItems} ${gapSize} ${className}`}
     >
       {children}
-    </div>
+    </Container>
   );
 }
