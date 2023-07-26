@@ -1,8 +1,8 @@
 "use client";
 import ChatCard from "@/components/ui/ChatCard";
 import FlexBox from "@/components/ui/FlexBox";
-import RightButton from "../../../public/ChatCardList/arrow-right.svg";
-import LeftButton from "../../../public/ChatCardList/arrow-left.svg";
+import RightButton from "@/public/ChatCardList/arrow-right.svg";
+import LeftButton from "@/public/ChatCardList/arrow-left.svg";
 
 export default function ChatCardList() {
   return (

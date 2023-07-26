@@ -4,6 +4,7 @@ import FlexBox from "../FlexBox";
 import Tag from "../Tag";
 import ChatCardTitle from "./ChatCardTitle";
 import ChatCardInfo from "./ChatCardInfo";
+import ShareIcon from "@/public/share.svg";
 export default function ChatCard() {
   return (
     <FlexBox
@@ -13,7 +14,9 @@ export default function ChatCard() {
     >
       <FlexBox justify="between" className="w-full ">
         <ChatCardTitle title={"천하제일 내 반려동물 자랑방"} />
-        <div>공유 버튼</div>
+        <button>
+          <ShareIcon />
+        </button>
       </FlexBox>
       <p>반려동물을 키우는 사람이라면 누구나 들어와서 자랑해주세요~</p>
       <FlexBox className="gap-3">
