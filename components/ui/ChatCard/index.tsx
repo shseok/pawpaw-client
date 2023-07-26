@@ -27,7 +27,7 @@ export default function ChatCard() {
       </FlexBox>
       <FlexBox justify="between" className="w-full">
         <ChatCardInfo
-          headcount={42}
+          participants={42}
           master_user_img={"/default.png"}
           master_user_name={"닉네임"}
         />
