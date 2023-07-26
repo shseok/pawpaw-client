@@ -3,7 +3,6 @@ import { ElementType, ReactNode } from "react";
 interface FlexBoxProps {
   children: ReactNode;
   direction?: "row" | "column";
-  gap?: number;
   justify?: "start" | "end" | "center" | "between" | "around";
   align?: "start" | "end" | "center";
   className?: string;
@@ -40,16 +39,14 @@ export default function FlexBox({
   direction = "row",
   justify = "center",
   align = "center",
-  gap = 0,
   as: Container = "div",
 }: FlexBoxProps) {
   const justifyContent = justifyOptions[justify];
   const flexDirection = directionOptions[direction];
   const alignItems = alignOptions[align];
-  const gapSize = `gap-${gap}`;
   return (
     <Container
-      className={`flex ${flexDirection} ${justifyContent} ${alignItems} ${gapSize} ${className}`}
+      className={`flex ${flexDirection} ${justifyContent} ${alignItems} ${className}`}
     >
       {children}
     </Container>
