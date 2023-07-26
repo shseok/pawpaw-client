@@ -3,20 +3,22 @@ import Link from "next/link";
 interface AvatarType {
   user_img: string;
   user_name: string;
-  width: number;
-  height: number;
+  size?: "small" | "base" | "large";
 }
 
 export default function Avatar({
-  height,
-  width,
+  size = "base",
   user_img,
   user_name,
 }: AvatarType) {
-  const widthClass = `w-${width}`;
-  const heightClass = `h-${height}`;
+  const avatarSizeVariants = {
+    small: "w-8 h-8",
+    base: "w-10 h-10",
+    large: "w-12 h-12",
+  };
+  const avatarSize = avatarSizeVariants[size];
   return (
-    <div className={`relative ${widthClass} ${heightClass}`}>
+    <div className={`relative  ${avatarSize}`}>
       <Image
         src={user_img}
         alt={user_name}

@@ -14,12 +14,7 @@ export default function ChatCardInfo({
 }: ChatCardInfo) {
   return (
     <FlexBox gap={3} className="text-[#74787D]">
-      <Avatar
-        height={10}
-        width={10}
-        user_img={master_user_img}
-        user_name={master_user_name}
-      />
+      <Avatar user_img={master_user_img} user_name={master_user_name} />
       <p className="font-bold ">{master_user_name}</p>
       <p>{headcount}명</p>
     </FlexBox>
