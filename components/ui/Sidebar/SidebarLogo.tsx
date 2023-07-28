@@ -1,17 +1,14 @@
 import Image from "next/image";
 import { SidebarProps } from "@/types/types";
+import { DesktopSvg } from "./SideButton/DesktopSvg";
 
 export default function SidebarLogo({ desktopWidth }: Pick<SidebarProps, "desktopWidth">) {
+  const { toggleOnLogo, toggleOffLogo } = DesktopSvg;
+
   return (
     <>
-      <figure className={`${desktopWidth === true ? "mt-8 mb-10" : "mt-8 mb-11"}`}>
-        <Image
-          src={`/sidebar/desktop/${desktopWidth === true ? "desktop_logo" : "tablet_logo"}.svg`}
-          alt="logo"
-          width={`${desktopWidth === true ? 140 : 50}`}
-          height={`${desktopWidth === true ? 42 : 60}`}
-          className="mx-auto"
-        />
+      <figure className={`${desktopWidth === true ? "mt-8 mb-10" : "mt-8 mb-11"} flex flex-row justify-center`}>
+        {desktopWidth === true ? toggleOnLogo() : toggleOffLogo()}
       </figure>
     </>
   );
