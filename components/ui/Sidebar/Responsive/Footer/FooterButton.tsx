@@ -6,7 +6,7 @@ export default function FotterButton({ activeButton, onClick, svgComponent }: Pi
     Feed: "피드",
     Community: "커뮤니티",
     Chat: "채팅",
-    Mypage: "마이 페이지",
+    Mypage: "마이페이지",
   };
   const name = names[svgComponent.name];
 
