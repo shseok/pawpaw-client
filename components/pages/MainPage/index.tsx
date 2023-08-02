@@ -1,4 +1,4 @@
-import Feed from "./Feed";
+import PostsList from "@/components/ui/PostsList";
 import Upload from "./Upload";
 
 export default function Main() {
@@ -8,7 +8,7 @@ export default function Main() {
         <div className="h-[298px] border border-red-500">
           <Upload></Upload>
         </div>
-        <Feed></Feed>
+        <PostsList />
       </div>
     </>
   );
