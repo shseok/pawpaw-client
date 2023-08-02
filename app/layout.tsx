@@ -5,9 +5,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body>
-        <Sidebar>
-          <main className="p-8 m-auto ml-64">{children}</main>
-        </Sidebar>
+        <Sidebar />
+        <main className="p-8 m-auto ml-64">{children}</main>
       </body>
     </html>
   );
