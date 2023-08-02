@@ -46,7 +46,7 @@ export default function Upload() {
                 height={80}
               />
               <textarea
-                className="bg-[#F5FFF6] w-full h-[77px]"
+                className="bg-[#F5FFF6] w-full h-[77px] resize-none"
                 placeholder="동네 주민들에게 즐거운 소식을 전해보세요!"
               />
             </FlexBox>
