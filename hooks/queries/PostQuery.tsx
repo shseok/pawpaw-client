@@ -12,7 +12,7 @@ interface Post {
 
 const PAGE_SIZE = 5;
 
-export default function usePosts() {
+export default function usePostsQuery() {
   return useInfiniteQuery({
     queryKey: ["posts"],
     queryFn: ({ pageParam = 1 }) =>

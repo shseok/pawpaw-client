@@ -1,6 +1,6 @@
 import "styles/global.css";
 import Sidebar from "@/components/ui/Sidebar/Sidebar";
-import MainPage from "@/components/pages/MainPage";
+import Feed from "@/components/pages/Feed";
 import ReactQueryProvider from "@/hooks/queries/ReactQueryProvider";
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
       <html lang="ko">
         <body>
           <Sidebar>
-            <MainPage></MainPage>
+            <Feed />
             {children}
           </Sidebar>
         </body>
