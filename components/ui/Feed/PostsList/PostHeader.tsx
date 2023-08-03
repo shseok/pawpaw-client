@@ -1,7 +1,7 @@
 import Image from "next/image";
-import FlexBox from "../FlexBox";
-import Button from "../Button";
-import Avatar from "../Avatar";
+import FlexBox from "../../FlexBox";
+import Button from "../../Button";
+import Avatar from "../../Avatar";
 
 export default function PostHeader({ userId }: { userId: number }) {
   return (
@@ -9,7 +9,7 @@ export default function PostHeader({ userId }: { userId: number }) {
       <FlexBox justify="between" className="w-full">
         <FlexBox className="gap-[10px]">
           <Avatar
-            size="xlarge"
+            size="xl"
             user_img="/Feed/desktop/tempProfilePic.svg"
             user_name={String(userId)}
           />

@@ -5,7 +5,7 @@ import useCommentsQuery from "@/hooks/queries/PostCommentsQuery";
 import usePostsQuery from "@/hooks/queries/PostQuery";
 import Image from "next/image";
 import { Fragment } from "react";
-import FlexBox from "../FlexBox";
+import FlexBox from "../../FlexBox";
 import PostHeader from "./PostHeader";
 import PostComment from "./PostComment";
 import PostContent from "./PostContent";

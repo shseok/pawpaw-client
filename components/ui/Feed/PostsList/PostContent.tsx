@@ -1,4 +1,4 @@
-import FlexBox from "../FlexBox";
+import FlexBox from "../../FlexBox";
 import Image from "next/image";
 
 export default function PostContent({
