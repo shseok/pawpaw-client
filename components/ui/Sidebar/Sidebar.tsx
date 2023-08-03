@@ -6,7 +6,7 @@ import { useState } from "react";
 import SidebarLogo from "./SidebarLogo";
 import ResponsiveNavbar from "./Responsive/ResponsiveNavbar";
 
-export default function Sidebar({ children }: { children: React.ReactNode }) {
+export default function Sidebar() {
   const [toggle, setToggle] = useState(true);
   const desktopWidth = toggle === true ? "w-64" : "w-24";
 
@@ -17,7 +17,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
         <SideButtonContainer desktopWidth={toggle} />
         <BottomToggle desktopWidth={toggle} onClick={() => setToggle(!toggle)} />
       </nav>
-      <ResponsiveNavbar>{children}</ResponsiveNavbar>
+      <ResponsiveNavbar />
     </>
   );
 }
