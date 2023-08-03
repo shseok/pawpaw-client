@@ -9,15 +9,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ReactQueryProvider>
-      <html lang="ko">
-        <body>
+    <html lang="ko">
+      <body>
+        <ReactQueryProvider>
           <Sidebar>
             <Feed />
             {children}
           </Sidebar>
-        </body>
-      </html>
-    </ReactQueryProvider>
+        </ReactQueryProvider>
+      </body>
+    </html>
   );
 }

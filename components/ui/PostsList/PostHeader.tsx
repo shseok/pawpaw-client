@@ -1,17 +1,17 @@
 import Image from "next/image";
 import FlexBox from "../FlexBox";
 import Button from "../Button";
+import Avatar from "../Avatar";
 
 export default function PostHeader({ userId }: { userId: number }) {
   return (
     <>
       <FlexBox justify="between" className="w-full">
         <FlexBox className="gap-[10px]">
-          <Image
-            src="/Feed/desktop/tempProfilePic.svg"
-            alt="프로필 사진"
-            width={56}
-            height={56}
+          <Avatar
+            size="xlarge"
+            user_img="/Feed/desktop/tempProfilePic.svg"
+            user_name={String(userId)}
           />
           <FlexBox direction="column" align="start" className="gap-[4px]">
             <FlexBox className="gap-[8px]">
