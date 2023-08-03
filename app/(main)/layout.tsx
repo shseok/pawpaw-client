@@ -1,11 +1,7 @@
 import Feed from "@/components/pages/Feed";
 import Sidebar from "@/components/ui/Sidebar/Sidebar";
 
-export default function MainLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Sidebar />
