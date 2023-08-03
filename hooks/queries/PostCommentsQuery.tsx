@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 interface Comment {
@@ -13,10 +12,12 @@ interface Comment {
 }
 
 const getComments = async () => {
-  const { data } = await axios.get<Comment[]>(
-    "https://koreanjson.com/comments"
-  );
-  return data;
+  const response = await fetch("https://koreanjson.com/comments");
+  if (!response.ok) {
+    throw new Error("Network response was not ok.");
+  }
+  const data = await response.json();
+  return data as Comment[];
 };
 
 export default function useCommentsQuery() {

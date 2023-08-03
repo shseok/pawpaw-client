@@ -37,28 +37,30 @@ export default function PostsList() {
                 : 0;
 
               return (
-                <FlexBox
-                  direction="column"
-                  justify="between"
-                  className="w-full p-[36px] rounded-[10px] border-[1px] border-[#E9EBED] gap-[16px]"
-                >
-                  <PostHeader userId={post.userId} />
-                  <PostContent content={post.title}>
-                    <PostComment commentsNum={filteredCommentsCount}>
-                      <FlexBox direction="column">
-                        {filteredComments?.map((comment) => (
-                          <div key={comment.id}>
-                            <span className="font-bold">
-                              {comment.User.name}
-                            </span>
-                            {"  "}
-                            {comment.content}
-                          </div>
-                        ))}
-                      </FlexBox>
-                    </PostComment>
-                  </PostContent>
-                </FlexBox>
+                <div key={post.id}>
+                  <FlexBox
+                    direction="column"
+                    justify="between"
+                    className="w-full p-[36px] rounded-[10px] border-[1px] border-[#E9EBED] gap-[16px]"
+                  >
+                    <PostHeader userId={post.userId} />
+                    <PostContent content={post.title}>
+                      <PostComment commentsNum={filteredCommentsCount}>
+                        <FlexBox direction="column">
+                          {filteredComments?.map((comment) => (
+                            <div key={comment.id}>
+                              <span className="font-bold">
+                                {comment.User.name}
+                              </span>
+                              {"  "}
+                              {comment.content}
+                            </div>
+                          ))}
+                        </FlexBox>
+                      </PostComment>
+                    </PostContent>
+                  </FlexBox>
+                </div>
               );
             })}
           </Fragment>
