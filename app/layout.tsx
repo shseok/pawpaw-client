@@ -1,7 +1,5 @@
-import "styles/global.css";
-import Sidebar from "@/components/ui/Sidebar/Sidebar";
-import Feed from "@/components/pages/Feed";
 import ReactQueryProvider from "@/hooks/queries/ReactQueryProvider";
+import "styles/global.css";
 
 export default function RootLayout({
   children,
@@ -10,14 +8,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
-        <ReactQueryProvider>
-          <Sidebar>
-            <Feed />
-            {children}
-          </Sidebar>
-        </ReactQueryProvider>
-      </body>
+      <ReactQueryProvider>
+        <body>{children}</body>
+      </ReactQueryProvider>
     </html>
   );
 }
