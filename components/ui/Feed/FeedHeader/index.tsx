@@ -6,19 +6,9 @@ import Upload from "./Upload";
 export default function FeedHeader() {
   return (
     <>
-      <FlexBox
-        direction="column"
-        align="start"
-        justify="between"
-        className="gap-[20px] w-full mt-10"
-      >
+      <FlexBox direction="column" align="start" justify="between" className="gap-[20px] w-full">
         <Title />
-        <FlexBox
-          direction="column"
-          align="start"
-          justify="between"
-          className="gap-[16px] w-full"
-        >
+        <FlexBox direction="column" align="start" justify="between" className="gap-[16px] w-full">
           <Location />
           <Upload />
         </FlexBox>
