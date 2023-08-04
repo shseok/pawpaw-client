@@ -7,17 +7,9 @@ import PostComment from "./PostComment";
 import PostContent from "./PostContent";
 import useGetInfiniteData from "@/hooks/queries/InfiniteData";
 
-interface Post {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-}
-
 export default function PostsList() {
-  const { Observer, data: posts } = useGetInfiniteData<Post>({
+  const { Observer, data: posts } = useGetInfiniteData({
     infiniteQueryKey: ["posts"],
-    apiAddress: "https://jsonplaceholder.typicode.com/posts",
   });
   const { data: comments } = useCommentsQuery();
 
@@ -26,12 +18,8 @@ export default function PostsList() {
       <FlexBox direction="column" className="gap-[40px]">
         {posts?.pages?.map((post) => {
           // 댓글을 위한 부분인데 나중에 실제 api 연결하면 바뀔 예정
-          const filteredComments = comments?.filter(
-            (comment) => comment.PostId === post.id
-          );
-          const filteredCommentsCount = filteredComments
-            ? filteredComments.length
-            : 0;
+          const filteredComments = comments?.filter((comment) => comment.PostId === post.id);
+          const filteredCommentsCount = filteredComments ? filteredComments.length : 0;
 
           return (
             <div key={post.id}>
