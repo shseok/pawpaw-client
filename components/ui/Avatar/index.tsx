@@ -23,7 +23,7 @@ export default function Avatar({
   const avatarSize = avatarSizeVariants[size];
 
   return (
-    <div className={`relative  ${avatarSize}`}>
+    <div className={`relative ${avatarSize}`}>
       <Image
         src={user_img}
         alt={user_name}

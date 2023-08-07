@@ -7,15 +7,7 @@ import Schedule from "../../../public/ChatCard/schedule.svg";
 import Link from "next/link";
 import TagList from "../TagList";
 export default function EnteredChatCard() {
-  const tagList = [
-    "awd",
-    "태그태그34태그94",
-    "awda",
-    "태그태그54태그94",
-    "태그태그64태그94",
-    "awdcs",
-    "122sdvsd",
-  ];
+  const tagList = ["#자랑", "#강아지", "#고양이", "#앵무새", "#토끼토", "rhtm"];
   return (
     <Link
       href={"/"}

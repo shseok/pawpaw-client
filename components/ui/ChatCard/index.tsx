@@ -28,8 +28,8 @@ export default function ChatCard() {
       <FlexBox justify="between" className="w-full">
         <ChatCardInfo
           participants={42}
-          master_user_img={"/default.png"}
-          master_user_name={"닉네임"}
+          masterUserImg={"/default.png"}
+          masterUserName={"닉네임"}
         />
         <Button>입장하기</Button>
       </FlexBox>
