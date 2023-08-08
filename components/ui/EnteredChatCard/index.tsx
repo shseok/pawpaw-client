@@ -40,8 +40,8 @@ export default function EnteredChatCard() {
             participants={24}
           />
           <FlexBox align="center" className="gap-3">
-            <Notice />
-            <Schedule />
+            <Notice className="w-8 h-8 tablet:w-10 tablet:h-10" />
+            <Schedule className="w-8 h-8 tablet:w-10 tablet:h-10" />
           </FlexBox>
         </FlexBox>
       </FlexBox>
