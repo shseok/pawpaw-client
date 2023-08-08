@@ -12,11 +12,11 @@ export default function TagList({ list }: { list: string[] }) {
       const tagListWrapperWidth = tagList.offsetWidth;
       const tagsArray = Array.from(tagList.children) as HTMLLIElement[];
 
-      let totalTagWidthTest = 0;
+      let totalTagWidth = 0;
       tagsArray.forEach((tag) => {
         const tagWidth = tag.offsetWidth + 12;
-        totalTagWidthTest += tagWidth;
-        if (totalTagWidthTest > tagListWrapperWidth) {
+        totalTagWidth += tagWidth;
+        if (totalTagWidth > tagListWrapperWidth) {
           setIsOverTagList(true);
         } else {
           setIsOverTagList(false);
