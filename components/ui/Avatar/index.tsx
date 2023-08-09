@@ -23,15 +23,14 @@ export default function Avatar({
   const avatarSize = avatarSizeVariants[size];
 
   return (
-    <div className={`relative  ${avatarSize}`}>
-      <Image
-        src={user_img}
-        alt={user_name}
-        fill
-        priority
-        className="absolute object-cover rounded-full"
-      />
-    </div>
+    <Image
+      src={user_img}
+      alt={user_name}
+      width={40}
+      height={40}
+      priority
+      className={`object-cover rounded-full ${avatarSize}`}
+    />
   );
 }
 /**만약 프로필 사진 클릭하여 해당유저의 마이페이지로 가려면 Link 태그 사용 */
