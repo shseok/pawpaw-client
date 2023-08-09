@@ -1,10 +1,14 @@
 import Sidebar from "@/components/ui/Sidebar/Sidebar";
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
+export default function MainLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <>
+    <div className="flex">
       <Sidebar />
-      <main className="p-8 m-auto ml-64">{children}</main>
-    </>
+      {children}
+    </div>
   );
 }

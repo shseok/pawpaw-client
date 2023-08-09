@@ -10,7 +10,7 @@ export default function ChatCardList() {
       direction="column"
       justify="start"
       as="aside"
-      className="sticky top-0 hidden h-screen gap-5 p-8 bg-white tablet:flex"
+      className="sticky top-0 right-0 hidden h-screen gap-5 px-4 py-8 bg-white turncate tablet:flex"
     >
       <FlexBox justify="between" className="w-full">
         <h1 className="text-2xl font-bold">지금 뜨고있는 채팅방 🔥</h1>
