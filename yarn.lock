@@ -1771,6 +1771,11 @@ chokidar@^3.5.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
+classnames@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
+
 client-only@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
@@ -2038,11 +2043,6 @@ electron-to-chromium@^1.4.431:
   version "1.4.464"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.464.tgz#2f94bad78dff34e527aacbfc5d0b1a33cf046507"
   integrity sha512-guZ84yoou4+ILNdj0XEbmGs6DEWj6zpVOWYpY09GU66yEb0DSYvP/biBPzHn0GuW/3RC/pnaYNUWlQE1fJYtgA==
-
-embla-carousel@^8.0.0-rc11:
-  version "8.0.0-rc11"
-  resolved "https://registry.yarnpkg.com/embla-carousel/-/embla-carousel-8.0.0-rc11.tgz#700ab6b3e4825ef9e6ac83238b81e3e1a316c3f4"
-  integrity sha512-Toeaug98PGYzSY56p/xsa+u4zbQbAXgGymwEDUc2wqT+1XCnnUsH42MClglhABJQbobwDYxOabhJrfXyJKUMig==
 
 emoji-regex@^9.2.2:
   version "9.2.2"
