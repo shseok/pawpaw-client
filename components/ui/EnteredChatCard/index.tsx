@@ -1,21 +1,23 @@
-"use client";
-import FlexBox from "../FlexBox";
-import Image from "next/image";
-import ChatCardInfo from "../ChatCard/ChatCardInfo";
-import Notice from "../../../public/ChatCard/notice.svg";
-import Schedule from "../../../public/ChatCard/schedule.svg";
-import Link from "next/link";
-import TagList from "../TagList";
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import FlexBox from '../FlexBox';
+import ChatCardInfo from '../ChatCard/ChatCardInfo';
+import Notice from '../../../public/ChatCard/notice.svg';
+import Schedule from '../../../public/ChatCard/schedule.svg';
+import TagList from '../TagList';
+
 export default function EnteredChatCard() {
-  const tagList = ["#자랑", "#강아지", "#고양이", "#앵무새", "#토끼토", "rhtm"];
+  const tagList = ['#자랑', '#강아지', '#고양이', '#앵무새', '#토끼토', 'rhtm'];
   return (
     <Link
-      href={"/"}
+      href="/"
       className="flex flex-col w-[321px] h-[334px] tablet:w-[350px] tablet:h-[411px] xl:w-[517px] xl:h-[538px] shadow-md rounded-[10px]"
     >
       <div className="relative w-full h-full max-h-[382px]">
         <Image
-          src={"/default.png"}
+          src="/default.png"
           alt="채팅방 이미지"
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -35,8 +37,8 @@ export default function EnteredChatCard() {
         </FlexBox>
         <FlexBox justify="between" align="center" className="w-full">
           <ChatCardInfo
-            masterUserImg={"/default.png"}
-            masterUserName={"지상최강감자"}
+            masterUserImg="/default.png"
+            masterUserName="지상최강감자"
             participants={24}
           />
           <FlexBox align="center" className="gap-3">

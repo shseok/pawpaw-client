@@ -1,8 +1,8 @@
-import Avatar from "../Avatar";
-import Devider from "../Divider";
-import FlexBox from "../FlexBox";
+import Avatar from '../Avatar';
+import Devider from '../Divider';
+import FlexBox from '../FlexBox';
 
-interface ChatCardInfo {
+interface ChatCardInfoProps {
   masterUserImg: string;
   masterUserName: string;
   participants: number;
@@ -12,7 +12,7 @@ export default function ChatCardInfo({
   participants,
   masterUserImg,
   masterUserName,
-}: ChatCardInfo) {
+}: ChatCardInfoProps) {
   return (
     <FlexBox className="text-[#74787D] gap-3 text-sm tablet:text-base">
       <Avatar user_img={masterUserImg} user_name={masterUserName} />
