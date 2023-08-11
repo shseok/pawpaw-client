@@ -25,12 +25,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
-<<<<<<< HEAD
-    "react-hooks/exhaustive-deps": ["warn"],
-    "react/require-default-props": 0
-=======
     "react-hooks/exhaustive-deps": ["warn"], // 의존성배열 강제주입 해제
     "react/require-default-props": 0 // 디폴트프롭관련 규칙 해제
->>>>>>> dev
   }
 }
