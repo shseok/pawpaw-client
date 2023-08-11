@@ -23,7 +23,6 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "no-console": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "react-hooks/exhaustive-deps": ["warn"], // 의존성배열 강제주입 해제
