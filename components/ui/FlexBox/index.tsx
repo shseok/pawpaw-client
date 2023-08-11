@@ -1,28 +1,28 @@
-import { ElementType, ReactNode } from "react";
+import { ElementType, ReactNode } from 'react';
 
 interface FlexBoxProps {
   children: ReactNode;
-  direction?: "row" | "column";
-  justify?: "start" | "end" | "center" | "between" | "around";
-  align?: "start" | "end" | "center";
+  direction?: 'row' | 'column';
+  justify?: 'start' | 'end' | 'center' | 'between' | 'around';
+  align?: 'start' | 'end' | 'center';
   className?: string;
   as?: ElementType;
 }
 const justifyOptions = {
-  start: "justify-start",
-  end: "justify-end",
-  center: "justify-center",
-  between: "justify-between",
-  around: "justify-around",
+  start: 'justify-start',
+  end: 'justify-end',
+  center: 'justify-center',
+  between: 'justify-between',
+  around: 'justify-around',
 };
 const directionOptions = {
-  row: "flex-row",
-  column: "flex-col",
+  row: 'flex-row',
+  column: 'flex-col',
 };
 const alignOptions = {
-  start: "items-start",
-  end: "items-end",
-  center: "items-center",
+  start: 'items-start',
+  end: 'items-end',
+  center: 'items-center',
 };
 /**
  *@name FlexBox - flex 속성이 적용되어있으며 가운데정렬이 기본값인 컴포넌트
@@ -35,11 +35,11 @@ const alignOptions = {
  */
 export default function FlexBox({
   children,
-  className = "",
-  direction = "row",
-  justify = "center",
-  align = "center",
-  as: Container = "div",
+  className = '',
+  direction = 'row',
+  justify = 'center',
+  align = 'center',
+  as: Container = 'div',
 }: FlexBoxProps) {
   const justifyContent = justifyOptions[justify];
   const flexDirection = directionOptions[direction];
