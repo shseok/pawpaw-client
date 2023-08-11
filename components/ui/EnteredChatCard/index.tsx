@@ -13,18 +13,16 @@ export default function EnteredChatCard() {
   return (
     <Link
       href="/"
-      className="flex flex-col w-[321px] h-[334px] tablet:w-[350px] tablet:h-[411px] xl:w-[517px] xl:h-[538px] shadow-md rounded-[10px]"
+      className="flex flex-col w-full max-w-[517px] shadow-chatCard rounded-[10px]"
     >
-      <div className="relative w-full h-full max-h-[382px]">
-        <Image
-          src="/default.png"
-          alt="채팅방 이미지"
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority
-          className="absolute object-cover rounded-t-[10px]"
-        />
-      </div>
+      <Image
+        src="/default.png"
+        alt="채팅방 이미지"
+        width={300}
+        height={200}
+        priority
+        className="w-full"
+      />
       <FlexBox direction="column" className="w-full gap-4 p-5 ">
         <FlexBox direction="column" className="w-full gap-3">
           <FlexBox justify="between" className="w-full gap-2">
