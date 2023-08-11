@@ -1,4 +1,5 @@
-import FlexBox from "../FlexBox";
+import FlexBox from '../FlexBox';
+
 export default function Badge() {
   return (
     <FlexBox

@@ -1,5 +1,5 @@
-import FlexBox from "../../FlexBox";
-import Image from "next/image";
+import Image from 'next/image';
+import FlexBox from '../../FlexBox';
 
 export default function PostContent({
   children,
@@ -11,7 +11,7 @@ export default function PostContent({
   return (
     <FlexBox className="gap-[36px]">
       <Image
-        src={`Feed/desktop/tempPostPic/tempPostPic3.svg`}
+        src="Feed/desktop/tempPostPic/tempPostPic3.svg"
         alt="게시글 사진1"
         width={545}
         height={260}

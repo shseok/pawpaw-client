@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import SideButtonContainer from "./SideButtonContainer";
-import BottomToggle from "./BottomToggle";
-import { useState } from "react";
-import SidebarLogo from "./SidebarLogo";
-import ResponsiveNavbar from "./Responsive/ResponsiveNavbar";
+import { useState } from 'react';
+import SideButtonContainer from './SideButtonContainer';
+import BottomToggle from './BottomToggle';
+import SidebarLogo from './SidebarLogo';
+import ResponsiveNavbar from './Responsive/ResponsiveNavbar';
 
 export default function Sidebar() {
   const [toggle, setToggle] = useState(true);
-  const desktopWidth = toggle === true ? "w-64" : "w-24";
+  const desktopWidth = toggle === true ? 'w-64' : 'w-24';
 
   return (
     <>

@@ -1,6 +1,8 @@
-"use client";
-import Tag from "../Tag";
-import { useRef, useState, useEffect } from "react";
+'use client';
+
+import { useRef, useState, useEffect } from 'react';
+import Tag from '../Tag';
+
 export default function TagList({ list }: { list: string[] }) {
   const tagListRef = useRef<HTMLUListElement>(null);
   const [isOverTagList, setIsOverTagList] = useState(false);
@@ -25,7 +27,7 @@ export default function TagList({ list }: { list: string[] }) {
     }
   };
 
-  //debounce
+  // debounce
   let resizeTimer: NodeJS.Timeout;
   const handleResize = () => {
     clearTimeout(resizeTimer);
@@ -35,10 +37,11 @@ export default function TagList({ list }: { list: string[] }) {
   };
   useEffect(() => {
     calculateTagWidth();
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
