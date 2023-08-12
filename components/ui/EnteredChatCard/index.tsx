@@ -9,7 +9,7 @@ import Schedule from '../../../public/ChatCard/schedule.svg';
 import TagList from '../TagList';
 
 export default function EnteredChatCard() {
-  const tagList = ['#자랑', '#강아지', '#고양이', '#앵무새', '#토끼토', 'rhtm'];
+  const tagList = ['자랑', '강아지', '고양이', '앵무새', '토끼토', 'rhtm'];
   return (
     <Link
       href="/"
