@@ -4,7 +4,7 @@ import TrendingChatList from '@/components/pages/community/TrendingChatList';
 
 export default function CommunityPage() {
   return (
-    <main className="flex flex-col w-full gap-5 p-8 overflow-hidden mt-[60px] tablet:mt-0">
+    <main className="flex flex-col w-full gap-10 tablet:gap-[60px] p-8 overflow-hidden mt-[60px] tablet:mt-0">
       <EnteredChatList />
       <RecommendChatList />
       <TrendingChatList />
