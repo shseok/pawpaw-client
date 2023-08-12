@@ -14,22 +14,22 @@ export default function Footer() {
         <FotterButton
           svgComponent={Feed}
           activeButton={activeButton}
-          onClick={() => setActiveButton('Feed')}
+          setActive={() => setActiveButton('Feed')}
         />
         <FotterButton
           svgComponent={Community}
           activeButton={activeButton}
-          onClick={() => setActiveButton('Community')}
+          setActive={() => setActiveButton('Community')}
         />
         <FotterButton
           svgComponent={Chat}
           activeButton={activeButton}
-          onClick={() => setActiveButton('Chat')}
+          setActive={() => setActiveButton('Chat')}
         />
         <FotterButton
           svgComponent={Mypage}
           activeButton={activeButton}
-          onClick={() => setActiveButton('Mypage')}
+          setActive={() => setActiveButton('Mypage')}
         />
       </div>
     </nav>

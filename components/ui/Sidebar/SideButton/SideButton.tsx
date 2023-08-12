@@ -6,7 +6,10 @@ export default function SideButton({
   svgComponent,
   desktopWidth,
   router,
-}: SidebarProps) {
+}: Pick<
+  SidebarProps,
+  'activeButton' | 'setActive' | 'svgComponent' | 'desktopWidth' | 'router'
+>) {
   const color = activeButton === svgComponent.name ? '#0ABE7D' : '#74787D';
   const names: { [key: string]: string } = {
     Feed: '피드',

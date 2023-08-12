@@ -19,7 +19,7 @@ export default function Sidebar() {
         <SideButtonContainer desktopWidth={toggle} />
         <BottomToggle
           desktopWidth={toggle}
-          onClick={() => setToggle(!toggle)}
+          toggleButton={() => setToggle(!toggle)}
         />
       </nav>
       <div>

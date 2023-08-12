@@ -4,4 +4,5 @@ export interface SidebarProps {
   setActive: () => void;
   router: () => void;
   desktopWidth: boolean;
+  toggleButton: () => void;
 }

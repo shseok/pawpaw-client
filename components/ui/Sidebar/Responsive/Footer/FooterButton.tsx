@@ -2,9 +2,9 @@ import { SidebarProps } from '@/types/types';
 
 export default function FotterButton({
   activeButton,
-  onClick,
+  setActive,
   svgComponent,
-}: Pick<SidebarProps, 'activeButton' | 'onClick' | 'svgComponent'>) {
+}: Pick<SidebarProps, 'activeButton' | 'setActive' | 'svgComponent'>) {
   const color = activeButton === svgComponent.name ? '#0ABE7D' : '#74787D';
   const names: { [key: string]: string } = {
     Feed: '피드',
@@ -16,7 +16,11 @@ export default function FotterButton({
 
   return (
     <div className="w-[88px] sm:w-[139px] flex flex-row justify-center flex-wrap">
-      <button type="button" className="w-[18x] h-[18px] mb-1" onClick={onClick}>
+      <button
+        type="button"
+        className="w-[18x] h-[18px] mb-1"
+        onClick={setActive}
+      >
         {svgComponent({ color })}
       </button>
       <div className="w-full h-[10px] text-xs text-center" style={{ color }}>
