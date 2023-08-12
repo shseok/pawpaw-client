@@ -2,9 +2,10 @@ import { SidebarProps } from '@/types/types';
 
 export default function SideButton({
   activeButton,
-  onClick,
+  setActive,
   svgComponent,
   desktopWidth,
+  router,
 }: SidebarProps) {
   const color = activeButton === svgComponent.name ? '#0ABE7D' : '#74787D';
   const names: { [key: string]: string } = {
@@ -17,13 +18,18 @@ export default function SideButton({
   };
   const name = names[svgComponent.name];
 
+  const clickHandler = () => {
+    setActive();
+    router();
+  };
+
   return (
     <div
       className={`relative flex flex-row ${
         desktopWidth === true ? 'items' : 'justify'
       }-center h-16 flex-nowrap`}
     >
-      <button type="button" onClick={onClick}>
+      <button type="button" onClick={clickHandler}>
         {activeButton === svgComponent.name &&
         svgComponent.name !== 'Search' &&
         svgComponent.name !== 'Alert' ? (

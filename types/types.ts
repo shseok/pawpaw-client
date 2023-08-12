@@ -1,6 +1,7 @@
 export interface SidebarProps {
   svgComponent: (props: { color: string }) => JSX.Element;
   activeButton: string;
-  onClick: () => void;
+  setActive: () => void;
+  router: () => void;
   desktopWidth: boolean;
 }
