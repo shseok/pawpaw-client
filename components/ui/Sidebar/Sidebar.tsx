@@ -13,7 +13,7 @@ export default function Sidebar() {
   return (
     <>
       <nav
-        className={`fixed top-0 h-screen left-0 ${desktopWidth}  bg-[#F7F8F9] invisible tablet:visible`}
+        className={`fixed top-0 h-screen left-0 ${desktopWidth}  bg-[#F7F8F9] hidden tablet:block`}
       >
         <SidebarLogo desktopWidth={toggle} />
         <SideButtonContainer desktopWidth={toggle} />
