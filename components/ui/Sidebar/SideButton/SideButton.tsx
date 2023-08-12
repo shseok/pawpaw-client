@@ -10,6 +10,7 @@ export default function SideButton({
   const names: { [key: string]: string } = {
     Feed: '피드',
     Community: '커뮤니티',
+    PawZone: 'Paw zone',
     Mypage: '마이 페이지',
     Search: '검색',
     Alert: '알림',
@@ -26,7 +27,7 @@ export default function SideButton({
         {activeButton === svgComponent.name &&
         svgComponent.name !== 'Search' &&
         svgComponent.name !== 'Alert' ? (
-          <div className="absolute left-0 w-[5px] h-16 bg-[#0ABE7D]" />
+          <div className="absolute top-0 left-0 w-[5px] h-16 bg-[#0ABE7D]" />
         ) : null}
         {desktopWidth === true ? (
           <div className="flex flex-nowrap ml-7">

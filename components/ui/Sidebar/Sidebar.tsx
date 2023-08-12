@@ -13,7 +13,7 @@ export default function Sidebar() {
   return (
     <>
       <nav
-        className={`sticky top-0 h-screen left-0 ${desktopWidth}  bg-[#F7F8F9] invisible tablet:visible`}
+        className={`fixed top-0 h-screen left-0 ${desktopWidth}  bg-[#F7F8F9] invisible tablet:visible`}
       >
         <SidebarLogo desktopWidth={toggle} />
         <SideButtonContainer desktopWidth={toggle} />
@@ -22,6 +22,9 @@ export default function Sidebar() {
           onClick={() => setToggle(!toggle)}
         />
       </nav>
+      <div>
+        <div className={`sticky ${desktopWidth} hidden tablet:block`} />
+      </div>
       <ResponsiveNavbar />
     </>
   );
