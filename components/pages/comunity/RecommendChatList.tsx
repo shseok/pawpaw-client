@@ -15,6 +15,7 @@ export default function RecommendChatList() {
       </h1>
       <Carousel>
         {Array.from({ length: 10 }).map((_, i) => (
+          // eslint-disable-next-line react/no-array-index-key
           <SwiperSlide key={i}>
             <ChatCard />
           </SwiperSlide>
