@@ -14,7 +14,7 @@ export default function ChatCardInfo({
   masterUserName,
 }: ChatCardInfoProps) {
   return (
-    <FlexBox className="text-[#74787D] gap-3 text-sm tablet:text-base">
+    <FlexBox className="text-[#74787D] gap-2 text-sm tablet:text-base">
       <Avatar user_img={masterUserImg} user_name={masterUserName} />
       <p className="font-medium">{masterUserName}</p>
       <Devider type="vertical" />

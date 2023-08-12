@@ -7,10 +7,11 @@ import Carousel from './Carousel';
 
 export default function RecommendChatList() {
   return (
-    <FlexBox direction="column" className="gap-1">
-      <h1 className="flex w-full p-2 text-xl font-bold">
-        <p className="text-green-600">지상최강감자</p>
-        <p>님에게 추천하는 신규 채팅방</p>
+    <FlexBox direction="column" className="gap-5">
+      <h1 className="flex w-full text-xl font-bold">
+        <p className="hidden text-green-600 tablet:block">지상최강감자</p>
+        <p className="hidden tablet:block">님에게 추천하는 </p>
+        <p>신규 채팅방</p>
       </h1>
       <Carousel>
         {Array.from({ length: 10 }).map((_, i) => (

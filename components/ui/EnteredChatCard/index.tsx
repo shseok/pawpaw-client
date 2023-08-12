@@ -39,7 +39,7 @@ export default function EnteredChatCard() {
             masterUserName="지상최강감자"
             participants={24}
           />
-          <FlexBox align="center" className="gap-3">
+          <FlexBox className="gap-2">
             <Notice className="w-8 h-8 tablet:w-10 tablet:h-10" />
             <Schedule className="w-8 h-8 tablet:w-10 tablet:h-10" />
           </FlexBox>

@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .swiper {
-  @apply p-2 !important;
+  overflow: unset !important;
 }
