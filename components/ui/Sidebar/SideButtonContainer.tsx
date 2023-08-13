@@ -1,7 +1,3 @@
-'use client';
-
-import { useState } from 'react';
-
 import { useRouter } from 'next/navigation';
 import { SidebarProps } from '@/types/types';
 import SideButton from './SideButton/SideButton';
@@ -9,10 +5,11 @@ import DesktopSvg from './SideButton/DesktopSvg';
 
 export default function SideButtonContainer({
   desktopWidth,
-}: Pick<SidebarProps, 'desktopWidth'>) {
+  activeButton,
+  setActive,
+}: Pick<SidebarProps, 'desktopWidth' | 'activeButton' | 'setActive'>) {
   const { Feed, Community, PawZone, Mypage, Search, Alert } = DesktopSvg;
   const router = useRouter();
-  const [activeButton, setActiveButton] = useState('Feed');
   const pseudoElementWidth = desktopWidth === true ? 'w-[232px]' : 'w-[72px]';
 
   return (
@@ -21,28 +18,28 @@ export default function SideButtonContainer({
         svgComponent={Feed}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        setActive={() => setActiveButton('Feed')}
+        setActive={setActive}
         router={() => router.push('/')}
       />
       <SideButton
         svgComponent={Community}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        setActive={() => setActiveButton('Community')}
+        setActive={setActive}
         router={() => router.push('/community')}
       />
       <SideButton
         svgComponent={PawZone}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        setActive={() => setActiveButton('PawZone')}
+        setActive={setActive}
         router={() => router.push('/pawzone')}
       />
       <SideButton
         svgComponent={Mypage}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        setActive={() => setActiveButton('Mypage')}
+        setActive={setActive}
         router={() => router.push('/mypage')}
       />
 
@@ -53,14 +50,14 @@ export default function SideButtonContainer({
         svgComponent={Search}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        setActive={() => setActiveButton('Search')}
+        setActive={setActive}
         router={() => router.push('/')}
       />
       <SideButton
         svgComponent={Alert}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        setActive={() => setActiveButton('Alert')}
+        setActive={setActive}
         router={() => router.push('/')}
       />
     </>

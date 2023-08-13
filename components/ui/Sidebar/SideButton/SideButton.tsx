@@ -22,7 +22,7 @@ export default function SideButton({
   const name = names[svgComponent.name];
 
   const clickHandler = () => {
-    setActive();
+    setActive(`${svgComponent.name}`);
     router();
   };
 

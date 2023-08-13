@@ -9,14 +9,17 @@ import ResponsiveNavbar from './Responsive/ResponsiveNavbar';
 export default function Sidebar() {
   const [toggle, setToggle] = useState(true);
   const desktopWidth = toggle === true ? 'w-64' : 'w-24';
+  const [activeButton, setActiveButton] = useState('Feed');
 
   return (
     <>
-      <nav
-        className={`fixed top-0 h-screen left-0 ${desktopWidth}  bg-[#F7F8F9] hidden tablet:block`}
-      >
+      <nav className={`fixed top-0 h-screen left-0 ${desktopWidth}  bg-[#F7F8F9] hidden tablet:block`}>
         <SidebarLogo desktopWidth={toggle} />
-        <SideButtonContainer desktopWidth={toggle} />
+        <SideButtonContainer
+          desktopWidth={toggle}
+          activeButton={activeButton}
+          setActive={setActiveButton}
+        />
         <BottomToggle
           desktopWidth={toggle}
           toggleButton={() => setToggle(!toggle)}
@@ -25,7 +28,10 @@ export default function Sidebar() {
       <div>
         <div className={`sticky ${desktopWidth} hidden tablet:block`} />
       </div>
-      <ResponsiveNavbar />
+      <ResponsiveNavbar
+        activeButton={activeButton}
+        setActive={setActiveButton}
+      />
     </>
   );
 }
