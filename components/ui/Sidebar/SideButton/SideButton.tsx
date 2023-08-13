@@ -14,7 +14,7 @@ export default function SideButton({
   const names: { [key: string]: string } = {
     Feed: '피드',
     Community: '커뮤니티',
-    PawZone: 'Paw zone',
+    Pawzone: 'Paw zone',
     Mypage: '마이 페이지',
     Search: '검색',
     Alert: '알림',

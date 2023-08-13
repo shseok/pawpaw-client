@@ -36,7 +36,7 @@ function Community({ color }: { color: string }) {
   );
 }
 
-function PawZone({ color }: { color: string }) {
+function Pawzone({ color }: { color: string }) {
   return (
     <div className="cursor-pointer">
       <svg
@@ -224,7 +224,7 @@ const toggleOffLogo = () => (
 const DesktopSvg = {
   Feed,
   Community,
-  PawZone,
+  Pawzone,
   Mypage,
   Search,
   Alert,
