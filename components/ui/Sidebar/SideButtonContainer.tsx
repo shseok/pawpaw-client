@@ -1,15 +1,15 @@
-'use client';
-
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { SidebarProps } from '@/types/types';
 import SideButton from './SideButton/SideButton';
 import DesktopSvg from './SideButton/DesktopSvg';
 
 export default function SideButtonContainer({
   desktopWidth,
-}: Pick<SidebarProps, 'desktopWidth'>) {
-  const { Feed, Community, Mypage, Search, Alert } = DesktopSvg;
-  const [activeButton, setActiveButton] = useState('Feed');
+  activeButton,
+  setActive,
+}: Pick<SidebarProps, 'desktopWidth' | 'activeButton' | 'setActive'>) {
+  const { Feed, Community, Pawzone, Mypage, Search, Alert } = DesktopSvg;
+  const router = useRouter();
   const pseudoElementWidth = desktopWidth === true ? 'w-[232px]' : 'w-[72px]';
 
   return (
@@ -18,20 +18,31 @@ export default function SideButtonContainer({
         svgComponent={Feed}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        onClick={() => setActiveButton('Feed')}
+        setActive={setActive}
+        router={() => router.push('/')}
       />
       <SideButton
         svgComponent={Community}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        onClick={() => setActiveButton('Community')}
+        setActive={setActive}
+        router={() => router.push('/community')}
+      />
+      <SideButton
+        svgComponent={Pawzone}
+        activeButton={activeButton}
+        desktopWidth={desktopWidth}
+        setActive={setActive}
+        router={() => router.push('/pawzone')}
       />
       <SideButton
         svgComponent={Mypage}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        onClick={() => setActiveButton('Mypage')}
+        setActive={setActive}
+        router={() => router.push('/mypage')}
       />
+
       <div className="flex flex-row items-center justify-center h-10">
         <div className={`${pseudoElementWidth} h-[0.5px] bg-[#CBCDD2]`} />
       </div>
@@ -39,13 +50,15 @@ export default function SideButtonContainer({
         svgComponent={Search}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        onClick={() => setActiveButton('Search')}
+        setActive={setActive}
+        router={() => router.push('/')}
       />
       <SideButton
         svgComponent={Alert}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
-        onClick={() => setActiveButton('Alert')}
+        setActive={setActive}
+        router={() => router.push('/')}
       />
     </>
   );

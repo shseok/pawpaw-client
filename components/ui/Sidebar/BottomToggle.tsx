@@ -3,14 +3,14 @@ import { SidebarProps } from '@/types/types';
 
 export default function BottomToggle({
   desktopWidth,
-  onClick,
-}: Pick<SidebarProps, 'desktopWidth' | 'onClick'>) {
+  toggleButton,
+}: Pick<SidebarProps, 'desktopWidth' | 'toggleButton'>) {
   return (
     <div className="absolute bottom-0 w-full h-12 bg-[#E9EBED]">
       <button
         type="button"
         className="absolute top-0 bottom-0 right-3"
-        onClick={onClick}
+        onClick={toggleButton}
       >
         <Image
           src={`/sidebar/desktop/${
