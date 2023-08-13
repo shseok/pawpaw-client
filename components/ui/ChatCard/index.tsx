@@ -13,7 +13,7 @@ export default function ChatCard() {
     <FlexBox
       direction="column"
       align="start"
-      className="max-h-[266px] w-full max-w-[517px]  p-8 rounded-[10px] gap-3 shadow-chatCard"
+      className="max-h-[266px] w-full h-full max-w-[517px]  p-8 rounded-[10px] gap-3 shadow-chatCard"
     >
       <ChatCardHeader title="천하제일 내 반려동천하제일 내 반려동물 자랑방" />
       <p className="w-full truncate">

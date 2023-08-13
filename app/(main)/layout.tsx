@@ -1,4 +1,4 @@
-import Sidebar from "@/components/ui/Sidebar/Sidebar";
+import Sidebar from '@/components/ui/Sidebar/Sidebar';
 
 export default function MainLayout({
   children,
@@ -8,7 +8,7 @@ export default function MainLayout({
   return (
     <div className="flex">
       <Sidebar />
-      <main className="flex w-full p-8">{children}</main>
+      {children}
     </div>
   );
 }

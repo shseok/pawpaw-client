@@ -9,22 +9,20 @@ import Schedule from '../../../public/ChatCard/schedule.svg';
 import TagList from '../TagList';
 
 export default function EnteredChatCard() {
-  const tagList = ['#자랑', '#강아지', '#고양이', '#앵무새', '#토끼토', 'rhtm'];
+  const tagList = ['자랑', '강아지', '고양이', '앵무새', '토끼토', 'rhtm'];
   return (
     <Link
       href="/"
-      className="flex flex-col w-[321px] h-[334px] tablet:w-[350px] tablet:h-[411px] xl:w-[517px] xl:h-[538px] shadow-md rounded-[10px]"
+      className="flex flex-col w-full max-w-[517px] shadow-chatCard rounded-[10px]"
     >
-      <div className="relative w-full h-full max-h-[382px]">
-        <Image
-          src="/default.png"
-          alt="채팅방 이미지"
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority
-          className="absolute object-cover rounded-t-[10px]"
-        />
-      </div>
+      <Image
+        src="/default.png"
+        alt="채팅방 이미지"
+        width={300}
+        height={200}
+        priority
+        className="w-full"
+      />
       <FlexBox direction="column" className="w-full gap-4 p-5 ">
         <FlexBox direction="column" className="w-full gap-3">
           <FlexBox justify="between" className="w-full gap-2">
@@ -41,7 +39,7 @@ export default function EnteredChatCard() {
             masterUserName="지상최강감자"
             participants={24}
           />
-          <FlexBox align="center" className="gap-3">
+          <FlexBox className="gap-2">
             <Notice className="w-8 h-8 tablet:w-10 tablet:h-10" />
             <Schedule className="w-8 h-8 tablet:w-10 tablet:h-10" />
           </FlexBox>
