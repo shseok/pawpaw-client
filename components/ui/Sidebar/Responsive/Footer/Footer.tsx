@@ -12,7 +12,7 @@ export default function Footer({
 
   return (
     <nav className="block tablet:hidden">
-      <div className="fixed bottom-0 flex flex-row items-center justify-center border-t-[1px] border-[#E9EBED] h-[54px] w-full bg-white">
+      <div className="fixed bottom-0 flex flex-row items-center justify-center border-t-[1px] border-[#E9EBED] h-[54px] w-full bg-white z-10">
         <FotterButton
           svgComponent={Feed}
           activeButton={activeButton}
