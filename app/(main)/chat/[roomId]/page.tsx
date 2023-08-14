@@ -22,7 +22,7 @@ export default function ChatRoom({ params }: { params: { roomId: string } }) {
           </div>
         </div>
       </div>
-      <aside className="sticky top-0 hidden w-2/6 h-screen tablet:block">
+      <aside className="sticky top-0 hidden w-2/6 h-screen min-w-fit tablet:block">
         <ChatUserList />
         <div>스케줄</div>
       </aside>
