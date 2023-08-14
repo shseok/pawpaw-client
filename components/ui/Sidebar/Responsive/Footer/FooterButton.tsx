@@ -1,6 +1,6 @@
 import { SidebarProps } from '@/types/types';
 
-export default function FotterButton({
+export default function FooterButton({
   activeButton,
   setActive,
   svgComponent,

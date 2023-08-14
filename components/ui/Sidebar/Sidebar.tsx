@@ -11,8 +11,14 @@ export default function Sidebar() {
   const [toggle, setToggle] = useState(true);
   const desktopWidth = toggle === true ? 'w-64' : 'w-24';
   const path = usePathname();
-  const pathname =
-    path === '/' ? 'Feed' : path.charAt(1).toUpperCase() + path.slice(2);
+  let pathname;
+  if (path === '/') {
+    pathname = 'Feed';
+  } else if (path.includes('chat')) {
+    pathname = 'Chat';
+  } else {
+    pathname = path.charAt(1).toUpperCase() + path.slice(2);
+  }
   const [activeButton, setActiveButton] = useState(pathname);
 
   return (
@@ -34,10 +40,19 @@ export default function Sidebar() {
       <div>
         <div className={`sticky ${desktopWidth} hidden tablet:block`} />
       </div>
-      <ResponsiveNavbar
-        activeButton={activeButton}
-        setActive={setActiveButton}
-      />
+      {pathname === 'Chat' ? (
+        <div className="hidden">
+          <ResponsiveNavbar
+            activeButton={activeButton}
+            setActive={setActiveButton}
+          />
+        </div>
+      ) : (
+        <ResponsiveNavbar
+          activeButton={activeButton}
+          setActive={setActiveButton}
+        />
+      )}
     </>
   );
 }
