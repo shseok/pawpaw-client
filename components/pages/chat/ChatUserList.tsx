@@ -3,9 +3,9 @@ import ChatUser from './ChatUser';
 
 export default function ChatUserList() {
   return (
-    <FlexBox direction="column" className="gap-2 px-6 py-4 border-b-2">
+    <FlexBox direction="column" className="gap-2 px-6 py-4 border-b-[1px]">
       <FlexBox justify="between" className="w-full">
-        <FlexBox as="header" className="gap-2">
+        <FlexBox as="header" className="gap-2 p-2">
           <h1 className="text-2xl font-bold">인원</h1>
           <FlexBox className="gap-1">
             <p>21</p>

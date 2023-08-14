@@ -8,7 +8,7 @@ export default function ChatUser() {
       <Avatar user_img="/default.png" user_name="" size="xl" />
       <FlexBox direction="column" align="start" className="gap-1 ">
         <FlexBox className="gap-1">
-          <p className="font-bold">닉네임</p>
+          <p className="font-bold">닉네awdwadawdwadaw임</p>
           <ArrowRightIcon />
         </FlexBox>
         <p className="text-[#74787D] ">3살 감자</p>
