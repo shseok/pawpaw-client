@@ -16,7 +16,7 @@ export default function ChatUserList() {
           추가
         </button>
       </FlexBox>
-      <ul className="w-full overflow-auto max-h-96">
+      <ul className="w-full overflow-auto max-h-96 scrollbar-hide">
         {Array.from({ length: 10 }).map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <ChatUser key={i} />

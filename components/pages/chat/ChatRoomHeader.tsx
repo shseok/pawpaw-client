@@ -9,7 +9,7 @@ export default function ChatRoomHeader({ title }: { title: string }) {
       as="header"
       justify="between"
       align="center"
-      className="sticky top-0  h-24 gap-4 px-5 py-4 tablet:px-10 tablet:py-8 bg-white border-b-[1px]"
+      className=" p-8 h-14 tablet:h-24 w-full gap-4 bg-white border-b-[1px]"
     >
       <FlexBox className="gap-1">
         <Link href="/community">

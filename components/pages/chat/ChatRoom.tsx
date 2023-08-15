@@ -1,32 +1,13 @@
-'use client';
-
-import FlexBox from '@/components/ui/FlexBox';
+import ChatRoomBox from './ChatRoomBox';
+import ChatRoomHeader from './ChatRoomHeader';
+import MessageInput from './MessageInput';
 
 export default function ChatRoom() {
   return (
-    <FlexBox direction="column" className="gap-5 p-10">
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-      <div> ChatRoom ChatRoom ChatRoom ChatRoom ChatRoom</div>
-    </FlexBox>
+    <div className="flex flex-col w-full h-screen bg-[#F5FFF6] border-r-[1px]">
+      <ChatRoomHeader title="awdawd" />
+      <ChatRoomBox />
+      <MessageInput />
+    </div>
   );
 }
