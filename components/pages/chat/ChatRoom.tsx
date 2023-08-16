@@ -32,6 +32,7 @@ export default function ChatRoom({ roomId }: { roomId: string }) {
         setMessage={setMessage}
         sendMessage={sendMessage}
         handleOnKeyPress={handleOnKeyPress}
+        message={message}
       />
     </div>
   );
