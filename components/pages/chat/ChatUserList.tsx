@@ -3,7 +3,10 @@ import ChatUser from './ChatUser';
 
 export default function ChatUserList() {
   return (
-    <FlexBox direction="column" className="gap-2 px-6 py-4 border-b-[1px]">
+    <FlexBox
+      direction="column"
+      className="gap-2 px-6 py-4 border-b-[1px] h-1/2"
+    >
       <FlexBox justify="between" className="w-full">
         <FlexBox as="header" className="gap-2 p-2">
           <h1 className="text-2xl font-bold">인원</h1>
@@ -16,7 +19,7 @@ export default function ChatUserList() {
           추가
         </button>
       </FlexBox>
-      <ul className="w-full overflow-auto max-h-96 scrollbar-hide">
+      <ul className="w-full overflow-auto scrollbar-hide">
         {Array.from({ length: 10 }).map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <ChatUser key={i} />
