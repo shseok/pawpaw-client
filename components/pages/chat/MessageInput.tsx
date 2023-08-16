@@ -4,17 +4,19 @@ import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import PlusCircleIcon from '@/public/PlusCircle.svg';
 import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
 
+interface MessageInputType {
+  setMessage: Dispatch<SetStateAction<string>>;
+  sendMessage: () => void;
+  handleOnKeyPress: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  message: string;
+}
+
 export default function MessageInput({
   setMessage,
   sendMessage,
   handleOnKeyPress,
   message,
-}: {
-  setMessage: Dispatch<SetStateAction<string>>;
-  sendMessage: () => void;
-  handleOnKeyPress: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  message: string;
-}) {
+}: MessageInputType) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
     if (textareaRef.current) {
@@ -29,7 +31,7 @@ export default function MessageInput({
       </button>
       <textarea
         ref={textareaRef}
-        className="w-full p-2 pl-20 pr-14 shadow-chatCard  rounded-[10px] outline-none scrollbar-hide resize-none max-h-40"
+        className="w-full p-2 pl-20 pr-14 shadow-chatCard rounded-[10px] outline-none scrollbar-hide resize-none max-h-40"
         onKeyDown={handleOnKeyPress}
         onChange={(e) => setMessage(e.target.value)}
         value={message}
