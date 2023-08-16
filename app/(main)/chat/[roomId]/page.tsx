@@ -10,7 +10,7 @@ export default function ChatRoomPage({
 
   return (
     <main className="flex w-full">
-      <ChatRoom />
+      <ChatRoom roomId={params.roomId} />
       <aside className="sticky top-0 hidden w-2/6 h-screen min-w-fit tablet:block">
         <ChatUserList />
         <div>스케줄</div>
