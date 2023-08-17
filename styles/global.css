@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .header1 {
+    @apply text-4xl font-bold leading-10 tablet:text-3xl tablet:leading-9;
+  }
+  .header2 {
+    @apply text-3xl font-bold leading-9 tablet:text-2xl tablet:leading-8;
+  }
+  .header3 {
+    @apply text-2xl font-bold leading-8 tablet:text-xl tablet:leading-7;
+  }
+  .header4 {
+    @apply text-lg font-bold leading-8 tablet:text-base;
+  }
+  .body1 {
+    @apply text-lg font-normal leading-8 tablet:text-base;
+  }
+  .body2 {
+    @apply text-base font-bold;
+  }
+  .body3 {
+    @apply text-base font-medium;
+  }
+  .body4 {
+    @apply text-base font-normal;
+  }
+  .caption1 {
+    @apply text-sm font-bold tablet:text-xs;
+  }
+  .caption2 {
+    @apply text-sm font-normal tablet:text-xs;
+  }
+}
+
 .swiper {
   overflow: unset !important;
 }
