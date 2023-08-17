@@ -21,7 +21,9 @@ export default function PostContent({
         align="start"
         className="w-[375px] gap-[12px]"
       >
-        <div className="text-[16px]">{content}</div>
+        <div className="overflow-hidden body3 text-grey-800 max-h-40">
+          {content}
+        </div>
         <Image
           src="/Feed/desktop/breakLine.svg"
           alt="break line"

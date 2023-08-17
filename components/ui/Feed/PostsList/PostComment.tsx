@@ -11,11 +11,11 @@ export default function PostComment({
   return (
     <FlexBox direction="column" align="start" className="w-full gap-[12px]">
       <FlexBox className="gap-[20px]">
-        <FlexBox className="gap-[8px]">
+        <FlexBox className="gap-[8px] body3 text-grey-500">
           <div>댓글</div>
           <div>{commentsNum}</div>
         </FlexBox>
-        <FlexBox className="gap-[8px]">
+        <FlexBox className="gap-[8px] body3 text-grey-500">
           <div>좋아요</div>
           <div>2</div>
         </FlexBox>
@@ -39,7 +39,7 @@ export default function PostComment({
         <input
           type="text"
           placeholder="댓글로 이웃과 소통해보세요!"
-          className="border rounded-[10px] py-[16px] px-[20px] w-full"
+          className="border rounded-[10px] py-[16px] px-[20px] w-full body4 text-grey-400"
         />
       </FlexBox>
     </FlexBox>
