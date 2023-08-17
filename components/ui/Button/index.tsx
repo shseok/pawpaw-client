@@ -17,9 +17,9 @@ const sizes = {
   xl: 'h-[66px]',
 };
 const variants = {
-  primary: 'bg-primary hover:bg-[#08995C] text-white',
+  primary: 'bg-primary-200 hover:bg-primary-300 text-white',
   secondary:
-    'bg-white border-2 border-primary  text-primary hover:border-[#08995C] hover:text-[#08995C]',
+    'bg-white border-2 border-primary-200 text-primary-200 hover:border-primary-300 hover:text-primary-300',
 };
 
 export default function Button({

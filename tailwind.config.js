@@ -13,7 +13,30 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        primary: '#0ABE7D',
+        DEFAULT: '#1B1D1F',
+        primary: {
+          300: '#08995C',
+          200: '#0ABE7D',
+          100: '#CFF4D2',
+          50: '#F5FFF6',
+        },
+        yellow: '#FFD232',
+        purple: '#B85FFF',
+        red: '#FF3257',
+        grey: {
+          800: '#1B1D1F',
+          700: '#26282B',
+          600: '#474C51',
+          500: '#74787D',
+          400: '#A0A4A8',
+          300: '#CBCDD2',
+          200: '#E9EBED',
+          100: '#F7F8F9',
+        },
+        white: '#FFFFFF',
+      },
+      borderColor: {
+        DEFAULT: '#E9EBED',
       },
       boxShadow: {
         chatCard: '0px 0px 20px 0px #00000014',
