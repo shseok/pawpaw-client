@@ -29,17 +29,24 @@ export default function PostsList() {
             <FlexBox
               direction="column"
               justify="between"
-              className="w-full p-[36px] rounded-[10px] border-[1px] border-[#E9EBED] gap-[16px]"
+              className="w-full max-h-[500px] p-9 rounded-[10px] border-[1px] border-grey-200 gap-4"
             >
               <PostHeader userId={post.userId} />
               <PostContent content={post.title}>
                 <PostComment commentsNum={filteredCommentsCount}>
-                  <FlexBox direction="column">
+                  <FlexBox
+                    direction="column"
+                    justify="start"
+                    className="max-h-[82px] overflow-scroll"
+                  >
                     {filteredComments?.map((comment) => (
                       <div key={comment.id}>
-                        <span className="font-bold">{comment.User.name}</span>
-                        {'  '}
-                        {comment.content}
+                        <div className="inline-block mr-1 body2 text-grey-500">
+                          {comment.User.name}
+                        </div>
+                        <div className="inline body4 text-grey-500">
+                          {comment.content}
+                        </div>
                       </div>
                     ))}
                   </FlexBox>

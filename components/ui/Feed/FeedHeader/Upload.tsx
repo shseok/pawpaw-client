@@ -6,7 +6,7 @@ export default function Upload() {
   return (
     <FlexBox
       direction="column"
-      className="bg-[#F5FFF6] p-[20px] border-[1px] rounded-[10px] w-full"
+      className="bg-primary-50 p-[20px] border-[1px] border-primary-300 rounded-[10px] w-full"
     >
       <FlexBox justify="between" className="w-full gap-[24px]">
         <Avatar
@@ -15,7 +15,7 @@ export default function Upload() {
           name="수박이"
         />
         <textarea
-          className="bg-[#F5FFF6] w-full h-[77px] resize-none"
+          className="bg-primary-50 w-full h-[77px] resize-none header4 text-grey-300"
           placeholder="동네 주민들에게 즐거운 소식을 전해보세요!"
         />
       </FlexBox>

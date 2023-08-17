@@ -9,14 +9,14 @@ export default function FeedHeader() {
       direction="column"
       align="start"
       justify="between"
-      className="gap-[20px] w-full"
+      className="w-full gap-5"
     >
       <Title />
       <FlexBox
         direction="column"
         align="start"
         justify="between"
-        className="gap-[16px] w-full"
+        className="w-full gap-4"
       >
         <Location />
         <Upload />

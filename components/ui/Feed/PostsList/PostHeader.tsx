@@ -14,12 +14,12 @@ export default function PostHeader({ userId }: { userId: number }) {
         />
         <FlexBox direction="column" align="start" className="gap-[4px]">
           <FlexBox className="gap-[8px]">
-            <div>{userId}</div>
+            <div className="header4 text-grey-800">{userId}</div>
             <Button size="md" variant="secondary">
               팔로우
             </Button>
           </FlexBox>
-          <div className="text-[14px]">
+          <div className="caption2 text-grey-400">
             고양이 아무튼 자격증 보유중 ・ 3시간 전
           </div>
         </FlexBox>
