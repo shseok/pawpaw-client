@@ -6,7 +6,7 @@ export default function Upload() {
   return (
     <FlexBox
       direction="column"
-      className="bg-primary-50 p-[20px] border-[1px] border-primary-300 rounded-[10px] w-full"
+      className="bg-primary-50 p-5 border-[1px] border-primary-300 rounded-[10px] w-full"
     >
       <FlexBox justify="between" className="w-full gap-[24px]">
         <Avatar
