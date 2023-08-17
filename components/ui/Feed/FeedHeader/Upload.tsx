@@ -48,7 +48,7 @@ export default function Upload() {
         <Button size="lg" disabled={isOverLimit}>
           업로드
         </Button>
-        <div className="mt-4" id="renderedText"></div>
+        <div className="mt-4" id="renderedText" />
       </FlexBox>
     </FlexBox>
   );
