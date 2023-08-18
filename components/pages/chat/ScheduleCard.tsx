@@ -18,14 +18,14 @@ export default function ScheduleCard() {
       <FlexBox
         direction="column"
         align="start"
-        className="gap-2 border-l-[5px] border-l-[#FFD232] border w-full rounded-r-[10px] p-2"
+        className="gap-2 border-l-[5px] border-l-[#FFD232] border w-full rounded-r-[10px] p-2 header4"
       >
         <p>2023년 7월 28일 금요일</p>
         <p>11:00 ~ 12:00</p>
       </FlexBox>
       <FlexBox justify="between" className="w-full">
         <FlexBox direction="column" className="gap-2">
-          <div className="w-full">참여자</div>
+          <div className="w-full caption1">참여자</div>
           <AvatarGroup userList={testArr1} />
         </FlexBox>
         <button type="button" className="self-end">

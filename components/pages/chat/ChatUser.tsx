@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Avatar from '@/components/ui/Avatar';
 import FlexBox from '@/components/ui/FlexBox';
 import ArrowRightIcon from '@/public/arrow-right.svg';
@@ -9,7 +10,9 @@ export default function ChatUser() {
       <FlexBox direction="column" align="start" className="gap-1 ">
         <FlexBox className="gap-1">
           <p className="font-bold">닉네awdwadawdwadaw임</p>
-          <ArrowRightIcon />
+          <Link href="/">
+            <ArrowRightIcon />
+          </Link>
         </FlexBox>
         <p className="text-[#74787D] ">3살 감자</p>
       </FlexBox>

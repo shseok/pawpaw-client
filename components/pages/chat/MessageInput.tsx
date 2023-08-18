@@ -24,8 +24,12 @@ export default function MessageInput({
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [message]);
+  const messageEmpty = message.trim().length === 0;
   return (
-    <footer className="relative flex items-center px-10 py-6 ">
+    <form
+      className="relative flex items-center px-10 py-6 "
+      onSubmit={sendMessage}
+    >
       <button type="button" className="absolute left-14">
         <PlusCircleIcon className="w-8 h-8" />
       </button>
@@ -36,9 +40,13 @@ export default function MessageInput({
         onChange={(e) => setMessage(e.target.value)}
         value={message}
       />
-      <button type="button" className="absolute right-14" onClick={sendMessage}>
-        <PaperPlaneIcon className="w-8 h-8 " />
+      <button
+        type="submit"
+        className="absolute right-14"
+        disabled={messageEmpty}
+      >
+        <PaperPlaneIcon className="w-8 h-8" />
       </button>
-    </footer>
+    </form>
   );
 }

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import ArrowLeftIcon from '@/public/arrow-left.svg';
 import FlexBox from '@/components/ui/FlexBox';
-import HambugerMenuIcon from '@/public/hambuger-menu.svg';
+import DotsIcon from '@/public/tabler_dots.svg';
 
 export default function ChatRoomHeader({ title }: { title: string }) {
   return (
@@ -17,9 +17,9 @@ export default function ChatRoomHeader({ title }: { title: string }) {
         </Link>
         <p className="text-xl font-bold">{title}</p>
       </FlexBox>
-      <div className="block tablet:hidden">
-        <HambugerMenuIcon className="w-8 h-8" />
-      </div>
+      <button type="button">
+        <DotsIcon className="w-6 h-6 tablet:w-7 tablet:h-7" />
+      </button>
     </FlexBox>
   );
 }

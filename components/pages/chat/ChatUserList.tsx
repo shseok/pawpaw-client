@@ -15,7 +15,7 @@ export default function ChatUserList() {
             <p className="text-[#A0A4A8]">/ 60</p>
           </FlexBox>
         </FlexBox>
-        <button type="button" className="font-bold text-primary">
+        <button type="button" className="font-bold text-primary-200">
           추가
         </button>
       </FlexBox>

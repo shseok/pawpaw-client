@@ -1,18 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
+import { useState } from 'react';
 import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
 import MessageInput from './MessageInput';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ChatRoom({ roomId }: { roomId: string }) {
   const [message, setMessage] = useState('');
-
-  // const socket = io(`서버주소/${roomId}`)
-
   const sendMessage = () => {
-    alert(message);
+    if (message.trim().length === 0) {
+      return;
+    }
+    console.log('호출');
+    setMessage('');
   };
   const handleOnKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // eslint-disable-next-line no-console

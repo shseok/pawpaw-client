@@ -10,9 +10,9 @@ export default function ChatRoomPage({
   console.log(params.roomId);
 
   return (
-    <main className="flex w-full">
+    <main className="flex w-screen">
       <ChatRoom roomId={params.roomId} />
-      <aside className="sticky top-0 flex-col hidden w-2/6 h-screen min-w-fit tablet:flex">
+      <aside className="flex-col hidden w-2/6 h-screen min-w-fit tablet:flex">
         <ChatUserList />
         <Schedule />
       </aside>
