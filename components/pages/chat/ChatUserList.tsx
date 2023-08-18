@@ -12,7 +12,7 @@ export default function ChatUserList() {
           <h1 className="text-2xl font-bold">인원</h1>
           <FlexBox className="gap-1">
             <p>21</p>
-            <p className="text-[#A0A4A8]">/ 60</p>
+            <p className="text-grey-500">/ 60</p>
           </FlexBox>
         </FlexBox>
         <button type="button" className="font-bold text-primary-200">

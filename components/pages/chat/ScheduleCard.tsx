@@ -18,7 +18,7 @@ export default function ScheduleCard() {
       <FlexBox
         direction="column"
         align="start"
-        className="gap-2 border-l-[5px] border-l-[#FFD232] border w-full rounded-r-[10px] p-2 header4"
+        className="gap-2 border-l-[5px] border-l-yellow border w-full rounded-r-[10px] p-2 header4"
       >
         <p>2023년 7월 28일 금요일</p>
         <p>11:00 ~ 12:00</p>

@@ -14,7 +14,7 @@ export default function ChatUser() {
             <ArrowRightIcon />
           </Link>
         </FlexBox>
-        <p className="text-[#74787D] ">3살 감자</p>
+        <p className="text-grey-500 ">3살 감자</p>
       </FlexBox>
     </FlexBox>
   );
