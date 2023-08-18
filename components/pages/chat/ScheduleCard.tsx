@@ -1,5 +1,5 @@
 import FlexBox from '@/components/ui/FlexBox';
-import ExportIcon from '@/public/Export.svg';
+import ExportIcon from '@/public/export.svg';
 import AvatarGroup from './AvatarGroup';
 
 export default function ScheduleCard() {
