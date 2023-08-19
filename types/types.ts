@@ -1,7 +1,7 @@
 import { SPECIES } from '@/constant/pets';
 
 export interface SidebarProps {
-  svgComponent: (props: { color: string }) => JSX.Element;
+  svgComponent: (props: { color: string; svgSize: string }) => JSX.Element;
   activeButton: string;
   setActive: (props: string) => void;
   router: () => void;
