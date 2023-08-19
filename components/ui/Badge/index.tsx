@@ -5,7 +5,7 @@ export default function Badge() {
     <FlexBox
       justify="center"
       align="center"
-      className="w-5 h-5 text-xs font-bold text-white rounded-full bg-primary "
+      className="w-5 h-5 text-xs font-bold text-white rounded-full bg-primary-200 "
     >
       N
     </FlexBox>

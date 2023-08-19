@@ -1,17 +1,17 @@
 'use client';
 
-import ChatCard from '@/components/ui/ChatCard';
 import FlexBox from '@/components/ui/FlexBox';
 import RightButton from '@/public/ChatCard/arrow-right.svg';
 import LeftButton from '@/public/ChatCard/arrow-left.svg';
+import SimpleChatCard from './SimpleChatCard';
 
-export default function ChatCardList() {
+export default function SimpleChatCardList() {
   return (
     <FlexBox
       direction="column"
       justify="start"
       as="aside"
-      className="sticky top-0 right-0 hidden h-screen gap-5 p-8 bg-white turncate tablet:flex"
+      className="w-full gap-3"
     >
       <FlexBox justify="between" className="w-full">
         <h1 className="text-2xl font-bold">지금 뜨고있는 채팅방 🔥</h1>
@@ -24,9 +24,9 @@ export default function ChatCardList() {
           </button>
         </FlexBox>
       </FlexBox>
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
+      <SimpleChatCard />
+      <SimpleChatCard />
+      <SimpleChatCard />
     </FlexBox>
   );
 }
