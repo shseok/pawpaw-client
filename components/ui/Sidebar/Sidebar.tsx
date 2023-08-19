@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import useViewportTracker from '@/hooks/common/useViewportTracker';
 import SideButtonContainer from './SideButtonContainer';
 import BottomToggle from './BottomToggle';
 import SidebarLogo from './SidebarLogo';
@@ -9,7 +10,10 @@ import ResponsiveNavbar from './Responsive/ResponsiveNavbar';
 
 export default function Sidebar() {
   const [toggle, setToggle] = useState(true);
-  const desktopWidth = toggle === true ? 'w-64' : 'w-24';
+  const viewport = useViewportTracker();
+  const responsiveWidth = [viewport.width / 7.5, viewport.width / 20];
+  const desktopWidth =
+    toggle === true ? `${responsiveWidth[0]}` : `${responsiveWidth[1]}`;
   const path = usePathname();
   let pathname;
   if (path === '/') {
@@ -24,13 +28,15 @@ export default function Sidebar() {
   return (
     <>
       <nav
-        className={`fixed top-0 h-screen left-0 ${desktopWidth}  bg-[#F7F8F9] hidden tablet:block`}
+        className="fixed top-0 h-screen left-0 bg-[#F7F8F9] hidden tablet:block"
+        style={{ width: `${desktopWidth}px` }}
       >
-        <SidebarLogo desktopWidth={toggle} />
+        <SidebarLogo desktopWidth={toggle} viewport={viewport.width} />
         <SideButtonContainer
           desktopWidth={toggle}
           activeButton={activeButton}
           setActive={setActiveButton}
+          viewport={viewport.width}
         />
         <BottomToggle
           desktopWidth={toggle}
@@ -38,7 +44,10 @@ export default function Sidebar() {
         />
       </nav>
       <div>
-        <div className={`sticky ${desktopWidth} hidden tablet:block`} />
+        <div
+          className="sticky hidden tablet:block"
+          style={{ width: `${desktopWidth}px` }}
+        />
       </div>
       {pathname === 'Chat' ? (
         <div className="hidden">

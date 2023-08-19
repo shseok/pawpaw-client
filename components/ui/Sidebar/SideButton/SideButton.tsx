@@ -6,9 +6,15 @@ export default function SideButton({
   svgComponent,
   desktopWidth,
   router,
+  viewport,
 }: Pick<
   SidebarProps,
-  'activeButton' | 'setActive' | 'svgComponent' | 'desktopWidth' | 'router'
+  | 'activeButton'
+  | 'setActive'
+  | 'svgComponent'
+  | 'desktopWidth'
+  | 'router'
+  | 'viewport'
 >) {
   const color = activeButton === svgComponent.name ? '#0ABE7D' : '#74787D';
   const names: { [key: string]: string } = {
@@ -25,6 +31,8 @@ export default function SideButton({
     setActive(`${svgComponent.name}`);
     router();
   };
+  const textSize = `${viewport / 96}`;
+  const svgSize = `${viewport / 65}`;
 
   return (
     <div
@@ -40,14 +48,17 @@ export default function SideButton({
         ) : null}
         {desktopWidth === true ? (
           <div className="flex flex-nowrap ml-7">
-            {svgComponent({ color })}
-            <div className="ml-3 text-xl cursor-pointer" style={{ color }}>
+            {svgComponent({ color, svgSize })}
+            <div
+              className="ml-3 cursor-pointer"
+              style={{ color, fontSize: `${textSize}px` }}
+            >
               {name}
             </div>
           </div>
         ) : (
           <div className="flex flex-row items-center">
-            {svgComponent({ color })}
+            {svgComponent({ color, svgSize })}
           </div>
         )}
       </button>

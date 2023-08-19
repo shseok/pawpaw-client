@@ -1,11 +1,14 @@
-// import Image from 'next/image';
-import { SidebarProps } from '@/types/types';
 import DesktopSvg from './SideButton/DesktopSvg';
 
 export default function SidebarLogo({
   desktopWidth,
-}: Pick<SidebarProps, 'desktopWidth'>) {
+  viewport,
+}: {
+  desktopWidth: boolean;
+  viewport: number;
+}) {
   const { toggleOnLogo, toggleOffLogo } = DesktopSvg;
+  const svgSize = `${viewport / 13.5}`;
 
   return (
     <figure
@@ -13,7 +16,7 @@ export default function SidebarLogo({
         desktopWidth === true ? 'mt-8 mb-10' : 'mt-8 mb-11'
       } flex flex-row justify-center`}
     >
-      {desktopWidth === true ? toggleOnLogo() : toggleOffLogo()}
+      {desktopWidth === true ? toggleOnLogo({ svgSize }) : toggleOffLogo()}
     </figure>
   );
 }
