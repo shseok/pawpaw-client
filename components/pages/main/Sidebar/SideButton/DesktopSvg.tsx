@@ -1,4 +1,4 @@
-function Feed({ color }: { color: string }) {
+function Feed({ color, svgSize }: { color: string; svgSize: string }) {
   return (
     <div className="cursor-pointer">
       <svg
@@ -17,7 +17,7 @@ function Feed({ color }: { color: string }) {
   );
 }
 
-function Community({ color }: { color: string }) {
+function Community({ color, svgSize }: { color: string; svgSize: string }) {
   return (
     <div className="cursor-pointer">
       <svg
@@ -36,7 +36,7 @@ function Community({ color }: { color: string }) {
   );
 }
 
-function Pawzone({ color }: { color: string }) {
+function Pawzone({ color, svgSize }: { color: string; svgSize: string }) {
   return (
     <div className="cursor-pointer">
       <svg
@@ -55,7 +55,7 @@ function Pawzone({ color }: { color: string }) {
   );
 }
 
-function Mypage({ color }: { color: string }) {
+function Mypage({ color, svgSize }: { color: string; svgSize: string }) {
   return (
     <div className="cursor-pointer">
       <svg
@@ -73,7 +73,7 @@ function Mypage({ color }: { color: string }) {
     </div>
   );
 }
-function Search({ color }: { color: string }) {
+function Search({ color, svgSize }: { color: string; svgSize: string }) {
   return (
     <div className="cursor-pointer">
       <svg
@@ -110,7 +110,7 @@ function Notice({ color }: { color: string }) {
   );
 }
 
-function Chat({ color }: { color: string }) {
+function Chat({ color, svgSize }: { color: string; svgSize: string }) {
   return (
     <div className="cursor-pointer">
       <svg
@@ -149,10 +149,10 @@ function Logout() {
   );
 }
 
-const toggleOnLogo = () => (
+const toggleOnLogo = ({ svgSize }: { svgSize: string }) => (
   <div>
     <svg
-      width="140"
+      width={svgSize}
       height="50"
       viewBox="0 0 140 50"
       fill="none"

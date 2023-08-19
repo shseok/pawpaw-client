@@ -6,9 +6,15 @@ export default function SideButton({
   svgComponent,
   desktopWidth,
   router,
+  viewport,
 }: Pick<
   SidebarProps,
-  'activeButton' | 'setActive' | 'svgComponent' | 'desktopWidth' | 'router'
+  | 'activeButton'
+  | 'setActive'
+  | 'svgComponent'
+  | 'desktopWidth'
+  | 'router'
+  | 'viewport'
 >) {
   const color = activeButton === svgComponent.name ? '#0ABE7D' : '#74787D';
   const names: { [key: string]: string } = {
@@ -24,6 +30,8 @@ export default function SideButton({
     setActive(`${svgComponent.name}`);
     router();
   };
+  const textSize = `${viewport / 96}`;
+  const svgSize = `${viewport / 65}`;
 
   return (
     <div
@@ -46,7 +54,7 @@ export default function SideButton({
           </div>
         ) : (
           <div className="flex flex-row items-center">
-            {svgComponent({ color })}
+            {svgComponent({ color, svgSize })}
           </div>
         )}
       </button>
