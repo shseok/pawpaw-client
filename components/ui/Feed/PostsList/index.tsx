@@ -31,8 +31,8 @@ export default function PostsList() {
               justify="between"
               className="w-full max-h-[500px] p-9 rounded-[10px] border-[1px] border-grey-200 gap-4"
             >
-              <PostHeader userId={post.userId} />
-              <PostContent content={post.title}>
+              <PostHeader userId={post.albumId} />
+              <PostContent content={post.title} img={post.url}>
                 <PostComment commentsNum={filteredCommentsCount}>
                   <FlexBox
                     direction="column"
