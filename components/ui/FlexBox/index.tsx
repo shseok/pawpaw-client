@@ -4,7 +4,7 @@ interface FlexBoxProps {
   children: ReactNode;
   direction?: 'row' | 'column';
   justify?: 'start' | 'end' | 'center' | 'between' | 'around';
-  align?: 'start' | 'end' | 'center';
+  align?: 'start' | 'end' | 'center' | 'stretch';
   className?: string;
   as?: ElementType;
 }
@@ -23,6 +23,7 @@ const alignOptions = {
   start: 'items-start',
   end: 'items-end',
   center: 'items-center',
+  stretch: 'items-stretch',
 };
 /**
  *@name FlexBox - flex 속성이 적용되어있으며 가운데정렬이 기본값인 컴포넌트

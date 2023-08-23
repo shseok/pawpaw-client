@@ -20,10 +20,10 @@ export default function Upload() {
         />
       </FlexBox>
       <FlexBox justify="end" className="gap-[10px] w-full">
-        <Button size="xl" variant="secondary">
+        <Button size="lg" variant="secondary">
           파일
         </Button>
-        <Button size="xl">업로드</Button>
+        <Button size="lg">업로드</Button>
       </FlexBox>
     </FlexBox>
   );

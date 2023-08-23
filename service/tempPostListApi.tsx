@@ -1,11 +1,11 @@
 interface Post {
+  albumId: number;
   id: number;
   title: string;
-  body: string;
-  userId: number;
+  url: string;
 }
 
-interface tempPostListApiProps {
+interface TempPostListApiProps {
   pageParam: number;
   pageSize: number;
 }
@@ -13,9 +13,9 @@ interface tempPostListApiProps {
 export default async function tempPostListApi({
   pageParam,
   pageSize,
-}: tempPostListApiProps): Promise<Post> {
+}: TempPostListApiProps): Promise<Post> {
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?_page=${pageParam}&_limit=${pageSize}`
+    `https://jsonplaceholder.typicode.com/photos?_page=${pageParam}&_limit=${pageSize}`,
   );
   return res.json();
 }
