@@ -7,7 +7,7 @@ export default function SimpleChatCard() {
     <FlexBox
       direction="column"
       align="start"
-      className="w-full shadow-chatCard  rounded-[10px] p-8 gap-3 bg-white"
+      className="w-full shadow-chatCard  rounded-[10px]  p-8 gap-3 bg-white"
     >
       <FlexBox justify="between" className="w-full">
         <FlexBox className="gap-1">

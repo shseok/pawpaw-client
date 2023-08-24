@@ -7,14 +7,9 @@ import SimpleChatCard from './SimpleChatCard';
 
 export default function SimpleChatCardList() {
   return (
-    <FlexBox
-      direction="column"
-      justify="start"
-      as="aside"
-      className="w-full gap-3"
-    >
+    <FlexBox direction="column" justify="start" className="w-full gap-3">
       <FlexBox justify="between" className="w-full">
-        <h1 className="text-2xl font-bold">지금 뜨고있는 채팅방 🔥</h1>
+        <h3 className="header3">지금 뜨고있는 채팅방 🔥</h3>
         <FlexBox className="gap-4">
           <button type="button">
             <RightButton />
@@ -26,6 +21,7 @@ export default function SimpleChatCardList() {
       </FlexBox>
       <SimpleChatCard />
       <SimpleChatCard />
+
       <SimpleChatCard />
     </FlexBox>
   );

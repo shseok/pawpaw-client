@@ -3,12 +3,14 @@ import SimpleChatCardList from '@/components/pages/main/SimpleChatCardList';
 import RecommendPlace from '@/components/pages/main/RecommendPlace';
 
 export default function Home() {
+  const geoCode = { lat: 37.5270372, lng: 126.931129 };
+
   return (
-    <main className="flex  w-full p-8 mt-[60px] tablet:mt-0 gap-10">
+    <main className="flex  w-full p-8 mt-[60px] gap-10 tablet:mt-0 h-full">
       <Feed />
-      <aside className="sticky top-0 flex-col hidden w-2/6 h-screen gap-10 tablet:flex">
+      <aside className="sticky top-0 flex-col justify-between hidden w-2/6 h-screen py-4 tablet:flex">
         <SimpleChatCardList />
-        <RecommendPlace />
+        <RecommendPlace geoCode={geoCode} />
       </aside>
     </main>
   );
