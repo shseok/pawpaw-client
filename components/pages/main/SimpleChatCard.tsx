@@ -15,7 +15,7 @@ export default function SimpleChatCard() {
           <Badge />
         </FlexBox>
         <button type="button">
-          <ShareIcon />
+          <ShareIcon className="w-6 h-6" />
         </button>
       </FlexBox>
       <p className="w-full truncate">

@@ -1,5 +1,5 @@
 import FlexBox from '@/components/ui/FlexBox';
-import ExportIcon from '@/public/export.svg';
+import ShareIcon from '@/public/share.svg';
 import AvatarGroup from './AvatarGroup';
 
 export default function ScheduleCard() {
@@ -28,8 +28,8 @@ export default function ScheduleCard() {
           <div className="w-full caption1">참여자</div>
           <AvatarGroup userList={testArr1} />
         </FlexBox>
-        <button type="button" className="self-end">
-          <ExportIcon className="w-8 h-8" />
+        <button type="button">
+          <ShareIcon className="w-8 h-8" />
         </button>
       </FlexBox>
     </FlexBox>
