@@ -5,7 +5,7 @@ import FlexBox from '../FlexBox';
 import ChatCardHeader from './ChatCardHeader';
 import ChatCardInfo from './ChatCardInfo';
 import TagList from '../TagList';
-import Devider from '../Divider';
+import Divider from '../Divider';
 
 const tagList = ['자랑', '강아지', '고양이', '앵무새', '토끼토', 'rhtm'];
 export default function ChatCard() {
@@ -21,7 +21,7 @@ export default function ChatCard() {
         들어와서자랑해자랑해주세요자랑해주세요주세요 자랑해주세요~
       </p>
       <TagList list={tagList} />
-      <Devider type="horizontal" />
+      <Divider type="horizontal" />
       <FlexBox justify="between" className="w-full">
         <ChatCardInfo
           participants={42}
