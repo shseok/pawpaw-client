@@ -63,7 +63,9 @@ export default function Dropdown({ children }: DropDownProps) {
   const providerValue = useMemo(() => ({ isOpen, handleDropdown }), [isOpen]);
   return (
     <DropdownContext.Provider value={providerValue}>
-      {children}
+      <div className="relative" ref={dropdownRef}>
+        {children}
+      </div>
     </DropdownContext.Provider>
   );
 }
