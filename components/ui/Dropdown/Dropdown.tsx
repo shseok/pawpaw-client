@@ -1,7 +1,15 @@
 'use client';
 
 /* eslint-disable import/no-cycle */
-import { createContext, useState, useContext, useMemo } from 'react';
+import {
+  createContext,
+  useState,
+  useContext,
+  useMemo,
+  useEffect,
+  useRef,
+} from 'react';
+import useOutSideClick from '@/hooks/common/useOutSideClick';
 import DropdownItem from './DropdownItem';
 import DropdownMenu from './DropdownMenu';
 import DropdownTrigger from './DropdownTrigger';
@@ -31,6 +39,23 @@ export const useDropdown = () => {
 
 export default function Dropdown({ children }: DropDownProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const isOpenRef = useRef(isOpen);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  useOutSideClick(dropdownRef, () => setIsOpen(false));
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (isOpenRef.current && event.key === 'Escape') {
+      setIsOpen(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
 
   const handleDropdown = () => {
     setIsOpen(!isOpen);
@@ -38,7 +63,7 @@ export default function Dropdown({ children }: DropDownProps) {
   const providerValue = useMemo(() => ({ isOpen, handleDropdown }), [isOpen]);
   return (
     <DropdownContext.Provider value={providerValue}>
-      <div className="relative">{children}</div>
+      {children}
     </DropdownContext.Provider>
   );
 }

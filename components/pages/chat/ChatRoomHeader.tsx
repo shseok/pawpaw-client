@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import ArrowLeftIcon from '@/public/arrow-left.svg';
@@ -43,24 +45,26 @@ export default function ChatRoomHeader({ title }: { title: string }) {
         </Link>
         <p className="text-xl font-bold">{title}</p>
       </FlexBox>
-      <Dropdown>
-        <Dropdown.Trigger>
-          <DotsIcon className="w-6 h-6 tablet:w-7 tablet:h-7" />
-        </Dropdown.Trigger>
-        <Dropdown.Menu>
-          <div className="block tablet:hidden">
-            <Dropdown.Item>인원</Dropdown.Item>
-            <Dropdown.Item>스케줄</Dropdown.Item>
-            <Divider type="horizontal" />
-          </div>
+      <div className="relative w-6 h-6 tablet:w-7 tablet:h-7">
+        <Dropdown>
+          <Dropdown.Trigger>
+            <DotsIcon className="w-6 h-6 tablet:w-7 tablet:h-7" />
+          </Dropdown.Trigger>
+          <Dropdown.Menu>
+            <div className="flex flex-col gap-2 tablet:hidden">
+              <Dropdown.Item>인원</Dropdown.Item>
+              <Dropdown.Item>스케줄</Dropdown.Item>
+              <Divider type="horizontal" />
+            </div>
 
-          {CHAT_ROOM_OPTIONS.map((option) => (
-            <Dropdown.Item key={option.name} event={option.event}>
-              {option.name}
-            </Dropdown.Item>
-          ))}
-        </Dropdown.Menu>
-      </Dropdown>
+            {CHAT_ROOM_OPTIONS.map((option) => (
+              <Dropdown.Item key={option.name} event={option.event}>
+                {option.name}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
     </FlexBox>
   );
 }
