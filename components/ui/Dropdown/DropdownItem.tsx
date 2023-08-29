@@ -3,7 +3,6 @@ import { useDropdown } from './Dropdown';
 
 interface Item {
   children: React.ReactNode | string;
-
   event?: () => void;
 }
 

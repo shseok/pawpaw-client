@@ -17,7 +17,6 @@ export default function ChatRoom({ roomId }: { roomId: string }) {
     setMessage('');
   };
   const handleOnKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    // eslint-disable-next-line no-console
     if (e.key === 'Enter') {
       if (!e.shiftKey) {
         e.preventDefault();

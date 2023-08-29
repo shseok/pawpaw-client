@@ -1,6 +1,6 @@
 import ChatRoom from '@/components/pages/chat/ChatRoom';
 import ChatUserList from '@/components/pages/chat/ChatUserList';
-import Schedule from '@/components/pages/chat/Schedule';
+import ScheduleList from '@/components/pages/chat/ScheduleList';
 
 export default function ChatRoomPage({
   params,
@@ -14,7 +14,7 @@ export default function ChatRoomPage({
       <ChatRoom roomId={params.roomId} />
       <aside className="flex-col hidden w-3/6 h-screen min-w-fit tablet:flex">
         <ChatUserList />
-        <Schedule />
+        <ScheduleList />
       </aside>
     </main>
   );

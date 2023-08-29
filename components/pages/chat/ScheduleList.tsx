@@ -2,7 +2,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import DotsIcon from '@/public/tabler_dots.svg';
 import ScheduleCard from './ScheduleCard';
 
-export default function Schedule() {
+export default function ScheduleList() {
   return (
     <FlexBox direction="column" className="gap-5 px-8 pt-8 h-1/2">
       <FlexBox as="header" justify="between" className="w-full">

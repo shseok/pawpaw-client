@@ -56,13 +56,6 @@ export default function Dropdown({ children }: DropDownProps) {
       document.removeEventListener('keydown', handleEscKeyClose);
     };
   }, []);
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     document.body.style.overflow = 'hidden';
-  //   } else {
-  //     document.body.style.overflow = 'auto';
-  //   }
-  // }, [isOpen]);
 
   const handleDropdown = () => {
     setIsOpen(!isOpen);
