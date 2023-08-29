@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import Dropdown from '@/components/ui/Dropdown/Dropdown';
 import DotsIcon from '@/public/tabler_dots.svg';
 import FlexBox from '@/components/ui/FlexBox';
@@ -8,24 +8,27 @@ import ArrowRightIcon from '@/public/arrow-right.svg';
 import UserListModal from './UserListModal';
 import ScheduleListModal from './ScheduleListModal';
 
-const copyToClipboard = async () => {
-  try {
-    await navigator.clipboard.writeText(window.location.href);
-    alert('복사 성공');
-  } catch {
-    alert('복사 실패');
-  }
-};
-const leaveChatRoom = () => {
-  window.location.replace('/community');
-};
-const CHAT_ROOM_OPTIONS = [
-  { name: '공지' },
-  { name: '사진' },
-  { name: '링크' },
-  { name: '공유하기', event: copyToClipboard },
-  { name: '채팅방 나가기', event: leaveChatRoom },
-];
+function NotiOption() {
+  return <Dropdown.Item>공지</Dropdown.Item>;
+}
+function PhotoOption() {
+  return <Dropdown.Item>사진</Dropdown.Item>;
+}
+function ShareOption() {
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert('복사 성공');
+    } catch {
+      alert('복사 실패');
+    }
+  };
+  return <Dropdown.Item event={copyToClipboard}>공유하기</Dropdown.Item>;
+}
+function LeaveChatRoomOption() {
+  return <Dropdown.Item>채팅방 나가기</Dropdown.Item>;
+}
+const OPTION_LIST = [NotiOption, PhotoOption, ShareOption, LeaveChatRoomOption];
 
 export default function ChatDropdownButton() {
   const [modalType, setModalType] = useState('');
@@ -52,13 +55,11 @@ export default function ChatDropdownButton() {
                 <ArrowRightIcon />
               </FlexBox>
             </Dropdown.Item>
-
             <Divider type="horizontal" />
           </div>
-          {CHAT_ROOM_OPTIONS.map((option) => (
-            <Dropdown.Item key={option.name} event={option.event}>
-              {option.name}
-            </Dropdown.Item>
+          {OPTION_LIST.map((option, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Fragment key={index}>{option()}</Fragment>
           ))}
         </Dropdown.Menu>
       </Dropdown>

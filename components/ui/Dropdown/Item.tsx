@@ -1,17 +1,17 @@
 // eslint-disable-next-line import/no-cycle
 import { useDropdown } from './Dropdown';
 
-interface Item {
+interface DropdownItemType {
   children: React.ReactNode | string;
   event?: () => void;
 }
 
-export default function DropdownItem({
+export default function Item({
   children,
   event = () => {
     console.error('해당 메뉴에 대한 이벤트가 존재하지 않습니다.');
   },
-}: Item) {
+}: DropdownItemType) {
   const { handleDropdown } = useDropdown();
   const eventHandler = () => {
     event();

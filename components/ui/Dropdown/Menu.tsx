@@ -1,19 +1,18 @@
 /* eslint-disable import/no-cycle */
-import { ReactNode } from 'react';
 import FlexBox from '../FlexBox';
 import { useDropdown } from './Dropdown';
 
-interface Menu {
-  children: ReactNode;
+interface DropdownMenuType {
+  children: React.ReactNode;
   direction?: 'left' | 'right';
   width?: string;
 }
 
-export default function DropdownMenu({
+export default function Menu({
   children,
   direction = 'right',
   width = 'w-48',
-}: Menu) {
+}: DropdownMenuType) {
   const { isOpen } = useDropdown();
   if (!isOpen) return null;
   const directionClass = direction === 'left' ? 'left-0' : 'right-0';
