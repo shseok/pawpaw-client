@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import ArrowLeftIcon from '@/public/arrow-left.svg';
 import FlexBox from '@/components/ui/FlexBox';
