@@ -1,3 +1,5 @@
+'use client';
+
 import { Fragment } from 'react';
 import Dropdown from '@/components/ui/Dropdown/Dropdown';
 import DotsIcon from '@/public/tabler_dots.svg';
