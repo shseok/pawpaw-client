@@ -6,7 +6,7 @@ function ScheduleAddOption() {
   return <Dropdown.Item>스케줄 추가</Dropdown.Item>;
 }
 function ScheduleEditOption() {
-  return <Dropdown.Item>스케줄 추가</Dropdown.Item>;
+  return <Dropdown.Item>스케줄 편집</Dropdown.Item>;
 }
 
 const OPTION_LIST = [ScheduleAddOption, ScheduleEditOption];
