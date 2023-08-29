@@ -13,7 +13,7 @@ export default function PostContent({
 }) {
   return (
     <FlexBox align="stretch" className="gap-[36px] h-full">
-      <div className="w-[545px] grid grid-cols-2 place-content-stretch">
+      <div className="w-[303px] mobile:w-[352px] tablet:w-[530px] pc:w-[545px] grid grid-cols-2 place-content-stretch">
         <div className="relative row-span-2 -z-10">
           <Image src={img} alt="게시글 사진1" layout="fill" objectFit="cover" />
         </div>
