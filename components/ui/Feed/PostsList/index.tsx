@@ -1,17 +1,34 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 'use client';
 
+import { useState } from 'react';
 import useCommentsQuery from '@/hooks/queries/PostCommentsQuery';
 import useGetInfiniteData from '@/hooks/queries/InfiniteData';
+import { Comment, Post } from '@/types/types';
 import FlexBox from '../../FlexBox';
 import PostHeader from './PostHeader';
-import PostComment from './PostComment';
 import PostContent from './PostContent';
+import PostCommentWrapper from './PostCommentWrapper';
+import PostComments from './PostComments';
+import FeedModal from '../FeedModal';
 
 export default function PostsList() {
   const { Observer, data: posts } = useGetInfiniteData({
     infiniteQueryKey: ['posts'],
   });
   const { data: comments } = useCommentsQuery();
+
+  // 모달창 구현에 필요
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [selectedComment, setSelectedComment] = useState<Comment[] | undefined>(
+    undefined,
+  );
+  const clickModal = () => {
+    setShowModal(!showModal);
+  };
 
   return (
     <FlexBox direction="column" className="gap-[40px]">
@@ -25,34 +42,49 @@ export default function PostsList() {
           : 0;
 
         return (
-          <div key={post.id}>
+          <div
+            key={post.id}
+            onClick={() => {
+              setSelectedPost(post);
+              setSelectedComment(filteredComments);
+            }}
+          >
             <FlexBox
               direction="column"
               justify="between"
               className="w-full max-h-[500px] p-9 rounded-[10px] border-[1px] border-grey-200 gap-4"
             >
               <PostHeader userId={post.albumId} />
-              <PostContent content={post.title} img={post.url}>
-                <PostComment commentsNum={filteredCommentsCount}>
+              <PostContent
+                content={post.title}
+                img={post.url}
+                onClickModal={clickModal}
+              >
+                <PostCommentWrapper commentsNum={filteredCommentsCount}>
                   <FlexBox
                     direction="column"
                     justify="start"
                     className="max-h-[82px] overflow-scroll"
                   >
                     {filteredComments?.map((comment) => (
-                      <div key={comment.id}>
-                        <div className="inline-block mr-1 body2 text-grey-500">
-                          {comment.User.name}
-                        </div>
-                        <div className="inline body4 text-grey-500">
-                          {comment.content}
-                        </div>
-                      </div>
+                      <PostComments
+                        commentId={comment.id}
+                        commentUserName={comment.User.name}
+                        commentContent={comment.content}
+                        onClickModal={clickModal}
+                      />
                     ))}
                   </FlexBox>
-                </PostComment>
+                </PostCommentWrapper>
               </PostContent>
             </FlexBox>
+            {showModal ? (
+              <FeedModal
+                onClick={clickModal}
+                post={selectedPost}
+                comment={selectedComment}
+              />
+            ) : null}
           </div>
         );
       })}
