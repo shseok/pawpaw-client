@@ -3,14 +3,14 @@ import FlexBox from '../../FlexBox';
 import Button from '../../Button';
 import Avatar from '../../Avatar';
 
-export default function PostHeader({ userId }: { userId: number }) {
+export default function ModalHeader({ userId }: { userId: number }) {
   return (
     <FlexBox justify="between" className="w-full">
       <FlexBox className="gap-[10px]">
         <Avatar
           size="xl"
-          image="/Feed/desktop/tempProfilePic.svg"
-          name={String(userId)}
+          user_img="/Feed/desktop/tempProfilePic.svg"
+          user_name={String(userId)}
         />
         <FlexBox direction="column" align="start" className="gap-[4px]">
           <FlexBox className="gap-[8px]">

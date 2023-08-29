@@ -1,14 +1,4 @@
-interface Post {
-  albumId: number;
-  id: number;
-  title: string;
-  url: string;
-}
-
-interface TempPostListApiProps {
-  pageParam: number;
-  pageSize: number;
-}
+import { Post, TempPostListApiProps } from '@/types/types';
 
 export default async function tempPostListApi({
   pageParam,
