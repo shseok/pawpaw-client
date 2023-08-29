@@ -4,31 +4,31 @@
 
 @layer components {
   .header1 {
-    @apply text-4xl font-bold leading-10 tablet:text-3xl tablet:leading-9;
+    @apply text-2xl font-bold sm:text-3xl tablet:text-4xl;
   }
   .header2 {
-    @apply text-3xl font-bold leading-9 tablet:text-2xl tablet:leading-8;
+    @apply text-xl font-bold sm:text-2xl tablet:text-3xl;
   }
   .header3 {
-    @apply text-2xl font-bold leading-8 tablet:text-xl tablet:leading-7;
+    @apply text-base font-bold sm:text-xl tablet:text-2xl;
   }
   .header4 {
-    @apply text-lg font-bold leading-8 tablet:text-base;
+    @apply text-sm font-bold sm:text-base sm:leading-8 tablet:text-lg;
   }
   .body1 {
-    @apply text-lg font-normal leading-8 tablet:text-base;
+    @apply text-sm font-normal sm:text-base tablet:text-lg tablet:leading-8;
   }
   .body2 {
-    @apply text-base font-bold;
+    @apply text-sm font-bold sm:text-base;
   }
   .body3 {
-    @apply text-base font-medium;
+    @apply text-sm font-medium sm:text-base;
   }
   .body4 {
-    @apply text-base font-normal;
+    @apply text-sm font-normal sm:text-base;
   }
   .caption1 {
-    @apply text-sm font-bold tablet:text-xs;
+    @apply text-xs font-bold tablet:text-sm;
   }
   .caption2 {
     @apply text-sm font-normal tablet:text-xs;
