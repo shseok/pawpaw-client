@@ -45,17 +45,24 @@ export default function Dropdown({ children }: DropDownProps) {
   useEffect(() => {
     isOpenRef.current = isOpen;
   }, [isOpen]);
-  const handleKeyPress = (event: KeyboardEvent) => {
+  const handleEscKeyClose = (event: KeyboardEvent) => {
     if (isOpenRef.current && event.key === 'Escape') {
       setIsOpen(false);
     }
   };
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress);
+    document.addEventListener('keydown', handleEscKeyClose);
     return () => {
-      document.removeEventListener('keydown', handleKeyPress);
+      document.removeEventListener('keydown', handleEscKeyClose);
     };
   }, []);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     document.body.style.overflow = 'hidden';
+  //   } else {
+  //     document.body.style.overflow = 'auto';
+  //   }
+  // }, [isOpen]);
 
   const handleDropdown = () => {
     setIsOpen(!isOpen);

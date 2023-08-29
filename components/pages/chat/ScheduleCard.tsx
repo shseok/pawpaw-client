@@ -36,8 +36,8 @@ export default function ScheduleCard() {
           <div className="w-full caption1">참여자</div>
           <AvatarGroup userList={testArr1} />
         </FlexBox>
-        <button type="button">
-          <ShareIcon className="w-8 h-8" />
+        <button type="button" className="self-end p-2">
+          <ShareIcon className="w-6 h-6 tablet:h-8 tablet:w-8" />
         </button>
       </FlexBox>
     </FlexBox>

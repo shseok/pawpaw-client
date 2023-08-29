@@ -19,9 +19,9 @@ export default function DropdownItem({
     handleDropdown();
   };
   return (
-    <li>
+    <li className="w-full rounded-[10px] hover:bg-grey-100 active:bg-grey-200">
       <button
-        className="w-full p-3 text-left rounded-[10px] body1 hover:bg-grey-100 active:bg-grey-200"
+        className="w-full p-3 text-left body1"
         type="button"
         onClick={eventHandler}
       >

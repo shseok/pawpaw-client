@@ -1,14 +1,20 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Link from 'next/link';
 import ArrowLeftIcon from '@/public/arrow-left.svg';
+import ArrowRightIcon from '@/public/arrow-right.svg';
 import FlexBox from '@/components/ui/FlexBox';
 import DotsIcon from '@/public/tabler_dots.svg';
 import Dropdown from '@/components/ui/Dropdown/Dropdown';
 import Divider from '@/components/ui/Divider';
+import Portal from '@/utils/Portal';
+import UserListModal from './UserListModal';
+import ScheduleListModal from './ScheduleListModal';
 
 export default function ChatRoomHeader({ title }: { title: string }) {
+  const [modalType, setModalType] = useState('');
   const router = useRouter();
   const copyToClipboard = async () => {
     try {
@@ -21,6 +27,9 @@ export default function ChatRoomHeader({ title }: { title: string }) {
   const leaveChatRoom = () => {
     router.replace('/community');
   };
+  const handleShowModal = (type: string) => {
+    setModalType(type);
+  };
   const CHAT_ROOM_OPTIONS = [
     {
       name: '공지',
@@ -32,6 +41,7 @@ export default function ChatRoomHeader({ title }: { title: string }) {
     { name: '공유하기', event: copyToClipboard },
     { name: '채팅방 나가기', event: leaveChatRoom },
   ];
+
   return (
     <FlexBox
       as="header"
@@ -45,15 +55,24 @@ export default function ChatRoomHeader({ title }: { title: string }) {
         </Link>
         <p className="text-xl font-bold">{title}</p>
       </FlexBox>
-
       <Dropdown>
         <Dropdown.Trigger>
           <DotsIcon className="w-6 h-6 tablet:w-7 tablet:h-7" />
         </Dropdown.Trigger>
         <Dropdown.Menu>
-          <div className="flex flex-col gap-2 tablet:hidden">
-            <Dropdown.Item>인원</Dropdown.Item>
-            <Dropdown.Item>스케줄</Dropdown.Item>
+          <div className="flex flex-col w-full gap-2 tablet:hidden">
+            <Dropdown.Item event={() => handleShowModal('user')}>
+              <FlexBox justify="between">
+                <p>인원</p>
+                <ArrowRightIcon />
+              </FlexBox>
+            </Dropdown.Item>
+            <Dropdown.Item event={() => handleShowModal('schedule')}>
+              <FlexBox justify="between">
+                <p>스케줄</p>
+                <ArrowRightIcon />
+              </FlexBox>
+            </Dropdown.Item>
             <Divider type="horizontal" />
           </div>
 
@@ -64,6 +83,15 @@ export default function ChatRoomHeader({ title }: { title: string }) {
           ))}
         </Dropdown.Menu>
       </Dropdown>
+      {modalType !== '' && (
+        <Portal>
+          {modalType === 'user' ? (
+            <UserListModal setModalType={setModalType} />
+          ) : (
+            <ScheduleListModal setModalType={setModalType} />
+          )}
+        </Portal>
+      )}
     </FlexBox>
   );
 }
