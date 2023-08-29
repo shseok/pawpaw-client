@@ -53,6 +53,9 @@ module.exports = {
       },
       screens: {
         tablet: '1000px',
+        mac: '1753px',
+        pc: '1920px',
+        mobile: '375px',
       },
       fontSize: {
         h1PC: ['32px', { lineHeight: '40px', fontWeight: 'bold' }],
