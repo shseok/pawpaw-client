@@ -7,11 +7,11 @@ export default function SimpleChatCard() {
     <FlexBox
       direction="column"
       align="start"
-      className="w-full shadow-chatCard  rounded-[10px]  p-8 gap-3 bg-white"
+      className="w-full shadow-chatCard  rounded-[10px] p-6 gap-3 bg-white"
     >
       <FlexBox justify="between" className="w-full">
         <FlexBox className="gap-1">
-          <p className="header3">천하제일 내 반려동물 자랑방</p>
+          <p className="header4">천하제일 내 반려동물 자랑방</p>
           <Badge />
         </FlexBox>
         <button type="button">
