@@ -69,41 +69,6 @@ export default function Dropdown({ children }: DropDownProps) {
     </DropdownContext.Provider>
   );
 }
-// function Trigger({ children }: { children: React.ReactNode }) {
-//   const { handleDropdown } = useDropdown();
-
-//   return (
-//     <button type="button" onClick={handleDropdown}>
-//       {children}
-//     </button>
-//   );
-// }
-// interface DropdownMenuType {
-//   children: React.ReactNode;
-//   direction?: 'left' | 'right';
-//   width?: string;
-// }
-// function Menu({
-//   children,
-//   direction = 'right',
-//   width = 'w-48',
-// }: DropdownMenuType) {
-//   const { isOpen } = useDropdown();
-//   if (!isOpen) return null;
-//   const directionClass = direction === 'left' ? 'left-0' : 'right-0';
-//   return (
-//     <FlexBox
-//       as="ul"
-//       direction="column"
-//       className={`absolute ${directionClass} ${width}  gap-2 p-4 bg-white shadow-chatCard rounded-[10px]`}
-//     >
-//       {children}
-//     </FlexBox>
-//   );
-// }
-// function Item() {
-//   return <div>d</div>;
-// }
 
 Dropdown.Trigger = Trigger;
 Dropdown.Menu = Menu;
