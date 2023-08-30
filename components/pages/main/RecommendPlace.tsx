@@ -99,7 +99,7 @@ export default function RecommendPlace({ geoCode }: PropsType) {
       </h3>
       <Link
         href={`/${placeDetail?.place_id}`}
-        className="w-full rounded-[10px] shadow-chatCard p-5 gap-5 flex flex-col"
+        className="w-full rounded-[10px] shadow-chatCard p-5 h-64 gap-5 flex flex-col"
       >
         <Image
           src="/default.png"
@@ -113,10 +113,12 @@ export default function RecommendPlace({ geoCode }: PropsType) {
           {isLoaded && <GoogleMap onLoad={(map) => onMapLoad(map)} />}
         </div>
         <FlexBox direction="column" align="start" className="w-full gap-1">
-          <p className="flex gap-1 body2">
-            {placeDetail && placeDetail.name}
-            <span className="body3 text-grey-300">{distance}</span>
-          </p>
+          <div className="flex gap-1">
+            <p className="w-5/6 truncate body2">
+              {placeDetail && placeDetail.name}
+            </p>
+            <p className="body3 min-w-fit text-grey-300">{distance}</p>
+          </div>
           <p className="body4">
             {placeDetail && placeDetail.formatted_address}
           </p>

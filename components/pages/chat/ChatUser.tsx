@@ -5,11 +5,11 @@ import ArrowRightIcon from '@/public/arrow-right.svg';
 
 export default function ChatUser() {
   return (
-    <FlexBox as="li" justify="start" className="w-full gap-3 px-5 py-3">
+    <FlexBox as="li" justify="start" className="gap-3 px-5 py-3 h-fit">
       <Avatar user_img="/default.png" user_name="" size="xl" />
       <FlexBox direction="column" align="start" className="gap-1 ">
         <FlexBox className="gap-1">
-          <p className="font-bold">닉네awdwadawdwadaw임</p>
+          <p className="font-bold">닉네aw daw임 awd</p>
           <Link href="/">
             <ArrowRightIcon />
           </Link>

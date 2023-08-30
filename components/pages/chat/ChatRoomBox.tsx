@@ -1,5 +1,3 @@
-'use client';
-
 import FlexBox from '@/components/ui/FlexBox';
 import Message from './Message';
 
