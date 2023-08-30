@@ -1,5 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import useEscKeyClose from '@/hooks/common/useEscKeyClose';
+import useOutSideClick from '@/hooks/common/useOutSideClick';
+import { Dispatch, SetStateAction, useRef } from 'react';
 
 interface ModalContentWrapperProps {
   showModal: boolean;
@@ -13,35 +14,10 @@ export default function ModalContentWrapper({
   setShowModal,
   opacitiyClass,
 }: ModalContentWrapperProps) {
-  const modalKeyRef = useRef(showModal);
+  const modalKeyRef = useRef<HTMLElement | boolean>(showModal);
   const modalClickRef = useRef<HTMLDivElement>(null);
-
-  const handleEscKeyClose = (event: KeyboardEvent) => {
-    if (modalKeyRef.current && event.key === 'Escape') {
-      setShowModal(false);
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('keydown', handleEscKeyClose);
-    return () => {
-      document.removeEventListener('keydown', handleEscKeyClose);
-    };
-  }, []);
-
-  const handleOutsideClickClose = (event: MouseEvent) => {
-    if (
-      modalClickRef.current &&
-      !modalClickRef.current.contains(event.target as Node)
-    ) {
-      setShowModal(false);
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClickClose);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClickClose);
-    };
-  }, []);
+  useOutSideClick(modalClickRef, () => setShowModal(false));
+  useEscKeyClose(modalKeyRef, () => setShowModal(false));
 
   return (
     <div

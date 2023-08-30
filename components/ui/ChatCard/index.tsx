@@ -1,5 +1,3 @@
-'use client';
-
 import Button from '../Button';
 import FlexBox from '../FlexBox';
 import ChatCardHeader from './ChatCardHeader';

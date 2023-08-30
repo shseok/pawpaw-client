@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import ArrowLeftIcon from '@/public/arrow-left.svg';
 import FlexBox from '@/components/ui/FlexBox';
-import DotsIcon from '@/public/tabler_dots.svg';
+import ChatDropdownButton from './ChatDropdownButton';
 
 export default function ChatRoomHeader({ title }: { title: string }) {
   return (
@@ -17,9 +17,7 @@ export default function ChatRoomHeader({ title }: { title: string }) {
         </Link>
         <p className="text-xl font-bold">{title}</p>
       </FlexBox>
-      <button type="button">
-        <DotsIcon className="w-6 h-6 tablet:w-7 tablet:h-7" />
-      </button>
+      <ChatDropdownButton />
     </FlexBox>
   );
 }

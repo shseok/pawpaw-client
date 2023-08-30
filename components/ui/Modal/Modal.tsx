@@ -1,37 +1,31 @@
-import { createPortal } from 'react-dom';
 import { Dispatch, SetStateAction } from 'react';
-import ModalContentWrapper from './ModalContentWrapper';
+import { createPortal } from 'react-dom';
+import ModalWrapper from './ModalContentWrapper';
 
 interface ModalProps {
   children: React.ReactNode;
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  opacity?: 'yes' | 'no';
+  opacity?: boolean;
 }
-
-const bgOpacitiy = {
-  yes: true,
-  no: false,
-};
 
 export default function Modal({
   children,
   showModal,
   setShowModal,
-  opacity = 'yes',
+  opacity = true,
 }: ModalProps) {
-  const opacitiyClass = bgOpacitiy[opacity];
   return (
     <div>
       {showModal &&
         createPortal(
-          <ModalContentWrapper
+          <ModalWrapper
             showModal={showModal}
             setShowModal={setShowModal}
-            opacitiyClass={opacitiyClass}
+            opacitiyClass={opacity}
           >
             {children}
-          </ModalContentWrapper>,
+          </ModalWrapper>,
           document.body,
         )}
     </div>
