@@ -1,5 +1,5 @@
-import ReactQueryProvider from "@/hooks/queries/ReactQueryProvider";
-import "styles/global.css";
+import ReactQueryProvider from '@/hooks/queries/ReactQueryProvider';
+import 'styles/global.css';
 
 export default function RootLayout({
   children,
