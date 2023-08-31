@@ -3,7 +3,7 @@
 import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
 
-function Portal({ children }: { children: React.ReactNode }) {
+function Portal({ children }: { children: React.ReactNode | null }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

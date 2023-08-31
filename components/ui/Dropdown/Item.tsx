@@ -6,16 +6,13 @@ interface DropdownItemType {
   event?: () => void;
 }
 
-export default function Item({
-  children,
-  event = () => {
-    console.error('해당 메뉴에 대한 이벤트가 존재하지 않습니다.');
-  },
-}: DropdownItemType) {
-  const { handleDropdown } = useDropdown();
+export default function Item({ children, event }: DropdownItemType) {
+  const { closeDropdown } = useDropdown();
   const eventHandler = () => {
-    event();
-    handleDropdown();
+    if (event) {
+      event();
+    }
+    closeDropdown();
   };
   return (
     <li className="w-full rounded-[10px] hover:bg-grey-100 active:bg-grey-200">
