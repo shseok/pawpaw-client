@@ -2,11 +2,13 @@ import { Dispatch, Fragment, SetStateAction, useState } from 'react';
 import Dropdown from '@/components/ui/Dropdown/Dropdown';
 import DotsIcon from '@/public/tabler_dots.svg';
 import FlexBox from '@/components/ui/FlexBox';
-import Portal from '@/utils/Portal';
 import Divider from '@/components/ui/Divider';
 import ArrowRightIcon from '@/public/arrow-right.svg';
-import UserListModal from './UserListModal';
-import ScheduleListModal from './ScheduleListModal';
+import UserListModal from '../UserListModal';
+import ScheduleListModal from '../Schedule/ScheduleListModal';
+import Modal from '@/components/ui/Modal/Modal';
+import LeaveChatRoomPopup from '../Popup/LeaveChatRoomPopup';
+
 type PopupType = '공지' | '사진' | '채팅방 나가기' | '인원' | '스케줄' | '';
 type PopupActionType = Dispatch<SetStateAction<PopupType>>;
 function NotiOption({ setModalType }: { setModalType: PopupActionType }) {
@@ -75,7 +77,7 @@ export default function ChatDropdownButton() {
         return <ScheduleListModal closePopup={closePopup} />;
       case '공지':
         return (
-          <div className="fixed top-0 bottom-0 z-50 w-full h-screen bg-white">
+          <div className="fixed top-0 bottom-0 left-0 z-50 w-full h-screen bg-white">
             <button type="button" onClick={closePopup}>
               {type}
             </button>
@@ -83,7 +85,7 @@ export default function ChatDropdownButton() {
         );
       case '사진':
         return (
-          <div className="fixed top-0 bottom-0 z-50 w-full h-screen bg-white">
+          <div className="fixed top-0 bottom-0 left-0 z-50 w-full h-screen bg-white">
             <button type="button" onClick={closePopup}>
               {type}
             </button>
@@ -91,17 +93,18 @@ export default function ChatDropdownButton() {
         );
       case '채팅방 나가기':
         return (
-          <div className="fixed top-0 bottom-0 z-50 w-full h-screen bg-white">
-            <button type="button" onClick={closePopup}>
-              {type}
-            </button>
-          </div>
+          <Modal
+            showModal={modalType === '채팅방 나가기'}
+            setShowModal={closePopup}
+          >
+            <LeaveChatRoomPopup closePopup={closePopup} />
+          </Modal>
         );
       default:
         return null;
     }
   };
-
+  console.log('modalType', modalType);
   return (
     <>
       <Dropdown>
@@ -120,7 +123,7 @@ export default function ChatDropdownButton() {
           ))}
         </Dropdown.Menu>
       </Dropdown>
-      {modalType !== '' && <Portal>{renderPopupHandler(modalType)}</Portal>}
+      {modalType !== '' && <>{renderPopupHandler(modalType)}</>}
     </>
   );
 }

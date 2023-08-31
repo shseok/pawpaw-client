@@ -1,6 +1,6 @@
-import ChatRoom from '@/components/pages/chat/ChatRoom';
-import ChatUserList from '@/components/pages/chat/ChatUserList';
-import ScheduleList from '@/components/pages/chat/ScheduleList';
+import ChatRoom from '@/components/pages/chat/ChatRoom/ChatRoom';
+import ChatUserList from '@/components/pages/chat/ChatRoom/ChatUserList';
+import ScheduleList from '@/components/pages/chat/Schedule/ScheduleList';
 
 export default function ChatRoomPage({
   params,

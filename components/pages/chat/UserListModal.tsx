@@ -1,5 +1,5 @@
 import ArrowLeftIcon from '@/public/arrow-left.svg';
-import ChatUser from './ChatUser';
+import ChatUser from './ChatRoom/ChatUser';
 
 interface PropsType {
   closePopup: () => void;
