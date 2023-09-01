@@ -16,7 +16,7 @@ export default function Modal({
   opacity = true,
 }: ModalProps) {
   return (
-    <div>
+    <>
       {showModal &&
         createPortal(
           <ModalWrapper
@@ -28,6 +28,6 @@ export default function Modal({
           </ModalWrapper>,
           document.body,
         )}
-    </div>
+    </>
   );
 }
