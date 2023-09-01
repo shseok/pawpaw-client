@@ -4,8 +4,8 @@ import DotsIcon from '@/public/tabler_dots.svg';
 import FlexBox from '@/components/ui/FlexBox';
 import Divider from '@/components/ui/Divider';
 import ArrowRightIcon from '@/public/arrow-right.svg';
-import UserListModal from '../UserListModal';
-import ScheduleListModal from '../Schedule/ScheduleListModal';
+import ChatUserListMobile from './ChatUserListMobile';
+import ScheduleListMobile from '../Schedule/ScheduleListMobile';
 import Modal from '@/components/ui/Modal/Modal';
 import LeaveChatRoomModal from '../Modal/LeaveChatRoomModal';
 
@@ -73,9 +73,9 @@ export default function ChatDropdownButton() {
     };
     switch (type) {
       case '인원':
-        return <UserListModal closeModal={closeModal} />;
+        return <ChatUserListMobile closeModal={closeModal} />;
       case '스케줄':
-        return <ScheduleListModal closeModal={closeModal} />;
+        return <ScheduleListMobile closeModal={closeModal} />;
       case '공지':
         return (
           <div className="fixed top-0 bottom-0 left-0 z-50 w-full h-screen bg-white">
