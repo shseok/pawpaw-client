@@ -1,10 +1,10 @@
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 
-export default function LeaveChatRoomPopup({
-  closePopup,
+export default function LeaveChatRoomModal({
+  closeModal,
 }: {
-  closePopup: () => void;
+  closeModal: () => void;
 }) {
   return (
     <FlexBox
@@ -15,7 +15,7 @@ export default function LeaveChatRoomPopup({
       <FlexBox className="w-full gap-3">
         <Button
           className="w-full body2"
-          onClickAction={closePopup}
+          onClickAction={closeModal}
           variant="secondary"
         >
           취소

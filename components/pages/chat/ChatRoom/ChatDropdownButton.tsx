@@ -7,15 +7,15 @@ import ArrowRightIcon from '@/public/arrow-right.svg';
 import UserListModal from '../UserListModal';
 import ScheduleListModal from '../Schedule/ScheduleListModal';
 import Modal from '@/components/ui/Modal/Modal';
-import LeaveChatRoomPopup from '../Popup/LeaveChatRoomPopup';
+import LeaveChatRoomModal from '../Modal/LeaveChatRoomModal';
 
-type PopupType = '공지' | '사진' | '채팅방 나가기' | '인원' | '스케줄' | '';
-type PopupActionType = Dispatch<SetStateAction<PopupType>>;
+type ModalType = '공지' | '사진' | '채팅방 나가기' | '인원' | '스케줄' | '';
+type ModalActionType = Dispatch<SetStateAction<ModalType>>;
 
-function NotiOption({ setModalType }: { setModalType: PopupActionType }) {
+function NotiOption({ setModalType }: { setModalType: ModalActionType }) {
   return <Dropdown.Item event={() => setModalType('공지')}>공지</Dropdown.Item>;
 }
-function PhotoOption({ setModalType }: { setModalType: PopupActionType }) {
+function PhotoOption({ setModalType }: { setModalType: ModalActionType }) {
   return <Dropdown.Item event={() => setModalType('사진')}>사진</Dropdown.Item>;
 }
 function ShareOption() {
@@ -33,7 +33,7 @@ function ShareOption() {
 function LeaveChatRoomOption({
   setModalType,
 }: {
-  setModalType: PopupActionType;
+  setModalType: ModalActionType;
 }) {
   return (
     <Dropdown.Item event={() => setModalType('채팅방 나가기')}>
@@ -42,7 +42,7 @@ function LeaveChatRoomOption({
   );
 }
 
-function UserOption({ setModalType }: { setModalType: PopupActionType }) {
+function UserOption({ setModalType }: { setModalType: ModalActionType }) {
   return (
     <Dropdown.Item event={() => setModalType('인원')}>
       <FlexBox justify="between">
@@ -52,7 +52,7 @@ function UserOption({ setModalType }: { setModalType: PopupActionType }) {
     </Dropdown.Item>
   );
 }
-function ScheduleOption({ setModalType }: { setModalType: PopupActionType }) {
+function ScheduleOption({ setModalType }: { setModalType: ModalActionType }) {
   return (
     <Dropdown.Item event={() => setModalType('스케줄')}>
       <FlexBox justify="between">
@@ -65,21 +65,21 @@ function ScheduleOption({ setModalType }: { setModalType: PopupActionType }) {
 const OPTION_LIST = [NotiOption, PhotoOption, ShareOption, LeaveChatRoomOption];
 const MOBILE_OPTION_LIST = [UserOption, ScheduleOption];
 export default function ChatDropdownButton() {
-  const [modalType, setModalType] = useState<PopupType>('');
+  const [modalType, setModalType] = useState<ModalType>('');
 
-  const renderPopupHandler = (type: PopupType) => {
-    const closePopup = () => {
+  const renderModalByType = (type: ModalType) => {
+    const closeModal = () => {
       setModalType('');
     };
     switch (type) {
       case '인원':
-        return <UserListModal closePopup={closePopup} />;
+        return <UserListModal closeModal={closeModal} />;
       case '스케줄':
-        return <ScheduleListModal closePopup={closePopup} />;
+        return <ScheduleListModal closeModal={closeModal} />;
       case '공지':
         return (
           <div className="fixed top-0 bottom-0 left-0 z-50 w-full h-screen bg-white">
-            <button type="button" onClick={closePopup}>
+            <button type="button" onClick={closeModal}>
               {type}
             </button>
           </div>
@@ -87,7 +87,7 @@ export default function ChatDropdownButton() {
       case '사진':
         return (
           <div className="fixed top-0 bottom-0 left-0 z-50 w-full h-screen bg-white">
-            <button type="button" onClick={closePopup}>
+            <button type="button" onClick={closeModal}>
               {type}
             </button>
           </div>
@@ -96,9 +96,9 @@ export default function ChatDropdownButton() {
         return (
           <Modal
             showModal={modalType === '채팅방 나가기'}
-            setShowModal={closePopup}
+            setShowModal={closeModal}
           >
-            <LeaveChatRoomPopup closePopup={closePopup} />
+            <LeaveChatRoomModal closeModal={closeModal} />
           </Modal>
         );
       default:
@@ -123,7 +123,7 @@ export default function ChatDropdownButton() {
           ))}
         </Dropdown.Menu>
       </Dropdown>
-      {modalType && renderPopupHandler(modalType)}
+      {modalType && renderModalByType(modalType)}
     </>
   );
 }

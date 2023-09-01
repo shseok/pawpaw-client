@@ -3,7 +3,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import SearchInput from '@/components/ui/SearchInput';
 
-export default function UserAddPopup({
+export default function UserAddModal({
   closePopup,
 }: {
   closePopup: () => void;
