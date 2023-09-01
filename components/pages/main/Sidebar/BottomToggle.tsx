@@ -5,7 +5,8 @@ import DesktopSvg from './SideButton/DesktopSvg';
 export default function BottomToggle({
   desktopWidth,
   toggleButton,
-}: Pick<SidebarProps, 'desktopWidth' | 'toggleButton'>) {
+  viewport,
+}: Pick<SidebarProps, 'desktopWidth' | 'toggleButton' | 'viewport'>) {
   const { Logout } = DesktopSvg;
   return (
     <div>
@@ -25,20 +26,22 @@ export default function BottomToggle({
         </button>
       </div>
       <div className="absolute bottom-0 w-full h-12 bg-[#E9EBED]">
-        <button
-          type="button"
-          className="absolute top-0 bottom-0 right-3"
-          onClick={toggleButton}
-        >
-          <Image
-            src={`/sidebar/desktop/${
-              desktopWidth === true ? 'desktoptoggle' : 'tablettoggle'
-            }.svg`}
-            alt="logo"
-            width={24}
-            height={24}
-          />
-        </button>
+        {viewport < 1240 ? null : (
+          <button
+            type="button"
+            className="absolute top-0 bottom-0 right-3"
+            onClick={toggleButton}
+          >
+            <Image
+              src={`/sidebar/desktop/${
+                desktopWidth === true ? 'desktoptoggle' : 'tablettoggle'
+              }.svg`}
+              alt="logo"
+              width={24}
+              height={24}
+            />
+          </button>
+        )}
       </div>
     </div>
   );

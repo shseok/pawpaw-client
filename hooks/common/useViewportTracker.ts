@@ -6,14 +6,15 @@ export default function useViewportTracker() {
     height: window?.innerHeight,
   });
 
-  useEffect(() => {
-    const handleResize = () => {
+  const handleResize = () => {
+    setTimeout(() => {
       setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight,
       });
-    };
-    handleResize();
+    }, 500);
+  };
+  useEffect(() => {
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);

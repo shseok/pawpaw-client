@@ -17,7 +17,7 @@ export default function SideButton({
     Pawzone: 'Paw zone',
     Mypage: '마이 페이지',
     Search: '검색',
-    Alert: '알림',
+    Notice: '알림',
   };
   const name = names[svgComponent.name];
   const clickHandler = () => {

@@ -13,7 +13,7 @@ export default function FooterButton({
   const names: { [key: string]: string } = {
     Feed: '피드',
     Community: '커뮤니티',
-    Chat: '채팅',
+    Pawzone: 'paw zone',
     Mypage: '마이페이지',
   };
   const name = names[svgComponent.name];

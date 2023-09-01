@@ -6,4 +6,5 @@ export interface SidebarProps {
   desktopWidth: boolean;
   toggleButton: () => void;
   viewport: number;
+  pathname: string;
 }

@@ -7,12 +7,12 @@ export default function Footer({
   activeButton,
   setActive,
 }: Pick<SidebarProps, 'activeButton' | 'setActive'>) {
-  const { Feed, Community, Chat, Mypage } = MobileSvg;
+  const { Feed, Community, Pawzone, Mypage } = MobileSvg;
   const router = useRouter();
 
   return (
     <nav className="block tablet:hidden">
-      <div className="fixed bottom-0 flex flex-row items-center justify-center border-t-[1px] border-[#E9EBED] h-[54px] w-full bg-white z-10">
+      <div className="fixed bottom-0 flex flex-row items-center justify-between border-t-[1px] border-[#E9EBED] h-[54px] w-full bg-white z-10">
         <FooterButton
           svgComponent={Feed}
           activeButton={activeButton}
@@ -26,10 +26,10 @@ export default function Footer({
           router={() => router.push('/community')}
         />
         <FooterButton
-          svgComponent={Chat}
+          svgComponent={Pawzone}
           activeButton={activeButton}
           setActive={setActive}
-          router={() => router.push('/chat')}
+          router={() => router.push('/pawzone')}
         />
         <FooterButton
           svgComponent={Mypage}

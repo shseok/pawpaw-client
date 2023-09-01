@@ -7,11 +7,12 @@ export default function SideButtonContainer({
   desktopWidth,
   activeButton,
   setActive,
+  pathname,
 }: Pick<
   SidebarProps,
-  'desktopWidth' | 'activeButton' | 'setActive' | 'viewport'
+  'desktopWidth' | 'activeButton' | 'setActive' | 'pathname'
 >) {
-  const { Feed, Community, Pawzone, Mypage, Search, Alert } = DesktopSvg;
+  const { Feed, Community, Pawzone, Mypage, Search, Notice } = DesktopSvg;
   const router = useRouter();
   const pseudoElementWidth = desktopWidth === true ? 'w-[232px]' : 'w-[72px]';
 
@@ -54,14 +55,14 @@ export default function SideButtonContainer({
         activeButton={activeButton}
         desktopWidth={desktopWidth}
         setActive={setActive}
-        router={() => router.push('/')}
+        router={() => router.push(pathname)}
       />
       <SideButton
-        svgComponent={Alert}
+        svgComponent={Notice}
         activeButton={activeButton}
         desktopWidth={desktopWidth}
         setActive={setActive}
-        router={() => router.push('/')}
+        router={() => router.push(pathname)}
       />
     </>
   );
