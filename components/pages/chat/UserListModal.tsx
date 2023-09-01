@@ -1,5 +1,6 @@
 import ArrowLeftIcon from '@/public/arrow-left.svg';
 import ChatUser from './ChatRoom/ChatUser';
+import UserAddButton from './UserAddButton';
 
 interface PropsType {
   closePopup: () => void;
@@ -20,9 +21,7 @@ export default function UserListModal({ closePopup }: PropsType) {
             </span>
           </div>
         </div>
-        <button type="button" className="p-2 body2 text-primary-200">
-          추가
-        </button>
+        <UserAddButton />
       </header>
       <div className="h-[calc(100%-4rem)] overflow-auto px-5 sm:px-10 pt-2">
         <ul className="grid w-full grid-cols-1 gap-2 h-fit sm:grid-cols-2 ">

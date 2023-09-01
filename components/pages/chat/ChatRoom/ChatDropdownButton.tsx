@@ -11,6 +11,7 @@ import LeaveChatRoomPopup from '../Popup/LeaveChatRoomPopup';
 
 type PopupType = '공지' | '사진' | '채팅방 나가기' | '인원' | '스케줄' | '';
 type PopupActionType = Dispatch<SetStateAction<PopupType>>;
+
 function NotiOption({ setModalType }: { setModalType: PopupActionType }) {
   return <Dropdown.Item event={() => setModalType('공지')}>공지</Dropdown.Item>;
 }
@@ -104,7 +105,6 @@ export default function ChatDropdownButton() {
         return null;
     }
   };
-  console.log('modalType', modalType);
   return (
     <>
       <Dropdown>
@@ -123,7 +123,7 @@ export default function ChatDropdownButton() {
           ))}
         </Dropdown.Menu>
       </Dropdown>
-      {modalType !== '' && <>{renderPopupHandler(modalType)}</>}
+      {modalType && renderPopupHandler(modalType)}
     </>
   );
 }

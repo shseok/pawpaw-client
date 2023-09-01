@@ -12,7 +12,7 @@ interface ButtonProps {
 }
 const sizes = {
   sm: 'h-[36px]',
-  md: 'h-[42px] w-20 tablet:w-24',
+  md: 'h-[42px] ',
   lg: 'h-[54px]',
   xl: 'h-[66px]',
 };

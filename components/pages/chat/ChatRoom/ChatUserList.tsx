@@ -1,5 +1,6 @@
 import FlexBox from '@/components/ui/FlexBox';
 import ChatUser from './ChatUser';
+import UserAddButton from '../UserAddButton';
 
 export default function ChatUserList() {
   return (
@@ -15,9 +16,7 @@ export default function ChatUserList() {
             <p className="text-grey-500">/ 60</p>
           </FlexBox>
         </FlexBox>
-        <button type="button" className="font-bold text-primary-200">
-          추가
-        </button>
+        <UserAddButton />
       </FlexBox>
       <ul className="w-full overflow-auto scrollbar-hide">
         {Array.from({ length: 10 }).map((_, i) => (
