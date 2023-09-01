@@ -129,10 +129,10 @@ function Chat({ color }: { color: string }) {
   );
 }
 
-const toggleOnLogo = ({ svgSize }: { svgSize: string }) => (
+const toggleOnLogo = () => (
   <div>
     <svg
-      width={svgSize}
+      width="140"
       height="50"
       viewBox="0 0 140 50"
       fill="none"

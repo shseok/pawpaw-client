@@ -6,15 +6,9 @@ export default function SideButton({
   svgComponent,
   desktopWidth,
   router,
-  viewport,
 }: Pick<
   SidebarProps,
-  | 'activeButton'
-  | 'setActive'
-  | 'svgComponent'
-  | 'desktopWidth'
-  | 'router'
-  | 'viewport'
+  'activeButton' | 'setActive' | 'svgComponent' | 'desktopWidth' | 'router'
 >) {
   const color = activeButton === svgComponent.name ? '#0ABE7D' : '#74787D';
   const names: { [key: string]: string } = {
@@ -26,7 +20,6 @@ export default function SideButton({
     Alert: '알림',
   };
   const name = names[svgComponent.name];
-  const leftMargin = `${viewport / 64}`;
   const clickHandler = () => {
     setActive(`${svgComponent.name}`);
     router();
@@ -45,10 +38,7 @@ export default function SideButton({
           <div className="absolute top-0 left-0 w-[5px] h-16 bg-[#0ABE7D]" />
         ) : null}
         {desktopWidth === true ? (
-          <div
-            className="flex flex-nowrap"
-            style={{ marginLeft: `${leftMargin}px` }}
-          >
+          <div className="flex ml-6 flex-nowrap">
             {svgComponent({ color })}
             <div className={`text-xl ml-3 cursor-pointer`} style={{ color }}>
               {name}
