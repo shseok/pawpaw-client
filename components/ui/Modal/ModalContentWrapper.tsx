@@ -23,7 +23,7 @@ export default function ModalContentWrapper({
     <div
       className={`fixed inset-0 bg-black ${
         opacitiyClass ? 'bg-opacity-50' : 'bg-opacity-0'
-      }`}
+      } z-50`}
     >
       <div
         ref={modalClickRef}
