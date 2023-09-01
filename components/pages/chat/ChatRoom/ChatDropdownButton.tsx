@@ -12,7 +12,10 @@ import LeaveChatRoomModal from '../Modal/LeaveChatRoomModal';
 type ModalType = '공지' | '사진' | '채팅방 나가기' | '인원' | '스케줄' | '';
 type ModalActionType = Dispatch<SetStateAction<ModalType>>;
 
-function NotiOption({ setModalType }: { setModalType: ModalActionType }) {
+type PopupType = '공지' | '사진' | '채팅방 나가기' | '인원' | '스케줄' | '';
+type PopupActionType = Dispatch<SetStateAction<PopupType>>;
+
+function NotiOption({ setModalType }: { setModalType: PopupActionType }) {
   return <Dropdown.Item event={() => setModalType('공지')}>공지</Dropdown.Item>;
 }
 function PhotoOption({ setModalType }: { setModalType: ModalActionType }) {
