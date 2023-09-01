@@ -7,7 +7,6 @@ export default function SideButtonContainer({
   desktopWidth,
   activeButton,
   setActive,
-  viewport,
 }: Pick<
   SidebarProps,
   'desktopWidth' | 'activeButton' | 'setActive' | 'viewport'
@@ -48,10 +47,7 @@ export default function SideButtonContainer({
       />
 
       <div className="flex flex-row items-center justify-center h-10">
-        <div
-          className="h-[0.5px] bg-[#CBCDD2]"
-          style={{ width: `${pseudoElementWidth}px` }}
-        />
+        <div className={`h-[0.5px] bg-[#CBCDD2] ${pseudoElementWidth}`} />
       </div>
       <SideButton
         svgComponent={Search}

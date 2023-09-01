@@ -11,9 +11,9 @@ import ResponsiveNavbar from './Responsive/ResponsiveNavbar';
 export default function Sidebar() {
   const [toggle, setToggle] = useState(true);
   const viewport = useViewportTracker();
-  const desktopWidth = toggle === true ? `256` : `96`;
+  const desktopWidth = toggle === true ? `w-[256px]` : `w-[96px]`;
   const path = usePathname();
-  //1240px
+  //1240px 1120px
   let pathname;
   if (path === '/') {
     pathname = 'Feed';
@@ -27,8 +27,7 @@ export default function Sidebar() {
   return (
     <>
       <nav
-        className="fixed top-0 h-screen left-0 bg-[#F7F8F9] hidden tablet:block"
-        style={{ width: `${desktopWidth}px` }}
+        className={`fixed top-0 h-screen left-0 bg-[#F7F8F9] hidden tablet:block ${desktopWidth}`}
       >
         <SidebarLogo desktopWidth={toggle} />
         <SideButtonContainer
@@ -43,10 +42,7 @@ export default function Sidebar() {
         />
       </nav>
       <div>
-        <div
-          className="sticky hidden tablet:block"
-          style={{ width: `${desktopWidth}px` }}
-        />
+        <div className={`sticky hidden tablet:block ${desktopWidth}`} />
       </div>
       {pathname === 'Chat' ? (
         <div className="hidden">
