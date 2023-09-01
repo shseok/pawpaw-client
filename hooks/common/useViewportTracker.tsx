@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 export default function useViewportTracker() {
   const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: window?.innerWidth,
+    height: window?.innerHeight,
   });
 
   useEffect(() => {

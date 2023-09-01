@@ -1,9 +1,9 @@
-function Feed({ color, svgSize }: { color: string; svgSize: string }) {
+function Feed({ color }: { color: string }) {
   return (
     <div className="cursor-pointer">
       <svg
-        width={svgSize}
-        height={svgSize}
+        width="28"
+        height="28"
         viewBox="0 0 28 28"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -17,12 +17,12 @@ function Feed({ color, svgSize }: { color: string; svgSize: string }) {
   );
 }
 
-function Community({ color, svgSize }: { color: string; svgSize: string }) {
+function Community({ color }: { color: string }) {
   return (
     <div className="cursor-pointer">
       <svg
-        width={svgSize}
-        height={svgSize}
+        width="28"
+        height="28"
         viewBox="0 0 28 28"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -36,12 +36,12 @@ function Community({ color, svgSize }: { color: string; svgSize: string }) {
   );
 }
 
-function Pawzone({ color, svgSize }: { color: string; svgSize: string }) {
+function Pawzone({ color }: { color: string }) {
   return (
     <div className="cursor-pointer">
       <svg
-        width={svgSize}
-        height={svgSize}
+        width="28"
+        height="28"
         viewBox="0 0 28 28"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -55,12 +55,12 @@ function Pawzone({ color, svgSize }: { color: string; svgSize: string }) {
   );
 }
 
-function Mypage({ color, svgSize }: { color: string; svgSize: string }) {
+function Mypage({ color }: { color: string }) {
   return (
     <div className="cursor-pointer">
       <svg
-        width={svgSize}
-        height={svgSize}
+        width="28"
+        height="28"
         viewBox="0 0 28 28"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -73,12 +73,12 @@ function Mypage({ color, svgSize }: { color: string; svgSize: string }) {
     </div>
   );
 }
-function Search({ color, svgSize }: { color: string; svgSize: string }) {
+function Search({ color }: { color: string }) {
   return (
     <div className="cursor-pointer">
       <svg
-        width={svgSize}
-        height={svgSize}
+        width="28"
+        height="28"
         viewBox="0 0 28 28"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -91,12 +91,12 @@ function Search({ color, svgSize }: { color: string; svgSize: string }) {
     </div>
   );
 }
-function Alert({ color, svgSize }: { color: string; svgSize: string }) {
+function Alert({ color }: { color: string }) {
   return (
     <div className="cursor-pointer">
       <svg
-        width={svgSize}
-        height={svgSize}
+        width="28"
+        height="28"
         viewBox="0 0 28 28"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -110,12 +110,12 @@ function Alert({ color, svgSize }: { color: string; svgSize: string }) {
   );
 }
 
-function Chat({ color, svgSize }: { color: string; svgSize: string }) {
+function Chat({ color }: { color: string }) {
   return (
     <div className="cursor-pointer">
       <svg
-        width={svgSize}
-        height={svgSize}
+        width="24"
+        height="24"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

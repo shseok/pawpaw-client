@@ -26,13 +26,11 @@ export default function SideButton({
     Alert: '알림',
   };
   const name = names[svgComponent.name];
-
+  const leftMargin = `${viewport / 64}`;
   const clickHandler = () => {
     setActive(`${svgComponent.name}`);
     router();
   };
-  const textSize = `${viewport / 96}`;
-  const svgSize = `${viewport / 65}`;
 
   return (
     <div
@@ -47,18 +45,18 @@ export default function SideButton({
           <div className="absolute top-0 left-0 w-[5px] h-16 bg-[#0ABE7D]" />
         ) : null}
         {desktopWidth === true ? (
-          <div className="flex flex-nowrap ml-7">
-            {svgComponent({ color, svgSize })}
-            <div
-              className="ml-3 cursor-pointer"
-              style={{ color, fontSize: `${textSize}px` }}
-            >
+          <div
+            className="flex flex-nowrap"
+            style={{ marginLeft: `${leftMargin}px` }}
+          >
+            {svgComponent({ color })}
+            <div className={`text-xl ml-3 cursor-pointer`} style={{ color }}>
               {name}
             </div>
           </div>
         ) : (
           <div className="flex flex-row items-center">
-            {svgComponent({ color, svgSize })}
+            {svgComponent({ color })}
           </div>
         )}
       </button>
