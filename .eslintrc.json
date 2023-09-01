@@ -27,11 +27,5 @@
     "react/jsx-props-no-spreading": "off",
     "react-hooks/exhaustive-deps": ["warn"], // 의존성배열 강제주입 해제
     "react/require-default-props": 0 // 디폴트프롭관련 규칙 해제
-  },
-  "import/no-extraneous-dependencies": [
-    "error",
-    {
-      "devDependencies": ["**/*.test.ts", "**/*.test.tsx"]
-    }
-  ]
+  }
 }

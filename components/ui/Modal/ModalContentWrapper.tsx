@@ -1,6 +1,6 @@
+import { Dispatch, SetStateAction, useRef } from 'react';
 import useEscKeyClose from '@/hooks/common/useEscKeyClose';
 import useOutSideClick from '@/hooks/common/useOutSideClick';
-import { Dispatch, SetStateAction, useRef } from 'react';
 
 interface ModalContentWrapperProps {
   showModal: boolean;

@@ -40,7 +40,7 @@ export default function SideButton({
         {desktopWidth === true ? (
           <div className="flex ml-6 flex-nowrap">
             {svgComponent({ color })}
-            <div className={`text-xl ml-3 cursor-pointer`} style={{ color }}>
+            <div className="ml-3 text-xl cursor-pointer" style={{ color }}>
               {name}
             </div>
           </div>
