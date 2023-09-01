@@ -48,11 +48,12 @@ export default function PostsList() {
               setSelectedPost(post);
               setSelectedComment(filteredComments);
             }}
+            className="w-full"
           >
             <FlexBox
               direction="column"
               justify="between"
-              className="w-full max-h-[500px] p-9 rounded-[10px] border-[1px] border-grey-200 gap-4"
+              className="max-h-[500px] p-9 rounded-[10px] border-[1px] border-grey-200 gap-4"
             >
               <PostHeader userId={post.albumId} />
               <PostContent

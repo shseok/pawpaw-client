@@ -9,7 +9,7 @@ export default function FeedHeader() {
       direction="column"
       align="start"
       justify="between"
-      className="w-full gap-5"
+      className="w-full gap-5 "
     >
       <Title />
       <FlexBox
