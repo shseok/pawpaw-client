@@ -25,7 +25,7 @@ export default function RecommendPlace({ geoCode }: PropsType) {
     libraries: libraries as any,
   });
   const calculateDistance = useCallback(
-    (destination: google.maps.places.PlaceResult) => {
+    (destination: RecommendedPlaceDetail) => {
       const distanceService = new window.google.maps.DistanceMatrixService();
       const userCurrentLocation = new window.google.maps.LatLng(
         geoCode.lat,

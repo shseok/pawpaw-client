@@ -3,18 +3,38 @@ import Avatar from '@/components/ui/Avatar';
 import FlexBox from '@/components/ui/FlexBox';
 import ArrowRightIcon from '@/public/arrow-right.svg';
 
-export default function ChatUser() {
+interface ChatUserPropsType {
+  shadow?: boolean;
+  image: string;
+  name: string;
+  petName: string;
+  icon?: boolean;
+}
+
+export default function ChatUser({
+  shadow = false,
+  image,
+  name,
+  petName,
+  icon = false,
+}: ChatUserPropsType) {
+  const shadowClass = shadow ? 'shadow-chatCard' : '';
   return (
-    <FlexBox as="li" justify="start" className="gap-3 px-5 py-3 h-fit">
-      <Avatar user_img="/default.png" user_name="" size="xl" />
+    <FlexBox
+      justify="start"
+      className={`gap-3 px-5 py-3 h-fit rounded-[10px] ${shadowClass}`}
+    >
+      <Avatar image={image} name={name} size="xl" />
       <FlexBox direction="column" align="start" className="gap-1 ">
         <FlexBox className="gap-1">
-          <p className="font-bold">닉네aw daw임 awd</p>
-          <Link href="/">
-            <ArrowRightIcon />
-          </Link>
+          <p className="font-bold">{name}</p>
+          {icon && (
+            <Link href={`/${name}`}>
+              <ArrowRightIcon />
+            </Link>
+          )}
         </FlexBox>
-        <p className="text-grey-500 ">3살 감자</p>
+        <p className="text-grey-500 ">{petName}</p>
       </FlexBox>
     </FlexBox>
   );

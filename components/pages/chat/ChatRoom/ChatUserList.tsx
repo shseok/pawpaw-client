@@ -2,6 +2,18 @@ import FlexBox from '@/components/ui/FlexBox';
 import ChatUser from './ChatUser';
 import UserAddButton from '../UserAddButton';
 
+const userList = [
+  { image: '/default.png', name: '닉네임1', petName: '3살 감자' },
+  { image: '/default.png', name: '닉네임2', petName: '4살 감자' },
+  { image: '/default.png', name: '닉네임3', petName: '5살 감자' },
+  { image: '/default.png', name: '닉네임5', petName: '5살 감자' },
+  { image: '/default.png', name: '닉네임6', petName: '5살 감자' },
+  { image: '/default.png', name: '닉네임7', petName: '5살 감자' },
+  { image: '/default.png', name: '닉네임8', petName: '5살 감자' },
+  { image: '/default.png', name: '닉네임9', petName: '5살 감자' },
+  { image: '/default.png', name: '닉네임10', petName: '5살 감자' },
+];
+
 export default function ChatUserList() {
   return (
     <FlexBox
@@ -18,10 +30,16 @@ export default function ChatUserList() {
         </FlexBox>
         <UserAddButton />
       </FlexBox>
-      <ul className="w-full overflow-auto scrollbar-hide">
-        {Array.from({ length: 10 }).map((_, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <ChatUser key={i} />
+      <ul className="w-full h-full overflow-auto scrollbar-hide">
+        {userList.map((user) => (
+          <li key={user.name}>
+            <ChatUser
+              image={user.image}
+              name={user.name}
+              petName={user.petName}
+              icon={true}
+            />
+          </li>
         ))}
       </ul>
     </FlexBox>
