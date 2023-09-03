@@ -1,19 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useInput } from '@/hooks/common/useInput';
 import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
 import MessageInput from './MessageInput';
 
 export default function ChatRoom({ roomId }: { roomId: string }) {
   // input 관련로직이 여기있는게 맞나? 분리를 해보자. 드랍다운 구현후에 그리고 여기는 서버컴포넌트로 바꾸자
-  const [message, setMessage] = useState('');
+  const { value: message, resetValue, onChangeValue } = useInput('');
+  console.log('message', message);
   const sendMessage = () => {
     if (message.trim().length === 0) {
       return;
     }
     console.log('호출');
-    setMessage('');
+    resetValue();
   };
   const handleOnKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
@@ -29,7 +30,7 @@ export default function ChatRoom({ roomId }: { roomId: string }) {
       <ChatRoomHeader title="awdawd" />
       <ChatRoomBox />
       <MessageInput
-        setMessage={setMessage}
+        onChangeValue={onChangeValue}
         sendMessage={sendMessage}
         handleOnKeyPress={handleOnKeyPress}
         message={message}

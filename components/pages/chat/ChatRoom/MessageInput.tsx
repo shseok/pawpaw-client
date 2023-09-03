@@ -1,18 +1,18 @@
 'use client';
 
-import { Dispatch, SetStateAction, useRef, useEffect } from 'react';
+import { useRef, useEffect, ChangeEvent } from 'react';
 import PlusCircleIcon from '@/public/PlusCircle.svg';
 import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
 
 interface MessageInputType {
-  setMessage: Dispatch<SetStateAction<string>>;
+  onChangeValue: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   sendMessage: () => void;
   handleOnKeyPress: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   message: string;
 }
 
 export default function MessageInput({
-  setMessage,
+  onChangeValue,
   sendMessage,
   handleOnKeyPress,
   message,
@@ -37,7 +37,7 @@ export default function MessageInput({
         ref={textareaRef}
         className="w-full p-2 pl-20 pr-14 shadow-chatCard rounded-[10px] outline-none scrollbar-hide resize-none max-h-40"
         onKeyDown={handleOnKeyPress}
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={onChangeValue}
         value={message}
       />
       <button
