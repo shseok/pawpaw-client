@@ -4,7 +4,7 @@ import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import SearchInput from '@/components/ui/SearchInput';
-import ChatUser from '../ChatRoom/ChatUser';
+import SearchedUserList from './SearchedUserList';
 
 const userList = [
   { image: '/default.png', name: '닉네임1', petName: '3살 감자' },
@@ -43,41 +43,11 @@ export default function UserAddModal({
           onChangeValue={onChangeValue}
           resetValue={resetValue}
         />
-        <div className="flex flex-col w-full gap-4">
-          <div className="w-full header4">
-            <p>
-              검색결과 <span className="text-primary-200">3건</span>
-            </p>
-          </div>
-          <ul className="grid w-full grid-cols-1 gap-4 p-2 overflow-auto tablet:grid-cols-2 max-h-72 scrollbar-hide">
-            {userList.map((user) => (
-              <li
-                className={`${
-                  checkedList.includes(user.name)
-                    ? 'ring-2 ring-primary-300'
-                    : ''
-                } rounded-[10px] duration-200`}
-                key={user.name}
-              >
-                <label className="cursor-pointer">
-                  <ChatUser
-                    shadow={true}
-                    image={user.image}
-                    name={user.name}
-                    petName={user.petName}
-                  />
-                  <input
-                    type="checkbox"
-                    checked={checkedList.includes(user.name)}
-                    onChange={(event) => handleCheckboxChange(user.name, event)}
-                    className="hidden appearance-none"
-                  />
-                </label>
-              </li>
-            ))}
-          </ul>
-        </div>
-
+        <SearchedUserList
+          userList={userList}
+          checkedList={checkedList}
+          handleCheckboxChange={handleCheckboxChange}
+        />
         <Button
           className="w-full header3"
           size="lg"
