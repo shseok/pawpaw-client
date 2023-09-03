@@ -1,5 +1,5 @@
 import FlexBox from '@/components/ui/FlexBox';
-import Message from '../Message';
+import Message from './Message';
 
 const messageList = [
   {

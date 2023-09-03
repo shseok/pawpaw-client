@@ -1,6 +1,6 @@
 import ArrowLeftIcon from '@/public/arrow-left.svg';
 import ChatUser from './ChatUser';
-import UserAddButton from '../UserAddButton';
+import UserAddButton from './UserAddButton';
 
 interface PropsType {
   closeModal: () => void;
@@ -25,28 +25,12 @@ export default function ChatUserListMobile({ closeModal }: PropsType) {
       </header>
       <div className="h-[calc(100%-4rem)] overflow-auto px-5 sm:px-10 pt-2">
         <ul className="grid w-full grid-cols-1 gap-2 h-fit sm:grid-cols-2 ">
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
-          <ChatUser />
+          <ChatUser
+            image="/default.png"
+            name="닉네임입니다"
+            petName="3살 감자"
+            icon={true}
+          />
         </ul>
       </div>
     </div>

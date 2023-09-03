@@ -1,6 +1,6 @@
 import FlexBox from '@/components/ui/FlexBox';
 import ChatUser from './ChatUser';
-import UserAddButton from '../UserAddButton';
+import UserAddButton from './UserAddButton';
 
 const userList = [
   { image: '/default.png', name: '닉네임1', petName: '3살 감자' },

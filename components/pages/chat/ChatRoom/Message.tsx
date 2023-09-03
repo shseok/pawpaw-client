@@ -11,9 +11,7 @@ export default function Message({ message }: any) {
 
   return (
     <div className={`flex gap-3 mb-5 w-fit ${messageSelfClass} `}>
-      {sender && (
-        <Avatar user_img={userInfo.userImg} user_name={userInfo.userName} />
-      )}
+      {sender && <Avatar image={userInfo.userImg} name={userInfo.userName} />}
       <div className="flex flex-col gap-1">
         {sender && <p className="body3 text-grey-600">{userInfo.userName}</p>}
         <div className={`flex gap-1 ${messageFlexClass}`}>
