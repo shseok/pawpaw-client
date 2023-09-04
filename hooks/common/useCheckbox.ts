@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 
-export const useCheckbox = () => {
+const useCheckbox = () => {
   const [checkedList, setCheckedList] = useState<string[]>([]);
 
   const handleCheckboxChange = (
@@ -18,3 +18,4 @@ export const useCheckbox = () => {
 
   return { checkedList, handleCheckboxChange };
 };
+export default useCheckbox;

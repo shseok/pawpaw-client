@@ -1,5 +1,5 @@
-import { useInput } from '@/hooks/common/useInput';
-import { useCheckbox } from '@/hooks/common/useCheckbox';
+import useCheckbox from '@/hooks/common/useCheckbox';
+import useInput from '@/hooks/common/useInput';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
