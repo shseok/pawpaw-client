@@ -16,6 +16,7 @@ export default function Modal({
   opacity = true,
 }: ModalProps) {
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {showModal &&
         createPortal(
