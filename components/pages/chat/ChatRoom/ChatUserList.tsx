@@ -37,7 +37,7 @@ export default function ChatUserList() {
               image={user.image}
               name={user.name}
               petName={user.petName}
-              icon={true}
+              icon
             />
           </li>
         ))}

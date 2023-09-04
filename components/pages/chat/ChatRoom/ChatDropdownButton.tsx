@@ -4,9 +4,9 @@ import DotsIcon from '@/public/tabler_dots.svg';
 import FlexBox from '@/components/ui/FlexBox';
 import Divider from '@/components/ui/Divider';
 import ArrowRightIcon from '@/public/arrow-right.svg';
+import Modal from '@/components/ui/Modal/Modal';
 import ChatUserListMobile from './ChatUserListMobile';
 import ScheduleListMobile from '../Schedule/ScheduleListMobile';
-import Modal from '@/components/ui/Modal/Modal';
 import LeaveChatRoomModal from '../Modal/LeaveChatRoomModal';
 
 type ModalType = '공지' | '사진' | '채팅방 나가기' | '인원' | '스케줄' | '';
@@ -114,11 +114,13 @@ export default function ChatDropdownButton() {
         <Dropdown.Menu>
           <div className="flex flex-col w-full gap-2 tablet:hidden">
             {MOBILE_OPTION_LIST.map((option, index) => (
+              // eslint-disable-next-line react/no-array-index-key
               <Fragment key={index}>{option({ setModalType })}</Fragment>
             ))}
             <Divider type="horizontal" />
           </div>
           {OPTION_LIST.map((option, index) => (
+            // eslint-disable-next-line react/no-array-index-key
             <Fragment key={index}>{option({ setModalType })}</Fragment>
           ))}
         </Dropdown.Menu>

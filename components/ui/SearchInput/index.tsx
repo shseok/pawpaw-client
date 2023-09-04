@@ -1,6 +1,6 @@
+import { ChangeEvent } from 'react';
 import SearchIcon from '@/public/search.svg';
 import InputDeleteIcon from '@/public/input-delete.svg';
-import { ChangeEvent } from 'react';
 
 interface SearchInputType {
   value: string;

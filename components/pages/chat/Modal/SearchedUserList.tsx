@@ -35,9 +35,10 @@ export default function SearchedUserList({
             } rounded-[10px] duration-200`}
             key={user.name}
           >
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label className="cursor-pointer">
               <ChatUser
-                shadow={true}
+                shadow
                 image={user.image}
                 name={user.name}
                 petName={user.petName}

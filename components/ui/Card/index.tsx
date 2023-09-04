@@ -3,13 +3,13 @@ import Avatar from '../Avatar';
 import Divider from '../Divider';
 import FlexBox from '../FlexBox';
 
-type justifyOption = 'between' | 'center' | 'around' | 'end' | 'start';
+type JustifyOption = 'between' | 'center' | 'around' | 'end' | 'start';
 
 interface ChildrenProp {
   children: React.ReactNode;
 }
 interface ChatCardHeaderProp extends ChildrenProp {
-  justify?: justifyOption;
+  justify?: JustifyOption;
 }
 interface ChatCardInfoProp {
   image: string;
