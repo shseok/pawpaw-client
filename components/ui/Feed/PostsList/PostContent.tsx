@@ -16,8 +16,8 @@ export default function PostContent({
   onClickModal: () => void;
 }) {
   return (
-    // <FlexBox align="stretch" className="w-full gap-[36px] h-full">
     <div className="grid grid-cols-2 gap-[36px] w-full">
+      {/* 디자인에는 아래와같이 나와있는데 이대로 하면 width가 모니터보다 넘치는 경우 발생 => full로 바꿔눔 */}
       {/* <div
         className="w-[303px] mobile:w-[352px] tablet:w-[530px] pc:w-[545px] grid grid-cols-2 place-content-stretch"
         onClick={onClickModal}
@@ -47,6 +47,5 @@ export default function PostContent({
         {children}
       </FlexBox>
     </div>
-    // </FlexBox>
   );
 }

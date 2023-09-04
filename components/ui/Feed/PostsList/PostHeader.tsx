@@ -2,6 +2,7 @@ import Image from 'next/image';
 import FlexBox from '../../FlexBox';
 import Button from '../../Button';
 import Avatar from '../../Avatar';
+import PostDropdownButton from './PostDropdownButton';
 
 export default function PostHeader({ userId }: { userId: number }) {
   return (
@@ -24,14 +25,7 @@ export default function PostHeader({ userId }: { userId: number }) {
           </div>
         </FlexBox>
       </FlexBox>
-      <button type="button">
-        <Image
-          src="/Feed/desktop/seeMore.svg"
-          alt="더보기"
-          width={24}
-          height={24}
-        />
-      </button>
+      <PostDropdownButton />
     </FlexBox>
   );
 }
