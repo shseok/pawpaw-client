@@ -1,33 +1,77 @@
-import Button from '../Button';
-import FlexBox from '../FlexBox';
-import ChatCardHeader from './ChatCardHeader';
-import ChatCardInfo from './ChatCardInfo';
-import TagList from '../TagList';
+import React from 'react';
+import Avatar from '../Avatar';
 import Divider from '../Divider';
+import FlexBox from '../FlexBox';
 
-const tagList = ['자랑', '강아지', '고양이', '앵무새', '토끼토', 'rhtm'];
-export default function ChatCard() {
+type JustifyOption = 'between' | 'center' | 'around' | 'end' | 'start';
+
+interface ChildrenProp {
+  children: React.ReactNode;
+}
+interface ChatCardHeaderProp extends ChildrenProp {
+  justify?: JustifyOption;
+}
+interface ChatCardInfoProp {
+  image: string;
+  name: string;
+  participants: number;
+}
+
+export default function ChatCard({ children }: ChildrenProp) {
   return (
     <FlexBox
       direction="column"
-      align="start"
-      className="max-h-[266px] w-full h-full max-w-[517px]  p-8 rounded-[10px] gap-3 shadow-chatCard"
+      className="w-full shadow-chatCard max-w-[517px] rounded-[10px] gap-3 p-4 sm:p-6"
     >
-      <ChatCardHeader title="천하제일 내 반려동천하제일 내 반려동물 자랑방" />
-      <p className="w-full truncate">
-        반려동물을 키우는 사람이라면 누구나
-        들어와서자랑해자랑해주세요자랑해주세요주세요 자랑해주세요~
-      </p>
-      <TagList list={tagList} />
-      <Divider type="horizontal" />
-      <FlexBox justify="between" className="w-full">
-        <ChatCardInfo
-          participants={42}
-          masterUserImg="/default.png"
-          masterUserName="닉네임"
-        />
-        <Button>입장하기</Button>
-      </FlexBox>
+      {children}
     </FlexBox>
   );
 }
+
+ChatCard.Header = function ChatCardHeader({
+  children,
+  justify,
+}: ChatCardHeaderProp) {
+  return (
+    <FlexBox justify={justify} align="center" className="w-full">
+      {children}
+    </FlexBox>
+  );
+};
+
+ChatCard.Title = function ChatCardTitle({ title }: { title: string }) {
+  return <p className="flex-1 truncate header3">{title}</p>;
+};
+
+ChatCard.Body = function ChatCardBody({ children }: ChildrenProp) {
+  return (
+    <FlexBox direction="column" className="w-full gap-3">
+      {children}
+    </FlexBox>
+  );
+};
+
+ChatCard.Description = function ChatCardDescription({
+  description,
+}: {
+  description: string;
+}) {
+  return <p className="w-full text-gray-800 body3">{description}</p>;
+};
+
+ChatCard.Info = function ChatCardInfo({
+  image,
+  name,
+  participants,
+}: ChatCardInfoProp) {
+  return (
+    <FlexBox className="gap-3">
+      <Avatar image={image} name={name} />
+      <FlexBox className="flex-1 gap-2 body3 text-grey-500">
+        <p className="truncate">{name}</p>
+        <Divider type="vertical" />
+        <p>{participants}명</p>
+      </FlexBox>
+    </FlexBox>
+  );
+};

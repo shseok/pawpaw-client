@@ -1,8 +1,8 @@
 'use client';
 
 import { SwiperSlide } from 'swiper/react';
-import EnteredChatCard from '@/components/ui/EnteredChatCard';
 import FlexBox from '@/components/ui/FlexBox';
+import ImageChatCard from '@/components/ui/ChatCard/ImageChatCard';
 import Carousel from './Carousel';
 
 export default function EnteredChatList() {
@@ -16,7 +16,7 @@ export default function EnteredChatList() {
         {Array.from({ length: 10 }).map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <SwiperSlide key={i} className="">
-            <EnteredChatCard />
+            <ImageChatCard />
           </SwiperSlide>
         ))}
       </Carousel>

@@ -2,7 +2,7 @@
 
 import useGetInfiniteData from '@/hooks/queries/InfiniteData';
 import FlexBox from '@/components/ui/FlexBox';
-import NormalChatCard from '@/components/ui/Card/NormalChatCard';
+import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
 
 export default function TrendingChatList() {
   const { data, Observer } = useGetInfiniteData({

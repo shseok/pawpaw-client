@@ -3,7 +3,7 @@
 import FlexBox from '@/components/ui/FlexBox';
 import RightButton from '@/public/ChatCard/arrow-right.svg';
 import LeftButton from '@/public/ChatCard/arrow-left.svg';
-import SimpleChatCard from '@/components/ui/Card/SimpleChatCard';
+import SimpleChatCard from '@/components/ui/ChatCard/SimpleChatCard';
 
 export default function SimpleChatCardList() {
   return (

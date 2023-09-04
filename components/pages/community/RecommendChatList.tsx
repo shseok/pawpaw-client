@@ -2,7 +2,7 @@
 
 import { SwiperSlide } from 'swiper/react';
 import FlexBox from '@/components/ui/FlexBox';
-import NormalChatCard from '@/components/ui/Card/NormalChatCard';
+import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
 import Carousel from './Carousel';
 
 export default function RecommendChatList() {

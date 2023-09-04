@@ -1,4 +1,5 @@
 import ShareIcon from '@/public/share.svg';
+import NoticeIcon from '@/public/ChatCard/notice.svg';
 import ChatCard from '.';
 import Badge from '../Badge';
 
@@ -14,7 +15,12 @@ export default function SimpleChatCard() {
           <ShareIcon className="w-6 h-6" />
         </button>
       </ChatCard.Header>
-      <ChatCard.Description description="병을 앓고있는 노견  보호자님들 이야기 나눠요" />
+      <div className="flex justify-between w-full">
+        <ChatCard.Description description="병을 앓고있는 노견  보호자님들 이야기 나눠요" />
+        <div>
+          <NoticeIcon classNamw="w-7 h-7" />
+        </div>
+      </div>
     </ChatCard>
   );
 }
