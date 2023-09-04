@@ -6,7 +6,7 @@ export default function SimpleChatCard() {
   return (
     <ChatCard>
       <ChatCard.Header justify="between">
-        <div className="flex items-center w-full">
+        <div className="flex items-center w-full gap-1">
           <ChatCard.Title title="강아지 방광암 TCC 정보 공유해요" />
           <Badge />
         </div>
