@@ -1,6 +1,6 @@
 'use client';
 
-import { useInput } from '@/hooks/common/useInput';
+import useInput from '@/hooks/common/useInput';
 import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
 import MessageInput from './MessageInput';
