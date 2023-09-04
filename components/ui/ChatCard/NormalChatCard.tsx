@@ -1,4 +1,5 @@
 import ShareIcon from '@/public/share.svg';
+import BadgeIcon from '@/public/Badge.svg';
 import ChatCard from '.';
 import TagList from '../TagList';
 import Divider from '../Divider';
@@ -8,7 +9,10 @@ export default function NormalChatCard() {
   return (
     <ChatCard>
       <ChatCard.Header justify="between">
-        <ChatCard.Title title="천하제일 내 반려동물 자랑방" />
+        <div className="flex items-center gap-1">
+          <ChatCard.Title title="천하제일 내 반려동물 자랑방" />
+          <BadgeIcon />
+        </div>
         <button type="button">
           <ShareIcon className="w-6 h-6" />
         </button>

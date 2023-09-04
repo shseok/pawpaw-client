@@ -40,7 +40,7 @@ ChatCard.Header = function ChatCardHeader({
 };
 
 ChatCard.Title = function ChatCardTitle({ title }: { title: string }) {
-  return <p className="flex-1 truncate header3">{title}</p>;
+  return <p className=" w-fit header3">{title}</p>;
 };
 
 ChatCard.Body = function ChatCardBody({ children }: ChildrenProp) {
