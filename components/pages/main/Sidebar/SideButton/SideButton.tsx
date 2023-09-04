@@ -17,10 +17,9 @@ export default function SideButton({
     Pawzone: 'Paw zone',
     Mypage: '마이 페이지',
     Search: '검색',
-    Alert: '알림',
+    Notice: '알림',
   };
   const name = names[svgComponent.name];
-
   const clickHandler = () => {
     setActive(`${svgComponent.name}`);
     router();
@@ -39,7 +38,7 @@ export default function SideButton({
           <div className="absolute top-0 left-0 w-[5px] h-16 bg-[#0ABE7D]" />
         ) : null}
         {desktopWidth === true ? (
-          <div className="flex flex-nowrap ml-7">
+          <div className="flex ml-6 flex-nowrap">
             {svgComponent({ color })}
             <div className="ml-3 text-xl cursor-pointer" style={{ color }}>
               {name}
