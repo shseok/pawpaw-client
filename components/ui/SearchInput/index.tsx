@@ -6,12 +6,14 @@ interface SearchInputType {
   value: string;
   resetValue: () => void;
   onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
 }
 
 export default function SearchInput({
   value,
   resetValue,
   onChangeValue,
+  placeholder,
 }: SearchInputType) {
   return (
     <div className="relative w-full">
@@ -20,7 +22,7 @@ export default function SearchInput({
         value={value}
         onChange={onChangeValue}
         className="border border-grey-600 block rounded-[10px] px-5 py-4 pr-20 w-full"
-        placeholder="추가할 인원의 아이디나 닉네임을 검색해보세요"
+        placeholder={placeholder}
       />
       <div className="absolute inset-y-0 top-0 flex gap-2 right-4">
         {value && (

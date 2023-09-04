@@ -39,6 +39,7 @@ export default function UserAddModal({
       >
         <header className="w-full header2">인원 추가</header>
         <SearchInput
+          placeholder="추가할 인원의 아이디나 닉네임을 검색해보세요"
           value={value}
           onChangeValue={onChangeValue}
           resetValue={resetValue}
