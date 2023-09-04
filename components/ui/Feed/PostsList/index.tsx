@@ -12,7 +12,7 @@ import PostHeader from './PostHeader';
 import PostContent from './PostContent';
 import PostCommentWrapper from './PostCommentWrapper';
 import PostComments from './PostComments';
-import FeedModal from '../FeedModal';
+import PostModal from './PostModal';
 
 export default function PostsList() {
   const { Observer, data: posts } = useGetInfiniteData({
@@ -61,6 +61,12 @@ export default function PostsList() {
                 img={post.url}
                 onClickModal={clickModal}
               >
+                <PostModal
+                  showModal={showModal}
+                  setShowModal={setShowModal}
+                  post={selectedPost}
+                  comment={selectedComment}
+                />
                 <PostCommentWrapper commentsNum={filteredCommentsCount}>
                   <FlexBox
                     direction="column"
@@ -79,13 +85,6 @@ export default function PostsList() {
                 </PostCommentWrapper>
               </PostContent>
             </FlexBox>
-            {showModal ? (
-              <FeedModal
-                onClick={clickModal}
-                post={selectedPost}
-                comment={selectedComment}
-              />
-            ) : null}
           </div>
         );
       })}
