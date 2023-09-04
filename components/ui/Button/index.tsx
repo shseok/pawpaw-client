@@ -33,7 +33,9 @@ export default function Button({
 }: ButtonProps) {
   const sizeClass = sizes[size];
   const variantClass = variants[variant];
-  const disabledClass = disabled && 'opacity-50 cursor-not-allowed';
+  const disabledClass =
+    disabled &&
+    'opacity-50 cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-300 disabled:border-none';
   return (
     <button
       type="button"
