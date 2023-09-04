@@ -1,44 +1,46 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+
 'use client';
 
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import useViewportTracker from '@/hooks/common/useViewportTracker';
 import SideButtonContainer from './SideButtonContainer';
 import BottomToggle from './BottomToggle';
 import SidebarLogo from './SidebarLogo';
 import ResponsiveNavbar from './Responsive/ResponsiveNavbar';
+import useGetPathname from './hooks/useGetPathname';
 
 export default function Sidebar() {
   const [toggle, setToggle] = useState(true);
-  const desktopWidth = toggle === true ? 'w-64' : 'w-24';
-  const path = usePathname();
-  let pathname;
-  if (path === '/') {
-    pathname = 'Feed';
-  } else if (path.includes('chat')) {
-    pathname = 'Chat';
-  } else {
-    pathname = path.charAt(1).toUpperCase() + path.slice(2);
-  }
+  const desktopWidth = toggle === true ? `w-[256px]` : `w-[96px]`;
+  const viewportWidth = useViewportTracker();
+  const pathname = useGetPathname();
   const [activeButton, setActiveButton] = useState(pathname);
+  useEffect(() => {
+    viewportWidth?.width! < 1240 ? setToggle(false) : setToggle(true);
+  }, [viewportWidth]);
 
   return (
     <>
       <nav
-        className={`fixed top-0 h-screen left-0 ${desktopWidth}  bg-[#F7F8F9] hidden tablet:block`}
+        className={`fixed top-0 h-screen left-0 bg-[#F7F8F9] hidden tablet:block ${desktopWidth}`}
       >
         <SidebarLogo desktopWidth={toggle} />
         <SideButtonContainer
           desktopWidth={toggle}
           activeButton={activeButton}
           setActive={setActiveButton}
+          pathname={pathname}
         />
         <BottomToggle
           desktopWidth={toggle}
           toggleButton={() => setToggle(!toggle)}
+          viewport={viewportWidth?.width}
         />
       </nav>
       <div>
-        <div className={`sticky ${desktopWidth} hidden tablet:block`} />
+        <div className={`sticky hidden tablet:block ${desktopWidth}`} />
       </div>
       {pathname === 'Chat' ? (
         <div className="hidden">

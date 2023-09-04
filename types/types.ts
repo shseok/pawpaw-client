@@ -5,4 +5,6 @@ export interface SidebarProps {
   router: () => void;
   desktopWidth: boolean;
   toggleButton: () => void;
+  viewport: number | undefined;
+  pathname: string;
 }

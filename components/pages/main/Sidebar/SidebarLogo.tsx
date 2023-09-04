@@ -1,10 +1,10 @@
-// import Image from 'next/image';
-import { SidebarProps } from '@/types/types';
 import DesktopSvg from './SideButton/DesktopSvg';
 
 export default function SidebarLogo({
   desktopWidth,
-}: Pick<SidebarProps, 'desktopWidth'>) {
+}: {
+  desktopWidth: boolean;
+}) {
   const { toggleOnLogo, toggleOffLogo } = DesktopSvg;
 
   return (
