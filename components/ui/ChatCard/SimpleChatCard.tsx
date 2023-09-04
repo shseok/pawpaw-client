@@ -1,7 +1,7 @@
 import ShareIcon from '@/public/share.svg';
 import NoticeIcon from '@/public/ChatCard/notice.svg';
+import BadgeIcon from '@/public/Badge.svg';
 import ChatCard from '.';
-import Badge from '../Badge';
 
 export default function SimpleChatCard() {
   return (
@@ -9,7 +9,7 @@ export default function SimpleChatCard() {
       <ChatCard.Header justify="between">
         <div className="flex items-center w-full gap-1">
           <ChatCard.Title title="강아지 방광암 TCC 정보 공유해요" />
-          <Badge />
+          <BadgeIcon />
         </div>
         <button type="button" onClick={() => alert('d')}>
           <ShareIcon className="w-6 h-6" />
