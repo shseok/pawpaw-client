@@ -21,7 +21,7 @@ export default function ChatCard({ children }: ChildrenProp) {
   return (
     <FlexBox
       direction="column"
-      className="w-full shadow-chatCard max-w-[517px] max-h-[266px]  rounded-[10px] gap-3 p-8"
+      className="w-full shadow-chatCard max-w-[517px] rounded-[10px] gap-3 p-4 sm:p-6"
     >
       {children}
     </FlexBox>
@@ -56,7 +56,7 @@ ChatCard.Description = function ChatCardDescription({
 }: {
   description: string;
 }) {
-  return <p className="w-full body3">{description}</p>;
+  return <p className="w-full text-gray-800 body3">{description}</p>;
 };
 
 ChatCard.Info = function ChatCardInfo({
