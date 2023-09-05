@@ -15,7 +15,7 @@ export default function EnteredChatList() {
       <Carousel>
         {Array.from({ length: 10 }).map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <SwiperSlide key={i} className="">
+          <SwiperSlide key={i} className="max-h-[538px] max-w-[517px]">
             <ImageChatCard />
           </SwiperSlide>
         ))}
