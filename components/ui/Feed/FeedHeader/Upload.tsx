@@ -11,8 +11,8 @@ export default function Upload() {
       <FlexBox justify="between" className="w-full gap-[24px]">
         <Avatar
           size="xxl"
-          user_img="/Feed/desktop/tempUserProfilePic.svg"
-          user_name="수박이"
+          image="/Feed/desktop/tempUserProfilePic.svg"
+          name="수박이"
         />
         <textarea
           className="bg-[#F5FFF6] w-full h-[77px] resize-none"

@@ -9,6 +9,7 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
+
 import useOutSideClick from '@/hooks/common/useOutSideClick';
 import Item from './Item';
 import Menu from './Menu';
@@ -20,11 +21,13 @@ interface DropDownProps {
 interface DropdownContextType {
   isOpen: boolean;
   handleDropdown: () => void;
+  closeDropdown: () => void;
 }
 
 const DropdownContext = createContext<DropdownContextType>({
   isOpen: false,
   handleDropdown: () => {},
+  closeDropdown: () => {},
 });
 
 export const useDropdown = () => {
@@ -60,7 +63,10 @@ export default function Dropdown({ children }: DropDownProps) {
   const handleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  const providerValue = useMemo(() => ({ isOpen, handleDropdown }), [isOpen]);
+  const providerValue = useMemo(
+    () => ({ isOpen, handleDropdown, closeDropdown: () => setIsOpen(false) }),
+    [isOpen],
+  );
   return (
     <DropdownContext.Provider value={providerValue}>
       <div className="relative" ref={dropdownRef}>

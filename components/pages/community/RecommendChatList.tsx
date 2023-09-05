@@ -1,8 +1,8 @@
 'use client';
 
 import { SwiperSlide } from 'swiper/react';
-import ChatCard from '@/components/ui/ChatCard';
 import FlexBox from '@/components/ui/FlexBox';
+import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
 import Carousel from './Carousel';
 
 export default function RecommendChatList() {
@@ -17,7 +17,7 @@ export default function RecommendChatList() {
         {Array.from({ length: 10 }).map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <SwiperSlide key={i}>
-            <ChatCard />
+            <NormalChatCard />
           </SwiperSlide>
         ))}
       </Carousel>

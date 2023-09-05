@@ -2,20 +2,16 @@ import Image from 'next/image';
 // import Link from "next/link";
 
 interface AvatarType {
-  user_img: string;
-  user_name: string;
+  image: string;
+  name: string;
   size?: 'small' | 'base' | 'large' | 'xl' | 'xxl';
 }
 
-export default function Avatar({
-  size = 'base',
-  user_img,
-  user_name,
-}: AvatarType) {
+export default function Avatar({ size = 'base', image, name }: AvatarType) {
   const avatarSizeVariants = {
     small: 'w-8 h-8',
     base: 'w-10 h-10',
-    large: 'w-12 h-12',
+    large: 'w-[52px] h-[52px]',
     xl: 'w-14 h-14',
     xxl: 'w-20 h-20',
   };
@@ -24,8 +20,8 @@ export default function Avatar({
 
   return (
     <Image
-      src={user_img}
-      alt={user_name}
+      src={image}
+      alt={name}
       width={40}
       height={40}
       priority

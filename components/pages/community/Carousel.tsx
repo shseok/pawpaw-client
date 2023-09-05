@@ -17,6 +17,9 @@ export default function Carousel({ children }: { children: React.ReactNode }) {
         1240: {
           slidesPerView: 3,
         },
+        1921: {
+          slidesPerView: 4,
+        },
       }}
     >
       {children}
