@@ -26,12 +26,15 @@ export default function PostsList() {
   const [selectedComment, setSelectedComment] = useState<Comment[] | undefined>(
     undefined,
   );
-  const clickModal = () => {
-    setShowModal(!showModal);
-  };
 
   return (
     <FlexBox direction="column" className="gap-[40px]">
+      <PostModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        post={selectedPost}
+        comment={selectedComment}
+      />
       {posts?.pages?.map((post) => {
         // 댓글을 위한 부분인데 나중에 실제 api 연결하면 바뀔 예정
         const filteredComments = comments?.filter(
@@ -40,7 +43,6 @@ export default function PostsList() {
         const filteredCommentsCount = filteredComments
           ? filteredComments.length
           : 0;
-
         return (
           <div
             key={post.id}
@@ -59,14 +61,8 @@ export default function PostsList() {
               <PostContent
                 content={post.title}
                 img={post.url}
-                onClickModal={clickModal}
+                onClickModal={() => setShowModal(true)}
               >
-                <PostModal
-                  showModal={showModal}
-                  setShowModal={setShowModal}
-                  post={selectedPost}
-                  comment={selectedComment}
-                />
                 <PostCommentWrapper commentsNum={filteredCommentsCount}>
                   <FlexBox
                     direction="column"
@@ -78,7 +74,7 @@ export default function PostsList() {
                         commentId={comment.id}
                         commentUserName={comment.User.name}
                         commentContent={comment.content}
-                        onClickModal={clickModal}
+                        onClickModal={() => setShowModal(true)}
                       />
                     ))}
                   </FlexBox>
