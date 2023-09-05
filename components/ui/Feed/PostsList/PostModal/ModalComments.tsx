@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Dropdown, { useDropdown } from '@/components/ui/Dropdown/Dropdown';
 import FlexBox from '../../../FlexBox';
 
 export default function ModalComments({
@@ -12,6 +13,8 @@ export default function ModalComments({
   commentUserImg: string;
   commentContent: string;
 }) {
+  const { isOpen } = useDropdown();
+
   return (
     <div key={commentId}>
       <FlexBox align="start" className="gap-3 group">
@@ -30,13 +33,15 @@ export default function ModalComments({
           </div>
           <FlexBox className="gap-1" align="start">
             <div className="caption2 text-grey-500">1일전</div>
-            <Image
-              src="/Feed/desktop/seeMore.svg"
-              alt="더보기"
-              width={16}
-              height={2}
-              className="hidden group-hover:block"
-            />
+            <Dropdown.Trigger>
+              <Image
+                src="/Feed/desktop/seeMore.svg"
+                alt="더보기"
+                width={16}
+                height={2}
+                className={isOpen ? 'block' : 'hidden group-hover:block'}
+              />
+            </Dropdown.Trigger>
           </FlexBox>
         </FlexBox>
       </FlexBox>

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import FlexBox from '../../FlexBox';
 import Button from '../../Button';
 import Avatar from '../../Avatar';
