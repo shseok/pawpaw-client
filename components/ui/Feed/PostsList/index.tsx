@@ -81,13 +81,6 @@ export default function PostsList() {
                 </PostCommentWrapper>
               </PostContent>
             </FlexBox>
-            {showModal ? (
-              <FeedModal
-                onClick={clickModal}
-                post={selectedPost}
-                comment={selectedComment}
-              />
-            ) : null}
           </div>
         );
       })}
