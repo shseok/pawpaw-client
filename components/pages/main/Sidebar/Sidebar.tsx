@@ -17,9 +17,11 @@ export default function Sidebar() {
   const viewportWidth = useViewportTracker();
   const pathname = useGetPathname();
   const [activeButton, setActiveButton] = useState(pathname);
+
   useEffect(() => {
     viewportWidth?.width! < 1240 ? setToggle(false) : setToggle(true);
-  }, [viewportWidth]);
+    setActiveButton(pathname);
+  }, [viewportWidth, pathname]);
 
   return (
     <>
