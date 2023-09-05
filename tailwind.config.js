@@ -139,6 +139,47 @@ module.exports = {
         cap2TAB: ['13px', { lineHeight: '21px', fontWeight: 'normal' }],
         cap2MOB: ['11px', { lineHeight: '19px', fontWeight: 'normal' }],
       },
+      fontSize: {
+        h1PC: ['32px', { lineHeight: '40px', fontWeight: 'bold' }],
+        h1TAB: ['30px', { lineHeight: '38px', fontWeight: 'bold' }],
+        h1MOB: ['25px', { lineHeight: '33px', fontWeight: 'bold' }],
+
+        h2PC: ['26px', { lineHeight: '34px', fontWeight: 'bold' }],
+        h2TAB: ['24px', { lineHeight: '32px', fontWeight: 'bold' }],
+        h2MOB: ['21px', { lineHeight: '29px', fontWeight: 'bold' }],
+
+        h3PC: ['22px', { lineHeight: '30px', fontWeight: 'bold' }],
+        h3TAB: ['20px', { lineHeight: '28px', fontWeight: 'bold' }],
+        h3MOB: ['17px', { lineHeight: '25px', fontWeight: 'bold' }],
+
+        h4PC: ['18px', { lineHeight: '26px', fontWeight: 'bold' }],
+        h4TAB: ['16px', { lineHeight: '32px', fontWeight: 'bold' }],
+        h4MOB: ['14px', { lineHeight: '22px', fontWeight: 'bold' }],
+
+        b1PC: ['18px', { lineHeight: '26px', fontWeight: 'normal' }],
+        b1TAB: ['16px', { lineHeight: '32px', fontWeight: 'normal' }],
+        b1MOB: ['14px', { lineHeight: '22px', fontWeight: 'normal' }],
+
+        b2PC: ['16px', { lineHeight: '24px', fontWeight: 'bold' }],
+        b2TAB: ['15px', { lineHeight: '23px', fontWeight: 'bold' }],
+        b2MOB: ['13px', { lineHeight: '21px', fontWeight: 'bold' }],
+
+        b3PC: ['16px', { lineHeight: '24px', fontWeight: 'medium' }],
+        b3TAB: ['15px', { lineHeight: '23px', fontWeight: 'medium' }],
+        b3MOB: ['13px', { lineHeight: '21px', fontWeight: 'medium' }],
+
+        b4PC: ['16px', { lineHeight: '24px', fontWeight: 'normal' }],
+        b4TAB: ['15px', { lineHeight: '23px', fontWeight: 'normal' }],
+        b4MOB: ['13px', { lineHeight: '21px', fontWeight: 'normal' }],
+
+        cap1PC: ['14px', { lineHeight: '22px', fontWeight: 'bold' }],
+        cap1TAB: ['13px', { lineHeight: '21px', fontWeight: 'bold' }],
+        cap1MOB: ['11px', { lineHeight: '19px', fontWeight: 'bold' }],
+
+        cap2PC: ['14px', { lineHeight: '22px', fontWeight: 'normal' }],
+        cap2TAB: ['13px', { lineHeight: '21px', fontWeight: 'normal' }],
+        cap2MOB: ['11px', { lineHeight: '19px', fontWeight: 'normal' }],
+      },
     },
   },
   plugins: [require('tailwind-scrollbar-hide')],
