@@ -20,7 +20,7 @@ export default function Menu({
     <FlexBox
       as="ul"
       direction="column"
-      className={`absolute ${directionClass} ${width} animate-dropdown gap-2 p-4 bg-white shadow-chatCard rounded-[10px] `}
+      className={`absolute ${directionClass} ${width} animate-dropdown gap-2 p-4 bg-white shadow-dropdown rounded-[10px] `}
     >
       {children}
     </FlexBox>

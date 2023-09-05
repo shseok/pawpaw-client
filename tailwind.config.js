@@ -49,6 +49,7 @@ module.exports = {
       },
       boxShadow: {
         chatCard: '0px 0px 20px 0px #00000014',
+        dropdown: '0px 0px 14px 0px #07D5801A',
       },
       screens: {
         tablet: '1000px',
