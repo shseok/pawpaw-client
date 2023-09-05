@@ -11,11 +11,11 @@ export default function ModalCommentWrapper({
   return (
     <FlexBox
       direction="column"
-      align="start"
+      align="stretch"
       justify="between"
       className="w-full h-full"
     >
-      <FlexBox direction="column" align="start" className="gap-3">
+      <FlexBox direction="column" align="start" className="h-full gap-3">
         <FlexBox className="gap-5">
           <FlexBox className="gap-2 body3 text-grey-500">
             <div>댓글</div>
@@ -28,8 +28,8 @@ export default function ModalCommentWrapper({
         </FlexBox>
         <FlexBox
           direction="column"
-          justify="between"
-          className="gap-[5px] overflow-scroll"
+          justify="start"
+          className="gap-[5px] overflow-scroll h-full"
         >
           {children}
         </FlexBox>
