@@ -1,6 +1,6 @@
-export default async function copyURL() {
+export default async function copyURL(url: string) {
   try {
-    await navigator.clipboard.writeText(window.location.href);
+    await navigator.clipboard.writeText(url);
     alert('복사 성공');
   } catch {
     alert('복사 실패');
