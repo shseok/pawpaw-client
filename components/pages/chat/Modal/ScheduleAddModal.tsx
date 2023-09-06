@@ -2,7 +2,6 @@ import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import useInput from '@/hooks/common/useInput';
-import Dropdown from '@/components/ui/Dropdown/Dropdown';
 
 export default function ScheduleAddModal({
   closeModal,
@@ -10,7 +9,7 @@ export default function ScheduleAddModal({
   closeModal: () => void;
 }) {
   const { value, onChangeValue } = useInput('');
-  console.log('value', value);
+
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
       <div className="self-end">
@@ -26,7 +25,7 @@ export default function ScheduleAddModal({
           <h2 className="w-full header2">스케줄 추가</h2>
           <input
             type="text"
-            className="px-5 py-4 border rounded-[10px] w-full"
+            className="px-5 py-4 border rounded-[10px] w-full focus-primary"
             placeholder="스케줄 제목을 입력해보세요"
             value={value}
             onChange={onChangeValue}
