@@ -13,14 +13,14 @@ export default function PostModal({
   showModal,
   setShowModal,
   post,
-  comment,
+  comments,
 }: {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
   post: Post | null;
-  comment: Comment[] | undefined;
+  comments: Comment[] | undefined;
 }) {
-  const filteredCommentsCount = comment ? comment.length : 0;
+  const filteredCommentsCount = comments ? comments.length : 0;
 
   return (
     <Modal showModal={showModal} setShowModal={setShowModal} opacity>
@@ -43,12 +43,12 @@ export default function PostModal({
             <ModalHeader userId={post.albumId} />
             <ModalContent imageUrl={post.url} content={post.title}>
               <ModalCommentWrapper commentsNum={filteredCommentsCount}>
-                {comment?.map((com) => (
+                {comments?.map((comment) => (
                   <ModalComments
-                    commentId={com.id}
-                    commentUserName={com.User.name}
-                    commentContent={com.content}
-                    commentUserImg="/Feed/desktop/tempProfilePic.svg"
+                    id={comment.id}
+                    userName={comment.User.name}
+                    content={comment.content}
+                    userImg="/Feed/desktop/tempProfilePic.svg"
                   />
                 ))}
               </ModalCommentWrapper>

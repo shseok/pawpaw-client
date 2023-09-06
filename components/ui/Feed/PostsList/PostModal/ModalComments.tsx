@@ -12,34 +12,29 @@ function ReportOption() {
   return <Dropdown.Item>신고</Dropdown.Item>;
 }
 export default function ModalComments({
-  commentId,
-  commentUserName,
-  commentUserImg,
-  commentContent,
+  id,
+  userName,
+  content,
+  userImg,
 }: {
-  commentId: number;
-  commentUserName: string;
-  commentUserImg: string;
-  commentContent: string;
+  id: number;
+  userName: string;
+  content: string;
+  userImg: string;
 }) {
   const { isOpen } = useDropdown();
   const OPTION_LIST = [BlockOption, ReportOption];
 
   return (
-    <div key={commentId}>
+    <div key={id}>
       <FlexBox align="start" className="gap-3 group">
-        <Image
-          src={commentUserImg}
-          alt="사용자 프로필"
-          width={36}
-          height={36}
-        />
+        <Image src={userImg} alt="사용자 프로필" width={36} height={36} />
         <FlexBox direction="column" align="start" className="gap-1">
           <div>
             <div className="inline-block mr-1 body2 text-grey-500">
-              {commentUserName}
+              {userName}
             </div>
-            <div className="inline body4 text-grey-500">{commentContent}</div>
+            <div className="inline body4 text-grey-500">{content}</div>
           </div>
           <FlexBox className="gap-1" align="start">
             <div className="caption2 text-grey-500">1일전</div>

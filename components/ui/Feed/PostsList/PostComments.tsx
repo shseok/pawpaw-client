@@ -1,22 +1,20 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 export default function PostComments({
-  commentId,
-  commentUserName,
-  commentContent,
+  id,
+  userName,
+  content,
   onClickModal,
 }: {
-  commentId: number;
-  commentUserName: string;
-  commentContent: string;
+  id: number;
+  userName: string;
+  content: string;
   onClickModal: () => void;
 }) {
   return (
-    <div key={commentId} onClick={onClickModal}>
-      <div className="inline-block mr-1 body2 text-grey-500">
-        {commentUserName}
-      </div>
-      <div className="inline body4 text-grey-500">{commentContent}</div>
+    <div key={id} onClick={onClickModal}>
+      <div className="inline-block mr-1 body2 text-grey-500">{userName}</div>
+      <div className="inline body4 text-grey-500">{content}</div>
     </div>
   );
 }
