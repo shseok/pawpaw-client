@@ -24,7 +24,6 @@ export default function Location() {
             height={16}
           />
         </FlexBox>
-        {/* <div className="w-[108px] h-px bg-grey-400" /> */}
         <Devider type="horizontal" />
       </FlexBox>
     </FlexBox>

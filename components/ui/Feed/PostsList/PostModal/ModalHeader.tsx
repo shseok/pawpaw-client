@@ -9,8 +9,8 @@ export default function ModalHeader({ userId }: { userId: number }) {
       <FlexBox className="gap-[10px]">
         <Avatar
           size="xl"
-          user_img="/Feed/desktop/tempProfilePic.svg"
-          user_name={String(userId)}
+          image="/Feed/desktop/tempProfilePic.svg"
+          name={String(userId)}
         />
         <FlexBox direction="column" align="start" className="gap-[4px]">
           <FlexBox className="gap-[8px]">
