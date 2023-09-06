@@ -4,14 +4,14 @@ import { MouseEventHandler, ReactNode } from 'react';
 
 interface ButtonProps {
   children: ReactNode | string;
-  size?: 'mini' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   variant?: 'primary' | 'secondary';
   disabled?: boolean;
   className?: string;
   onClickAction?: MouseEventHandler<HTMLButtonElement>;
 }
 const sizes = {
-  mini: 'h-[32px] w-[58px] body2',
+  xs: 'h-[32px] w-[58px] body2',
   sm: 'h-[36px] p-2.5',
   md: 'h-[42px] w-20 p-2.5 tablet:w-24',
   lg: 'h-[54px] w-40 p-2.5',
