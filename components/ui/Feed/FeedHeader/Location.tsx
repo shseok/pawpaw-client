@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import FlexBox from '../../FlexBox';
-import Devider from '../../Divider';
+import Divider from '../../Divider';
 
 export default function Location() {
   return (
@@ -24,7 +24,7 @@ export default function Location() {
             height={16}
           />
         </FlexBox>
-        <Devider type="horizontal" />
+        <Divider type="horizontal" />
       </FlexBox>
     </FlexBox>
   );
