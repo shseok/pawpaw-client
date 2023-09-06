@@ -15,7 +15,7 @@ export default function ModalHeader({ userId }: { userId: number }) {
         <FlexBox direction="column" align="start" className="gap-[4px]">
           <FlexBox className="gap-[8px]">
             <div className="header4 text-grey-800">{userId}</div>
-            <Button size="mini" variant="secondary">
+            <Button size="xs" variant="secondary">
               팔로우
             </Button>
           </FlexBox>
