@@ -11,7 +11,9 @@ export default function PostDropdownButton() {
       </Dropdown.Trigger>
       <Dropdown.Menu>
         <Dropdown.Item>북마크 추가</Dropdown.Item>
-        <Dropdown.Item event={copyURL}>공유하기</Dropdown.Item>
+        <Dropdown.Item event={() => copyURL(window.location.href)}>
+          공유하기
+        </Dropdown.Item>
         <Dropdown.Item>신고하기</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
