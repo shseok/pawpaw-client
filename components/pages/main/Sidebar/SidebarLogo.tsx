@@ -6,7 +6,6 @@ export default function SidebarLogo({
   desktopWidth: boolean;
 }) {
   const { toggleOnLogo, toggleOffLogo } = DesktopSvg;
-  const svgSize = `${viewport / 13.5}`;
 
   return (
     <figure
@@ -14,7 +13,7 @@ export default function SidebarLogo({
         desktopWidth === true ? 'mt-8 mb-10' : 'mt-8 mb-11'
       } flex flex-row justify-center`}
     >
-      {desktopWidth === true ? toggleOnLogo({ svgSize }) : toggleOffLogo()}
+      {desktopWidth === true ? toggleOnLogo() : toggleOffLogo()}
     </figure>
   );
 }

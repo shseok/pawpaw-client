@@ -26,7 +26,7 @@ export default function Sidebar() {
       <nav
         className={`fixed top-0 h-screen left-0 bg-[#F7F8F9] hidden tablet:block ${desktopWidth}`}
       >
-        <SidebarLogo desktopWidth={toggle} viewport={viewport.width} />
+        <SidebarLogo desktopWidth={toggle} />
         <SideButtonContainer
           desktopWidth={toggle}
           activeButton={activeButton}

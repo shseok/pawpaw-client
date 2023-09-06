@@ -14,8 +14,7 @@ export default function SideButtonContainer({
 >) {
   const { Feed, Community, Pawzone, Mypage, Search, Notice } = DesktopSvg;
   const router = useRouter();
-  const pseudoElementWidth =
-    desktopWidth === true ? `${viewport / 8}` : 'w-[72px]';
+  const pseudoElementWidth = desktopWidth === true ? 'w-[232px]' : 'w-[72px]';
 
   return (
     <>
@@ -25,7 +24,6 @@ export default function SideButtonContainer({
         desktopWidth={desktopWidth}
         setActive={setActive}
         router={() => router.push('/')}
-        viewport={viewport}
       />
       <SideButton
         svgComponent={Community}
@@ -33,7 +31,6 @@ export default function SideButtonContainer({
         desktopWidth={desktopWidth}
         setActive={setActive}
         router={() => router.push('/community')}
-        viewport={viewport}
       />
       <SideButton
         svgComponent={Pawzone}
@@ -41,7 +38,6 @@ export default function SideButtonContainer({
         desktopWidth={desktopWidth}
         setActive={setActive}
         router={() => router.push('/pawzone')}
-        viewport={viewport}
       />
       <SideButton
         svgComponent={Mypage}
@@ -49,7 +45,6 @@ export default function SideButtonContainer({
         desktopWidth={desktopWidth}
         setActive={setActive}
         router={() => router.push('/mypage')}
-        viewport={viewport}
       />
 
       <div className="flex flex-row items-center justify-center h-10">
