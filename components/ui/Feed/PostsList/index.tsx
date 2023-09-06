@@ -23,9 +23,9 @@ export default function PostsList() {
   // 모달창 구현에 필요
   const [showModal, setShowModal] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  const [selectedComment, setSelectedComment] = useState<Comment[] | undefined>(
-    undefined,
-  );
+  const [selectedComments, setSelectedComments] = useState<
+    Comment[] | undefined
+  >(undefined);
 
   return (
     <FlexBox direction="column" className="gap-[40px]">
@@ -33,7 +33,7 @@ export default function PostsList() {
         showModal={showModal}
         setShowModal={setShowModal}
         post={selectedPost}
-        comment={selectedComment}
+        comments={selectedComments}
       />
       {posts?.pages?.map((post) => {
         // 댓글을 위한 부분인데 나중에 실제 api 연결하면 바뀔 예정
@@ -48,7 +48,7 @@ export default function PostsList() {
             key={post.id}
             onClick={() => {
               setSelectedPost(post);
-              setSelectedComment(filteredComments);
+              setSelectedComments(filteredComments);
             }}
             className="w-full"
           >
@@ -71,9 +71,9 @@ export default function PostsList() {
                   >
                     {filteredComments?.map((comment) => (
                       <PostComments
-                        commentId={comment.id}
-                        commentUserName={comment.User.name}
-                        commentContent={comment.content}
+                        id={comment.id}
+                        userName={comment.User.name}
+                        content={comment.content}
                         onClickModal={() => setShowModal(true)}
                       />
                     ))}
