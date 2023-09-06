@@ -1,4 +1,4 @@
-export default async function copyURLToClipboard() {
+export default async function copyURL() {
   try {
     await navigator.clipboard.writeText(window.location.href);
     alert('복사 성공');
