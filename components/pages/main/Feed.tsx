@@ -4,7 +4,7 @@ import FeedHeader from '@/components/ui/Feed/FeedHeader';
 
 export default function Feed() {
   return (
-    <FlexBox direction="column" className="w-full gap-[40px]">
+    <FlexBox direction="column" className="gap-10">
       <FeedHeader />
       <PostsList />
     </FlexBox>
