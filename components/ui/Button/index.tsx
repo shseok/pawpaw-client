@@ -11,10 +11,11 @@ interface ButtonProps {
   onClickAction?: MouseEventHandler<HTMLButtonElement>;
 }
 const sizes = {
-  sm: 'h-[36px]',
-  md: 'h-[42px] ',
-  lg: 'h-[54px]',
-  xl: 'h-[66px]',
+  mini: 'h-[32px] w-[58px] body2',
+  sm: 'h-[36px] p-2.5',
+  md: 'h-[42px] w-20 p-2.5 tablet:w-24',
+  lg: 'h-[54px] w-40 p-2.5',
+  xl: 'h-[66px] p-2.5',
 };
 const variants = {
   primary: 'bg-primary-200 hover:bg-primary-300 text-white',
