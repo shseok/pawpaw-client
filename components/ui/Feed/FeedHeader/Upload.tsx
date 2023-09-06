@@ -8,7 +8,7 @@ import FlexBox from '../../FlexBox';
 export default function Upload() {
   const [postText, setPostText] = useState('');
   const maxCharacters = 100;
-  const isOverLimit = postText.length > maxCharacters;
+  const isOverMaxChar = postText.length > maxCharacters;
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostText(event.target.value);
@@ -32,7 +32,7 @@ export default function Upload() {
             value={postText}
             onChange={handleTextChange}
           />
-          {isOverLimit ? (
+          {isOverMaxChar ? (
             <FlexBox className="caption2 h-[36px] absolute bottom-0 right-0 bg-primary-50/80 z-10">
               <span className="text-red">{postText.length}</span>
               <span className="text-grey-200">/</span>
@@ -42,10 +42,10 @@ export default function Upload() {
         </div>
       </FlexBox>
       <FlexBox justify="end" className="gap-[10px] w-full">
-        <Button size="lg" variant="secondary" disabled={isOverLimit}>
+        <Button size="lg" variant="secondary" disabled={isOverMaxChar}>
           파일
         </Button>
-        <Button size="lg" disabled={isOverLimit}>
+        <Button size="lg" disabled={isOverMaxChar}>
           업로드
         </Button>
         <div className="mt-4" id="renderedText" />
