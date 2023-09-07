@@ -21,7 +21,6 @@ export default function Modal({
   toggle,
 }: ModalProps) {
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {showModal &&
         createPortal(

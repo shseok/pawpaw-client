@@ -43,7 +43,7 @@ export default function ModalContentWrapper({
         <div
           className={`fixed h-full inset-0 bg-black ${
             opacitiyClass ? 'bg-opacity-75' : 'bg-opacity-0'
-          } z-50 ${toggle ? 'ml-[256px]' : 'left-0 ml-[96px]'}`}
+          } z-50 ${toggle ? 'ml-[256px]' : 'ml-[96px]'}`}
         >
           <div ref={modalClickRef} className="flex flex-row justify-start">
             {children}
