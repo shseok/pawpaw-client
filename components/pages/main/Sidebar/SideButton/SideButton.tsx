@@ -1,4 +1,15 @@
-import { SidebarProps } from '@/types/types';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Dispatch, SetStateAction, useEffect } from 'react';
+
+interface SideButtonProps {
+  svgComponent: (props: { color: string }) => JSX.Element;
+  activeButton: string;
+  setActive: (props: string) => void;
+  router?: () => void;
+  desktopWidth: boolean;
+  setSearchModal: Dispatch<SetStateAction<boolean>>;
+  setNoticeModal: Dispatch<SetStateAction<boolean>>;
+}
 
 export default function SideButton({
   activeButton,
@@ -6,11 +17,11 @@ export default function SideButton({
   svgComponent,
   desktopWidth,
   router,
-}: Pick<
-  SidebarProps,
-  'activeButton' | 'setActive' | 'svgComponent' | 'desktopWidth' | 'router'
->) {
+  setSearchModal,
+  setNoticeModal,
+}: SideButtonProps) {
   const color = activeButton === svgComponent.name ? '#0ABE7D' : '#74787D';
+
   const names: { [key: string]: string } = {
     Feed: '피드',
     Community: '커뮤니티',
@@ -19,11 +30,28 @@ export default function SideButton({
     Search: '검색',
     Notice: '알림',
   };
+
   const name = names[svgComponent.name];
+
   const clickHandler = () => {
     setActive(`${svgComponent.name}`);
-    router();
+    if (router) {
+      router();
+    }
   };
+
+  useEffect(() => {
+    if (activeButton !== 'Search' && activeButton !== 'Notice') {
+      setSearchModal(false);
+      setNoticeModal(false);
+    } else if (activeButton === 'Search') {
+      setSearchModal(true);
+      setNoticeModal(false);
+    } else if (activeButton === 'Notice') {
+      setNoticeModal(true);
+      setSearchModal(false);
+    }
+  }, [activeButton]);
 
   return (
     <div
@@ -34,7 +62,7 @@ export default function SideButton({
       <button type="button" onClick={clickHandler}>
         {activeButton === svgComponent.name &&
         svgComponent.name !== 'Search' &&
-        svgComponent.name !== 'Alert' ? (
+        svgComponent.name !== 'Notice' ? (
           <div className="absolute top-0 left-0 w-[5px] h-16 bg-[#0ABE7D]" />
         ) : null}
         {desktopWidth === true ? (

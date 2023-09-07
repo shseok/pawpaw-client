@@ -25,7 +25,11 @@ export default function BottomToggle({
           ) : null}
         </button>
       </div>
-      <div className="absolute bottom-0 w-full h-12 bg-[#E9EBED]">
+      <div
+        className={`absolute bottom-0 ${
+          desktopWidth === true ? 'w-[256px]' : 'w-[96px]'
+        } h-12 bg-[#E9EBED]`}
+      >
         {viewport! < 1240 ? null : (
           <button
             type="button"

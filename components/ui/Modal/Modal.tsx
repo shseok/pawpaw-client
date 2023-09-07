@@ -8,6 +8,8 @@ interface ModalProps {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
   opacity?: boolean;
+  position?: 'center' | 'left';
+  toggle?: boolean;
 }
 
 export default function Modal({
@@ -15,6 +17,8 @@ export default function Modal({
   showModal,
   setShowModal,
   opacity = true,
+  position = 'center',
+  toggle,
 }: ModalProps) {
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -25,6 +29,8 @@ export default function Modal({
             showModal={showModal}
             setShowModal={setShowModal}
             opacitiyClass={opacity}
+            position={position}
+            toggle={toggle}
           >
             {children}
           </ModalWrapper>,
