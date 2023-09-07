@@ -1,14 +1,16 @@
-import { SidebarProps } from '@/types/types';
+interface FooterButtonProps {
+  activeButton: string;
+  setActive: (props: string) => void;
+  svgComponent: (props: { color: string }) => JSX.Element;
+  router: () => void;
+}
 
 export default function FooterButton({
   activeButton,
   setActive,
   svgComponent,
   router,
-}: Pick<
-  SidebarProps,
-  'activeButton' | 'setActive' | 'svgComponent' | 'router'
->) {
+}: FooterButtonProps) {
   const color = activeButton === svgComponent.name ? '#0ABE7D' : '#74787D';
   const names: { [key: string]: string } = {
     Feed: '피드',

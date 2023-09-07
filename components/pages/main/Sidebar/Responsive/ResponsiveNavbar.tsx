@@ -1,11 +1,15 @@
-import { SidebarProps } from '@/types/types';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
+
+interface ResponsiveNavbarProps {
+  activeButton: string;
+  setActive: (props: string) => void;
+}
 
 export default function ResponsiveNavbar({
   activeButton,
   setActive,
-}: Pick<SidebarProps, 'activeButton' | 'setActive'>) {
+}: ResponsiveNavbarProps) {
   return (
     <>
       <Header />

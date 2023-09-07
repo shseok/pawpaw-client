@@ -1,12 +1,17 @@
 import Image from 'next/image';
-import { SidebarProps } from '@/types/types';
+import { MouseEventHandler } from 'react';
 import DesktopSvg from './SideButton/DesktopSvg';
 
+interface BottomToggleProps {
+  desktopWidth: boolean;
+  toggleButton: MouseEventHandler<HTMLButtonElement>;
+  viewport: number | undefined;
+}
 export default function BottomToggle({
   desktopWidth,
   toggleButton,
   viewport,
-}: Pick<SidebarProps, 'desktopWidth' | 'toggleButton' | 'viewport'>) {
+}: BottomToggleProps) {
   const { Logout } = DesktopSvg;
   return (
     <div>

@@ -1,12 +1,13 @@
 import { useRouter } from 'next/navigation';
-import { SidebarProps } from '@/types/types';
 import FooterButton from './FooterButton';
 import MobileSvg from '../MobileSvg';
 
-export default function Footer({
-  activeButton,
-  setActive,
-}: Pick<SidebarProps, 'activeButton' | 'setActive'>) {
+interface FooterProps {
+  activeButton: string;
+  setActive: (props: string) => void;
+}
+
+export default function Footer({ activeButton, setActive }: FooterProps) {
   const { Feed, Community, Pawzone, Mypage } = MobileSvg;
   const router = useRouter();
 
