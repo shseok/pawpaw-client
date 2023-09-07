@@ -1,7 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 import Image from 'next/image';
-import { Fragment } from 'react';
-import Dropdown, { useDropdown } from '@/components/ui/Dropdown/Dropdown';
+import { Fragment, useState } from 'react';
+import Modal from '@/components/ui/Modal/Modal';
+import Dropdown from '@/components/ui/Dropdown/Dropdown';
 import FlexBox from '../../../FlexBox';
 
 // 드롭다운 메뉴
@@ -22,8 +23,9 @@ export default function ModalComments({
   content: string;
   userImg: string;
 }) {
-  const { isOpen } = useDropdown();
+  // const { isOpen } = useDropdown();
   const OPTION_LIST = [BlockOption, ReportOption];
+  const [showSmallModal, setShowSmallModal] = useState(false);
 
   return (
     <div key={id}>
@@ -38,7 +40,7 @@ export default function ModalComments({
           </div>
           <FlexBox className="gap-1" align="start">
             <div className="caption2 text-grey-500">1일전</div>
-            <Dropdown>
+            {/* <Dropdown>
               <Dropdown.Trigger>
                 <Image
                   src="/Feed/desktop/seeMore.svg"
@@ -53,7 +55,43 @@ export default function ModalComments({
                   <Fragment key={index}>{option()}</Fragment>
                 ))}
               </Dropdown.Menu>
-            </Dropdown>
+            </Dropdown> */}
+            <button type="button" onClick={() => setShowSmallModal(true)}>
+              <Image
+                src="/Feed/desktop/seeMore.svg"
+                alt="더보기"
+                width={16}
+                height={16}
+                className="hidden group-hover:block"
+              />
+            </button>
+            <Modal showModal={showSmallModal} setShowModal={setShowSmallModal}>
+              <FlexBox
+                as="ul"
+                direction="column"
+                className={`gap-2 p-4 w-[324px] bg-white shadow-dropdown rounded-[10px] `}
+              >
+                <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
+                  <button className="w-full p-3 body1" type="button">
+                    차단하기
+                  </button>
+                </li>
+                <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
+                  <button className="w-full p-3 body1" type="button">
+                    신고하기
+                  </button>
+                </li>
+                <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
+                  <button
+                    className="w-full p-3 body1"
+                    type="button"
+                    onClick={() => setShowSmallModal(false)}
+                  >
+                    취소
+                  </button>
+                </li>
+              </FlexBox>
+            </Modal>
           </FlexBox>
         </FlexBox>
       </FlexBox>
