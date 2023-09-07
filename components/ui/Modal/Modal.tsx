@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { Dispatch, SetStateAction } from 'react';
 import { createPortal } from 'react-dom';
 import ModalWrapper from './ModalContentWrapper';
