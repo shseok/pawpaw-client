@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
@@ -6,13 +7,11 @@
 
 import { useEffect, useState } from 'react';
 import useViewportTracker from '@/hooks/common/useViewportTracker';
-import Modal from '@/components/ui/Modal/Modal';
 import { useBodyScrollLock } from '@/hooks/common/useBodyScrollLock';
-import SideButtonContainer from './SideButtonContainer';
-import BottomToggle from './BottomToggle';
-import SidebarLogo from './SidebarLogo';
 import ResponsiveNavbar from './Responsive/ResponsiveNavbar';
 import useGetPathname from './hooks/useGetPathname';
+import DesktopSidebar from './DesktopSidebar/DesktopSidebar';
+import SidebarModal from './SidebarModal/SidebarModal';
 
 export default function Sidebar() {
   const [toggle, setToggle] = useState(true);
@@ -30,11 +29,9 @@ export default function Sidebar() {
       setActiveButton(pathname);
     }
   }, [searchModal, noticeModal]);
-
   useEffect(() => {
     viewportWidth?.width! < 1240 ? setToggle(false) : setToggle(true);
   }, [viewportWidth]);
-
   useEffect(() => {
     setActiveButton(pathname);
   }, [pathname]);
@@ -42,51 +39,54 @@ export default function Sidebar() {
   return (
     <>
       {searchModal ? (
-        <Modal
+        <SidebarModal
           showModal={searchModal}
           setShowModal={setSearchModal}
-          position="left"
           toggle={toggle}
+          setToggle={setToggle}
+          desktopWidth={desktopWidth}
+          activeButton={activeButton}
+          setActiveButton={setActiveButton}
+          setSearchModal={setSearchModal}
+          setNoticeModal={setNoticeModal}
+          viewportWidth={viewportWidth}
         >
-          <nav
-            className={`fixed h-screen left-0 bg-[#F7F8F9] hidden tablet:block ${desktopWidth}`}
-          >
-            <SidebarLogo desktopWidth={toggle} />
-            <SideButtonContainer
-              desktopWidth={toggle}
-              activeButton={activeButton}
-              setActive={setActiveButton}
-              setSearchModal={setSearchModal}
-              setNoticeModal={setNoticeModal}
-            />
-            <BottomToggle
-              desktopWidth={toggle}
-              toggleButton={() => setToggle(!toggle)}
-              viewport={viewportWidth?.width}
-            />
-          </nav>
+          {/* 검색모달컴포넌트 시작점 */}
           <div className="fixed w-[696px] h-screen bg-white overflow-auto">
-            <div>dd</div>
+            <div>searchModal</div>
           </div>
-        </Modal>
-      ) : (
-        <nav
-          className={`fixed h-screen left-0 bg-[#F7F8F9] hidden tablet:block ${desktopWidth}`}
+          {/* 검색모달컴포넌트 끝점 */}
+        </SidebarModal>
+      ) : noticeModal ? (
+        <SidebarModal
+          showModal={noticeModal}
+          setShowModal={setNoticeModal}
+          toggle={toggle}
+          setToggle={setToggle}
+          desktopWidth={desktopWidth}
+          activeButton={activeButton}
+          setActiveButton={setActiveButton}
+          setSearchModal={setSearchModal}
+          setNoticeModal={setNoticeModal}
+          viewportWidth={viewportWidth}
         >
-          <SidebarLogo desktopWidth={toggle} />
-          <SideButtonContainer
-            desktopWidth={toggle}
-            activeButton={activeButton}
-            setActive={setActiveButton}
-            setSearchModal={setSearchModal}
-            setNoticeModal={setNoticeModal}
-          />
-          <BottomToggle
-            desktopWidth={toggle}
-            toggleButton={() => setToggle(!toggle)}
-            viewport={viewportWidth?.width}
-          />
-        </nav>
+          {/* 알림모달컴포넌트 시작점 */}
+          <div className="fixed w-[696px] h-screen bg-white overflow-auto">
+            <div>noticeModal</div>
+          </div>
+          {/* 알림모달컴포넌트 끝점 */}
+        </SidebarModal>
+      ) : (
+        <DesktopSidebar
+          toggle={toggle}
+          setToggle={setToggle}
+          desktopWidth={desktopWidth}
+          activeButton={activeButton}
+          setActiveButton={setActiveButton}
+          setSearchModal={setSearchModal}
+          setNoticeModal={setNoticeModal}
+          viewportWidth={viewportWidth}
+        />
       )}
       <div>
         <div className={`sticky hidden tablet:block ${desktopWidth}`} />
