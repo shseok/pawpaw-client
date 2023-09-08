@@ -8,7 +8,9 @@ import React, {
   useMemo,
   Dispatch,
   SetStateAction,
+  useRef,
 } from 'react';
+import useOutSideClick from '@/hooks/common/useOutSideClick';
 import Trigger from './Trigger';
 import Option from './Option';
 import OptionList from './OptionList';
@@ -41,13 +43,14 @@ export const useSelect = () => {
 
 export default function CustomSelect({
   children,
-  className,
 }: {
-  className?: string;
   children: React.ReactNode;
 }) {
+  const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState('');
+  useOutSideClick(ref, () => setIsOpen(false));
+
   const onOpenChange = () => {
     setIsOpen(!isOpen);
   };
@@ -62,10 +65,11 @@ export default function CustomSelect({
     }),
     [isOpen, value],
   );
-
   return (
     <SelectContext.Provider value={providerValue}>
-      <div className={`relative ${className || ''}`}>{children}</div>
+      <div className="relative w-full" ref={ref}>
+        {children}
+      </div>
     </SelectContext.Provider>
   );
 }
