@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { Dispatch, SetStateAction, useRef } from 'react';
 import useEscKeyClose from '@/hooks/common/useEscKeyClose';
+import useScrollRock from '@/hooks/common/useScrollRock';
 
 interface ModalContentWrapperProps {
   showModal: boolean;
@@ -23,6 +24,7 @@ export default function ModalContentWrapper({
   const modalKeyRef = useRef<HTMLElement | boolean>(showModal);
   const modalClickRef = useRef<HTMLDivElement>(null);
   useEscKeyClose(modalKeyRef, () => setShowModal(false));
+  useScrollRock();
 
   return (
     <>
@@ -40,22 +42,32 @@ export default function ModalContentWrapper({
           <div
             ref={modalClickRef}
             className={`fixed ${
-              order === 1 ? 'z-20' : 'z-50'
+              order === 1 ? 'z-20' : 'z-40'
             } transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2`}
           >
             {children}
           </div>
         </>
       ) : (
-        <div
-          className={`fixed h-full inset-0 bg-black ${
-            opacitiyClass ? 'bg-opacity-75' : 'bg-opacity-0'
-          } z-50 ${toggle ? 'ml-[256px]' : 'ml-[96px]'}`}
-        >
-          <div ref={modalClickRef} className="flex flex-row justify-start">
+        <>
+          <button
+            className={`fixed inset-0 bg-black ${
+              opacitiyClass ? 'bg-opacity-75' : 'bg-opacity-0'
+            } z-10 cursor-default`}
+            type="button"
+            onClick={() => setShowModal(false)}
+          >
+            {' '}
+          </button>
+          <div
+            ref={modalClickRef}
+            className={`fixed top-0 z-20 ${
+              toggle ? 'ml-[256px]' : 'ml-[96px]'
+            }`}
+          >
             {children}
           </div>
-        </div>
+        </>
       )}
     </>
   );

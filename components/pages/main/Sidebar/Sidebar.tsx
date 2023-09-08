@@ -7,7 +7,6 @@
 
 import { useEffect, useState } from 'react';
 import useViewportTracker from '@/hooks/common/useViewportTracker';
-import { useBodyScrollLock } from '@/hooks/common/useBodyScrollLock';
 import ResponsiveNavbar from './Responsive/ResponsiveNavbar';
 import useGetPathname from './hooks/useGetPathname';
 import DesktopSidebar from './DesktopSidebar/DesktopSidebar';
@@ -21,10 +20,8 @@ export default function Sidebar() {
   const [activeButton, setActiveButton] = useState(pathname);
   const [searchModal, setSearchModal] = useState(false);
   const [noticeModal, setNoticeModal] = useState(false);
-  const { lockScroll, openScroll } = useBodyScrollLock();
 
   useEffect(() => {
-    searchModal ? lockScroll() : openScroll();
     if (searchModal === false && noticeModal === false) {
       setActiveButton(pathname);
     }
@@ -52,7 +49,7 @@ export default function Sidebar() {
           viewportWidth={viewportWidth}
         >
           {/* 검색모달컴포넌트 시작점 */}
-          <div className="fixed w-[696px] h-screen bg-white overflow-auto">
+          <div className="fixed w-[696px] h-screen overflow-auto bg-white">
             <div>searchModal</div>
           </div>
           {/* 검색모달컴포넌트 끝점 */}
