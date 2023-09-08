@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { Dispatch, SetStateAction, useRef } from 'react';
 import useEscKeyClose from '@/hooks/common/useEscKeyClose';
-import useOutSideClick from '@/hooks/common/useOutSideClick';
 
 interface ModalContentWrapperProps {
   showModal: boolean;
@@ -10,6 +9,7 @@ interface ModalContentWrapperProps {
   opacitiyClass: boolean;
   position?: 'center' | 'left';
   toggle?: boolean;
+  order?: number;
 }
 export default function ModalContentWrapper({
   children,
@@ -18,27 +18,34 @@ export default function ModalContentWrapper({
   opacitiyClass,
   position,
   toggle,
+  order,
 }: ModalContentWrapperProps) {
   const modalKeyRef = useRef<HTMLElement | boolean>(showModal);
   const modalClickRef = useRef<HTMLDivElement>(null);
-  useOutSideClick(modalClickRef, () => setShowModal(false));
   useEscKeyClose(modalKeyRef, () => setShowModal(false));
 
   return (
     <>
       {position === 'center' ? (
-        <div
-          className={`fixed inset-0 bg-black ${
-            opacitiyClass ? 'bg-opacity-75' : 'bg-opacity-0'
-          } z-50`}
-        >
+        <>
+          <button
+            className={`fixed inset-0 bg-black ${
+              opacitiyClass ? 'bg-opacity-75' : 'bg-opacity-0'
+            } ${order === 1 ? 'z-10' : 'z-30'} cursor-default`}
+            type="button"
+            onClick={() => setShowModal(false)}
+          >
+            {' '}
+          </button>
           <div
             ref={modalClickRef}
-            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"
+            className={`fixed ${
+              order === 1 ? 'z-20' : 'z-50'
+            } transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2`}
           >
             {children}
           </div>
-        </div>
+        </>
       ) : (
         <div
           className={`fixed h-full inset-0 bg-black ${

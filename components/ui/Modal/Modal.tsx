@@ -10,6 +10,7 @@ interface ModalProps {
   opacity?: boolean;
   position?: 'center' | 'left';
   toggle?: boolean;
+  order?: number;
 }
 
 export default function Modal({
@@ -19,6 +20,7 @@ export default function Modal({
   opacity = true,
   position = 'center',
   toggle,
+  order = 1,
 }: ModalProps) {
   return (
     <>
@@ -30,6 +32,7 @@ export default function Modal({
             opacitiyClass={opacity}
             position={position}
             toggle={toggle}
+            order={order}
           >
             {children}
           </ModalWrapper>,
