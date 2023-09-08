@@ -1,14 +1,34 @@
+import { useEffect } from 'react';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import useInput from '@/hooks/common/useInput';
+import useScheduleDate from '../hooks/useScheduleDate';
+import EndDateSelectGroup from './EndDateSelectGroup';
 
 export default function ScheduleAddModal({
   closeModal,
 }: {
   closeModal: () => void;
 }) {
+  const { endDate, handleEndDate } = useScheduleDate();
   const { value, onChangeValue } = useInput('');
+
+  const lastDay = new Date(
+    Number(endDate.year),
+    Number(endDate.month),
+    0,
+  ).getDate();
+
+  const days = Array.from({ length: lastDay }, (_, index) =>
+    (index + 1).toString().padStart(2, '0'),
+  );
+
+  useEffect(() => {
+    if (days.includes(endDate.date)) return;
+    handleEndDate('date', String(lastDay));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [endDate.month]);
 
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
@@ -41,17 +61,7 @@ export default function ScheduleAddModal({
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-full gap-2">
-            <span>종료 날짜</span>
-            <div className="flex gap-2">
-              <div className="border rounded-[10px] px-5 py-4">2023</div>
-              <div className="border rounded-[10px] px-5 py-4 ">09</div>
-              <div className="border rounded-[10px] px-5 py-4 ">01</div>
-              <div className="border rounded-[10px] px-5 py-4 flex-1 text-center">
-                오후 00 : 00
-              </div>
-            </div>
-          </div>
+          <EndDateSelectGroup endDate={endDate} handleEndDate={handleEndDate} />
           <label htmlFor="allday" className="flex w-full gap-2">
             <input type="checkbox" id="allday" />
             <p>하루종일</p>
