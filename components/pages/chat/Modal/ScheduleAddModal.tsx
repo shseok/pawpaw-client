@@ -5,13 +5,15 @@ import XIcon from '@/public/X.svg';
 import useInput from '@/hooks/common/useInput';
 import useScheduleDate from '../hooks/useScheduleDate';
 import EndDateSelectGroup from './EndDateSelectGroup';
+import StartDateSelectGroup from './StartDateSelectGroup';
 
 export default function ScheduleAddModal({
   closeModal,
 }: {
   closeModal: () => void;
 }) {
-  const { endDate, handleEndDate } = useScheduleDate();
+  const { endDate, handleEndDate, handleStartDate, startDate } =
+    useScheduleDate();
   const { value, onChangeValue } = useInput('');
 
   const lastDay = new Date(
@@ -30,6 +32,8 @@ export default function ScheduleAddModal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endDate.month]);
 
+  const formattedEndDate = `${endDate.year}-${endDate.month}-${endDate.date}`;
+  const formattedStartDate = `${startDate.year}-${startDate.month}-${startDate.date}`;
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
       <div className="self-end">
@@ -51,17 +55,15 @@ export default function ScheduleAddModal({
             onChange={onChangeValue}
           />
           <div className="flex flex-col w-full gap-2">
-            <span>시작 날짜</span>
-            <div className="flex gap-2">
-              <div className="border rounded-[10px] px-5 py-4">2023</div>
-              <div className="border rounded-[10px] px-5 py-4 ">09</div>
-              <div className="border rounded-[10px] px-5 py-4 ">01</div>
-              <div className="border rounded-[10px] px-5 py-4 flex-1 text-center">
-                오후 00 : 00
-              </div>
-            </div>
+            <StartDateSelectGroup
+              startDate={startDate}
+              handleStartDate={handleStartDate}
+            />
+            <EndDateSelectGroup
+              endDate={endDate}
+              handleEndDate={handleEndDate}
+            />
           </div>
-          <EndDateSelectGroup endDate={endDate} handleEndDate={handleEndDate} />
           <label htmlFor="allday" className="flex w-full gap-2">
             <input type="checkbox" id="allday" />
             <p>하루종일</p>
