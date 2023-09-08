@@ -1,9 +1,9 @@
-import FlexBox from '../../FlexBox';
-import Button from '../../Button';
-import Avatar from '../../Avatar';
-import PostDropdownButton from './PostDropdownButton';
+import Image from 'next/image';
+import FlexBox from '../../../FlexBox';
+import Button from '../../../Button';
+import Avatar from '../../../Avatar';
 
-export default function PostHeader({ userId }: { userId: number }) {
+export default function ModalHeader({ userId }: { userId: number }) {
   return (
     <FlexBox justify="between" className="w-full">
       <FlexBox className="gap-[10px]">
@@ -24,7 +24,14 @@ export default function PostHeader({ userId }: { userId: number }) {
           </div>
         </FlexBox>
       </FlexBox>
-      <PostDropdownButton />
+      <button type="button">
+        <Image
+          src="/Feed/desktop/seeMore.svg"
+          alt="더보기"
+          width={24}
+          height={24}
+        />
+      </button>
     </FlexBox>
   );
 }

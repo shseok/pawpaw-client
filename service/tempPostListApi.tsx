@@ -1,21 +1,11 @@
-interface Post {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-}
-
-interface tempPostListApiProps {
-  pageParam: number;
-  pageSize: number;
-}
+import { Post, TempPostListApiProps } from '@/types/types';
 
 export default async function tempPostListApi({
   pageParam,
   pageSize,
-}: tempPostListApiProps): Promise<Post> {
+}: TempPostListApiProps): Promise<Post> {
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?_page=${pageParam}&_limit=${pageSize}`
+    `https://jsonplaceholder.typicode.com/photos?_page=${pageParam}&_limit=${pageSize}`,
   );
   return res.json();
 }
