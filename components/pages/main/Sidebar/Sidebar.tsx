@@ -46,10 +46,9 @@ export default function Sidebar() {
           setActiveButton={setActiveButton}
           setSearchModal={setSearchModal}
           setNoticeModal={setNoticeModal}
-          viewportWidth={viewportWidth}
         >
           {/* 검색모달컴포넌트 시작점 */}
-          <div className="fixed w-[696px] h-screen overflow-auto bg-white">
+          <div className="fixed w-full tablet:w-[696px] h-screen overflow-auto bg-white">
             <div>searchModal</div>
           </div>
           {/* 검색모달컴포넌트 끝점 */}
@@ -65,10 +64,9 @@ export default function Sidebar() {
           setActiveButton={setActiveButton}
           setSearchModal={setSearchModal}
           setNoticeModal={setNoticeModal}
-          viewportWidth={viewportWidth}
         >
           {/* 알림모달컴포넌트 시작점 */}
-          <div className="fixed w-[696px] h-screen bg-white overflow-auto">
+          <div className="fixed w-full tablet:w-[696px] h-screen bg-white overflow-auto">
             <div>noticeModal</div>
           </div>
           {/* 알림모달컴포넌트 끝점 */}
@@ -82,7 +80,6 @@ export default function Sidebar() {
           setActiveButton={setActiveButton}
           setSearchModal={setSearchModal}
           setNoticeModal={setNoticeModal}
-          viewportWidth={viewportWidth}
         />
       )}
       <div>

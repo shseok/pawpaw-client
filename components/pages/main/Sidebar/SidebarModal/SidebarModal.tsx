@@ -13,7 +13,6 @@ interface SidebarModalProps {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   setSearchModal: Dispatch<SetStateAction<boolean>>;
   setNoticeModal: Dispatch<SetStateAction<boolean>>;
-  viewportWidth: { width: number; height: number } | undefined;
 }
 
 export default function SidebarModal({
@@ -27,7 +26,6 @@ export default function SidebarModal({
   setShowModal,
   setSearchModal,
   setNoticeModal,
-  viewportWidth,
 }: SidebarModalProps) {
   return (
     <Modal
@@ -44,7 +42,6 @@ export default function SidebarModal({
         setActiveButton={setActiveButton}
         setSearchModal={setSearchModal}
         setNoticeModal={setNoticeModal}
-        viewportWidth={viewportWidth}
       />
       {children}
     </Modal>

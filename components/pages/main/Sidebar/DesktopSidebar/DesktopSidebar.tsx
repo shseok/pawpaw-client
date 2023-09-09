@@ -13,7 +13,6 @@ interface DesktopSidebarProps {
   setActiveButton: (button: string) => void;
   setSearchModal: Dispatch<SetStateAction<boolean>>;
   setNoticeModal: Dispatch<SetStateAction<boolean>>;
-  viewportWidth: { width: number; height: number } | undefined;
 }
 export default function DesktopSidebar({
   toggle,
@@ -23,7 +22,6 @@ export default function DesktopSidebar({
   setActiveButton,
   setSearchModal,
   setNoticeModal,
-  viewportWidth,
 }: DesktopSidebarProps) {
   return (
     <nav
@@ -40,7 +38,6 @@ export default function DesktopSidebar({
       <BottomToggle
         desktopWidth={toggle}
         toggleButton={() => setToggle(!toggle)}
-        viewport={viewportWidth?.width}
       />
     </nav>
   );

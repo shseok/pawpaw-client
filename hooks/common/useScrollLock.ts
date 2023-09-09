@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function useScrollRock() {
+export default function useScrollLock() {
   useEffect(() => {
     document.body.style.cssText = `
           position: fixed; 

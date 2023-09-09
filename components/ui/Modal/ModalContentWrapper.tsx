@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { Dispatch, SetStateAction, useRef } from 'react';
 import useEscKeyClose from '@/hooks/common/useEscKeyClose';
-import useScrollRock from '@/hooks/common/useScrollRock';
+import useScrollLock from '@/hooks/common/useScrollLock';
 
 interface ModalContentWrapperProps {
   showModal: boolean;
@@ -24,7 +24,7 @@ export default function ModalContentWrapper({
   const modalKeyRef = useRef<HTMLElement | boolean>(showModal);
   const modalClickRef = useRef<HTMLDivElement>(null);
   useEscKeyClose(modalKeyRef, () => setShowModal(false));
-  useScrollRock();
+  useScrollLock();
 
   return (
     <>
@@ -43,7 +43,7 @@ export default function ModalContentWrapper({
             ref={modalClickRef}
             className={`fixed ${
               order === 1 ? 'z-20' : 'z-40'
-            } transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2`}
+            } transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 tablet:w-fit tablet:h-fit w-full h-full`}
           >
             {children}
           </div>
@@ -62,8 +62,8 @@ export default function ModalContentWrapper({
           <div
             ref={modalClickRef}
             className={`fixed top-0 z-20 ${
-              toggle ? 'ml-[256px]' : 'ml-[96px]'
-            }`}
+              toggle ? 'tablet:ml-[256px] ml-0' : 'tablet:ml-[96px] ml-0'
+            }tablet:w-fit tablet:h-fit w-full h-full`}
           >
             {children}
           </div>
