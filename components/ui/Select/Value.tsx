@@ -8,12 +8,16 @@ interface SelectValueProps {
 
 export default function Value({ defaultValue }: SelectValueProps) {
   const { isOpen } = useSelectContext();
+  const focus = isOpen ? 'ring-1 ring-primary-200 duration-200' : '';
+  const animation = isOpen
+    ? 'duration-200 -rotate-180 fill-black'
+    : 'fill-gray-300';
   return (
-    <div className="flex gap-2 items-center justify-center border rounded-[10px] p-2">
+    <div
+      className={`flex gap-2 items-center justify-center border rounded-[10px] p-2 ${focus}`}
+    >
       <div className="flex-1">{defaultValue}</div>
-      <ComboboxArrowIcon
-        className={`${isOpen ? 'duration-300 -rotate-180' : ''}`}
-      />
+      <ComboboxArrowIcon className={animation} />
     </div>
   );
 }

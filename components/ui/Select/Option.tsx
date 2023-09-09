@@ -18,7 +18,7 @@ export default function Option({ children, value }: SelectOptionProps) {
       <button
         type="button"
         onClick={handleOptionSelect}
-        className="w-full hover:bg-primary-50 active:bg-primary-100"
+        className="w-full p-2 hover:bg-primary-50 active:bg-primary-100"
       >
         {children}
       </button>

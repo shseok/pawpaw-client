@@ -34,10 +34,10 @@
     @apply text-cap2MOB sm:text-cap2TAB tablet:text-cap2PC;
   }
   .focus-primary {
-    @apply duration-150 outline-none focus:ring-1 focus:ring-primary-300;
+    @apply duration-200 outline-none focus:ring-1 focus:ring-primary-200;
   }
   .focus-error {
-    @apply duration-150 outline-none focus:ring-1 focus:ring-red;
+    @apply duration-200 outline-none focus:ring-1 focus:ring-red;
   }
 }
 
