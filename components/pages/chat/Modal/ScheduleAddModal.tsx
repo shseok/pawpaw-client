@@ -1,39 +1,22 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import useInput from '@/hooks/common/useInput';
-import useScheduleDate from '../hooks/useScheduleDate';
-import EndDateSelectGroup from './EndDateSelectGroup';
-import StartDateSelectGroup from './StartDateSelectGroup';
+import { Select } from '@/components/ui/Select';
 
+const test = ['사과', '바나나', '파인애플', '망고', '딸기', '포도'];
 export default function ScheduleAddModal({
   closeModal,
 }: {
   closeModal: () => void;
 }) {
-  const { endDate, handleEndDate, handleStartDate, startDate } =
-    useScheduleDate();
   const { value, onChangeValue } = useInput('');
+  const [selected, setSelected] = useState('사과');
+  const onItemSelectHandler = (item: string) => {
+    setSelected(item);
+  };
 
-  const lastDay = new Date(
-    Number(endDate.year),
-    Number(endDate.month),
-    0,
-  ).getDate();
-
-  const days = Array.from({ length: lastDay }, (_, index) =>
-    (index + 1).toString().padStart(2, '0'),
-  );
-
-  useEffect(() => {
-    if (days.includes(endDate.date)) return;
-    handleEndDate('date', String(lastDay));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [endDate.month]);
-
-  const formattedEndDate = `${endDate.year}-${endDate.month}-${endDate.date}`;
-  const formattedStartDate = `${startDate.year}-${startDate.month}-${startDate.date}`;
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
       <div className="self-end">
@@ -54,15 +37,31 @@ export default function ScheduleAddModal({
             value={value}
             onChange={onChangeValue}
           />
-          <div className="flex flex-col w-full gap-2">
-            <StartDateSelectGroup
-              startDate={startDate}
-              handleStartDate={handleStartDate}
-            />
-            <EndDateSelectGroup
-              endDate={endDate}
-              handleEndDate={handleEndDate}
-            />
+          <div className="flex flex-row w-full gap-2">
+            <Select onChange={onItemSelectHandler}>
+              <Select.Trigger>
+                <Select.Value defaultValue={selected} />
+              </Select.Trigger>
+              <Select.OptionList>
+                {test.map((i) => (
+                  <Select.Option value={i} key={i}>
+                    {i}
+                  </Select.Option>
+                ))}
+              </Select.OptionList>
+            </Select>
+            <Select onChange={onItemSelectHandler}>
+              <Select.Trigger>
+                <Select.Value defaultValue={selected} />
+              </Select.Trigger>
+              <Select.OptionList>
+                {test.map((i) => (
+                  <Select.Option value={i} key={i}>
+                    {i}
+                  </Select.Option>
+                ))}
+              </Select.OptionList>
+            </Select>
           </div>
           <label htmlFor="allday" className="flex w-full gap-2">
             <input type="checkbox" id="allday" />
@@ -70,14 +69,10 @@ export default function ScheduleAddModal({
           </label>
         </FlexBox>
         <div className="flex w-full gap-3">
-          <Button
-            variant="secondary"
-            className="w-full"
-            onClickAction={closeModal}
-          >
+          <Button variant="secondary" onClickAction={closeModal}>
             취소
           </Button>
-          <Button className="w-full">등록</Button>
+          <Button>등록</Button>
         </div>
       </FlexBox>
     </FlexBox>

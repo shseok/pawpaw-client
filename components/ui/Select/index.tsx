@@ -6,64 +6,62 @@ import React, {
   useState,
   useContext,
   useMemo,
-  Dispatch,
-  SetStateAction,
   useRef,
+  useCallback,
 } from 'react';
+
 import useOutSideClick from '@/hooks/common/useOutSideClick';
 import Trigger from './Trigger';
 import Option from './Option';
 import OptionList from './OptionList';
-import Label from './Label';
+import Value from './Value';
 
 interface SelectContextType {
   isOpen: boolean;
   onOpenChange: () => void;
-  setValue: Dispatch<SetStateAction<string>>;
-  value: string;
+  onChange: (selected: string) => void;
   close: () => void;
 }
 
 const SelectContext = createContext<SelectContextType>({
   isOpen: false,
   onOpenChange: () => {},
-  setValue: () => {},
-  value: '',
+  onChange: () => {},
   close: () => {},
 });
-export const useSelect = () => {
-  const selectContext = useContext(SelectContext);
+export const useSelectContext = () => {
+  const context = useContext(SelectContext);
   if (!SelectContext) {
     throw new Error(
       'Select 하위컴포넌트를 사용하려면 부모 컴포넌트로 <Select>가 있어야 합니다.',
     );
   }
-  return selectContext;
+  return context;
 };
-
 export default function CustomSelect({
   children,
+  onChange,
 }: {
   children: React.ReactNode;
+  onChange: (selected: string) => void;
 }) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState('');
+
   useOutSideClick(ref, () => setIsOpen(false));
 
-  const onOpenChange = () => {
+  const onOpenChange = useCallback(() => {
     setIsOpen(!isOpen);
-  };
+  }, [isOpen]);
 
   const providerValue = useMemo(
     () => ({
       isOpen,
       onOpenChange,
-      setValue,
-      value,
+      onChange,
       close: () => setIsOpen(false),
     }),
-    [isOpen, value],
+    [isOpen, onChange, onOpenChange],
   );
   return (
     <SelectContext.Provider value={providerValue}>
@@ -75,7 +73,7 @@ export default function CustomSelect({
 }
 export const Select = Object.assign(CustomSelect, {
   Trigger,
-  Label,
+  Value,
   OptionList,
   Option,
 });

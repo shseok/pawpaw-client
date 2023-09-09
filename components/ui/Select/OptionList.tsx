@@ -1,15 +1,15 @@
 // eslint-disable-next-line import/no-cycle
-import { useSelect } from '.';
+import { useSelectContext } from '.';
 
 interface SelectOptionListProps {
   children: React.ReactNode;
 }
 
 export default function OptionList({ children }: SelectOptionListProps) {
-  const { isOpen } = useSelect();
+  const { isOpen } = useSelectContext();
   if (!isOpen) return null;
   return (
-    <ul className="absolute flex flex-col w-full animate-dropdown scrollbar-hide mt-2 h-fit max-h-60 rounded-[10px] z-50 overflow-auto  bg-white border">
+    <ul className="absolute w-full flex flex-col animate-dropdown mt-2 max-h-60 rounded-[10px] z-50 overflow-auto bg-white border">
       {children}
     </ul>
   );

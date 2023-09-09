@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { useSelect } from '.';
+import { useSelectContext } from '.';
 
 interface SelectOptionProps {
   children: React.ReactNode;
@@ -7,10 +7,10 @@ interface SelectOptionProps {
 }
 
 export default function Option({ children, value }: SelectOptionProps) {
-  const { close, setValue } = useSelect();
+  const { close, onChange } = useSelectContext();
 
   const handleOptionSelect = () => {
-    setValue(value);
+    onChange(value);
     close();
   };
   return (

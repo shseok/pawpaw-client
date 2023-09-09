@@ -1,22 +1,15 @@
 // eslint-disable-next-line import/no-cycle
-import { useSelect } from '.';
+import { useSelectContext } from '.';
 
 interface SelectTriggerProps {
   children: React.ReactNode;
-  className: string;
 }
 
-export default function Trigger({ children, className }: SelectTriggerProps) {
-  const { onOpenChange, isOpen } = useSelect();
+export default function Trigger({ children }: SelectTriggerProps) {
+  const { onOpenChange } = useSelectContext();
 
   return (
-    <button
-      type="button"
-      className={`${
-        isOpen ? 'ring-1 ring-primary-200 duration-150' : ''
-      } ${className}`}
-      onClick={onOpenChange}
-    >
+    <button type="button" className="w-full" onClick={onOpenChange}>
       {children}
     </button>
   );
