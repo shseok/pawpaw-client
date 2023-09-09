@@ -10,7 +10,7 @@ export default function Value({ defaultValue }: SelectValueProps) {
   const { isOpen } = useSelectContext();
   const focus = isOpen ? 'ring-1 ring-primary-200 duration-200' : '';
   const animation = isOpen
-    ? 'duration-200 -rotate-180 fill-black'
+    ? 'duration-300 -rotate-180 fill-black'
     : 'fill-gray-300';
   return (
     <div
