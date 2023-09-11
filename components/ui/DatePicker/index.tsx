@@ -19,6 +19,7 @@ import ko from 'date-fns/locale/ko';
 import useOutSideClick from '@/hooks/common/useOutSideClick';
 import CaretLeftIcon from '@/public/CaretLeft.svg';
 import CaretRightIcon from '@/public/CaretRight.svg';
+import CaretDownIcon from '@/public/CaretDown.svg';
 
 export default function DatePicker() {
   const ref = useRef(null);
@@ -60,9 +61,14 @@ export default function DatePicker() {
         onClick={() => setCalenderOpen(!calenderOpen)}
       />
       {calenderOpen && (
-        <div className="absolute flex flex-col gap-2 rounded-[10px] p-3 z-50 mt-2 w-72 bg-white shadow-chatCard caption2 animate-dropdown">
-          <div className="flex items-center justify-between">
-            <div className="caption1">{format(selectedDate, 'MMM yyyy')}</div>
+        <div className="absolute flex flex-col gap-2 rounded-[10px] p-3 z-0 mt-2 w-72 bg-white shadow-chatCard caption2 animate-dropdown">
+          <div className="flex items-center justify-between px-3">
+            <div className="flex gap-1 caption1">
+              <span>{format(selectedDate, 'MMM yyyy')}</span>
+              <button type="button">
+                <CaretDownIcon />
+              </button>
+            </div>
             <div className="flex gap-2">
               <button type="button" onClick={prevMonth}>
                 <CaretLeftIcon className="w-4 h-4 fill-grey-400" />
@@ -74,23 +80,27 @@ export default function DatePicker() {
           </div>
           <div className="grid grid-cols-7 place-items-center">
             {weekDays.map((days) => (
-              <div className="">{days}</div>
+              <div className="" key={days}>
+                {days}
+              </div>
             ))}
           </div>
-          <div className="grid grid-cols-7 place-content-center">
-            {현재달의모든날짜.map((v) => (
+          <div className="grid grid-cols-7 ">
+            {현재달의모든날짜.map((date, index) => (
               <button
-                className={`p-2 rounded-full
-                ${isSameMonth(selectedDate, v) ? '' : 'text-grey-200'}
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                className={`p-2 rounded-full 
+                ${isSameMonth(selectedDate, date) ? '' : 'text-grey-200'}
                 ${
-                  isSameDay(selectedDate, v)
+                  isSameDay(selectedDate, date)
                     ? 'bg-primary-200 text-[#FFFFFF]'
                     : 'hover:bg-primary-50 hover:text-primary-200'
                 }`}
                 type="button"
-                onClick={() => setSelectedDate(v)}
+                onClick={() => setSelectedDate(date)}
               >
-                {v.getDate()}
+                {date.getDate()}
               </button>
             ))}
           </div>
