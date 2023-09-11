@@ -12,6 +12,8 @@ import {
   eachDayOfInterval,
   isSameDay,
   isSameMonth,
+  addMonths,
+  subMonths,
 } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import useOutSideClick from '@/hooks/common/useOutSideClick';
@@ -42,26 +44,30 @@ export default function DatePicker() {
     start: 현재달의첫주의시작날짜,
     end: 현재달마지막주의끝날짜,
   });
-  const nextMonth = () => {};
-  const prevMonth = () => {};
+  const nextMonth = () => {
+    setSelectedDate(addMonths(selectedDate, 1));
+  };
+  const prevMonth = () => {
+    setSelectedDate(subMonths(selectedDate, 1));
+  };
   return (
     <div className="relative bg-white" ref={ref}>
       <input
         type="text"
         value={format(selectedDate, 'yyyy년 MM월 dd일')}
-        className="p-4 border rounded-[10px] focus-primary body1 text-center"
+        className="p-4 border rounded-[10px] focus-primary body1 text-center cursor-pointer"
         readOnly
         onClick={() => setCalenderOpen(!calenderOpen)}
       />
       {calenderOpen && (
-        <div className="absolute flex flex-col gap-2 rounded-[10px] h-fit p-3 z-50 mt-2 w-72 bg-white shadow-chatCard caption2">
+        <div className="absolute flex flex-col gap-2 rounded-[10px] p-3 z-50 mt-2 w-72 bg-white shadow-chatCard caption2 animate-dropdown">
           <div className="flex items-center justify-between">
             <div className="caption1">{format(selectedDate, 'MMM yyyy')}</div>
             <div className="flex gap-2">
-              <button type="button" onClick={nextMonth}>
+              <button type="button" onClick={prevMonth}>
                 <CaretLeftIcon className="w-4 h-4 fill-grey-400" />
               </button>
-              <button type="button" onClick={prevMonth}>
+              <button type="button" onClick={nextMonth}>
                 <CaretRightIcon className="w-4 h-4 fill-grey-400" />
               </button>
             </div>
