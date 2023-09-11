@@ -14,6 +14,8 @@ export default function ScheduleAddModal({
 }) {
   const { value, onChangeValue } = useInput('');
   const [selected, setSelected] = useState('사과');
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
   const onItemSelectHandler = (item: string) => {
     setSelected(item);
   };
@@ -39,7 +41,10 @@ export default function ScheduleAddModal({
             onChange={onChangeValue}
           />
           <div className="flex w-full gap-2">
-            <DatePicker />
+            <DatePicker
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+            />
             <Select onChange={onItemSelectHandler}>
               <Select.Trigger>
                 <Select.Value defaultValue={selected} />

@@ -1,56 +1,34 @@
 'use client';
 
-/* eslint-disable no-console */
-import { useState, useRef } from 'react';
-import {
-  startOfMonth,
-  endOfMonth,
-  startOfWeek,
-  format,
-  addDays,
-  endOfWeek,
-  eachDayOfInterval,
-  isSameDay,
-  isSameMonth,
-  addMonths,
-  subMonths,
-} from 'date-fns';
-import ko from 'date-fns/locale/ko';
+import { useState, useRef, Dispatch, SetStateAction } from 'react';
+import { format, isSameDay, isSameMonth, addMonths, subMonths } from 'date-fns';
 import useOutSideClick from '@/hooks/common/useOutSideClick';
 import CaretLeftIcon from '@/public/CaretLeft.svg';
 import CaretRightIcon from '@/public/CaretRight.svg';
 import CaretDownIcon from '@/public/CaretDown.svg';
+import useCalender from '@/hooks/common/useCalender';
 
-export default function DatePicker() {
+interface DatePickerProps {
+  selectedDate: Date;
+  setSelectedDate: Dispatch<SetStateAction<Date>>;
+}
+
+export default function DatePicker({
+  selectedDate,
+  setSelectedDate,
+}: DatePickerProps) {
   const ref = useRef(null);
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [calenderOpen, setCalenderOpen] = useState(false);
+  const { weekDays, currentMonthAllDates } = useCalender(selectedDate);
   useOutSideClick(ref, () => setCalenderOpen(false));
 
-  // 첫주 시작하는 일을 계산함 예를들어 9월1일 금요일이라면 첫주는 일요일순으로 시작함 역으로 계산하면 8월27일이 첫주 시작하는일이 된다.
-  const weekStartDate = startOfWeek(new Date());
-
-  const weekDays = [];
-  for (let day = 0; day < 7; day += 1) {
-    // 매개변수로 Date객체 또는 Number(년,월,일)을받고 두번째 매개변수로 추가할 일을 받는다. 해당 코드에서는 첫주 시작하는 일로부터 7일을 추가하여 배열에 추가한다
-    weekDays.push(format(addDays(weekStartDate, day), 'E', { locale: ko }));
-  }
-
-  const 현재달의시작날짜 = startOfMonth(selectedDate);
-  const 현재달의마지막날짜 = endOfMonth(selectedDate);
-  const 현재달의첫주의시작날짜 = startOfWeek(현재달의시작날짜);
-  const 현재달마지막주의끝날짜 = endOfWeek(현재달의마지막날짜);
-
-  const 현재달의모든날짜 = eachDayOfInterval({
-    start: 현재달의첫주의시작날짜,
-    end: 현재달마지막주의끝날짜,
-  });
   const nextMonth = () => {
     setSelectedDate(addMonths(selectedDate, 1));
   };
   const prevMonth = () => {
     setSelectedDate(subMonths(selectedDate, 1));
   };
+
   return (
     <div className="relative bg-white" ref={ref}>
       <input
@@ -80,13 +58,11 @@ export default function DatePicker() {
           </div>
           <div className="grid grid-cols-7 place-items-center">
             {weekDays.map((days) => (
-              <div className="" key={days}>
-                {days}
-              </div>
+              <div key={days}>{days}</div>
             ))}
           </div>
           <div className="grid grid-cols-7 ">
-            {현재달의모든날짜.map((date, index) => (
+            {currentMonthAllDates.map((date, index) => (
               <button
                 // eslint-disable-next-line react/no-array-index-key
                 key={index}
