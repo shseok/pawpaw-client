@@ -58,6 +58,24 @@ export default function ScheduleAddModal({
               </Select.OptionList>
             </Select>
           </div>
+          <div className="flex w-full gap-2">
+            <DatePicker
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+            />
+            <Select onChange={onItemSelectHandler}>
+              <Select.Trigger>
+                <Select.Value defaultValue={selected} />
+              </Select.Trigger>
+              <Select.OptionList>
+                {test.map((i) => (
+                  <Select.Option value={i} key={i}>
+                    {i}
+                  </Select.Option>
+                ))}
+              </Select.OptionList>
+            </Select>
+          </div>
           <label htmlFor="allday" className="flex w-full gap-2">
             <input type="checkbox" id="allday" />
             <p>하루종일</p>

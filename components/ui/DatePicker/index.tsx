@@ -39,7 +39,7 @@ export default function DatePicker({
         onClick={() => setCalenderOpen(!calenderOpen)}
       />
       {calenderOpen && (
-        <div className="absolute flex flex-col gap-2 rounded-[10px] p-3 z-0 mt-2 w-72 bg-white shadow-chatCard caption2 animate-dropdown">
+        <div className="absolute flex flex-col gap-2 rounded-[10px] p-3 z-50 mt-2 w-72 bg-white shadow-chatCard caption2 animate-dropdown">
           <div className="flex items-center justify-between px-3">
             <div className="flex gap-1 caption1">
               <span>{format(selectedDate, 'MMM yyyy')}</span>
