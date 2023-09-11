@@ -14,9 +14,9 @@ export default function Value({ defaultValue }: SelectValueProps) {
     : 'fill-gray-300';
   return (
     <div
-      className={`flex items-center justify-center border rounded-[10px] p-2 ${focus}`}
+      className={`flex items-center justify-center border rounded-[10px] w-full p-4 ${focus}`}
     >
-      <div className="flex-1 ml-4">{defaultValue}</div>
+      <div className="flex-1">{defaultValue}</div>
       <ComboboxArrowIcon className={animation} />
     </div>
   );

@@ -4,6 +4,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import useInput from '@/hooks/common/useInput';
 import { Select } from '@/components/ui/Select';
+import DatePicker from '@/components/ui/DatePicker';
 
 const test = ['사과', '바나나', '파인애플', '망고', '딸기', '포도'];
 export default function ScheduleAddModal({
@@ -37,7 +38,8 @@ export default function ScheduleAddModal({
             value={value}
             onChange={onChangeValue}
           />
-          <div className="flex flex-row w-full gap-2">
+          <div className="flex w-full gap-2">
+            <DatePicker />
             <Select onChange={onItemSelectHandler}>
               <Select.Trigger>
                 <Select.Value defaultValue={selected} />
