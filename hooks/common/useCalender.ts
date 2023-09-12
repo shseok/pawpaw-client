@@ -8,13 +8,11 @@ import {
   format,
 } from 'date-fns';
 
-import ko from 'date-fns/locale/ko';
-
 const useCalender = (selectedDate: Date) => {
   const weekDays = [];
   const weekStartDate = startOfWeek(new Date());
   for (let day = 0; day < 7; day += 1) {
-    weekDays.push(format(addDays(weekStartDate, day), 'E', { locale: ko }));
+    weekDays.push(format(addDays(weekStartDate, day), 'EEEEE'));
   }
 
   const 현재달의시작날짜 = startOfMonth(selectedDate);
