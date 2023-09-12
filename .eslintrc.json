@@ -14,7 +14,7 @@
     "airbnb-typescript",
     "prettier"
   ],
-  "overrides": [],
+  "overrides": [{ "rules": { "import/no-cycle": "off" } }],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",

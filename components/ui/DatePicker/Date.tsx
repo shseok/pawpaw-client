@@ -3,7 +3,6 @@ import CaretLeftIcon from '@/public/CaretLeft.svg';
 import CaretRightIcon from '@/public/CaretRight.svg';
 import CaretDownIcon from '@/public/CaretDown.svg';
 import useCalender from '@/hooks/common/useCalender';
-// eslint-disable-next-line import/no-cycle
 import { DatePickerProps } from '.';
 
 export default function Date({
@@ -18,8 +17,12 @@ export default function Date({
   const prevMonth = () => {
     setSelectedDate(subMonths(selectedDate, 1));
   };
+  const onChangeDate = (date: Date) => {
+    setSelectedDate(date);
+    setPickerType('');
+  };
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between px-3">
         <div className="flex gap-1 caption1">
           <span>{format(selectedDate, 'MMM yyyy')}</span>
@@ -55,7 +58,7 @@ export default function Date({
             : 'hover:bg-primary-50 hover:text-primary-200'
         }`}
             type="button"
-            onClick={() => setSelectedDate(date)}
+            onClick={() => onChangeDate(date)}
           >
             {date.getDate()}
           </button>

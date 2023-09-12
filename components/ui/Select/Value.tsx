@@ -1,5 +1,4 @@
 import ComboboxArrowIcon from '@/public/combobox-arrow.svg';
-// eslint-disable-next-line import/no-cycle
 import { useSelectContext } from '.';
 
 interface SelectValueProps {
