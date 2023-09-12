@@ -6,6 +6,8 @@ import {
   startOfWeek,
   eachDayOfInterval,
   format,
+  addMonths,
+  startOfYear,
 } from 'date-fns';
 
 const useCalender = (selectedDate: Date) => {
@@ -13,6 +15,12 @@ const useCalender = (selectedDate: Date) => {
   const weekStartDate = startOfWeek(new Date());
   for (let day = 0; day < 7; day += 1) {
     weekDays.push(format(addDays(weekStartDate, day), 'EEEEE'));
+  }
+
+  const allMonth = [];
+  const startMonth = startOfYear(selectedDate);
+  for (let month = 0; month < 12; month += 1) {
+    allMonth.push(addMonths(startMonth, month));
   }
 
   const 현재달의시작날짜 = startOfMonth(selectedDate);
@@ -24,6 +32,6 @@ const useCalender = (selectedDate: Date) => {
     end: 현재달마지막주의끝날짜,
   });
 
-  return { weekDays, currentMonthAllDates };
+  return { weekDays, currentMonthAllDates, allMonth };
 };
 export default useCalender;
