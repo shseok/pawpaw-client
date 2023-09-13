@@ -65,7 +65,7 @@ export default function CustomSelect({
   );
   return (
     <SelectContext.Provider value={providerValue}>
-      <div className="relative w-full" ref={ref}>
+      <div className="relative w-full h-full" ref={ref}>
         {children}
       </div>
     </SelectContext.Provider>

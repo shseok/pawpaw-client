@@ -1,24 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import useInput from '@/hooks/common/useInput';
-import { Select } from '@/components/ui/Select';
 import DatePicker from '@/components/ui/DatePicker';
+import TimeSelect from './TimeSelect';
 
-const test = ['사과', '바나나', '파인애플', '망고', '딸기', '포도'];
 export default function ScheduleAddModal({
   closeModal,
 }: {
   closeModal: () => void;
 }) {
   const { value, onChangeValue } = useInput('');
-  const [selected, setSelected] = useState('사과');
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
-  const onItemSelectHandler = (item: string) => {
-    setSelected(item);
-  };
+  console.log(startDate < endDate);
 
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
@@ -40,39 +37,31 @@ export default function ScheduleAddModal({
             value={value}
             onChange={onChangeValue}
           />
+
+          {/**시작 날짜 */}
           <div className="flex w-full gap-2">
             <DatePicker
-              selectedDate={selectedDate}
-              setSelectedDate={setSelectedDate}
+              selectedDate={startDate}
+              setSelectedDate={setStartDate}
             />
-            <Select onChange={onItemSelectHandler}>
-              <Select.Trigger>
-                <Select.Value defaultValue={selected} />
-              </Select.Trigger>
-              <Select.OptionList>
-                {test.map((i) => (
-                  <Select.Option value={i} key={i}>
-                    {i}
-                  </Select.Option>
-                ))}
-              </Select.OptionList>
-            </Select>
-            <Select onChange={onItemSelectHandler}>
-              <Select.Trigger>
-                <Select.Value defaultValue={selected} />
-              </Select.Trigger>
-              <Select.OptionList>
-                {test.map((i) => (
-                  <Select.Option value={i} key={i}>
-                    {i}
-                  </Select.Option>
-                ))}
-              </Select.OptionList>
-            </Select>
+            <TimeSelect
+              selectedDate={startDate}
+              setSelectedDate={setStartDate}
+            />
           </div>
-          <label htmlFor="allday" className="flex w-full gap-2">
-            <input type="checkbox" id="allday" />
-            <p>하루종일</p>
+
+          {/**종료 날짜 */}
+          <div className="flex w-full gap-2 ">
+            <DatePicker selectedDate={endDate} setSelectedDate={setEndDate} />
+            <TimeSelect selectedDate={endDate} setSelectedDate={setEndDate} />
+          </div>
+
+          <label
+            htmlFor="allday"
+            className="flex items-center self-start gap-2 cursor-pointer"
+          >
+            <input type="checkbox" id="allday" className="bg-primary-200" />
+            <p className="body1">하루종일</p>
           </label>
         </FlexBox>
         <div className="flex w-full gap-3">
