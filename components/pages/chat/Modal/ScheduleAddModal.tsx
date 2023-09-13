@@ -12,10 +12,11 @@ export default function ScheduleAddModal({
   closeModal: () => void;
 }) {
   const { value, onChangeValue } = useInput('');
+  const [isChecked, setIsChecked] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  console.log(startDate < endDate);
+  console.log(isChecked);
 
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
@@ -60,7 +61,12 @@ export default function ScheduleAddModal({
             htmlFor="allday"
             className="flex items-center self-start gap-2 cursor-pointer"
           >
-            <input type="checkbox" id="allday" className="bg-primary-200" />
+            <input
+              type="checkbox"
+              id="allday"
+              className="w-6 h-6 rounded-full checked:bg-primary-200 checked:hover:bg-primary-200"
+              onChange={(e) => setIsChecked(e.target.checked)}
+            />
             <p className="body1">하루종일</p>
           </label>
         </FlexBox>
