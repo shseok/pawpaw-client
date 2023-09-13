@@ -2,6 +2,7 @@
 
 import { useState, useRef, Dispatch, SetStateAction } from 'react';
 import { format } from 'date-fns';
+import ko from 'date-fns/locale/ko';
 import useOutSideClick from '@/hooks/common/useOutSideClick';
 import Date from './Date';
 import Month from './Month';
@@ -56,7 +57,10 @@ export default function DatePicker({
     <div className="relative bg-white" ref={ref}>
       <input
         type="text"
-        value={format(selectedDate, 'yyyy년 MM월 dd일')}
+        value={format(
+          selectedDate,
+          `yyyy년 MM월 dd일 (${format(selectedDate, 'E', { locale: ko })})`,
+        )}
         className="p-4 border rounded-[10px] focus-primary body1 text-center cursor-pointer"
         readOnly
         onClick={toggleDatePicker}
