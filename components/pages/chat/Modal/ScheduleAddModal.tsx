@@ -16,8 +16,6 @@ export default function ScheduleAddModal({
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  console.log(isChecked);
-
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
       <div className="self-end">
@@ -33,7 +31,7 @@ export default function ScheduleAddModal({
           <h2 className="w-full header2">스케줄 추가</h2>
           <input
             type="text"
-            className="px-5 py-4 border rounded-[10px] w-full focus-primary"
+            className="px-5 py-4 rounded-[10px] w-full focus-primary"
             placeholder="스케줄 제목을 입력해보세요"
             value={value}
             onChange={onChangeValue}

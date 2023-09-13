@@ -17,7 +17,7 @@ export interface DatePickerProps {
 export default function DatePicker({
   selectedDate,
   setSelectedDate,
-}: Exclude<DatePickerProps, 'setPickerType'>) {
+}: Omit<DatePickerProps, 'setPickerType'>) {
   const ref = useRef(null);
   const [pickerType, setPickerType] = useState<PickerType>('');
   useOutSideClick(ref, () => setPickerType(''));
@@ -61,7 +61,7 @@ export default function DatePicker({
           selectedDate,
           `yyyy년 MM월 dd일 (${format(selectedDate, 'E', { locale: ko })})`,
         )}
-        className="p-4 border rounded-[10px] focus-primary body1 text-center cursor-pointer"
+        className="p-4 rounded-[10px] focus-primary body1 text-center cursor-pointer"
         readOnly
         onClick={toggleDatePicker}
       />
