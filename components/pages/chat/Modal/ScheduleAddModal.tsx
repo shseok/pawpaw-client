@@ -44,26 +44,35 @@ export default function ScheduleAddModal({
           />
 
           {/**시작 날짜 */}
-          <div className="flex w-full gap-2">
-            <DatePicker
-              selectedDate={startDate}
-              setSelectedDate={setStartDate}
-            />
-            {!isChecked && (
-              <TimeSelect
+          <FlexBox direction="column" className="w-full gap-2">
+            <span className="w-full body1">시작 날짜</span>
+            <div className="flex w-full gap-2">
+              <DatePicker
                 selectedDate={startDate}
                 setSelectedDate={setStartDate}
               />
-            )}
-          </div>
+              {!isChecked && (
+                <TimeSelect
+                  selectedDate={startDate}
+                  setSelectedDate={setStartDate}
+                />
+              )}
+            </div>
+          </FlexBox>
 
           {/**종료 날짜 */}
-          <div className="flex w-full gap-2 ">
-            <DatePicker selectedDate={endDate} setSelectedDate={setEndDate} />
-            {!isChecked && (
-              <TimeSelect selectedDate={endDate} setSelectedDate={setEndDate} />
-            )}
-          </div>
+          <FlexBox direction="column" className="w-full gap-2">
+            <span className="w-full body1">종료 날짜</span>
+            <div className="flex w-full gap-2">
+              <DatePicker selectedDate={endDate} setSelectedDate={setEndDate} />
+              {!isChecked && (
+                <TimeSelect
+                  selectedDate={endDate}
+                  setSelectedDate={setEndDate}
+                />
+              )}
+            </div>
+          </FlexBox>
 
           <label
             htmlFor="allday"
