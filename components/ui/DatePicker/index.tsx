@@ -54,14 +54,14 @@ export default function DatePicker({
   };
 
   return (
-    <div className="relative bg-white" ref={ref}>
+    <div className="relative w-full bg-white" ref={ref}>
       <input
         type="text"
         value={format(
           selectedDate,
           `yyyy년 MM월 dd일 (${format(selectedDate, 'E', { locale: ko })})`,
         )}
-        className="p-4 rounded-[10px] focus-primary body1 text-center cursor-pointer"
+        className="p-4 rounded-[10px] focus-primary body1 w-full text-center cursor-pointer"
         readOnly
         onClick={toggleDatePicker}
       />

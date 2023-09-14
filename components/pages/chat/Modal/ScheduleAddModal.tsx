@@ -5,6 +5,7 @@ import XIcon from '@/public/X.svg';
 import useInput from '@/hooks/common/useInput';
 import DatePicker from '@/components/ui/DatePicker';
 import TimeSelect from './TimeSelect';
+import { startOfDay } from 'date-fns';
 
 export default function ScheduleAddModal({
   closeModal,
@@ -15,7 +16,12 @@ export default function ScheduleAddModal({
   const [isChecked, setIsChecked] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
+  useEffect(() => {
+    if (isChecked) {
+      setStartDate(startOfDay(startDate));
+      setEndDate(startOfDay(endDate));
+    }
+  }, [isChecked]);
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
       <div className="self-end">
@@ -43,16 +49,20 @@ export default function ScheduleAddModal({
               selectedDate={startDate}
               setSelectedDate={setStartDate}
             />
-            <TimeSelect
-              selectedDate={startDate}
-              setSelectedDate={setStartDate}
-            />
+            {!isChecked && (
+              <TimeSelect
+                selectedDate={startDate}
+                setSelectedDate={setStartDate}
+              />
+            )}
           </div>
 
           {/**종료 날짜 */}
           <div className="flex w-full gap-2 ">
             <DatePicker selectedDate={endDate} setSelectedDate={setEndDate} />
-            <TimeSelect selectedDate={endDate} setSelectedDate={setEndDate} />
+            {!isChecked && (
+              <TimeSelect selectedDate={endDate} setSelectedDate={setEndDate} />
+            )}
           </div>
 
           <label
