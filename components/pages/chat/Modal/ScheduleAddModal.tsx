@@ -27,13 +27,13 @@ export default function ScheduleAddModal({
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
       <div className="self-end">
-        <button type="button">
+        <button type="button" onClick={closeModal}>
           <XIcon className="w-8 h-8" />
         </button>
       </div>
       <FlexBox
         direction="column"
-        className="w-full bg-white rounded-[10px] p-9 gap-10"
+        className="w-full bg-white rounded-[10px] p-9 gap-4"
       >
         <FlexBox direction="column" className="w-full gap-7">
           <h2 className="w-full header2">스케줄 추가</h2>
