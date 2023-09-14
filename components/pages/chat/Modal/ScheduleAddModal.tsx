@@ -22,6 +22,8 @@ export default function ScheduleAddModal({
       setEndDate(startOfDay(endDate));
     }
   }, [isChecked]);
+  const isScheduleValueSet = startDate >= endDate || !value ? true : false;
+
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
       <div className="self-end">
@@ -91,7 +93,7 @@ export default function ScheduleAddModal({
           <Button variant="secondary" onClickAction={closeModal}>
             취소
           </Button>
-          <Button disabled={startDate >= endDate}>등록</Button>
+          <Button disabled={isScheduleValueSet}>등록</Button>
         </div>
       </FlexBox>
     </FlexBox>
