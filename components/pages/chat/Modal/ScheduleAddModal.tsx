@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
+import { startOfDay } from 'date-fns';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import useInput from '@/hooks/common/useInput';
 import DatePicker from '@/components/ui/DatePicker';
 import TimeSelect from './TimeSelect';
-import { startOfDay } from 'date-fns';
 
 export default function ScheduleAddModal({
   closeModal,
@@ -22,7 +22,7 @@ export default function ScheduleAddModal({
       setEndDate(startOfDay(endDate));
     }
   }, [isChecked]);
-  const isScheduleValueSet = startDate >= endDate || !value ? true : false;
+  const isScheduleValueSet = !!(startDate >= endDate || !value);
 
   return (
     <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
@@ -45,7 +45,7 @@ export default function ScheduleAddModal({
             onChange={onChangeValue}
           />
 
-          {/**시작 날짜 */}
+          {/** 시작 날짜 */}
           <FlexBox direction="column" className="w-full gap-2">
             <span className="w-full body1">시작 날짜</span>
             <div className="flex w-full gap-2">
@@ -62,7 +62,7 @@ export default function ScheduleAddModal({
             </div>
           </FlexBox>
 
-          {/**종료 날짜 */}
+          {/** 종료 날짜 */}
           <FlexBox direction="column" className="w-full gap-2">
             <span className="w-full body1">종료 날짜</span>
             <div className="flex w-full gap-2">

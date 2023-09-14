@@ -1,8 +1,8 @@
-import { Select } from '@/components/ui/Select';
-import { HOUR, MINUTE } from '@/constant/constant';
 import { format, setHours, setMinutes } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import { Dispatch, SetStateAction } from 'react';
+import { Select } from '@/components/ui/Select';
+import { HOUR, MINUTE } from '@/constant/days';
 
 interface TimeSelectProps {
   setSelectedDate: Dispatch<SetStateAction<Date>>;
