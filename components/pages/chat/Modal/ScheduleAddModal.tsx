@@ -90,10 +90,12 @@ export default function ScheduleAddModal({
           </label>
         </FlexBox>
         <div className="flex w-full gap-3">
-          <Button variant="secondary" onClickAction={closeModal}>
+          <Button variant="secondary" onClickAction={closeModal} fullWidth>
             취소
           </Button>
-          <Button disabled={isScheduleValueSet}>등록</Button>
+          <Button disabled={isScheduleValueSet} fullWidth>
+            등록
+          </Button>
         </div>
       </FlexBox>
     </FlexBox>
