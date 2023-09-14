@@ -82,7 +82,7 @@ export default function ScheduleAddModal({
           <Button variant="secondary" onClickAction={closeModal}>
             취소
           </Button>
-          <Button>등록</Button>
+          <Button disabled={startDate >= endDate}>등록</Button>
         </div>
       </FlexBox>
     </FlexBox>
