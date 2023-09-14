@@ -20,7 +20,6 @@ function ScheduleEditOption() {
 }
 
 const OPTION_LIST = [ScheduleAddOption, ScheduleEditOption];
-console.log('d');
 export default function ScheduleDropdownButton() {
   const [isOpen, setIsOpen] = useState(false);
   return (

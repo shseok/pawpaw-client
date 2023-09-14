@@ -7,8 +7,6 @@ export default function ChatRoomPage({
 }: {
   params: { roomId: string };
 }) {
-  console.log(params.roomId);
-
   return (
     <main className="flex w-screen">
       <ChatRoom roomId={params.roomId} />
