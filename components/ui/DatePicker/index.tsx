@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useRef, Dispatch, SetStateAction } from 'react';
+import { useState, Dispatch, SetStateAction, useRef } from 'react';
 import { format } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import useOutSideClick from '@/hooks/common/useOutSideClick';
 import Date from './Date';
 import Month from './Month';
+import DatePickerWrapper from './DatePickerWrapper';
 
 export type PickerType = 'date' | 'month' | 'year' | '';
 export interface DatePickerProps {
@@ -66,9 +67,7 @@ export default function DatePicker({
         onClick={toggleDatePicker}
       />
       {pickerType !== '' && (
-        <div className="absolute rounded-[10px] p-3 z-50 mt-2 w-72 bg-white shadow-chatCard caption2 animate-dropdown">
-          {renderPickerByType(pickerType)}
-        </div>
+        <DatePickerWrapper>{renderPickerByType(pickerType)}</DatePickerWrapper>
       )}
     </div>
   );
