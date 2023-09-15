@@ -1,5 +1,6 @@
 import Check from 'public/Check.svg';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import FlexBox from '../FlexBox';
 
 export default function SnackBar({
@@ -13,7 +14,7 @@ export default function SnackBar({
   showSnackBar: boolean;
   setShowSnackBar: Dispatch<SetStateAction<boolean>>;
 }) {
-  const [fadeAnimation, setFadeAnimation] = useState(true);
+  const [fadeAnimation, setFadeAnimation] = useState(true); // fade 애니메이션 조절을 위한
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,21 +28,23 @@ export default function SnackBar({
       clearTimeout(fadetimer);
       setFadeAnimation(true);
     };
-  }, [showSnackBar]);
+  }, [setShowSnackBar, showSnackBar, time]);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {showSnackBar && (
-        <FlexBox
-          className={`fixed w-[800px] h-16 py-4 px-[120px] gap-2 rounded-[100px] transform -translate-x-1/2 -translate-y-1/2 bottom-3 left-1/2 bg-grey-800/70 ${
-            fadeAnimation ? 'animate-snackbarIn' : 'animate-snackbarOut'
-          }`}
-        >
-          <Check />
-          <div className="text-white header4">{message}</div>
-        </FlexBox>
-      )}
+      {showSnackBar &&
+        createPortal(
+          <FlexBox
+            className={`fixed w-[800px] h-16 py-4 px-[120px] gap-2 rounded-[100px] transform -translate-x-1/2 -translate-y-1/2 bottom-3 left-1/2 bg-grey-800/70 ${
+              fadeAnimation ? 'animate-snackbarIn' : 'animate-snackbarOut'
+            }`}
+          >
+            <Check />
+            <div className="text-white header4">{message}</div>
+          </FlexBox>,
+          document.body,
+        )}
     </>
   );
 }
