@@ -243,7 +243,9 @@ PostCard.CommentWrapper = function PostCardCommentWrapper({
               width={1}
               height={53}
             />
-            {children}
+            <FlexBox direction="column" className="gap-[5px]">
+              {children}
+            </FlexBox>
           </FlexBox>
         )}
       </FlexBox>
@@ -276,7 +278,7 @@ PostCard.Comments = function PostCardComments({
   onClickModal: () => void;
 }) {
   return (
-    <div key={id} onClick={onClickModal}>
+    <div key={id} onClick={onClickModal} className="h-6 gap-1 overflow-hidden">
       <div className="inline-block mr-1 body2 text-grey-500">{userName}</div>
       <div className="inline body4 text-grey-500">{content}</div>
     </div>
