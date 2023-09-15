@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useRef, useEffect, useState } from 'react';
+import { ReactNode, useRef, useState, useLayoutEffect } from 'react';
 
 export default function DatePickerWrapper({
   children,
@@ -12,7 +12,7 @@ export default function DatePickerWrapper({
   const parentHeight =
     (ref.current?.parentElement?.offsetHeight as number) + 10;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const currentRectBottom = ref.current?.getBoundingClientRect()
       .bottom as number;
     const { innerHeight } = window;
