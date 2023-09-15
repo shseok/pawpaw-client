@@ -27,8 +27,9 @@ export default function FeedPostCard({
     >
       <PostCard.Header userId={userId} />
       <PostCard.Content
-        imgs={imgs}
+        type="mainPC"
         content={content}
+        imgs={imgs}
         onClickModal={() => setShowModal(true)}
       >
         <PostCard.CommentWrapper commentsNum={commentsCount}>

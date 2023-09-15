@@ -114,39 +114,64 @@ PostCard.Images = function PostCardImages({
 
 PostCard.Content = function PostCardContent({
   children,
+  type,
   content,
   imgs,
   onClickModal,
 }: {
   children: React.ReactNode;
-  imgs?: string[];
+  type: 'mainPC' | 'modal';
   content: string;
-  onClickModal: () => void;
+  imgs?: string[];
+  onClickModal?: () => void;
 }) {
-  function renderContent() {
+  const renderContent = () => (
+    <FlexBox
+      direction="column"
+      align="start"
+      className={`${type === 'mainPC' ? 'w-full' : 'w-[375px] h-full'} gap-3`}
+    >
+      <div
+        className={`body3 text-grey-800 ${
+          type === 'mainPC' ? 'max-h-40' : null
+        }`}
+        onClick={onClickModal}
+      >
+        {content}
+      </div>
+      <Divider type="horizontal" />
+      {children}
+    </FlexBox>
+  );
+  if (imgs) {
     return (
-      <FlexBox direction="column" align="start" className="w-full gap-3">
-        <div className="body3 text-grey-800 max-h-40" onClick={onClickModal}>
-          {content}
-        </div>
-        <Divider type="horizontal" />
-        {children}
-      </FlexBox>
+      // eslint-disable-next-line react/jsx-no-useless-fragment
+      <>
+        {type === 'mainPC' ? (
+          <div className="grid w-full h-full grid-cols-2 gap-9">
+            <PostCard.Images imgs={imgs} />
+            {renderContent()}
+          </div>
+        ) : (
+          <FlexBox className="gap-9">
+            <div className="relative w-[545px] h-[574px]">
+              {imgs?.map((image) => (
+                <Image
+                  src={image}
+                  alt="게시글 사진"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-[20px]"
+                />
+              ))}
+            </div>
+            {renderContent()}
+          </FlexBox>
+        )}
+      </>
     );
   }
-  return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
-      {imgs ? (
-        <div className="grid w-full h-full grid-cols-2 gap-9">
-          <PostCard.Images imgs={imgs} />
-          {renderContent()}
-        </div>
-      ) : (
-        renderContent()
-      )}
-    </>
-  );
+  return renderContent();
 };
 
 PostCard.CommentWrapper = function PostCardCommentWrapper({
@@ -229,53 +254,6 @@ PostCard.Comments = function PostCardComments({
       <div className="inline-block mr-1 body2 text-grey-500">{userName}</div>
       <div className="inline body4 text-grey-500">{content}</div>
     </div>
-  );
-};
-
-PostCard.ModalContent = function PostCardModalContent({
-  imgs,
-  content,
-  children,
-}: {
-  children: React.ReactNode;
-  imgs?: string[];
-  content: string;
-}) {
-  function renderContent() {
-    return (
-      <FlexBox
-        direction="column"
-        align="start"
-        className="w-[375px] gap-3 h-full"
-      >
-        <div className="body3 text-grey-800">{content}</div>
-        <Divider type="horizontal" />
-        {children}
-      </FlexBox>
-    );
-  }
-  return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
-      {imgs ? (
-        <FlexBox className="gap-9">
-          <div className="relative w-[545px] h-[574px]">
-            {imgs?.map((image) => (
-              <Image
-                src={image}
-                alt="게시글 사진"
-                layout="fill"
-                objectFit="cover"
-                className="rounded-[20px]"
-              />
-            ))}
-          </div>
-          {renderContent()}
-        </FlexBox>
-      ) : (
-        renderContent()
-      )}
-    </>
   );
 };
 

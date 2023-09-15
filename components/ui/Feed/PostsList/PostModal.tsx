@@ -33,6 +33,7 @@ export default function PostModal({
         {post ? (
           <FeedPostModal
             userId={post.albumId}
+            imgs={[post.url]}
             content={post.title}
             comments={comments}
           />

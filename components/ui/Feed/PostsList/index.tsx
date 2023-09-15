@@ -49,7 +49,7 @@ export default function PostsList() {
             <FeedPostCard
               userId={post.albumId}
               content={post.title}
-              imgs={[post.url]}
+              imgs={[post.url, post.url, post.url]}
               setShowModal={setShowModal}
               comments={filteredComments}
             />

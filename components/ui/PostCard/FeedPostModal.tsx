@@ -24,7 +24,7 @@ export default function FeedPostModal({
       } h-[720px] p-9 gap-4 bg-white opacity-100 border-[1px] border-grey-200 rounded-[10px]`}
     >
       <PostCard.Header userId={userId} />
-      <PostCard.ModalContent content={content}>
+      <PostCard.Content type="modal" content={content} imgs={imgs}>
         <PostCard.CommentWrapper commentsNum={filteredCommentsCount} isModal>
           {comments?.map((comment) => (
             <PostCard.ModalComments
@@ -35,7 +35,7 @@ export default function FeedPostModal({
             />
           ))}
         </PostCard.CommentWrapper>
-      </PostCard.ModalContent>
+      </PostCard.Content>
     </FlexBox>
   );
 }
