@@ -33,9 +33,9 @@ export default function ScheduleAddModal({
       </div>
       <FlexBox
         direction="column"
-        className="w-full bg-white rounded-[10px] p-9 gap-4"
+        className="w-full bg-white rounded-[10px] p-9 gap-7"
       >
-        <FlexBox direction="column" className="w-full gap-7">
+        <FlexBox direction="column" className="w-full gap-4">
           <h2 className="w-full header2">스케줄 추가</h2>
           <input
             type="text"
