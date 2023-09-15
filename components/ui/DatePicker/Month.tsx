@@ -18,9 +18,9 @@ export default function Month({
     setSelectedDate(subYears(selectedDate, 1));
   };
   const onChangeMonth = (month: Date) => {
-    setPickerType('');
     setSelectedDate(month);
   };
+
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between w-full p-2">
@@ -45,12 +45,12 @@ export default function Month({
             type="button"
             // eslint-disable-next-line react/no-array-index-key
             key={index}
-            className={` rounded-full p-2 caption2
-            ${
+            className={`rounded-full p-2 caption2 duration-75 ${
               isSameMonth(selectedDate, month)
                 ? 'bg-primary-200 text-[#FFFFFF]'
                 : 'hover:bg-primary-50 hover:text-primary-200'
-            }`}
+            }
+            `}
             onClick={() => onChangeMonth(month)}
           >
             {format(month, 'MMM')}

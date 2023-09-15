@@ -21,7 +21,7 @@ export default function TimeSelect({
   };
 
   return (
-    <div className="flex items-center w-full border rounded-[10px]">
+    <div className="flex items-center w-full border rounded-[10px] p-4">
       <Select onChange={onChangeHour}>
         <Select.Trigger>
           <span className="flex justify-center w-full gap-2">
