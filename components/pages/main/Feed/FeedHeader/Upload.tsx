@@ -47,12 +47,18 @@ export default function Upload() {
           </div>
         </FlexBox>
         <FlexBox justify="end" className="gap-[10px] w-full">
-          <Button size="lg" variant="secondary" disabled={isOverMaxChar}>
+          <Button
+            size="lg"
+            variant="secondary"
+            disabled={isOverMaxChar}
+            className="w-40"
+          >
             파일
           </Button>
           <Button
             size="lg"
             disabled={isOverMaxChar}
+            className="w-40"
             onClickAction={() => setShowSnackBar(true)}
           >
             업로드

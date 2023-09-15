@@ -15,7 +15,7 @@ interface ButtonProps {
   to?: string;
 }
 const sizes = {
-  xs: 'h-[32px] body2',
+  xs: 'h-[32px]',
   sm: 'h-[36px] p-2.5',
   md: 'h-[42px] p-2.5',
   lg: 'h-[54px] p-2.5',

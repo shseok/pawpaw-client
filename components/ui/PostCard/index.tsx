@@ -5,6 +5,8 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import CaretRight from 'public/CaretRight.svg';
+import CaretLeft from 'public/CaretLeft.svg';
 import DotsIcon from '@/public/tabler_dots.svg';
 import copyURL from '@/utils/copyURL';
 import Avatar from '../Avatar';
@@ -55,7 +57,7 @@ PostCard.Header = function PostCardHeader({ userId }: { userId: number }) {
         <FlexBox direction="column" align="start" className="gap-1">
           <FlexBox className="gap-2">
             <div className="header4 text-grey-800">{userId}</div>
-            <Button size="xs" variant="secondary">
+            <Button size="xs" variant="secondary" className="px-2 py-1 body2">
               팔로우
             </Button>
           </FlexBox>
@@ -125,6 +127,22 @@ PostCard.Content = function PostCardContent({
   imgs?: string[];
   onClickModal?: () => void;
 }) {
+  const [imgNum, setImgNum] = useState(0);
+  const downImgNum = () => {
+    if (imgNum - 1 >= 0) {
+      setImgNum(imgNum - 1);
+    } else {
+      setImgNum(imgNum);
+    }
+  };
+  const upImgNum = () => {
+    if (imgs && imgNum + 1 < imgs?.length) {
+      setImgNum(imgNum + 1);
+    } else {
+      setImgNum(imgNum);
+    }
+  };
+
   const renderContent = () => (
     <FlexBox
       direction="column"
@@ -149,21 +167,29 @@ PostCard.Content = function PostCardContent({
       <>
         {type === 'mainPC' ? (
           <div className="grid w-full h-full grid-cols-2 gap-9">
-            <PostCard.Images imgs={imgs} />
+            <PostCard.Images imgs={imgs} onClickModal={onClickModal} />
             {renderContent()}
           </div>
         ) : (
           <FlexBox className="gap-9">
             <div className="relative w-[545px] h-[574px]">
-              {imgs?.map((image) => (
-                <Image
-                  src={image}
-                  alt="게시글 사진"
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-[20px]"
-                />
-              ))}
+              <Image
+                src={imgs[imgNum]}
+                alt="게시글 사진"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-[20px]"
+              />
+              <FlexBox className="absolute top-1/2 left-3 bg-white/50 rounded-[20px]">
+                <button type="button" onClick={downImgNum}>
+                  <CaretLeft className="w-6 h-6 fill-grey-400 hover:fill-white" />
+                </button>
+              </FlexBox>
+              <FlexBox className="absolute top-1/2 right-3 bg-white/50 rounded-[20px]">
+                <button type="button" onClick={upImgNum}>
+                  <CaretRight className="w-6 h-6 fill-grey-400 hover:fill-white" />
+                </button>
+              </FlexBox>
             </div>
             {renderContent()}
           </FlexBox>
