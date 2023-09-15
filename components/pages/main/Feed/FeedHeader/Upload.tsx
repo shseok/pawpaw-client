@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Avatar from '../../Avatar';
-import Button from '../../Button';
-import FlexBox from '../../FlexBox';
+import Avatar from '../../../../ui/Avatar';
+import Button from '../../../../ui/Button';
+import FlexBox from '../../../../ui/FlexBox';
 
 export default function Upload() {
   const [postText, setPostText] = useState('');

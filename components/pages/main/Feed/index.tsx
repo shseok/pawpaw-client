@@ -1,6 +1,6 @@
-import PostsList from '@/components/ui/Feed/PostsList';
+import PostsList from '@/components/pages/main/Feed/PostsList';
 import FlexBox from '@/components/ui/FlexBox';
-import FeedHeader from '@/components/ui/Feed/FeedHeader';
+import FeedHeader from '@/components/pages/main/Feed/FeedHeader';
 
 export default function Feed() {
   return (

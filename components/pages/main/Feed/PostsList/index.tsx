@@ -7,9 +7,9 @@ import { useState } from 'react';
 import useCommentsQuery from '@/hooks/queries/PostCommentsQuery';
 import useGetInfiniteData from '@/hooks/queries/InfiniteData';
 import { Comment, Post } from '@/types/types';
-import FlexBox from '../../FlexBox';
+import FlexBox from '../../../../ui/FlexBox';
 import PostModal from './PostModal';
-import FeedPostCard from '../../PostCard/FeedPostCard';
+import FeedPostCard from '../../../../ui/PostCard/FeedPostCard';
 
 export default function PostsList() {
   const { Observer, data: posts } = useGetInfiniteData({

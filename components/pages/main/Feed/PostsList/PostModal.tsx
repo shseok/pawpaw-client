@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { Comment, Post } from '@/types/types';
 import FeedPostModal from '@/components/ui/PostCard/FeedPostModal';
-import FlexBox from '../../FlexBox';
-import Modal from '../../Modal/Modal';
+import FlexBox from '../../../../ui/FlexBox';
+import Modal from '../../../../ui/Modal/Modal';
 
 export default function PostModal({
   showModal,
