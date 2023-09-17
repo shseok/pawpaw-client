@@ -12,7 +12,7 @@ export type PickerType = 'date' | 'month' | 'year' | '';
 export interface DatePickerProps {
   selectedDate: Date;
   setSelectedDate: Dispatch<SetStateAction<Date>>;
-  setPickerType: Dispatch<SetStateAction<PickerType>>;
+  onChangePickerType: () => void;
 }
 
 export default function DatePicker({
@@ -37,13 +37,13 @@ export default function DatePicker({
           <Date
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
-            setPickerType={setPickerType}
+            onChangePickerType={() => setPickerType('month')}
           />
         );
       case 'month':
         return (
           <Month
-            setPickerType={setPickerType}
+            onChangePickerType={() => setPickerType('date')}
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />

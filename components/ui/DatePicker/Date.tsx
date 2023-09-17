@@ -8,7 +8,7 @@ import { DatePickerProps } from '.';
 export default function Date({
   selectedDate,
   setSelectedDate,
-  setPickerType,
+  onChangePickerType,
 }: DatePickerProps) {
   const { currentMonthAllDates, weekDays } = useCalender(selectedDate);
   const nextMonth = () => {
@@ -25,7 +25,7 @@ export default function Date({
       <div className="flex items-center justify-between px-3">
         <div className="flex gap-1 caption1">
           <span>{format(selectedDate, 'MMM yyyy')}</span>
-          <button type="button" onClick={() => setPickerType('month')}>
+          <button type="button" onClick={onChangePickerType}>
             <CaretDownIcon />
           </button>
         </div>
