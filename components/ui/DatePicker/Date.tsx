@@ -19,7 +19,6 @@ export default function Date({
   };
   const onChangeDate = (date: Date) => {
     setSelectedDate(date);
-    setPickerType('');
   };
   return (
     <div className="flex flex-col gap-1">
