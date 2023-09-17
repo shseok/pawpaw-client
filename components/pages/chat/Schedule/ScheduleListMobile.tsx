@@ -1,5 +1,4 @@
 import ArrowLeftIcon from '@/public/arrow-left.svg';
-import DotsIcon from '@/public/tabler_dots.svg';
 import ScheduleCard from './ScheduleCard';
 import ScheduleDropdownButton from './ScheduleDropdownButton';
 
