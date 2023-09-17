@@ -16,7 +16,6 @@ export default function OptionList({ children }: SelectOptionListProps) {
   useLayoutEffect(() => {
     const currentRectBottom = ref.current?.getBoundingClientRect()
       .bottom as number;
-    console.log(currentRectBottom);
     const { innerHeight } = window;
     setIsOverFloating(currentRectBottom + 10 > innerHeight);
   }, [isOpen]);
