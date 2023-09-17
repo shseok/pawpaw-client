@@ -12,7 +12,7 @@ export type PickerType = 'date' | 'month' | 'year' | '';
 export interface DatePickerProps {
   selectedDate: Date;
   setSelectedDate: Dispatch<SetStateAction<Date>>;
-  onChangePickerType: () => void;
+  onChangePickerType?: () => void;
 }
 
 export default function DatePicker({
