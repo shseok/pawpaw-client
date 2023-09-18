@@ -19,8 +19,7 @@ const sizes = {
   xl: 'h-[66px] p-2.5',
 };
 const variants = {
-  primary:
-    'bg-primary-200 hover:bg-primary-300 active:bg-primary-100 text-white',
+  primary: 'bg-primary-200 hover:bg-primary-300 text-white',
   secondary:
     'bg-white border border-primary-200 text-primary-200 hover:border-primary-300 hover:text-primary-300',
 };

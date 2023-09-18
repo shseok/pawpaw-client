@@ -8,7 +8,7 @@ export default function Trigger({ children }: SelectTriggerProps) {
   const { onOpenChange } = useSelectContext();
 
   return (
-    <button type="button" className="w-full h-full" onClick={onOpenChange}>
+    <button type="button" className="w-full" onClick={onOpenChange}>
       {children}
     </button>
   );

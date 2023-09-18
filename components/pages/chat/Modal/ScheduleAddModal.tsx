@@ -33,13 +33,13 @@ export default function ScheduleAddModal({
       </div>
       <FlexBox
         direction="column"
-        className="w-full bg-white rounded-[10px] p-9 gap-4"
+        className="w-full bg-white rounded-[10px] p-9 gap-7"
       >
-        <FlexBox direction="column" className="w-full gap-7">
+        <FlexBox direction="column" className="w-full gap-4">
           <h2 className="w-full header2">스케줄 추가</h2>
           <input
             type="text"
-            className="px-5 py-4 rounded-[10px] w-full focus-primary"
+            className="px-5 py-4 rounded-[10px] w-full focus-primary body1"
             placeholder="스케줄 제목을 입력해보세요"
             value={value}
             onChange={onChangeValue}
@@ -48,7 +48,7 @@ export default function ScheduleAddModal({
           {/** 시작 날짜 */}
           <FlexBox direction="column" className="w-full gap-2">
             <span className="w-full body1">시작 날짜</span>
-            <div className="flex w-full gap-2">
+            <div className="flex flex-col w-full gap-2 tablet:flex-row">
               <DatePicker
                 selectedDate={startDate}
                 setSelectedDate={setStartDate}
@@ -65,7 +65,7 @@ export default function ScheduleAddModal({
           {/** 종료 날짜 */}
           <FlexBox direction="column" className="w-full gap-2">
             <span className="w-full body1">종료 날짜</span>
-            <div className="flex w-full gap-2">
+            <div className="flex flex-col w-full gap-2 tablet:flex-row">
               <DatePicker selectedDate={endDate} setSelectedDate={setEndDate} />
               {!isChecked && (
                 <TimeSelect

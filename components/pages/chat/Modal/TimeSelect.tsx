@@ -21,10 +21,10 @@ export default function TimeSelect({
   };
 
   return (
-    <div className="flex items-center w-full border rounded-[10px]">
+    <div className="flex items-center w-full border h-full rounded-[10px]">
       <Select onChange={onChangeHour}>
         <Select.Trigger>
-          <span className="flex justify-center w-full gap-2">
+          <span className="flex justify-center w-full gap-2 p-4">
             <div>{format(selectedDate, 'aa', { locale: ko })}</div>
             <div>{format(selectedDate, 'HH')}시</div>
           </span>
@@ -39,7 +39,9 @@ export default function TimeSelect({
       </Select>
       :
       <Select onChange={onChangeMinute}>
-        <Select.Trigger>{format(selectedDate, 'mm')}분</Select.Trigger>
+        <Select.Trigger>
+          <div className="p-4">{format(selectedDate, 'mm')}분</div>
+        </Select.Trigger>
         <Select.OptionList>
           {MINUTE.map((i) => (
             <Select.Option value={i} key={i}>

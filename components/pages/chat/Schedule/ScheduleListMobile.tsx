@@ -1,6 +1,6 @@
 import ArrowLeftIcon from '@/public/arrow-left.svg';
-import DotsIcon from '@/public/tabler_dots.svg';
 import ScheduleCard from './ScheduleCard';
+import ScheduleDropdownButton from './ScheduleDropdownButton';
 
 interface PropsType {
   closeModal: () => void;
@@ -16,9 +16,7 @@ export default function ScheduleListMobile({ closeModal }: PropsType) {
           </button>
           <p className="body1 sm:header2">스케줄</p>
         </div>
-        <button type="button" className="p-2 body2 text-primary-200">
-          <DotsIcon className="w-7 h-7" />
-        </button>
+        <ScheduleDropdownButton />
       </header>
       <ul className="flex flex-col overflow-auto h-[calc(100%-4rem)] gap-4 p-10">
         <ScheduleCard />
