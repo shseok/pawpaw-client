@@ -43,6 +43,11 @@ module.exports = {
           100: '#F7F8F9',
         },
         white: '#FFFFFF',
+        icon: {
+          kakao: '#FFE812',
+          naver: '#57B04B',
+          google: '#FFFFFF',
+        },
       },
       borderColor: {
         DEFAULT: '#E9EBED',

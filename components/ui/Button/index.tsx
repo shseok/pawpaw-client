@@ -1,15 +1,17 @@
 'use client';
 
+import Link from 'next/link';
 import { MouseEventHandler, ReactNode } from 'react';
 
 interface ButtonProps {
   children: ReactNode | string;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'ghost';
   disabled?: boolean;
   className?: string;
   fullWidth?: boolean;
   onClickAction?: MouseEventHandler<HTMLButtonElement>;
+  to?: string;
 }
 const sizes = {
   xs: 'h-[32px] body2',
@@ -22,6 +24,8 @@ const variants = {
   primary: 'bg-primary-200 hover:bg-primary-300 text-white',
   secondary:
     'bg-white border border-primary-200 text-primary-200 hover:border-primary-300 hover:text-primary-300',
+  ghost:
+    'bg-white border border-grey-200 text-primary-800 hover:border-grey-200 hover:bg-primary-50 flex justify-center items-center',
 };
 
 export default function Button({
@@ -33,6 +37,7 @@ export default function Button({
   fullWidth = false,
   // eslint-disable-next-line no-console
   onClickAction = () => console.error('onClick 이벤트가 정의되지 않았습니다.'),
+  to,
 }: ButtonProps) {
   const fwClass = fullWidth && 'w-full';
   const sizeClass = sizes[size];
@@ -40,7 +45,14 @@ export default function Button({
   const disabledClass =
     disabled &&
     'opacity-50 cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-300 disabled:border-none';
-  return (
+  return to ? (
+    <Link
+      href={to}
+      className={`rounded-[10px] ${sizeClass} ${fwClass} ${variantClass} ${disabledClass} ${className}`}
+    >
+      {children}
+    </Link>
+  ) : (
     <button
       type="button"
       className={`rounded-[10px] ${sizeClass} ${fwClass} ${variantClass} ${disabledClass} ${className}`}
