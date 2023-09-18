@@ -32,7 +32,7 @@ export default function Upload() {
           />
           <div className="relative w-full">
             <textarea
-              className="bg-primary-50 w-full h-[77px] resize-none header4 text-grey-500 placeholder:text-grey-300"
+              className="bg-primary-50 w-full h-[77px] resize-none header4 text-grey-500 placeholder:text-grey-300 border-none focus:ring-primary-300"
               placeholder="동네 주민들에게 즐거운 소식을 전해보세요!"
               value={postText}
               onChange={handleTextChange}

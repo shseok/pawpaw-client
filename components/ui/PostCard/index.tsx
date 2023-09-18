@@ -80,34 +80,35 @@ PostCard.Images = function PostCardImages({
 }) {
   if (imgs) {
     return (
-      <div
-        className="grid w-full grid-cols-2 place-content-stretch"
-        onClick={onClickModal}
-      >
-        <div className="relative row-span-2 -z-10">
-          <Image
-            src={imgs[0]}
-            alt="게시글 사진1"
-            layout="fill"
-            objectFit="cover"
-          />
-        </div>
-        <div className="relative -z-10">
-          <Image
-            src={imgs[0]}
-            alt="게시글 사진2"
-            layout="fill"
-            objectFit="cover"
-          />
-        </div>
-        <div className="relative -z-10">
-          <Image
-            src={imgs[0]}
-            alt="게시글 사진3"
-            layout="fill"
-            objectFit="cover"
-          />
-        </div>
+      <div onClick={onClickModal}>
+        <FlexBox className="h-[160px] sm:h-full">
+          <div className="relative w-full h-full">
+            <Image
+              src={imgs[0]}
+              alt="게시글 사진1"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <FlexBox direction="column" className="w-full h-full">
+            <div className="relative w-full h-full">
+              <Image
+                src={imgs[0]}
+                alt="게시글 사진2"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+            <div className="relative w-full h-full">
+              <Image
+                src={imgs[0]}
+                alt="게시글 사진3"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+          </FlexBox>
+        </FlexBox>
       </div>
     );
   }
@@ -166,7 +167,7 @@ PostCard.Content = function PostCardContent({
       // eslint-disable-next-line react/jsx-no-useless-fragment
       <>
         {type === 'mainPC' ? (
-          <div className="grid w-full h-full grid-cols-2 gap-9">
+          <div className="flex flex-col w-full h-full gap-3 sm:grid sm:grid-cols-2 sm:gap-9">
             <PostCard.Images imgs={imgs} onClickModal={onClickModal} />
             {renderContent()}
           </div>
