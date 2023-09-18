@@ -44,3 +44,8 @@
 .swiper {
   overflow: unset !important;
 }
+
+html,
+body {
+  height: 100%;
+}
