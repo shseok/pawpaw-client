@@ -1,6 +1,7 @@
 import EnteredChatList from '@/components/pages/community/EnteredChatList';
 import RecommendChatList from '@/components/pages/community/RecommendChatList';
 import TrendingChatList from '@/components/pages/community/TrendingChatList';
+import AddChatRoomButton from '@/components/pages/community/AddChatRoomButton';
 
 export default function CommunityPage() {
   return (
@@ -8,6 +9,7 @@ export default function CommunityPage() {
       <EnteredChatList />
       <RecommendChatList />
       <TrendingChatList />
+      <AddChatRoomButton />
     </main>
   );
 }
