@@ -8,6 +8,7 @@ interface ButtonProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   variant?: 'primary' | 'secondary' | 'ghost';
   disabled?: boolean;
+  disabledTextColor?: string;
   className?: string;
   fullWidth?: boolean;
   onClickAction?: MouseEventHandler<HTMLButtonElement>;
@@ -33,6 +34,7 @@ export default function Button({
   size = 'md',
   variant = 'primary',
   disabled = false,
+  disabledTextColor,
   className = '',
   fullWidth = false,
   // eslint-disable-next-line no-console
@@ -42,9 +44,10 @@ export default function Button({
   const fwClass = fullWidth && 'w-full';
   const sizeClass = sizes[size];
   const variantClass = variants[variant];
+  disabledTextColor ??= 'text-grey-300';
   const disabledClass =
     disabled &&
-    'opacity-50 cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-300 disabled:border-none';
+    `opacity-50 cursor-not-allowed disabled:bg-grey-200 disabled:${disabledTextColor} disabled:border-none`;
   return to ? (
     <Link
       href={to}
