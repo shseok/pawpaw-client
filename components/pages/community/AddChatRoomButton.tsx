@@ -1,52 +1,35 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import { useState } from 'react';
 import PlusIcon from '@/public/plus.svg';
+import ModalTest from '@/components/ui/ModalRefactor';
 
 export default function AddChatRoomButton() {
   const [isOpen, setIsOpen] = useState(false);
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add('overflow-hidden');
-    } else {
-      document.body.classList.remove('overflow-hidden');
-    }
-  }, [isOpen]);
+  const [두번째모달, 두번째모달상태변경] = useState(false);
 
   return (
     <>
-      {isOpen &&
-        createPortal(
-          // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
-          <div
-            className="fixed inset-0 z-40 bg-black opacity-75"
-            onClick={() => setIsOpen(false)}
-          />,
-          document.body,
-        )}
+      <ModalTest open={isOpen} onClose={() => setIsOpen(false)}>
+        <div className="w-full bg-white">
+          <button type="button" onClick={() => 두번째모달상태변경(!두번째모달)}>
+            두번째 모달 오픈
+          </button>
+          <div>test</div>
+        </div>
+      </ModalTest>
+      <ModalTest open={두번째모달} onClose={() => 두번째모달상태변경(false)}>
+        <div className="bg-red">
+          <button type="button" onClick={() => 두번째모달상태변경(false)}>
+            두번째 모달 닫기 입니다.
+          </button>
+          <button type="button" onClick={() => 두번째모달상태변경(false)}>
+            두번째 모달 닫기 입니다.
+          </button>
+        </div>
+      </ModalTest>
+
       <div className="fixed bottom-0 right-0 z-50 flex flex-col w-full gap-2 p-8 pb-20 tablet:p-8 tablet:w-80">
-        {isOpen && (
-          <ul className="flex flex-col w-full gap-2 body1">
-            <li className="flex flex-col rounded-[10px] text-center p-4 bg-white">
-              <button type="button" className="p-3">
-                채팅방 만들기
-              </button>
-              <button type="button" className="p-3">
-                채팅방 편집
-              </button>
-            </li>
-            <li className="bg-white text-center rounded-[10px]">
-              <button
-                type="button"
-                className="w-full p-3"
-                onClick={() => setIsOpen(false)}
-              >
-                취소
-              </button>
-            </li>
-          </ul>
-        )}
         {!isOpen && (
           <button
             type="button"
