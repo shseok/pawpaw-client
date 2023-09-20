@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { KeyboardEvent, useState } from 'react';
 import { ModalProps } from '@/types/types';
 import useInput from '@/hooks/common/useInput';
 import Modal from '../../Modal';
@@ -12,7 +12,17 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [description, onChangeDescription] = useInput('');
   const [tag, onChangeTag, reset] = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
-  console.log('tagList', tagList);
+
+  const handleAddTag = (event: KeyboardEvent) => {
+    const isDuplicateTag = !tagList.includes(tag);
+    const isNonEmptyTag = tag.trim() !== '';
+    if (event.key === 'Enter') {
+      if (isDuplicateTag && isNonEmptyTag) {
+        setTagList([...tagList, tag]);
+        reset();
+      }
+    }
+  };
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -36,19 +46,14 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
               onChange={onChangeDescription}
               type="text"
             />
-            <div className="w-full">
+            <div className="flex">
               <input
                 type="text"
                 onChange={onChangeTag}
                 className="w-full border-none"
                 placeholder="#해시태그를 이용해서 채팅방을 소개해 보세요"
                 value={tag}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
-                    setTagList([...tagList, tag]);
-                    reset();
-                  }
-                }}
+                onKeyUp={handleAddTag}
               />
               <TagList list={tagList} />
             </div>
