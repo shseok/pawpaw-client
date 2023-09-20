@@ -32,7 +32,7 @@ function Overlay({
 function ModalWrapper({ children }: { children: ReactNode }) {
   return <div onClick={(event) => event.stopPropagation()}>{children}</div>;
 }
-export default function ModalRefactor({ children, open, onClose }: ModalProps) {
+export default function Modal({ children, open, onClose }: ModalProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
