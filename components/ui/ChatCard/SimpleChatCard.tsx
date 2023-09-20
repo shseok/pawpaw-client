@@ -18,7 +18,7 @@ export default function SimpleChatCard() {
       <div className="flex justify-between w-full">
         <ChatCard.Description description="병을 앓고있는 노견  보호자님들 이야기 나눠요" />
         <div>
-          <NoticeIcon classNamw="w-7 h-7" />
+          <NoticeIcon className="w-7 h-7" />
         </div>
       </div>
     </ChatCard>

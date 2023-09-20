@@ -20,7 +20,7 @@ const userList = [
 ];
 
 export default function UserAddModal({ onClose }: { onClose: () => void }) {
-  const { value, resetValue, onChangeValue } = useInput('');
+  const [value, onChangeValue, resetValue] = useInput('');
   const { checkedList, handleCheckboxChange } = useCheckbox();
 
   return (
