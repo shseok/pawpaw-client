@@ -11,20 +11,28 @@ interface Props {
 
 const CheckList = ({ text, to, isChecked, setCheck }: Props) => {
   return (
-    <button className="flex items-center gap-[18px]" onClick={setCheck}>
-      <Check className={isChecked ? 'fill-primary-200' : 'fill-grey-300'} />
-      <div className="flex items-center gap-[10px]">
-        <span className="text-lg leading-[26px] text-grey-600">{text}</span>
-        {to && (
-          <Link
-            href={to}
-            className="text-lg leading-[26px] text-grey-600 border-b-[1px] border-grey-600"
-          >
-            보기
-          </Link>
-        )}
+    <label className="cursor-pointer">
+      <div className="flex items-center gap-[18px]">
+        <Check className={isChecked ? 'fill-primary-200' : 'fill-grey-300'} />
+        <div className="flex items-center gap-[10px]">
+          <span className="text-lg leading-[26px] text-grey-600">{text}</span>
+          {to && (
+            <Link
+              href={to}
+              className="text-lg leading-[26px] text-grey-600 border-b-[1px] border-grey-600"
+            >
+              보기
+            </Link>
+          )}
+        </div>
       </div>
-    </button>
+      <input
+        type="checkbox"
+        className="hidden appearance-none"
+        checked={isChecked}
+        onChange={setCheck}
+      />
+    </label>
   );
 };
 

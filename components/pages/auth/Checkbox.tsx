@@ -4,7 +4,7 @@ import Check from '@/public/Auth/check.svg';
 interface Props {
   isChecked: boolean;
   disabled?: boolean;
-  onValueChangeHandler?: (checked: boolean) => void;
+  onValueChangeHandler?: () => void;
   text: string;
   textColor?: string;
   checkBoxBorderColor?: string;
@@ -21,7 +21,7 @@ const Checkbox = ({
 }: Props) => {
   const onPressedHandler = () => {
     if (onValueChangeHandler) {
-      onValueChangeHandler(!isChecked);
+      onValueChangeHandler();
     }
   };
 
@@ -33,11 +33,8 @@ const Checkbox = ({
   checkBoxBorderColor ??= 'border-grey-300';
 
   return (
-    <div>
-      <button
-        className="flex items-center gap-[18px]"
-        onClick={triggerCheckbox}
-      >
+    <label className="cursor-pointer">
+      <div className="flex items-center gap-[18px]">
         <div
           className={`rounded-sm border-[1px] ${
             isChecked ? 'border-primary-200' : checkBoxBorderColor
@@ -48,8 +45,14 @@ const Checkbox = ({
         <span className={`${textColor} font-bold text-lg leading-[26px]`}>
           {text}
         </span>
-      </button>
-    </div>
+      </div>
+      <input
+        type="checkbox"
+        className="hidden appearance-none"
+        checked={isChecked}
+        onChange={triggerCheckbox}
+      />
+    </label>
   );
 };
 
