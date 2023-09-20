@@ -4,6 +4,7 @@ import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import SearchInput from '@/components/ui/SearchInput';
+import ArrowLeftIcon from '@/public/arrow-left.svg';
 import SearchedUserList from './SearchedUserList';
 
 const userList = [
@@ -18,26 +19,34 @@ const userList = [
   { image: '/default.png', name: '닉네임33', petName: '5살 감자' },
 ];
 
-export default function UserAddModal({
-  closePopup,
-}: {
-  closePopup: () => void;
-}) {
+export default function UserAddModal({ onClose }: { onClose: () => void }) {
   const { value, resetValue, onChangeValue } = useInput('');
   const { checkedList, handleCheckboxChange } = useCheckbox();
 
   return (
-    <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
-      <div className="self-end">
-        <button type="button" onClick={closePopup}>
+    <FlexBox
+      direction="column"
+      className="w-screen tablet:w-[672px] gap-4 h-screen"
+    >
+      <div className="self-end hidden tablet:block">
+        <button type="button" onClick={onClose}>
           <XIcon className="w-8 h-8" />
         </button>
       </div>
       <FlexBox
         direction="column"
-        className="bg-white rounded-[10px] p-9 gap-7 w-full"
+        className="bg-white rounded-[10px] p-4 tablet:p-9 gap-7 w-full h-screen tablet:h-auto"
       >
-        <header className="w-full header2">인원 추가</header>
+        <header className="flex items-center w-full header2">
+          <button
+            type="button"
+            className="block tablet:hidden"
+            onClick={onClose}
+          >
+            <ArrowLeftIcon className="w-6 h-6" />
+          </button>
+          <span className="self-center">인원 추가</span>
+        </header>
         <SearchInput
           placeholder="추가할 인원의 아이디나 닉네임을 검색해보세요"
           value={value}
