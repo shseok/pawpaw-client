@@ -10,7 +10,7 @@ import TagList from '../../TagList';
 export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [title, onChangeTitle] = useInput('');
   const [description, onChangeDescription] = useInput('');
-  const [tag, onChangeTag, reset] = useInput('');
+  const [tag, onChangeTag, resetTag] = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
 
   const handleAddTag = (event: KeyboardEvent) => {
@@ -19,7 +19,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
     if (event.key === 'Enter') {
       if (isDuplicateTag && isNonEmptyTag) {
         setTagList([...tagList, tag]);
-        reset();
+        resetTag();
       }
     }
   };
