@@ -70,7 +70,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
                   <div
                     key={tagItem}
                     onClick={() => removeTagByName(tagItem)}
-                    className="cursor-pointer animate-bounce"
+                    className="cursor-pointer animate-scaleUp"
                   >
                     <Tag tagName={tagItem} />
                   </div>
