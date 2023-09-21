@@ -9,6 +9,7 @@ interface TitleInputProps {
 }
 
 export default function TitleInput({ title, onChangeTitle }: TitleInputProps) {
+  const isTitleOver = title.length > 30;
   return (
     <div className="flex flex-col gap-3">
       <div className="flex">
@@ -19,7 +20,11 @@ export default function TitleInput({ title, onChangeTitle }: TitleInputProps) {
           onChange={onChangeTitle}
           type="text"
         />
-        <div className="caption2 text-grey-400">{title.length}/30</div>
+        <div
+          className={`caption2 ${isTitleOver ? 'text-red' : 'text-grey-400'}`}
+        >
+          {title.length}/30
+        </div>
       </div>
       <Divider type="horizontal" />
     </div>

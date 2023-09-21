@@ -44,7 +44,7 @@ export default function HashTagInput({
       setTagList(removedTagList);
     }
   };
-
+  const isHashTagNumOver = tagList.length > 10;
   return (
     <div className="flex flex-wrap items-center w-full ">
       <div className="flex flex-wrap items-center flex-1 gap-2">
@@ -67,7 +67,13 @@ export default function HashTagInput({
           onKeyDown={removeTagByBackspace}
         />
       </div>
-      <div className="caption2 text-grey-200">{tagList.length}/10</div>
+      <div
+        className={`caption2 ${
+          isHashTagNumOver ? 'text-red' : 'text-grey-400'
+        }`}
+      >
+        {tagList.length}/10
+      </div>
     </div>
   );
 }

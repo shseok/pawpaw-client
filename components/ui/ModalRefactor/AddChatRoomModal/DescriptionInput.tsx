@@ -11,6 +11,7 @@ export default function DescriptionInput({
   description,
   onChangeDescription,
 }: DescriptionInputProps) {
+  const isDescriptionOver = description.length > 30;
   return (
     <div className="flex">
       <input
@@ -20,7 +21,13 @@ export default function DescriptionInput({
         onChange={onChangeDescription}
         type="text"
       />
-      <div className="caption2 text-grey-200">{description.length}/30</div>
+      <div
+        className={`caption2 ${
+          isDescriptionOver ? 'text-red' : 'text-grey-400'
+        }`}
+      >
+        {description.length}/30
+      </div>
     </div>
   );
 }
