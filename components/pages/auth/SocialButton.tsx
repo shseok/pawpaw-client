@@ -1,12 +1,12 @@
-import React from 'react';
+'use client';
+
 import KakaoTalk from '@/public/Auth/kakotalk.svg';
 import Naver from '@/public/Auth/naver.svg';
 import Google from '@/public/Auth/google.svg';
 
 interface Props {
-  handleLogin: () => void;
   hasBorder?: string;
-  socialType: SocialType;
+  socialProvider: SocialType;
   size?: 'medium';
 }
 type SocialType = keyof typeof socialMap;
@@ -30,16 +30,20 @@ const socialMap = {
   google: Google,
 } as const;
 
+const REDIRECT_URI = 'http://localhost:3000/term';
+
 export default function SocialButton({
-  handleLogin,
   hasBorder = 'border',
-  socialType,
+  socialProvider,
   size = 'medium',
 }: Props) {
-  const ButtonIcon = socialMap[socialType];
-  const buttonStyle = `${sizes[size].btn} rounded-full ${bgColor[socialType]} flex items-center justify-center ${hasBorder}`;
+  const ButtonIcon = socialMap[socialProvider];
+  const buttonStyle = `${sizes[size].btn} rounded-full ${bgColor[socialProvider]} flex items-center justify-center ${hasBorder}`;
+  const handleLogin = (provider: string) => {
+    window.location.href = `https://pawpawdev.duckdns.org/oauth2/authorize/${provider}?redirect_uri=${REDIRECT_URI}`;
+  };
   return (
-    <button className={buttonStyle} onClick={handleLogin}>
+    <button className={buttonStyle} onClick={() => handleLogin(socialProvider)}>
       {<ButtonIcon className={sizes[size].svg} />}
     </button>
   );
