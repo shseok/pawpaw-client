@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { ModalProps } from '@/types/types';
 import useInput from '@/hooks/common/useInput';
 import XIcon from '@/public/X.svg';
-import ArrowLeftIcon from '@/public/arrow-left.svg';
 import Modal from '../../Modal';
 import TitleInput from './TitleInput';
 import DescriptionInput from './DescriptionInput';
@@ -16,6 +15,7 @@ import Button from '../../Button';
 import Divider from '../../Divider';
 import ImageDisplay from './ImageDisplay';
 import ImageList from './ImageList';
+import MobileHeader from './MobileHeader';
 
 export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [title, onChangeTitle] = useInput('');
@@ -34,13 +34,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
           </button>
         </div>
         <div className="flex flex-col h-full gap-3 bg-white p-9 tablet:rounded-[10px] overflow-y-auto">
-          <header className="flex items-center py-2 border-b-[1px] tablet:hidden">
-            <button type="button" onClick={onClose}>
-              <ArrowLeftIcon className="w-6 h-6" />
-            </button>
-            <span className="flex-1 text-center body1">공개 채팅방 만들기</span>
-          </header>
-
+          <MobileHeader onClose={onClose} />
           <div className="flex flex-col order-2 gap-3 tablet:order-1">
             <TitleInput title={title} onChangeTitle={onChangeTitle} />
             <Divider type="horizontal" />
