@@ -19,7 +19,7 @@ module.exports = {
       },
       animation: {
         dropdown: 'dropdown .1s ease',
-        scaleUp: 'scaleUp .2s ease',
+        scaleUp: 'scaleUp .2s ease-in-out',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

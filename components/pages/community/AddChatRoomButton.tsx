@@ -10,8 +10,8 @@ export default function AddChatRoomButton() {
   return (
     <>
       <AddChatRoomModal open={isOpen} onClose={() => setIsOpen(false)} />
-      <div className="fixed bottom-0 right-0 z-50 flex flex-col w-full gap-2 p-8 pb-20 tablet:p-8 tablet:w-80">
-        {!isOpen && (
+      {!isOpen && (
+        <div className="fixed bottom-0 right-0 z-50 flex flex-col w-full gap-2 p-8 pb-20 tablet:p-8 tablet:w-80">
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
@@ -19,8 +19,8 @@ export default function AddChatRoomButton() {
           >
             <PlusIcon />
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 }

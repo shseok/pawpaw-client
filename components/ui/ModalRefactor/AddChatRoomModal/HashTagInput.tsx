@@ -47,7 +47,7 @@ export default function HashTagInput({
   const isHashTagNumOver = tagList.length > 10;
   return (
     <div className="flex flex-wrap items-center w-full ">
-      <div className="flex flex-wrap items-center flex-1 gap-2">
+      <div className="flex flex-wrap items-center flex-1 gap-2 overflow-auto max-h-20">
         {tagList.map((tagItem) => (
           <div
             key={tagItem}
@@ -60,7 +60,7 @@ export default function HashTagInput({
         <input
           type="text"
           onChange={onChangeTag}
-          className="p-0 border-none w-80 focus:ring-0"
+          className="p-0 border-none w-80 tablet:w-96 focus:ring-0 body1"
           placeholder="#해시태그를 이용해서 채팅방을 소개해 보세요"
           value={tag}
           onKeyUp={addTagByEnter}
