@@ -1,41 +1,25 @@
 import Divider from '@/components/ui/Divider';
-import React, { Dispatch } from 'react';
+import React from 'react';
 import Checkbox from './Checkbox';
 import CheckList from './CheckList';
+import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import { termList } from '@/constant/term';
 
-interface Props {
-  isAllChecked: boolean;
-  setIsAllChecked: (value: boolean) => void;
-  isCheckList: boolean[];
-  setIsCheckList: Dispatch<React.SetStateAction<boolean[]>>;
-}
+const CheckListOfTerm = () => {
+  const isAllCheck = useRegisterStore((state) => state.allCheked);
+  const setIsAllCheck = useRegisterStore((state) => state.setAllCheked);
+  const isCheckList = useRegisterStore((state) => state.checkList);
+  const setIsCheckList = useRegisterStore((state) => state.setCheckList);
 
-export const termList = [
-  { text: '[필수] 만 14세 이상입니다' },
-  { text: '[필수] 서비스 통합이용약관 동의', to: '/' },
-  { text: '[필수] 위치정보 이용약관 동의', to: '/' },
-  { text: '[선택] 개인정보 수집 및 이용 동의', to: '/' },
-];
-
-const CheckListOfTerm = ({
-  isAllChecked,
-  setIsAllChecked,
-  isCheckList,
-  setIsCheckList,
-}: Props) => {
-  const check = (idx: number) => {
-    setIsCheckList((prev) => {
-      const newCheckList = [...prev];
-      newCheckList[idx] = !newCheckList[idx];
-      return newCheckList;
-    });
+  const handleAllCheck = () => {
+    setIsAllCheck(!isAllCheck);
   };
 
   return (
     <div className="w-full">
       <Checkbox
-        isChecked={isAllChecked}
-        onValueChangeHandler={setIsAllChecked}
+        isChecked={isAllCheck}
+        onValueChangeHandler={handleAllCheck}
         text="모두 동의 (선택 정보 포함)"
       />
       <Divider type="horizontal" className="my-[20px]" />
@@ -45,7 +29,7 @@ const CheckListOfTerm = ({
             key={idx}
             isChecked={isCheckList[idx]}
             setCheck={() => {
-              check(idx);
+              setIsCheckList(idx, !isCheckList[idx]);
             }}
             {...item}
           />
