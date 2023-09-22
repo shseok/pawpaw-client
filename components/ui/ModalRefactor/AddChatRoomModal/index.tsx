@@ -65,7 +65,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             <span className="flex-1 text-center body1">공개 채팅방 만들기</span>
           </header>
 
-          <div className="flex flex-col gap-3 ">
+          <div className="flex flex-col order-2 gap-3 tablet:order-1">
             <TitleInput title={title} onChangeTitle={onChangeTitle} />
             <Divider type="horizontal" />
 
@@ -84,15 +84,15 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             </div>
           </div>
 
-          <div className="flex items-center justify-between gap-4">
-            <div className="relative flex-1 h-40 tablet:h-60 tablet:rounded-none">
+          <div className="flex items-center justify-between order-1 gap-4 tablet:order-2">
+            <div className="relative flex-1 h-44 tablet:h-60">
               <Image
                 src={image}
                 alt=""
                 fill
                 sizes="100vw"
                 priority
-                className="rounded-[10px]"
+                className="rounded-[10px] tablet:rounded-none"
               />
               <button
                 onClick={() => console.log('d')}
@@ -102,7 +102,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
                 <CameraIcon />
               </button>
             </div>
-            <div className="flex-col flex-1 hidden gap-4 tablet:flex">
+            <div className="flex-col flex-1 hidden gap-5 tablet:flex">
               <div className="flex justify-between">
                 <span className="text-grey-600 body3">커버선택</span>
                 <div className="flex gap-2">
@@ -123,7 +123,12 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
                     className="flex flex-col items-center justify-center w-full h-full cursor-pointer bg-grey-200"
                     htmlFor="imageUpload"
                   >
-                    <input type="file" className="hidden" id="imageUpload" />
+                    <input
+                      type="file"
+                      className="hidden"
+                      id="imageUpload"
+                      accept="image/jpg,impge/png,image/jpeg,image/gif,image/webp"
+                    />
                     <CameraIcon />
                     <span className="capion1 text-grey-400">사진추가</span>
                   </label>
@@ -148,7 +153,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col order-3 gap-6">
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="option1"
@@ -190,7 +195,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             </div>
           </div>
 
-          <div className="flex items-end h-full z-[999] w-full gap-5 ">
+          <div className="flex items-end h-full z-[999] w-full gap-5 order-4">
             <Button variant="secondary" fullWidth onClickAction={onClose}>
               취소
             </Button>
