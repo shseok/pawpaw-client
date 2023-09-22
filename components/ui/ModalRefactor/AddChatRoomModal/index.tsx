@@ -57,7 +57,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             <XIcon className="w-8 h-8" />
           </button>
         </div>
-        <div className="flex flex-col h-full gap-6 bg-white p-9 tablet:rounded-[10px] overflow-auto scrollbar-hide">
+        <div className="flex flex-col h-full gap-3 bg-white p-9 tablet:rounded-[10px] overflow-y-auto">
           <header className="flex items-center py-2 border-b-[1px] tablet:hidden">
             <button type="button" onClick={onClose}>
               <ArrowLeftIcon className="w-6 h-6" />
