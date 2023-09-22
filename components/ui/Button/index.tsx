@@ -51,7 +51,7 @@ export default function Button({
   return to ? (
     <Link
       href={to}
-      className={`rounded-[10px] ${sizeClass} ${fwClass} ${variantClass} ${disabledClass} ${className}`}
+      className={`rounded-[10px] ${sizeClass} ${fwClass} ${variantClass} ${disabledClass} ${className} text-center`}
     >
       {children}
     </Link>
