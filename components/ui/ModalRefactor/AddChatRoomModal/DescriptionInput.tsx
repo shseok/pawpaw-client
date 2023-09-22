@@ -13,7 +13,7 @@ export default function DescriptionInput({
 }: DescriptionInputProps) {
   const isDescriptionOver = description.length > 30;
   return (
-    <div className="flex">
+    <div className="flex items-center justify-between w-full">
       <input
         placeholder="채팅방에 대해 소개해 주세요"
         className="w-full p-0 border-none body1 focus:ring-0 text-grey-500"

@@ -19,6 +19,7 @@ export default function HashTagInput({
   reset,
   onChangeTag,
 }: HashTagInputProps) {
+  const isHashTagNumOver = tagList.length >= 10;
   const removeTagByName = (name: string) => {
     const filteredTagList = tagList.filter((tagName) => tagName !== name);
     setTagList(filteredTagList);
@@ -28,7 +29,7 @@ export default function HashTagInput({
     const isDuplicateTag = !tagList.includes(tag);
     const isNonEmptyTag = tag.trim() !== '';
     if (event.key === 'Enter') {
-      if (isDuplicateTag && isNonEmptyTag) {
+      if (isDuplicateTag && isNonEmptyTag && !isHashTagNumOver) {
         setTagList([...tagList, tag]);
         reset();
       }
@@ -44,7 +45,7 @@ export default function HashTagInput({
       setTagList(removedTagList);
     }
   };
-  const isHashTagNumOver = tagList.length > 10;
+
   return (
     <div className="flex flex-wrap items-center w-full ">
       <div className="flex flex-wrap items-center flex-1 gap-2 overflow-auto max-h-20">
@@ -60,20 +61,20 @@ export default function HashTagInput({
         <input
           type="text"
           onChange={onChangeTag}
-          className="p-0 border-none w-80 tablet:w-96 focus:ring-0 body1"
-          placeholder="#해시태그를 이용해서 채팅방을 소개해 보세요"
+          className={`p-0 border-none w-72 tablet:w-96 focus:ring-0 body1 ${
+            isHashTagNumOver ? 'placeholder:text-red' : ''
+          }`}
+          placeholder={
+            isHashTagNumOver
+              ? '해시태그는 10개를 초과할 수 없어요.🥲'
+              : '#해시태그를 이용해서 채팅방을 소개해 보세요'
+          }
           value={tag}
           onKeyUp={addTagByEnter}
           onKeyDown={removeTagByBackspace}
         />
       </div>
-      <div
-        className={`caption2 ${
-          isHashTagNumOver ? 'text-red' : 'text-grey-400'
-        }`}
-      >
-        {tagList.length}/10
-      </div>
+      <div className="caption2 text-grey-400">{tagList.length}/10</div>
     </div>
   );
 }

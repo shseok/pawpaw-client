@@ -16,6 +16,8 @@ import Divider from '../../Divider';
 import ImageDisplay from './ImageDisplay';
 import ImageList from './ImageList';
 import MobileHeader from './MobileHeader';
+import { RadioGroup } from '../../RadioGroup';
+import FlexBox from '../../FlexBox';
 
 export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [title, onChangeTitle] = useInput('');
@@ -23,7 +25,11 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [tag, onChangeTag, resetTag] = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
   const [image, setImage] = useState('/images/AddChatModal/default2.webp');
-  const [isChecked, setIsChecked] = useState('');
+  const [option, setOption] = useState('1');
+
+  const handleRadioOption = (value: string) => {
+    setOption(value);
+  };
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -35,7 +41,12 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
         </div>
         <div className="flex flex-col h-full gap-3 bg-white p-9 tablet:rounded-[10px] overflow-y-auto">
           <MobileHeader onClose={onClose} />
-          <div className="flex flex-col order-2 gap-3 tablet:order-1">
+
+          <FlexBox
+            direction="column"
+            align="start"
+            className="order-2 gap-2 tablet:order-1"
+          >
             <TitleInput title={title} onChangeTitle={onChangeTitle} />
             <Divider type="horizontal" />
             <DescriptionInput
@@ -49,61 +60,39 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
               tag={tag}
               tagList={tagList}
             />
-          </div>
+          </FlexBox>
 
-          <div className="flex items-center justify-between order-1 gap-4 tablet:order-2">
+          <FlexBox className="order-1 gap-4 tablet:order-2">
             <ImageDisplay image={image} />
             <ImageList setImage={setImage} />
-          </div>
+          </FlexBox>
 
-          <div className="flex flex-col order-3 gap-6">
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="option1"
-                className="flex items-center gap-2 header4"
-              >
-                <input
-                  className="w-5 h-5 checked:bg-primary-200 text-primary-200 focus:ring-primary-200"
-                  type="radio"
-                  id="option1"
-                  checked={isChecked === '1'}
-                  value="1"
-                  onChange={(event) => setIsChecked(event.target.value)}
-                />
-                <span>지역 입장 조건 설정</span>
-              </label>
-              <span className="text-grey-600 body3">
-                지역을 입장조건으로 설정하면, 설정된 정보가 있는 멤버만 채팅장에
-                입장할 수 있습니다.
-              </span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="option2"
-                className="flex items-center gap-2 header4"
-              >
-                <input
-                  className="w-5 h-5 checked:bg-primary-200 text-primary-200 focus:ring-primary-200"
-                  type="radio"
-                  id="option2"
-                  checked={isChecked === '2'}
-                  value="2"
-                  onChange={(event) => setIsChecked(event.target.value)}
-                />
-                <span>검색허용</span>
-              </label>
-              <span className="text-grey-600 body3">
-                채팅방 이름 혹은 태그로 검색 할 수 있게 합니다.
-              </span>
-            </div>
-          </div>
+          <FlexBox direction="column" align="start" className="order-3 gap-6">
+            <RadioGroup value={option} onChange={handleRadioOption}>
+              <div className="flex flex-col gap-2">
+                <RadioGroup.Item option="1">
+                  지역 입장 조건 설정
+                </RadioGroup.Item>
+                <span className="body3">
+                  지역을 입장조건으로 설정하면, 설정된 정보가 있는 멤버만
+                  채팅장에 입장할 수 있습니다.
+                </span>
+              </div>
+              <div className="flex flex-col gap-2">
+                <RadioGroup.Item option="2">검색허용</RadioGroup.Item>
+                <span className="body3">
+                  채팅방 이름 혹은 태그로 검색 할 수 있게 합니다.
+                </span>
+              </div>
+            </RadioGroup>
+          </FlexBox>
 
-          <div className="flex items-end h-full z-[999] w-full gap-5 order-4">
+          <FlexBox align="end" className="h-full z-[999] w-full gap-5 order-4">
             <Button variant="secondary" fullWidth onClickAction={onClose}>
               취소
             </Button>
             <Button fullWidth>확인</Button>
-          </div>
+          </FlexBox>
         </div>
       </div>
     </Modal>
