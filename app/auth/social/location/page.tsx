@@ -48,10 +48,14 @@ export default function page() {
             const latitude = location?.coordinates?.lat ?? 0;
             const longitude = location?.coordinates?.lng ?? 0;
             await getLocationData();
+            const response = await fetch(
+              `http://localhost:3000/api/location?latitude=${latitude}&longitude=${longitude}`,
+            );
+            const locationName = (await response.json()) as LocationName;
             setPosition({
               lat: latitude,
               lng: longitude,
-              name: '',
+              name: locationName.ko_address,
             });
           }}
         >
