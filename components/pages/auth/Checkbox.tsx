@@ -11,14 +11,14 @@ interface Props {
   // size?: 'small' | 'medium' | 'large';
 }
 
-const Checkbox = ({
+export default function Checkbox({
   isChecked,
   text,
   disabled,
   onValueChangeHandler,
   textColor = 'text-grey-600',
   checkBoxBorderColor, // size = 'medium',
-}: Props) => {
+}: Props) {
   const onPressedHandler = () => {
     if (onValueChangeHandler) {
       onValueChangeHandler();
@@ -54,6 +54,4 @@ const Checkbox = ({
       />
     </label>
   );
-};
-
-export default Checkbox;
+}

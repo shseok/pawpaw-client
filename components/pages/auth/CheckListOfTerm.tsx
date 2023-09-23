@@ -5,7 +5,7 @@ import CheckList from './CheckList';
 import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
 import { termList } from '@/constant/term';
 
-const CheckListOfTerm = () => {
+export default function CheckListOfTerm() {
   const isAllCheck = useRegisterStore((state) => state.allCheked);
   const setIsAllCheck = useRegisterStore((state) => state.setAllCheked);
   const isCheckList = useRegisterStore((state) => state.checkList);
@@ -37,6 +37,4 @@ const CheckListOfTerm = () => {
       </div>
     </div>
   );
-};
-
-export default CheckListOfTerm;
+}

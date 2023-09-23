@@ -9,7 +9,7 @@ interface Props {
   setCheck: () => void;
 }
 
-const CheckList = ({ text, to, isChecked, setCheck }: Props) => {
+export default function CheckList({ text, to, isChecked, setCheck }: Props) {
   return (
     <label className="cursor-pointer">
       <div className="flex items-center gap-[18px]">
@@ -34,6 +34,4 @@ const CheckList = ({ text, to, isChecked, setCheck }: Props) => {
       />
     </label>
   );
-};
-
-export default CheckList;
+}
