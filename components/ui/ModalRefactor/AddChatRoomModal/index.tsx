@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { ModalProps } from '@/types/types';
 import useInput from '@/hooks/common/useInput';
 import XIcon from '@/public/X.svg';
+import useImageUpload from '@/hooks/common/useImageUpload';
 import Modal from '../../Modal';
 import TitleInput from './TitleInput';
 import DescriptionInput from './DescriptionInput';
@@ -24,13 +25,14 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [description, onChangeDescription] = useInput('');
   const [tag, onChangeTag, resetTag] = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
-  const [image, setImage] = useState('/images/AddChatModal/default2.webp');
+  const { handleImageUpload, setImage, image } = useImageUpload(
+    '/images/AddChatModal/default2.webp',
+  );
   const [option, setOption] = useState('1');
 
   const handleRadioOption = (value: string) => {
     setOption(value);
   };
-
   return (
     <Modal open={open} onClose={onClose}>
       <div className="flex flex-col w-screen tablet:w-[1028px] h-screen tablet:h-[720px] ">
@@ -64,7 +66,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
 
           <FlexBox className="order-1 gap-4 tablet:order-2">
             <ImageDisplay image={image} />
-            <ImageList setImage={setImage} />
+            <ImageList onChangeImage={handleImageUpload} setImage={setImage} />
           </FlexBox>
 
           <FlexBox direction="column" align="start" className="order-3 gap-6">

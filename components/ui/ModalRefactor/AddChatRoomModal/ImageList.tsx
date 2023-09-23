@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
 import CameraIcon from '@/public/Camera.svg';
 
@@ -19,10 +19,11 @@ const SecondImageList = [
 ];
 
 interface ImageListProps {
+  onChangeImage: (event: ChangeEvent<HTMLInputElement>) => void;
   setImage: Dispatch<SetStateAction<string>>;
 }
 
-export default function ImageList({ setImage }: ImageListProps) {
+export default function ImageList({ onChangeImage, setImage }: ImageListProps) {
   const [imaegList, setImageList] = useState<string[]>(FirstImageList);
   const onNetxImageList = () => {
     setImageList(SecondImageList);
@@ -30,6 +31,7 @@ export default function ImageList({ setImage }: ImageListProps) {
   const onPrevImageList = () => {
     setImageList(FirstImageList);
   };
+
   return (
     <div className="flex-col flex-1 hidden gap-5 tablet:flex">
       <div className="flex justify-between">
@@ -56,7 +58,8 @@ export default function ImageList({ setImage }: ImageListProps) {
               type="file"
               className="hidden"
               id="imageUpload"
-              accept="image/jpg,impge/png,image/jpeg,image/gif,image/webp"
+              onChange={(event) => onChangeImage(event)}
+              accept="image/*"
             />
             <CameraIcon />
             <span className="capion1 text-grey-400">사진추가</span>
