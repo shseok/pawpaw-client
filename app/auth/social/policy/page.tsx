@@ -15,10 +15,13 @@ export default function page() {
   useEffect(() => {
     setStep(1);
   }, []);
+
   const body = (
-    <div className="flex flex-col items-center max-w-[400px] w-full">
-      <h1 className="header1">약관동의</h1>
-      <ProgressBar step={step} />
+    <div className="flex flex-col items-center max-w-[400px] w-full gap-[56px]">
+      <div className="flex flex-col items-center w-full">
+        <h1 className="header1">약관동의</h1>
+        <ProgressBar step={step} />
+      </div>
       <CheckListOfTerm />
     </div>
   );
@@ -27,9 +30,8 @@ export default function page() {
       <Button
         className="text-lg flex-1 px-[20px] py-[16px]"
         fullWidth
-        disabled={checkList.some((v) => !v)}
+        disabled={checkList.slice(0, 3).some((v) => !v)}
         variant="primary"
-        disabledTextColor="text-grey-400"
         to="/auth/social/location"
       >
         다음

@@ -6,9 +6,8 @@ import { MouseEventHandler, ReactNode } from 'react';
 interface ButtonProps {
   children: ReactNode | string;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'light';
   disabled?: boolean;
-  disabledTextColor?: string;
   className?: string;
   fullWidth?: boolean;
   onClickAction?: MouseEventHandler<HTMLButtonElement>;
@@ -27,6 +26,7 @@ const variants = {
     'bg-white border border-primary-200 text-primary-200 hover:border-primary-300 hover:text-primary-300',
   ghost:
     'bg-white border border-grey-200 text-primary-800 hover:border-grey-200 hover:bg-primary-50 flex justify-center items-center',
+  light: 'bg-primary-100 hover:bg-primary-200 text-grey-600',
 };
 
 export default function Button({
@@ -34,7 +34,6 @@ export default function Button({
   size = 'md',
   variant = 'primary',
   disabled = false,
-  disabledTextColor,
   className = '',
   fullWidth = false,
   // eslint-disable-next-line no-console
@@ -44,21 +43,18 @@ export default function Button({
   const fwClass = fullWidth && 'w-full';
   const sizeClass = sizes[size];
   const variantClass = variants[variant];
-  disabledTextColor ??= 'text-grey-300';
-  const disabledClass =
-    disabled &&
-    `opacity-50 cursor-not-allowed disabled:bg-grey-200 disabled:${disabledTextColor} disabled:border-none`;
+  const disabledClass = disabled
+    ? `opacity-50 cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-400 disabled:border-none`
+    : '';
+  const styles = `rounded-[10px] ${sizeClass} ${fwClass} ${variantClass} ${disabledClass} ${className}`;
   return to ? (
-    <Link
-      href={to}
-      className={`rounded-[10px] ${sizeClass} ${fwClass} ${variantClass} ${disabledClass} ${className} text-center`}
-    >
+    <Link href={disabled ? '#' : to} className={`${styles} text-center`}>
       {children}
     </Link>
   ) : (
     <button
       type="button"
-      className={`rounded-[10px] ${sizeClass} ${fwClass} ${variantClass} ${disabledClass} ${className}`}
+      className={styles}
       onClick={onClickAction}
       disabled={disabled}
     >
