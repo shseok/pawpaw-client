@@ -6,9 +6,11 @@ interface RegisterStore {
   step: number;
   allCheked: boolean;
   checkList: boolean[];
+  position: { lat: number; lng: number; name: string };
   setStep: (curStep: number) => void;
   setAllCheked: (checked: boolean) => void;
   setCheckList: (index: number, checked: boolean) => void;
+  setPosition: (position: { lat: number; lng: number; name: string }) => void;
 }
 
 export const useRegisterStore = create<
@@ -19,6 +21,7 @@ export const useRegisterStore = create<
     step: 1,
     allCheked: false,
     checkList: Array(termList.length).fill(false),
+    position: { lat: 0, lng: 0, name: '' },
     setStep: (curStep: number) => set((store) => ({ ...store, step: curStep })),
     setAllCheked: (checked: boolean) =>
       set((store) => ({
@@ -34,5 +37,7 @@ export const useRegisterStore = create<
         newCheckList[index] = checked;
         return { ...store, checkList: newCheckList };
       }),
+    setPosition: (position: { lat: number; lng: number; name: string }) =>
+      set((store) => ({ ...store, position })),
   })),
 );
