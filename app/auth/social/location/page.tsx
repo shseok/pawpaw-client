@@ -10,6 +10,8 @@ import useGeolocation from '@/hooks/common/useGeolocation';
 import Modal from '@/components/ui/Modal/Modal';
 import SearchInput from '@/components/ui/SearchInput';
 import useInput from '@/hooks/common/useInput';
+import LocationList from '@/components/pages/auth/LocationList';
+import { useDebounce } from 'use-debounce';
 
 type LocationName = {
   ko_address: string;
@@ -21,7 +23,8 @@ export default function page() {
   const position = useRegisterStore((state) => state.position);
   const setPosition = useRegisterStore((state) => state.setPosition);
   const { location, isOpen, setIsOpen, getLocationData } = useGeolocation();
-  const { value, resetValue, onChangeValue } = useInput('');
+  const { value: searchResult, resetValue, onChangeValue } = useInput('');
+  const [inputResult] = useDebounce(searchResult, 300);
 
   useEffect(() => {
     setStep(2);
@@ -36,7 +39,7 @@ export default function page() {
       <div className="flex flex-col items-center w-full gap-[21px]">
         <SearchInput
           placeholder="동명 (읍,면)으로 검색 (ex.서초동)"
-          value={value}
+          value={searchResult}
           onChangeValue={onChangeValue}
           resetValue={resetValue}
         />
@@ -64,6 +67,7 @@ export default function page() {
             현재 위치로 설정
           </div>
         </Button>
+        {inputResult && <LocationList value={inputResult} />}
       </div>
 
       {isOpen && (
