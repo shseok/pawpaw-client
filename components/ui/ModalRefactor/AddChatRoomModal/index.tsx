@@ -4,10 +4,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { ModalProps } from '@/types/types';
 import useInput from '@/hooks/common/useInput';
 import XIcon from '@/public/X.svg';
 import useImageUpload from '@/hooks/common/useImageUpload';
+import postChatRoom from '@/service/chatRoom';
 import Modal from '../../Modal';
 import TitleInput from './TitleInput';
 import DescriptionInput from './DescriptionInput';
@@ -25,17 +27,59 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [description, onChangeDescription] = useInput('');
   const [tag, onChangeTag, resetTag] = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
-  const { handleImageUpload, setImage, image } = useImageUpload(
-    '/images/AddChatModal/default2.webp',
-  );
+  const { handleImageUpload, setImagePreview, imageFile, imagePreview } =
+    useImageUpload('/images/AddChatModal/default2.webp');
   const [option, setOption] = useState('1');
+  const router = useRouter();
 
   const handleRadioOption = (value: string) => {
     setOption(value);
   };
+  const onCreateChatRoom = async () => {
+    try {
+      const response = await postChatRoom({
+        image: imageFile as File,
+        body: {
+          name: title,
+          description,
+          hashTagList: tagList,
+          searchable: true,
+          locationLimit: true,
+        },
+      });
+      if (response.chatroomId) {
+        router.push(`chat/${response.chatroomId}`);
+      } else {
+        console.log(response);
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const tempLogin = async () => {
+    const account = {
+      email: 'test4@gmail.com',
+      password: '1234',
+    };
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/auth`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(account),
+      },
+    );
+    console.log(response);
+  };
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="flex flex-col w-screen tablet:w-[1028px] h-screen tablet:h-[720px] ">
+      <div className="flex flex-col w-screen tablet:w-[1028px] h-screen tablet:h-[720px]">
         <div className="self-end hidden tablet:block">
           <button type="button" onClick={onClose}>
             <XIcon className="w-8 h-8" />
@@ -65,8 +109,11 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
           </FlexBox>
 
           <FlexBox className="order-1 gap-4 tablet:order-2">
-            <ImageDisplay image={image} />
-            <ImageList onChangeImage={handleImageUpload} setImage={setImage} />
+            <ImageDisplay image={imagePreview} />
+            <ImageList
+              onChangeImage={handleImageUpload}
+              setImage={setImagePreview}
+            />
           </FlexBox>
 
           <FlexBox direction="column" align="start" className="order-3 gap-6">
@@ -93,7 +140,12 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             <Button variant="secondary" fullWidth onClickAction={onClose}>
               취소
             </Button>
-            <Button fullWidth>확인</Button>
+            <Button fullWidth onClickAction={onCreateChatRoom}>
+              확인
+            </Button>
+            <button type="button" onClick={tempLogin}>
+              임시로그인
+            </button>
           </FlexBox>
         </div>
       </div>

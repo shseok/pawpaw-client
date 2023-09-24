@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
 import CameraIcon from '@/public/Camera.svg';
 
-const FirstImageList = [
+const FIRST_IMAGWE_LIST = [
   '/images/AddChatModal/default2.webp',
   '/images/AddChatModal/default3.webp',
   '/images/AddChatModal/default4.webp',
@@ -11,7 +11,7 @@ const FirstImageList = [
   '/images/AddChatModal/default7.webp',
   '/images/AddChatModal/default8.webp',
 ];
-const SecondImageList = [
+const SECOND_IMAGWE_LIST = [
   '/images/AddChatModal/default9.webp',
   '/images/AddChatModal/default10.webp',
   '/images/AddChatModal/default11.webp',
@@ -24,12 +24,26 @@ interface ImageListProps {
 }
 
 export default function ImageList({ onChangeImage, setImage }: ImageListProps) {
-  const [imaegList, setImageList] = useState<string[]>(FirstImageList);
+  const [imaegList, setImageList] = useState<string[]>(FIRST_IMAGWE_LIST);
   const onNetxImageList = () => {
-    setImageList(SecondImageList);
+    setImageList(SECOND_IMAGWE_LIST);
   };
   const onPrevImageList = () => {
-    setImageList(FirstImageList);
+    setImageList(FIRST_IMAGWE_LIST);
+  };
+  const imageSrcToData64 = async (src: string) => {
+    const response = await fetch(src);
+    console.log(response);
+    const data = await response.blob();
+    console.log('data', data);
+    const reader = new FileReader();
+    reader.readAsDataURL(data);
+    reader.onload = () => {
+      setImage(reader.result as string);
+    };
+    reader.onerror = () => {
+      console.error('이미지 업로드 실패하였습니다.');
+    };
   };
 
   return (
@@ -69,7 +83,7 @@ export default function ImageList({ onChangeImage, setImage }: ImageListProps) {
           // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
           <li
             key={img}
-            onClick={() => setImage(img)}
+            onClick={() => imageSrcToData64(img)}
             className="cursor-pointer "
           >
             <Image
