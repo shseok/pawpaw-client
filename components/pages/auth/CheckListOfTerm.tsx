@@ -31,6 +31,7 @@ export default function CheckListOfTerm() {
             setCheck={() => {
               setIsCheckList(idx, !isCheckList[idx]);
             }}
+            isShow
             {...item}
           />
         ))}
