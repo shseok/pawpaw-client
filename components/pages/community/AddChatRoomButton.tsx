@@ -6,7 +6,9 @@ import AddChatRoomModal from '@/components/ui/ModalRefactor/AddChatRoomModal';
 
 export default function AddChatRoomButton() {
   const [isOpen, setIsOpen] = useState(false);
-
+  if (typeof window === 'undefined') {
+    return null;
+  }
   return (
     <>
       <AddChatRoomModal open={isOpen} onClose={() => setIsOpen(false)} />
