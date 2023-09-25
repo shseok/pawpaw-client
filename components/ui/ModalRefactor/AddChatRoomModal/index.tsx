@@ -11,14 +11,11 @@ import useInput from '@/hooks/common/useInput';
 import XIcon from '@/public/X.svg';
 import useImageUpload from '@/hooks/common/useImageUpload';
 import postChatRoom from '@/service/chatRoom';
-import Modal from '../../Modal';
+import { FlexBox, Divider, Button, Modal } from '../../ui';
 import HashTagInput from './HashTagInput';
-import Button from '../../Button';
-import Divider from '../../Divider';
 import ImageDisplay from './ImageDisplay';
 import ImageList from './ImageList';
 import MobileHeader from './MobileHeader';
-import FlexBox from '../../FlexBox';
 import OptionRadioGroup from './OptionRadioGroup';
 
 interface FormData {
