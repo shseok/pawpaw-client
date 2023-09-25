@@ -22,13 +22,24 @@ export default function page() {
   const setStep = useRegisterStore((state) => state.setStep);
   const position = useRegisterStore((state) => state.position);
   const setPosition = useRegisterStore((state) => state.setPosition);
+  const searchHistory = useRegisterStore((state) => state.searchHistory);
+  const setSearchHistory = useRegisterStore((state) => state.setSearchHistory);
   const { location, isOpen, setIsOpen, getLocationData } = useGeolocation();
-  const { value: searchResult, resetValue, onChangeValue } = useInput('');
-  const [inputResult] = useDebounce(searchResult, 300);
+  const {
+    value: searchResult,
+    resetValue,
+    onChangeValue,
+    setValueByInput,
+  } = useInput(searchHistory);
+  const [inputResult] = useDebounce(searchResult, 500);
 
   useEffect(() => {
     setStep(2);
   }, []);
+
+  useEffect(() => {
+    setSearchHistory(inputResult);
+  }, [inputResult]);
 
   const body = (
     <div className="flex flex-col items-center max-w-[400px] w-full gap-[32px]">
@@ -60,6 +71,8 @@ export default function page() {
               lng: longitude,
               name: locationName.ko_address,
             });
+            setValueByInput(locationName.ko_address);
+            setSearchHistory(locationName.ko_address);
           }}
         >
           <div className="flex justify-center items-center gap-1">
