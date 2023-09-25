@@ -4,6 +4,7 @@ import { MouseEventHandler, ReactNode } from 'react';
 
 interface ButtonProps {
   children: ReactNode | string;
+  type?: 'button' | 'submit' | 'reset';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   variant?: 'primary' | 'secondary';
   disabled?: boolean;
@@ -25,13 +26,13 @@ const variants = {
 };
 
 export default function Button({
+  type = 'button',
   children,
   size = 'md',
   variant = 'primary',
   disabled = false,
   className = '',
   fullWidth = false,
-  // eslint-disable-next-line no-console
   onClickAction = () => console.error('onClick 이벤트가 정의되지 않았습니다.'),
 }: ButtonProps) {
   const fwClass = fullWidth && 'w-full';
@@ -42,7 +43,8 @@ export default function Button({
     'opacity-50 cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-300 disabled:border-none';
   return (
     <button
-      type="button"
+      // eslint-disable-next-line react/button-has-type
+      type={type}
       className={`rounded-[10px] ${sizeClass} ${fwClass} ${variantClass} ${disabledClass} ${className}`}
       onClick={onClickAction}
       disabled={disabled}

@@ -1,6 +1,8 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
 import CameraIcon from '@/public/Camera.svg';
+import CaretLeftIcon from '@/public/CaretLeft.svg';
+import CaretRightIcon from '@/public/CaretRight.svg';
 
 const FIRST_IMAGWE_LIST = [
   '/images/AddChatModal/default2.webp',
@@ -20,10 +22,9 @@ const SECOND_IMAGWE_LIST = [
 
 interface ImageListProps {
   onChangeImage: (event: ChangeEvent<HTMLInputElement>) => void;
-  setImage: Dispatch<SetStateAction<string>>;
 }
 
-export default function ImageList({ onChangeImage, setImage }: ImageListProps) {
+export default function ImageList({ onChangeImage }: ImageListProps) {
   const [imaegList, setImageList] = useState<string[]>(FIRST_IMAGWE_LIST);
   const onNetxImageList = () => {
     setImageList(SECOND_IMAGWE_LIST);
@@ -31,33 +32,27 @@ export default function ImageList({ onChangeImage, setImage }: ImageListProps) {
   const onPrevImageList = () => {
     setImageList(FIRST_IMAGWE_LIST);
   };
-  const imageSrcToData64 = async (src: string) => {
-    const response = await fetch(src);
-    console.log(response);
-    const data = await response.blob();
-    console.log('data', data);
-    const reader = new FileReader();
-    reader.readAsDataURL(data);
-    reader.onload = () => {
-      setImage(reader.result as string);
-    };
-    reader.onerror = () => {
-      console.error('이미지 업로드 실패하였습니다.');
-    };
-  };
 
   return (
     <div className="flex-col flex-1 hidden gap-5 tablet:flex">
       <div className="flex justify-between">
         <span className="text-grey-600 body3">커버선택</span>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <span className="caption2 text-grey-500">1 / 2</span>
-          <div>
-            <button type="button" onClick={onPrevImageList}>
-              이전
+          <div className="border divide-x rounded-[10px]">
+            <button
+              type="button"
+              onClick={onPrevImageList}
+              className="p-2 rounded-l-[10px] hover:bg-gray-100 active:bg-grey-200"
+            >
+              <CaretLeftIcon className="w-[14px] h-[14px]" />
             </button>
-            <button type="button" onClick={onNetxImageList}>
-              다음
+            <button
+              type="button"
+              onClick={onNetxImageList}
+              className="p-2 rounded-r-[10px] hover:bg-gray-100 active:bg-grey-200"
+            >
+              <CaretRightIcon className="w-[14px] h-[14px]" />
             </button>
           </div>
         </div>
@@ -80,12 +75,7 @@ export default function ImageList({ onChangeImage, setImage }: ImageListProps) {
           </label>
         </li>
         {imaegList.map((img) => (
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
-          <li
-            key={img}
-            onClick={() => imageSrcToData64(img)}
-            className="cursor-pointer "
-          >
+          <li key={img} className="cursor-pointer ">
             <Image
               src={img}
               alt=""

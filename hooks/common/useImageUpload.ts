@@ -11,10 +11,8 @@ const useImageUpload = (defaultImage: string) => {
     }
     setImageFile(file);
     setImagePreview(URL.createObjectURL(file));
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
   };
 
-  return { imagePreview, imageFile, setImagePreview, handleImageUpload };
+  return { imagePreview, imageFile, handleImageUpload };
 };
 export default useImageUpload;
