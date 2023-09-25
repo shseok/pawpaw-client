@@ -1,7 +1,7 @@
+'use client';
+
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-
-'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';

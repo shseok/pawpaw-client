@@ -1,14 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PlusIcon from '@/public/plus.svg';
 import AddChatRoomModal from '@/components/ui/ModalRefactor/AddChatRoomModal';
 
 export default function AddChatRoomButton() {
   const [isOpen, setIsOpen] = useState(false);
-  if (typeof window === 'undefined') {
-    return null;
-  }
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  });
+  if (!isClient) return null;
+
   return (
     <>
       <AddChatRoomModal open={isOpen} onClose={() => setIsOpen(false)} />
