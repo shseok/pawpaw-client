@@ -3,7 +3,7 @@ import useInput from '@/hooks/common/useInput';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
-import SearchInput from '@/components/ui/SearchInput';
+import SearchInput from '@/components/ui/Input/SearchInput';
 import SearchedUserList from './SearchedUserList';
 
 const userList = [

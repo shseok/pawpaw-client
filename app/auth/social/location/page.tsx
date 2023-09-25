@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import Detect from '@/public/Auth/detect.svg';
 import useGeolocation from '@/hooks/common/useGeolocation';
 import Modal from '@/components/ui/Modal/Modal';
-import SearchInput from '@/components/ui/SearchInput';
+import SearchInput from '@/components/ui/Input/SearchInput';
 import useInput from '@/hooks/common/useInput';
 import LocationList from '@/components/pages/auth/LocationList';
 import { useDebounce } from 'use-debounce';
@@ -53,6 +53,7 @@ export default function page() {
           value={searchResult}
           onChangeValue={onChangeValue}
           resetValue={resetValue}
+          className="focus-primary placeholder-grey-400"
         />
         <Button
           variant="light"

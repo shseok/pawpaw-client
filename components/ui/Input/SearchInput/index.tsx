@@ -7,6 +7,7 @@ interface SearchInputType {
   resetValue: () => void;
   onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
+  className?: string;
 }
 
 export default function SearchInput({
@@ -14,6 +15,7 @@ export default function SearchInput({
   resetValue,
   onChangeValue,
   placeholder,
+  className,
 }: SearchInputType) {
   return (
     <div className="relative w-full">
@@ -21,7 +23,7 @@ export default function SearchInput({
         type="text"
         value={value}
         onChange={onChangeValue}
-        className="border border-grey-600 block rounded-[10px] px-5 py-4 pr-20 w-full"
+        className={`border border-grey-600 block rounded-[10px] px-5 py-4 pr-20 w-full ${className}`}
         placeholder={placeholder}
       />
       <div className="absolute inset-y-0 top-0 flex gap-2 right-4">
