@@ -1,4 +1,4 @@
-import Logo from '@/public/Auth/desktop_logo.svg';
+import Logo from '@/public/Auth/desktop-logo.svg';
 import Link from 'next/link';
 
 export default function AuthLayout({
