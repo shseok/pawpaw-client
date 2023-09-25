@@ -12,6 +12,7 @@ import SearchInput from '@/components/ui/Input/SearchInput';
 import useInput from '@/hooks/common/useInput';
 import LocationList from '@/components/pages/auth/LocationList';
 import { useDebounce } from 'use-debounce';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type LocationName = {
   ko_address: string;
@@ -25,6 +26,11 @@ export default function page() {
   const searchHistory = useRegisterStore((state) => state.searchHistory);
   const setSearchHistory = useRegisterStore((state) => state.setSearchHistory);
   const { location, isOpen, setIsOpen, getLocationData } = useGeolocation();
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const key = searchParams.get('key');
+
   const {
     value: searchResult,
     resetValue,
@@ -113,7 +119,9 @@ export default function page() {
         fullWidth
         disabled={!position.lat}
         variant="primary"
-        to="/auth/social/profile"
+        onClickAction={() => {
+          router.push(`/auth/social/profile?key=${key}`);
+        }}
       >
         다음
       </Button>

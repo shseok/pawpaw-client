@@ -5,12 +5,16 @@ import CheckListOfTerm from '@/components/pages/auth/CheckListOfTerm';
 import ProgressBar from '@/components/pages/auth/ProgressBar';
 import Button from '@/components/ui/Button';
 import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function page() {
   const step = useRegisterStore((state) => state.step);
   const setStep = useRegisterStore((state) => state.setStep);
   const checkList = useRegisterStore((state) => state.checkList);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const key = searchParams.get('key');
 
   useEffect(() => {
     setStep(1);
@@ -32,7 +36,9 @@ export default function page() {
         fullWidth
         disabled={checkList.slice(0, 3).some((v) => !v)}
         variant="primary"
-        to="/auth/social/location"
+        onClickAction={() => {
+          router.push(`/auth/social/location?key=${key}`);
+        }}
       >
         다음
       </Button>

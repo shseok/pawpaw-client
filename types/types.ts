@@ -40,3 +40,28 @@ export type Species =
   | 'GUINEA_PIG'
   | 'LIZARD'
   | 'FROG';
+
+export interface AuthParams {
+  image: File;
+  body: Body;
+}
+
+export interface Body {
+  key: string;
+  termAgrees: number[];
+  position: Position;
+  nickname: string;
+  noImage: boolean;
+  petInfos: PetInfo[];
+}
+
+export interface PetInfo {
+  petName: string;
+  petType: string;
+}
+
+export interface Position {
+  latitude: number;
+  longitude: number;
+  name: string;
+}

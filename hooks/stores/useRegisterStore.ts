@@ -14,6 +14,7 @@ interface RegisterStore {
     name: string;
     species: Species | null;
   };
+  imageFile: File | null;
   setStep: (curStep: number) => void;
   setAllCheked: (checked: boolean) => void;
   setCheckList: (index: number, checked: boolean) => void;
@@ -21,6 +22,7 @@ interface RegisterStore {
   setSearchHistory: (searchHistory: string) => void;
   setNickname: (nickname: string) => void;
   setPetInfo: (info: { name: string; species: Species | null }) => void;
+  setImageFile: (imageFile: File) => void;
 }
 
 export const useRegisterStore = create<
@@ -38,6 +40,7 @@ export const useRegisterStore = create<
       name: '',
       species: null,
     },
+    imageFile: null,
     setStep: (curStep: number) => set((store) => ({ ...store, step: curStep })),
     setAllCheked: (checked: boolean) =>
       set((store) => ({
@@ -60,5 +63,7 @@ export const useRegisterStore = create<
     setNickname: (nickname: string) => set((store) => ({ ...store, nickname })),
     setPetInfo: (petInfo: { name: string; species: Species | null }) =>
       set((store) => ({ ...store, petInfo })),
+    setImageFile: (imageFile: File) =>
+      set((store) => ({ ...store, imageFile })),
   })),
 );
