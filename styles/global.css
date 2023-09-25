@@ -39,6 +39,9 @@
   .focus-error {
     @apply duration-200 outline-none focus:ring-1 focus:ring-red;
   }
+  .focus-none {
+    @apply duration-200 outline-none focus:ring-0;
+  }
 }
 
 .swiper {

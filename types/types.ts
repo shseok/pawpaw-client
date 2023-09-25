@@ -29,3 +29,14 @@ export interface Comment {
     name: string;
   };
 }
+
+export type Species =
+  | 'DOG'
+  | 'CAT'
+  | 'FISH'
+  | 'BIRD'
+  | 'HAMSTER'
+  | 'RABBIT'
+  | 'GUINEA_PIG'
+  | 'LIZARD'
+  | 'FROG';
