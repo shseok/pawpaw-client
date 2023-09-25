@@ -18,8 +18,8 @@ import Divider from '../../Divider';
 import ImageDisplay from './ImageDisplay';
 import ImageList from './ImageList';
 import MobileHeader from './MobileHeader';
-import { RadioGroup } from '../../RadioGroup';
 import FlexBox from '../../FlexBox';
+import OptionRadioGroup from './OptionRadioGroup';
 
 interface FormData {
   name: string;
@@ -59,10 +59,10 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
       if (response.chatroomId) {
         router.push(`chat/${response.chatroomId}`);
       } else {
-        console.log(response);
         throw new Error(response.message);
       }
     } catch (error) {
+      // 스낵바 컴포넌트가 완성되면 바꿀예정
       alert(error);
     }
   };
@@ -87,6 +87,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
         </div>
         <div className="flex flex-col h-full gap-3 bg-white p-9 tablet:rounded-[10px] overflow-y-auto">
           <MobileHeader onClose={onClose} />
+
           <FlexBox
             direction="column"
             align="start"
@@ -127,7 +128,6 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
                 {errors.description.message}
               </span>
             )}
-
             <HashTagInput
               onChangeTag={onChangeTag}
               reset={resetTag}
@@ -136,6 +136,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
               tagList={tagList}
             />
           </FlexBox>
+
           <FlexBox className="order-1 gap-4 tablet:order-2">
             <ImageDisplay
               image={imagePreview}
@@ -143,25 +144,10 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             />
             <ImageList onChangeImage={handleImageUpload} />
           </FlexBox>
-          <FlexBox direction="column" align="start" className="order-3 gap-6">
-            <RadioGroup value={option} onChange={handleRadioOption}>
-              <div className="flex flex-col gap-2">
-                <RadioGroup.Item option="1">
-                  지역 입장 조건 설정
-                </RadioGroup.Item>
-                <span className="body3">
-                  지역을 입장조건으로 설정하면, 설정된 정보가 있는 멤버만
-                  채팅장에 입장할 수 있습니다.
-                </span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <RadioGroup.Item option="2">검색허용</RadioGroup.Item>
-                <span className="body3">
-                  채팅방 이름 혹은 태그로 검색 할 수 있게 합니다.
-                </span>
-              </div>
-            </RadioGroup>
-          </FlexBox>
+          <OptionRadioGroup
+            option={option}
+            onChangeOption={handleRadioOption}
+          />
           <FlexBox align="end" className="h-full z-[999] w-full gap-5 order-4">
             <Button variant="secondary" fullWidth onClickAction={onClose}>
               취소
