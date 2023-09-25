@@ -29,3 +29,8 @@ export interface Comment {
     name: string;
   };
 }
+
+export interface ModalProps {
+  open: boolean;
+  onClose: () => void;
+}

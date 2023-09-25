@@ -8,6 +8,7 @@ export default function MainLayout({
   return (
     <div className="flex">
       <Sidebar />
+      <div id="modal-root" />
       {children}
     </div>
   );

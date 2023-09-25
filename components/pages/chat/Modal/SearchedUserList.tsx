@@ -27,7 +27,7 @@ export default function SearchedUserList({
           검색결과 <span className="text-primary-200">{userList.length}건</span>
         </p>
       </div>
-      <ul className="grid grid-cols-1 gap-4 p-2 overflow-auto tablet:grid-cols-2 max-h-72 scrollbar-hide">
+      <ul className="grid grid-cols-1 gap-4 p-2 overflow-auto md:grid-cols-2 max-h-72 scrollbar-hide">
         {userList.map((user) => (
           <li
             className={`${
