@@ -12,7 +12,7 @@ export default function ScheduleAddModal({
 }: {
   closeModal: () => void;
 }) {
-  const { value, onChangeValue } = useInput('');
+  const [value, onChangeValue] = useInput('');
   const [isChecked, setIsChecked] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());

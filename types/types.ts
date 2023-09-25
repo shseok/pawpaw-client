@@ -65,3 +65,7 @@ export interface Position {
   longitude: number;
   name: string;
 }
+export interface ModalProps {
+  open: boolean;
+  onClose: () => void;
+}

@@ -13,6 +13,6 @@ const useInput = (initialValue: string) => {
   const resetValue = () => {
     setValue('');
   };
-  return { value, resetValue, onChangeValue, setValueByInput };
+  return [value, onChangeValue, resetValue, setValueByInput] as const;
 };
 export default useInput;

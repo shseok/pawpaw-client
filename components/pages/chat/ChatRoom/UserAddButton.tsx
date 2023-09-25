@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import Modal from '@/components/ui/Modal/Modal';
-import UserAddPopup from '../Modal/UserAddModal';
+import Modal from '@/components/ui/Modal';
+import UserAddModal from '../Modal/UserAddModal';
 
 export default function UserAddButton() {
-  const [openPopup, setOpenPopup] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpenPopup = () => {
-    setOpenPopup(true);
+    setOpen(true);
   };
 
   return (
@@ -19,8 +19,8 @@ export default function UserAddButton() {
       >
         추가
       </button>
-      <Modal showModal={openPopup} setShowModal={setOpenPopup}>
-        <UserAddPopup closePopup={() => setOpenPopup(false)} />
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <UserAddModal onClose={() => setOpen(false)} />
       </Modal>
     </>
   );
