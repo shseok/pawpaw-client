@@ -30,6 +30,18 @@ export interface Comment {
   };
 }
 
+export interface LocationInfoType {
+  predictions: string[];
+  location: {
+    lat: number;
+    lng: number;
+  };
+}
+
+export type LocationName = {
+  koAddress: string;
+};
+
 export type Species =
   | 'DOG'
   | 'CAT'

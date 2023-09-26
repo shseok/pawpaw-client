@@ -1,9 +1,9 @@
-import Divider from '@/components/ui/Divider';
 import React from 'react';
+import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import Divider from '@/components/ui/Divider';
+import { termList } from '@/constant/term';
 import Checkbox from './Checkbox';
 import CheckList from './CheckList';
-import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
-import { termList } from '@/constant/term';
 
 export default function CheckListOfTerm() {
   const isAllCheck = useRegisterStore((state) => state.allCheked);
@@ -18,6 +18,7 @@ export default function CheckListOfTerm() {
   return (
     <div className="w-full">
       <Checkbox
+        option={0}
         isChecked={isAllCheck}
         onValueChangeHandler={handleAllCheck}
         text="모두 동의 (선택 정보 포함)"
@@ -26,7 +27,8 @@ export default function CheckListOfTerm() {
       <div className="flex flex-col gap-[28px]">
         {termList.map((item, idx) => (
           <CheckList
-            key={idx}
+            option={idx}
+            key={item.text}
             isChecked={isCheckList[idx]}
             setCheck={() => {
               setIsCheckList(idx, !isCheckList[idx]);

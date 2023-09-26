@@ -12,8 +12,8 @@ export async function GET(request: Request) {
   const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=(regions)&language=ko&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`;
   const url2 = `https://maps.googleapis.com/maps/api/geocode/json?address=${input}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`;
 
-  async function fetchData(url: string) {
-    const response = await fetch(url).then((res) => res.json());
+  async function fetchData(urlString: string) {
+    const response = await fetch(urlString).then((res) => res.json());
     return response;
   }
 
@@ -23,6 +23,7 @@ export async function GET(request: Request) {
       fetchData(url2),
     ]);
     const { lat, lng } = geocodeResult.results[0].geometry.location;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const predictions = autocompleteResult.predictions.map((prediction: any) =>
       prediction.description
         .split(' ')

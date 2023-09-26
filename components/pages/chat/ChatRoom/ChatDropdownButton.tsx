@@ -4,7 +4,7 @@ import DotsIcon from '@/public/tabler_dots.svg';
 import FlexBox from '@/components/ui/FlexBox';
 import Divider from '@/components/ui/Divider';
 import ArrowRightIcon from '@/public/arrow-right.svg';
-import Modal from '@/components/ui/Modal/Modal';
+import Modal from '@/components/ui/Modal';
 import ChatUserListMobile from './ChatUserListMobile';
 import ScheduleListMobile from '../Schedule/ScheduleListMobile';
 import LeaveChatRoomModal from '../Modal/LeaveChatRoomModal';
@@ -94,10 +94,7 @@ export default function ChatDropdownButton() {
         );
       case '채팅방 나가기':
         return (
-          <Modal
-            showModal={modalType === '채팅방 나가기'}
-            setShowModal={closeModal}
-          >
+          <Modal open={modalType === '채팅방 나가기'} onClose={closeModal}>
             <LeaveChatRoomModal closeModal={closeModal} />
           </Modal>
         );

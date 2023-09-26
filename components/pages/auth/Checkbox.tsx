@@ -2,6 +2,7 @@ import React from 'react';
 import Check from '@/public/Auth/check.svg';
 
 interface Props {
+  option: number;
   isChecked: boolean;
   disabled?: boolean;
   onValueChangeHandler?: () => void;
@@ -12,12 +13,13 @@ interface Props {
 }
 
 export default function Checkbox({
+  option,
   isChecked,
   text,
   disabled,
   onValueChangeHandler,
   textColor = 'text-grey-600',
-  checkBoxBorderColor, // size = 'medium',
+  checkBoxBorderColor = 'border-grey-300', // size = 'medium',
 }: Props) {
   const onPressedHandler = () => {
     if (onValueChangeHandler) {
@@ -29,11 +31,9 @@ export default function Checkbox({
     if (disabled) return;
     onPressedHandler();
   };
-
-  checkBoxBorderColor ??= 'border-grey-300';
-
+  const id = `checkbox-${option}`;
   return (
-    <label className="cursor-pointer">
+    <label className="cursor-pointer" htmlFor={id}>
       <div className="flex items-center gap-[18px]">
         <div
           className={`rounded-sm border-[1px] ${
@@ -47,6 +47,7 @@ export default function Checkbox({
         </span>
       </div>
       <input
+        id={id}
         type="checkbox"
         className="hidden appearance-none"
         checked={isChecked}

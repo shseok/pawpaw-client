@@ -17,6 +17,7 @@ export default function SearchInput({
   placeholder,
   className,
 }: SearchInputType) {
+  console.log(value);
   return (
     <div className="relative w-full">
       <input

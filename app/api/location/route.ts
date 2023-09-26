@@ -13,11 +13,11 @@ export async function GET(request: Request) {
   try {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&language=ko&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`;
     const response = await fetch(url).then((res) => res.json());
-    const ko_address = response.plus_code.compound_code
+    const koAddress = response.plus_code.compound_code
       .split(' ')
       .slice(1)
       .join(' ');
-    return NextResponse.json({ ko_address }, { status: 200 });
+    return NextResponse.json({ koAddress }, { status: 200 });
   } catch (error) {
     return NextResponse.json({}, { status: 400 });
     // return res.end();

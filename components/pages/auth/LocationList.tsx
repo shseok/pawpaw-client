@@ -1,36 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import CheckList from './CheckList';
 import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import { LocationInfoType } from '@/types/types';
+import { getLocationList } from '@/service/map';
+import CheckList from './CheckList';
 
 interface Props {
   value: string;
 }
 
-type ResponseType = {
-  predictions: string[];
-  location: {
-    lat: number;
-    lng: number;
-  };
-};
-
 // TODO: add loading spinner
 export default function LocationList({ value }: Props) {
-  const [locationInfo, setLocationInfo] = useState<ResponseType | null>(null);
+  const [locationInfo, setLocationInfo] = useState<LocationInfoType | null>(
+    null,
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const position = useRegisterStore((state) => state.position);
   const setPosition = useRegisterStore((state) => state.setPosition);
 
   useEffect(() => {
-    async function getLocationList() {
-      const response = await fetch(
-        `http://localhost:3000/api/autocomplete?searchResult=${value}`,
-      );
-      const data = (await response.json()) as ResponseType;
-      setLocationInfo(data);
+    const fetchLocationList = async () => {
       setIsLoading(true);
-    }
-    getLocationList();
+      try {
+        const locationList = await getLocationList(value);
+        setLocationInfo(locationList);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchLocationList();
   }, [value]);
 
   const handleClick = (location: string) => {
@@ -39,25 +38,26 @@ export default function LocationList({ value }: Props) {
   };
 
   const renderLocationList = () => {
-    if (!locationInfo) return;
+    if (!locationInfo) return null;
     const isEmpty =
       Object.keys(locationInfo).length === 0 ||
       locationInfo?.predictions.length === 0;
     if (isEmpty) {
-      return '검색 결과가 없습니다.';
+      return <h4 className="header4">{`'검색 결과가 없습니다.'`}</h4>;
     }
 
     return (
       <ul className="flex flex-col gap-[16px] overflow-scroll overflow-x-hidden max-h-[187px]">
-        {locationInfo?.predictions.map((location, index) => (
-          <li className="body1" key={index}>
+        {locationInfo?.predictions.map((location, idx) => (
+          <li className="body1" key={location}>
             <CheckList
+              option={idx}
               text={location}
               isChecked={location === position.name}
               isShow={location === position.name}
               setCheck={() => handleClick(location)}
               className="gap-[4px]"
-            ></CheckList>
+            />
           </li>
         ))}
       </ul>
@@ -66,7 +66,7 @@ export default function LocationList({ value }: Props) {
   return (
     <div className="w-full">
       <h4 className="header4 mb-[26px]">{`'${value}' 검색 결과`}</h4>
-      {isLoading ? renderLocationList() : null}
+      {isLoading ? '로딩 중...' : renderLocationList()}
     </div>
   );
 }

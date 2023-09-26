@@ -49,7 +49,7 @@ export default function Button({
     : '';
   const styles = `rounded-[10px] ${sizeClass} ${fwClass} ${variantClass} ${disabledClass} ${className}`;
   return to ? (
-    <Link href={disabled ? '#' : to} className={`${styles} text-center`}>
+    <Link href={to} className={`${styles} text-center`}>
       {children}
     </Link>
   ) : (

@@ -43,8 +43,12 @@ export default function SocialButton({
     window.location.href = `https://pawpawdev.duckdns.org/oauth2/authorize/${provider}?redirect_uri=${REDIRECT_URI}`;
   };
   return (
-    <button className={buttonStyle} onClick={() => handleLogin(socialProvider)}>
-      {<ButtonIcon className={sizes[size].svg} />}
+    <button
+      type="button"
+      className={buttonStyle}
+      onClick={() => handleLogin(socialProvider)}
+    >
+      <ButtonIcon className={sizes[size].svg} />
     </button>
   );
 }

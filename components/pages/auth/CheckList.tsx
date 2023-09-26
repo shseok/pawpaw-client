@@ -8,6 +8,7 @@ interface Props {
   isChecked?: boolean;
   isShow?: boolean;
   className?: string;
+  option: number;
   setCheck: () => void;
 }
 
@@ -17,15 +18,16 @@ export default function CheckList({
   isChecked = false,
   isShow = false,
   setCheck,
+  option,
   className,
 }: Props) {
-  const checkClassName = !isShow
-    ? 'fill-transparent'
-    : isChecked
-    ? 'fill-primary-200'
-    : 'fill-grey-300';
+  let checkClassName = 'fill-transparent';
+  if (isShow) {
+    checkClassName = isChecked ? 'fill-primary-200' : 'fill-grey-300';
+  }
+  const listId = `list-${option}`;
   return (
-    <label className="cursor-pointer">
+    <label className="cursor-pointer" htmlFor={listId}>
       <div className={`flex items-center gap-[18px] ${className}`}>
         <Check className={checkClassName} />
         <div className="flex items-center gap-[10px]">
@@ -41,6 +43,7 @@ export default function CheckList({
         </div>
       </div>
       <input
+        id={listId}
         type="checkbox"
         className="hidden appearance-none"
         checked={isChecked}
