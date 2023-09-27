@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { cookies } from 'next/headers';
 import { RecommendedChatList, EnteredChatList } from '@/types/types';
 
@@ -17,17 +18,11 @@ export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
     if (!response.ok) {
       throw new Error(`서버 오류:${response.status}`);
     }
-
-    // 응답을 5초 동안 지연시킵니다.
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(null);
-      }, 3000);
-    });
     const data = await response.json();
     return data;
   } catch (error) {
     console.error(error);
+    return [];
     // throw error;
   }
 }
@@ -45,15 +40,11 @@ export async function getEnteredChatList(): Promise<EnteredChatList[]> {
     if (!response.ok) {
       throw new Error(`서버 오류:${response.status}`);
     }
-    // 응답을 5초 동안 지연시킵니다.
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(null);
-      }, 3000);
-    });
+
     const data = await response.json();
     return data;
   } catch (error) {
     console.error(error);
+    return [];
   }
 }

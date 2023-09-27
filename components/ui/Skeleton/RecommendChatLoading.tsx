@@ -7,11 +7,6 @@ import { Divider, Skeleton } from '@/components/ui/ui';
 export default function RecommendChatLoading() {
   return (
     <div className="flex flex-col w-full">
-      <h1 className="flex items-center w-full mb-3 text-xl font-bold tablet:mb-5">
-        <Skeleton className="hidden w-32 h-8 border rounded-lg tablet:block" />
-        <p className="hidden tablet:block">님에게 추천하는 </p>
-        <p>신규 채팅방</p>
-      </h1>
       <Carousel>
         {new Array(10).fill('').map((_, i) => (
           <SwiperSlide>

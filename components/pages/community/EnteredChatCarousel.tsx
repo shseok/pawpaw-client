@@ -14,7 +14,7 @@ export default function EnteredChatCarousel({
     <Carousel>
       {enteredChatlist &&
         enteredChatlist.map((list) => (
-          <SwiperSlide key={list.name} className="max-h-[538px] max-w-[517px]">
+          <SwiperSlide key={list.name}>
             <ImageChatCard {...list} />
           </SwiperSlide>
         ))}

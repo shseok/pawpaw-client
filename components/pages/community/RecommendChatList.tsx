@@ -7,11 +7,6 @@ export default async function RecommendChatList() {
 
   return (
     <FlexBox direction="column" className="gap-3 tablet:gap-5">
-      <h1 className="flex w-full mb-3 text-xl font-bold tablet:mb-5">
-        <p className="hidden text-green-600 tablet:block">지상최강감자</p>
-        <p className="hidden tablet:block">님에게 추천하는 </p>
-        <p>신규 채팅방</p>
-      </h1>
       <RecommendChatCarousel recommendedChatList={list} />
     </FlexBox>
   );

@@ -20,20 +20,22 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
     participantNumber,
   } = list;
   return (
-    <Link href="/">
-      <Image
-        src={coverUrl ?? '/default.png'}
-        alt={name}
-        width={300}
-        height={200}
-        priority
-        className="w-full h-80 rounded-t-[10px]"
-      />
+    <Link href="/" className="w-fit">
       <ChatCard>
+        <Image
+          src={coverUrl ?? '/default.png'}
+          alt={name}
+          width={300}
+          height={200}
+          priority
+          className="w-full h-80 rounded-[10px]"
+        />
         <ChatCard.Header justify="between">
           <ChatCard.Title title={name} />
           <p className="text-gray-400 body2">
-            {lastChatTime ? `최근 대화 ${lastChatTime}` : ''}
+            {lastChatTime
+              ? `최근 대화 ${lastChatTime}`
+              : '최근 대화가 없어요.🥹'}
           </p>
         </ChatCard.Header>
         <TagList list={hashTagList} />
@@ -45,7 +47,7 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
             participants={participantNumber}
           />
           <div className="flex items-center gap-3">
-            <NoticeIcon className="w-10 h-10" />
+            <NoticeIcon className="w-10 h-10 " />
             <ScheduleIcon className="w-10 h-10" />
           </div>
         </FlexBox>

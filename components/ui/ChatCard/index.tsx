@@ -1,7 +1,5 @@
 import React from 'react';
-import Avatar from '../Avatar';
-import Divider from '../Divider';
-import FlexBox from '../FlexBox';
+import { FlexBox, Divider, Avatar } from '@/components/ui/ui';
 
 type JustifyOption = 'between' | 'center' | 'around' | 'end' | 'start';
 
@@ -17,7 +15,7 @@ interface ChatCardInfoProp {
   participants: number;
 }
 
-export default function ChatCard({ children }: ChildrenProp) {
+export default function ChatCardWrapper({ children }: ChildrenProp) {
   return (
     <FlexBox
       direction="column"
@@ -28,42 +26,31 @@ export default function ChatCard({ children }: ChildrenProp) {
   );
 }
 
-ChatCard.Header = function ChatCardHeader({
-  children,
-  justify,
-}: ChatCardHeaderProp) {
+function Header({ children, justify }: ChatCardHeaderProp) {
   return (
     <FlexBox justify={justify} align="center" className="w-full">
       {children}
     </FlexBox>
   );
-};
+}
 
-ChatCard.Title = function ChatCardTitle({ title }: { title: string }) {
+function Title({ title }: { title: string }) {
   return <p className="header3">{title}</p>;
-};
+}
 
-ChatCard.Body = function ChatCardBody({ children }: ChildrenProp) {
+function Body({ children }: ChildrenProp) {
   return (
     <FlexBox direction="column" className="w-full gap-3">
       {children}
     </FlexBox>
   );
-};
+}
 
-ChatCard.Description = function ChatCardDescription({
-  description,
-}: {
-  description: string;
-}) {
+function Description({ description }: { description: string }) {
   return <p className="w-full text-gray-800 body3">{description}</p>;
-};
+}
 
-ChatCard.Info = function ChatCardInfo({
-  image,
-  name,
-  participants,
-}: ChatCardInfoProp) {
+function Info({ image, name, participants }: ChatCardInfoProp) {
   return (
     <FlexBox className="gap-3">
       <Avatar image={image} name={name} />
@@ -74,4 +61,11 @@ ChatCard.Info = function ChatCardInfo({
       </FlexBox>
     </FlexBox>
   );
-};
+}
+export const ChatCard = Object.assign(ChatCardWrapper, {
+  Header,
+  Title,
+  Body,
+  Description,
+  Info,
+});
