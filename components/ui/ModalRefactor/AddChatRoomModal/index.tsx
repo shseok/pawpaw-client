@@ -10,7 +10,7 @@ import { ModalProps } from '@/types/types';
 import useInput from '@/hooks/common/useInput';
 import XIcon from '@/public/X.svg';
 import useImageUpload from '@/hooks/common/useImageUpload';
-import postChatRoom from '@/service/chatRoom';
+import { postChatRoom } from '@/service/chatRoom';
 import { FlexBox, Divider, Button, Modal } from '../../ui';
 import HashTagInput from './HashTagInput';
 import ImageDisplay from './ImageDisplay';
@@ -53,8 +53,9 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
           locationLimit: true,
         },
       });
+      console.log(response);
       if (response.chatroomId) {
-        router.push(`chat/${response.chatroomId}`);
+        router.push(`/chat/${response.chatroomId}`);
       } else {
         throw new Error(response.message);
       }

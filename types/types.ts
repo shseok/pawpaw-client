@@ -34,3 +34,13 @@ export interface ModalProps {
   open: boolean;
   onClose: () => void;
 }
+
+export interface RecommendedChatList {
+  id: number;
+  name: string;
+  description: string;
+  hashTagList: string[];
+  managerName: string;
+  managerImageUrl: string;
+  participantNumber: number;
+}

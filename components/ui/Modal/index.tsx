@@ -34,12 +34,11 @@ function ModalWrapper({ children }: { children: ReactNode }) {
 }
 export default function Modal({ children, open, onClose }: ModalProps) {
   const [mounted, setMounted] = useState(false);
-
+  const [modalRoot, setModalRoot] = useState<Element | null>(null);
   useEffect(() => {
     setMounted(true);
+    setModalRoot(document.getElementById('modal-root'));
   }, []);
-
-  const modalRoot = document.getElementById('modal-root') as Element;
 
   const handleModalVisible = (event: KeyboardEvent) => {
     if (!open || event.key !== 'Escape') return;
@@ -56,7 +55,7 @@ export default function Modal({ children, open, onClose }: ModalProps) {
     };
   }, [open]);
 
-  if (!mounted) {
+  if (!mounted || !modalRoot) {
     return null;
   }
   return createPortal(
