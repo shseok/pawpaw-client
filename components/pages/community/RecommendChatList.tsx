@@ -1,15 +1,9 @@
-// import { redirect } from 'next/navigation';
 import FlexBox from '@/components/ui/FlexBox';
-import getRecommendedChatList from '@/service/community';
+import { getRecommendedChatList } from '@/service/community';
 import RecommendChatCarousel from './RecommendChatCarousel';
 
 export default async function RecommendChatList() {
-  const list = await getRecommendedChatList()
-    .then((res) => res)
-    .catch((error) => {
-      console.error(error);
-      // redirect('/auth/login');
-    });
+  const list = await getRecommendedChatList();
 
   return (
     <FlexBox direction="column" className="gap-3 tablet:gap-5">

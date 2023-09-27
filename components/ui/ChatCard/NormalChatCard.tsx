@@ -16,7 +16,6 @@ export default function NormalChatCard({ ...list }: RecommendedChatList) {
     name,
     participantNumber,
   } = list;
-  console.log(list);
   const router = useRouter();
   const enterChatRoom = async () => {
     if (window.confirm('채팅방에 입장하시겠습니까?')) {
