@@ -42,9 +42,7 @@ export default function Checkbox({
         >
           <Check className={isChecked ? 'fill-primary-200' : 'fill-grey-300'} />
         </div>
-        <span className={`${textColor} font-bold text-lg leading-[26px]`}>
-          {text}
-        </span>
+        <span className={`${textColor} header4`}>{text}</span>
       </div>
       <input
         id={id}

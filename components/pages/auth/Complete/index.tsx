@@ -11,7 +11,7 @@ export default function Complete() {
   const router = useRouter();
   return (
     <>
-      <div className="flex flex-col justify-center items-center gap-[24px]">
+      <div className="flex flex-col justify-center items-center gap-[24px] mb-[184px]">
         <Congratulation />
         <div className="flex flex-col justify-center items-center gap-[11px]">
           <h2 className="header2 text-primary-200 text-center">가입 완료!</h2>

@@ -90,7 +90,7 @@ export default function SelectInput({
                 setIsCustomInputOpen(true);
                 inputRef.current?.focus();
               }}
-              className="cursor-pointer px-5 py-4 hover:bg-grey-100 body1 text-grey-400"
+              className="w-full text-start cursor-pointer px-5 py-4 hover:bg-grey-100 body1 text-grey-400"
             >
               +직접입력
             </button>

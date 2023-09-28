@@ -31,11 +31,11 @@ export default function CheckList({
       <div className={`flex items-center gap-[18px] ${className}`}>
         <Check className={checkClassName} />
         <div className="flex items-center gap-[10px]">
-          <span className="text-lg leading-[26px] text-grey-600">{text}</span>
+          <span className="body1 text-grey-600">{text}</span>
           {to && (
             <Link
               href={to}
-              className="text-lg leading-[26px] text-grey-600 border-b-[1px] border-grey-600"
+              className="body1 text-grey-600 border-b-[1px] border-grey-600"
             >
               보기
             </Link>

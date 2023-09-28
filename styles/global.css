@@ -48,11 +48,6 @@
   overflow: unset !important;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 /* width */
 ::-webkit-scrollbar {
   width: 6px;

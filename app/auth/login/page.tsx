@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <>
-      <div className="flex flex-col items-center max-w-[80%]">
+      <div className="flex flex-col items-center max-w-[80%] mb-[68px]">
         <h1 className="header1">로그인</h1>
         <span className="text-center mt-4 mb-[50px] text-grey-600 body1 break-keep">
           SNS로 간편하게 로그인하고 더 많은 서비스를 즐겨보세요!

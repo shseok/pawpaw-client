@@ -20,7 +20,7 @@ export default function Policy({
 
   return (
     <>
-      <div className="flex flex-col items-center w-full gap-[56px]">
+      <div className="flex flex-col items-center w-full gap-[56px] mb-[155px]">
         <div className="flex flex-col items-center w-full">
           <h1 className="header1">{title}</h1>
           <ProgressBar step={step} />

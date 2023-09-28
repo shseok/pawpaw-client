@@ -23,7 +23,7 @@ export default function BottomButton({
   return (
     <div className="flex flex-col items-center gap-10 w-full">
       <Button
-        className="text-lg flex-1 px-[20px] py-[16px]"
+        className="header3 flex-1 px-[20px] py-[16px]"
         variant={variant}
         fullWidth={isFullWidth}
         to={to}

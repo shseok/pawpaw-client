@@ -15,7 +15,6 @@ import ProgressBar from '../ProgressBar';
 import LocationList from '../LocationList';
 import BottomButton from '../BottomButton';
 
-
 export default function Location({
   step,
   title,
@@ -65,9 +64,12 @@ export default function Location({
     setSearchHistory(inputResult);
   }, [setSearchHistory, inputResult]);
 
+  const marginBottom = !inputResult ? 'mb-[301px]' : 'mb-[45px]';
   return (
     <>
-      <div className="flex flex-col items-center max-w-[400px] w-full gap-[32px]">
+      <div
+        className={`flex flex-col items-center max-w-[400px] w-full gap-[32px] ${marginBottom}`}
+      >
         <div className="flex flex-col items-center w-full">
           <h1 className="header1">{title}</h1>
           <ProgressBar step={step} />
@@ -82,7 +84,7 @@ export default function Location({
           />
           <Button
             variant="light"
-            className="text-lg flex-1 px-[20px] py-[16px]"
+            className="body2 flex-1 px-[20px] py-[16px]"
             fullWidth
             onClickAction={handleCurrentLocationClick}
           >
