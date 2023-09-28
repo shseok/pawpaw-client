@@ -19,7 +19,7 @@ export async function GET(request: Request) {
       .join(' ');
     return NextResponse.json({ koAddress }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({}, { status: 400 });
+    return NextResponse.error();
     // return res.end();
   }
 }

@@ -4,12 +4,19 @@ import Divider from '@/components/ui/Divider';
 import { termList } from '@/constant/term';
 import Checkbox from './Checkbox';
 import CheckList from './CheckList';
+import { shallow } from 'zustand/shallow';
 
 export default function CheckListOfTerm() {
-  const isAllCheck = useRegisterStore((state) => state.allCheked);
-  const setIsAllCheck = useRegisterStore((state) => state.setAllCheked);
-  const isCheckList = useRegisterStore((state) => state.checkList);
-  const setIsCheckList = useRegisterStore((state) => state.setCheckList);
+  const { isAllCheck, setIsAllCheck, isCheckList, setIsCheckList } =
+    useRegisterStore(
+      (state) => ({
+        isAllCheck: state.allCheked,
+        setIsAllCheck: state.setAllCheked,
+        isCheckList: state.checkList,
+        setIsCheckList: state.setCheckList,
+      }),
+      shallow,
+    );
 
   const handleAllCheck = () => {
     setIsAllCheck(!isAllCheck);

@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { createWithEqualityFn } from 'zustand/traditional';
 import { termList } from '@/constant/term';
 import { devtools } from 'zustand/middleware'; // 미들웨어를 통해 Redux-devtools를 사용
 import { Species } from '@/types/types';
@@ -25,10 +25,7 @@ interface RegisterStore {
   setImageFile: (imageFile: File) => void;
 }
 
-export const useRegisterStore = create<
-  RegisterStore,
-  [['zustand/devtools', RegisterStore]]
->(
+export const useRegisterStore = createWithEqualityFn<RegisterStore>()(
   devtools((set) => ({
     step: 1,
     allCheked: false,
@@ -66,4 +63,5 @@ export const useRegisterStore = create<
     setImageFile: (imageFile: File) =>
       set((store) => ({ ...store, imageFile })),
   })),
+  Object.is,
 );
