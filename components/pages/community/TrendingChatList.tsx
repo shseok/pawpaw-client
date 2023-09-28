@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect } from 'react';
 import useGetInfiniteData from '@/hooks/queries/InfiniteData';
 import FlexBox from '@/components/ui/FlexBox';
 import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
+import { getTrendingChatList } from '@/service/community';
 
 export default function TrendingChatList() {
   const { data, Observer } = useGetInfiniteData({
@@ -11,6 +13,9 @@ export default function TrendingChatList() {
     pageSize: 5,
     inViewThreshold: 1,
   });
+  useEffect(() => {
+    getTrendingChatList(2).then((res) => console.log(res));
+  }, []);
 
   return (
     <FlexBox direction="column" className="gap-3 tablet:gap-5">

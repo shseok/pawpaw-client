@@ -43,6 +43,7 @@ interface ChatList {
   managerName: string;
   managerImageUrl: string;
   participantNumber: number;
+  trandingId?: number;
 }
 export interface RecommendedChatList extends ChatList {}
 export interface EnteredChatList extends ChatList {
