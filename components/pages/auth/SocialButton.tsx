@@ -30,7 +30,11 @@ const socialMap = {
   google: Google,
 } as const;
 
-const REDIRECT_URI = 'http://localhost:3000/term';
+const REDIRECT_URI = `${
+  process.env.NODE_ENV === 'development'
+    ? process.env.NEXT_PUBLIC_LOCAL_API_BASE_URL
+    : process.env.NEXT_PUBLIC_CLIENT_BASE_URL
+}/term`;
 
 export default function SocialButton({
   hasBorder = 'border',
