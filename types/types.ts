@@ -54,7 +54,7 @@ export type Species =
   | 'FROG';
 
 export interface AuthParams {
-  image: File;
+  image: File | string;
   body: Body;
 }
 

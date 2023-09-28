@@ -69,22 +69,22 @@ export default function Profile({
 
   const handleNext = async () => {
     // TODO: 현재 뒤로가거나 완료를 누르면 저장이 안되는데, 이는 위치를 변화시킬 때마다 임시저장 하는 방식으로 해결해야함. 일일이 입력할 때마다 상태가 변하면 다른 컴포넌트에도 영향을 주어 성능 이슈가 발생할지도
-    // setStep(step);
+    // TODO: 에러 내용 UI상 표시
     if (!key) {
       console.error('key is not exist');
       return;
     }
-    if (!imageFile) {
-      console.error('imageFile is not exist');
-      return;
-    }
+    // if (!imageFile) {
+    //   console.error('imageFile is not exist');
+    //   return;
+    // }
     if (!petInfo.species) {
       console.error('petInfo.species is not exist');
       return;
     }
     try {
       await createUserWithSocialLogin({
-        image: imageFile,
+        image: imageFile ?? '',
         body: {
           key,
           termAgrees: checkList
@@ -115,15 +115,15 @@ export default function Profile({
   const handleButtonClick = () => {
     fileInputRef.current?.click();
   };
+  // TODO: 기본이미지 선택시, 기본이미지로 설정되도록 수정
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const file = e.target.files?.[0];
-      // 파일 처리 로직을 추가하기
+      // 파일 처리 로직
       if (file) {
         // 파일을 미리보기하고 상태에 저장 (파일 처리 로직)
         const reader = new FileReader();
         reader.onload = (event) => {
-          // e.target?.result as string > data:image/gif;base64,R0lGODlhyADIAPf/AMh3Uq+TBLKzcg6bV6fTgwV7QQBN
           setUploadedImage(event.target?.result as string);
         };
         reader.readAsDataURL(file);
@@ -137,13 +137,12 @@ export default function Profile({
 
   return (
     <>
-      <div className="flex flex-col items-center max-w-[400px] w-full gap-[20px]">
+      <div className="flex flex-col items-center max-w-[400px] w-full gap-[20px] mb-[98px]">
         <div className="flex flex-col items-center w-full">
           <h1 className="header1">{title}</h1>
           <ProgressBar step={step} />
         </div>
         <div className="flex flex-col items-center w-full gap-[12px]">
-          {/* default profile */}
           <div className="rounded-full border border-grey-200 w-[100px] h-[100px] bg-white relative">
             <div className="rounded-full w-[94px] h-[94px] bg-grey-200 relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               {uploadedImage ? (
@@ -153,7 +152,6 @@ export default function Profile({
                   className="w-full h-full object-cover rounded-full"
                 />
               ) : (
-                /* 기본 프로필 이미지 */
                 <DefaultImg className="fill-grey-200 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               )}
               <button
@@ -171,7 +169,6 @@ export default function Profile({
               />
             </div>
           </div>
-          {/* required to refactor input */}
           <div className="w-full">
             <input
               type="text"
@@ -224,7 +221,7 @@ export default function Profile({
         text="완료"
         isFullWidth
         variant="primary"
-        isDisabled={!profileName || !petName || !uploadedImage}
+        isDisabled={!profileName || !petName || !selectedPet}
         handleClick={handleNext}
       />
     </>
