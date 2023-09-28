@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from '..';
 import { ModalProps } from '@/types/types';
+import Modal from '..';
 import Button from '../../Button';
 
 export default function ConfirmLocationModal({ open, onClose }: ModalProps) {

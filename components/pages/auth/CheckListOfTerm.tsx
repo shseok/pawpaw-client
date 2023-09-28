@@ -1,10 +1,9 @@
-import React from 'react';
+import { shallow } from 'zustand/shallow';
 import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
 import Divider from '@/components/ui/Divider';
 import { termList } from '@/constant/term';
 import Checkbox from './Checkbox';
 import CheckList from './CheckList';
-import { shallow } from 'zustand/shallow';
 
 export default function CheckListOfTerm() {
   const { isAllCheck, setIsAllCheck, isCheckList, setIsCheckList } =

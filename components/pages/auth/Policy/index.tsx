@@ -1,10 +1,10 @@
 'use client';
 
+import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import { useRouter, useSearchParams } from 'next/navigation';
 import ProgressBar from '../ProgressBar';
 import CheckListOfTerm from '../CheckListOfTerm';
 import BottomButton from '../BottomButton';
-import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
-import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function Policy({
   step,

@@ -1,19 +1,20 @@
 'use client';
 
+import { shallow } from 'zustand/shallow';
 import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
-import ProgressBar from '../ProgressBar';
-import useGeolocation from '@/hooks/common/useGeolocation';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useDebounce } from 'use-debounce';
+import useGeolocation from '@/hooks/common/useGeolocation';
 import useInput from '@/hooks/common/useInput';
 import { useEffect } from 'react';
 import { Button, SearchInput } from '@/components/ui/ui';
 import { getLocationKoreanName } from '@/service/map';
 import Detect from '@/public/Auth/detect.svg';
+import ConfirmLocationModal from '@/components/ui/Modal/ConfirmLocationModal';
+import ProgressBar from '../ProgressBar';
 import LocationList from '../LocationList';
 import BottomButton from '../BottomButton';
-import ConfirmLocationModal from '@/components/ui/Modal/ConfirmLocationModal';
-import { useDebounce } from 'use-debounce';
-import { shallow } from 'zustand/shallow';
+
 
 export default function Location({
   step,
