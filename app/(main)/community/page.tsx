@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import type { Metadata } from 'next';
 import EnteredChatList from '@/components/pages/community/EnteredChatList';
 import RecommendChatList from '@/components/pages/community/RecommendChatList';
 import TrendingChatList from '@/components/pages/community/TrendingChatList';
@@ -6,6 +7,11 @@ import AddChatRoomButton from '@/components/pages/community/AddChatRoomButton';
 import RecommendChatLoading from '@/components/ui/Skeleton/RecommendChatLoading';
 import EnteredChatLoading from '@/components/ui/Skeleton/EnteredChatLoading';
 import getUserInfo from '@/service/user';
+
+export const metadata: Metadata = {
+  title: 'pawpaw | Comunity',
+  description: '반려동물 모임을 위한 실시간 오픈채팅 커뮤니티',
+};
 
 export default async function CommunityPage() {
   const userInfo = await getUserInfo();
