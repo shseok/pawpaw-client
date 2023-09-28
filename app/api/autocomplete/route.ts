@@ -9,8 +9,8 @@ export async function GET(request: Request) {
     //   status: 400,
     // });
   }
-  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=(regions)&language=ko&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`;
-  const url2 = `https://maps.googleapis.com/maps/api/geocode/json?address=${input}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`;
+  const autocompleteUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=(regions)&language=ko&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`;
+  const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${input}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`;
 
   async function fetchData(urlString: string) {
     const response = await fetch(urlString).then((res) => res.json());
@@ -19,8 +19,8 @@ export async function GET(request: Request) {
 
   try {
     const [autocompleteResult, geocodeResult] = await Promise.all([
-      fetchData(url),
-      fetchData(url2),
+      fetchData(autocompleteUrl),
+      fetchData(geocodeUrl),
     ]);
     const { lat, lng } = geocodeResult.results[0].geometry.location;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
