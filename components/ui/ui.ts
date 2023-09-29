@@ -1,6 +1,6 @@
 import Skeleton from './Skeleton/Skeleton';
 import DatePicker from './DatePicker';
-import { ChatCard } from './ChatCard';
+import ChatCard from './ChatCard';
 import Dropdown from './Dropdown/Dropdown';
 import { RadioGroup } from './RadioGroup';
 import Avatar from './Avatar';

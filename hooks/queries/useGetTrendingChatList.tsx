@@ -18,7 +18,7 @@ export default function useGetTrendingChatList() {
       },
     );
   function Observer({ children }: { children: React.ReactNode }) {
-    const [ref, inView] = useInView();
+    const [ref, inView] = useInView({ threshold: 0.5 });
     useEffect(() => {
       if (!data) return;
       if (hasNextPage && inView) fetchNextPage();
