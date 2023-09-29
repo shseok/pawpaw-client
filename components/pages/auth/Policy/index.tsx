@@ -17,6 +17,7 @@ export default function Policy({
   const router = useRouter();
   const searchParams = useSearchParams();
   const key = searchParams.get('key');
+  const next = searchParams.get('next');
 
   return (
     <>
@@ -33,7 +34,11 @@ export default function Policy({
         variant="primary"
         isDisabled={checkList.slice(0, 3).some((v) => !v)}
         handleClick={() => {
-          router.push(`/auth/social/location?key=${key}`);
+          if (next) {
+            router.push(`${next}`);
+            return;
+          }
+          router.push(`/auth/location?key=${key}`);
         }}
       />
     </>

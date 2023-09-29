@@ -102,7 +102,7 @@ export default function Location({
         variant="primary"
         isDisabled={!position.lat}
         handleClick={() => {
-          router.push(`/auth/social/profile?key=${key}`);
+          router.push(`/auth/profile?key=${key}`);
         }}
       />
       <ConfirmLocationModal

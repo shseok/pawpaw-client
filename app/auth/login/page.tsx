@@ -32,7 +32,7 @@ export default function LoginPage() {
       </div>
       <BottomButton
         text="간편 회원가입 하기"
-        to="/auth/register"
+        to="/auth/policy?next=/auth/register"
         variant="ghost"
         isFullWidth
       >
