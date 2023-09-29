@@ -19,7 +19,7 @@ export default function ChatCardWrapper({ children }: ChildrenProp) {
   return (
     <FlexBox
       direction="column"
-      className="w-full shadow-chatCard max-w-[517px] rounded-[10px] gap-3 p-4 sm:p-6"
+      className="w-full shadow-chatCard max-w-[517px] max-h-[538px] h-full rounded-[10px] gap-3 p-4 sm:p-6"
     >
       {children}
     </FlexBox>

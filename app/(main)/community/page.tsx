@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 
 export default async function CommunityPage() {
   const userInfo = await getUserInfo();
-  console.log('userInfo', userInfo);
   return (
     <main className="flex flex-col w-full gap-10  p-8 overflow-hidden mt-[60px] tablet:mt-0">
       <h1 className="header2">참여중인 채팅방</h1>
@@ -23,7 +22,9 @@ export default async function CommunityPage() {
         <EnteredChatList />
       </Suspense>
       <h1 className="flex w-full mb-3 text-xl font-bold tablet:mb-5">
-        <p className="hidden text-green-600 tablet:block">지상최강감자</p>
+        <p className="hidden text-green-600 tablet:block">
+          {userInfo.nickname}
+        </p>
         <p className="hidden tablet:block">님에게 추천하는 </p>
         <p>신규 채팅방</p>
       </h1>

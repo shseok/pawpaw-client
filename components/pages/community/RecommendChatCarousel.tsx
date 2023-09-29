@@ -14,7 +14,7 @@ export default function RecommendChatCarousel({
     const response = await fetch(`/api/auth`, {
       method: 'POST',
       body: JSON.stringify({
-        email: 'test8@gmail.com',
+        email: 'test5@gmail.com',
         password: '1234',
       }),
       mode: 'cors',

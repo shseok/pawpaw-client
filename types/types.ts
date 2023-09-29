@@ -43,7 +43,7 @@ interface ChatList {
   managerName: string;
   managerImageUrl: string;
   participantNumber: number;
-  trandingId?: number;
+  trendingId: number;
 }
 export interface RecommendedChatList extends ChatList {}
 export interface EnteredChatList extends ChatList {
@@ -65,4 +65,13 @@ export interface TrendingChatList {
   pageSize: number;
   paged: boolean;
   unpaged: boolean;
+}
+
+export interface UserInfo {
+  email: string;
+  role: string;
+  nickname: string;
+  briefIntroduction: string;
+  position: { latitude: number; longitude: number; name: string };
+  imageUrl: string;
 }

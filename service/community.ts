@@ -54,12 +54,14 @@ export async function getEnteredChatList(
     return [];
   }
 }
-
 export async function getTrendingChatList(
   beforeId: number,
 ): Promise<TrendingChatList> {
+  let url = 'http://localhost:3000/api/chatroom/trending?size=9';
+  if (beforeId !== 0) {
+    url += `&beforeId=${beforeId}`;
+  }
   try {
-    const url = `http://localhost:3000/api/chatroom/trending?beforeId=${beforeId}&size=9`;
     const response = await fetch(url);
     if (!response.ok) {
       throw Error(`서버 오류 ${response.status}`);
@@ -67,6 +69,7 @@ export async function getTrendingChatList(
     if (response.status === 401) {
       throw new Error('로그인이 필요한 서비스입니다.');
     }
+
     return await response.json();
   } catch (error) {
     console.error(error);

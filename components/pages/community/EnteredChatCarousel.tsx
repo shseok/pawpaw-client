@@ -10,6 +10,9 @@ export default function EnteredChatCarousel({
 }: {
   enteredChatlist: EnteredChatList[];
 }) {
+  if (enteredChatlist.length === 0) {
+    return <div className="header2">참여중인 채팅방이 없어요.🐶</div>;
+  }
   return (
     <Carousel>
       {enteredChatlist &&

@@ -29,10 +29,17 @@ export async function postChatRoom(chatRoomData: ChatRoomType) {
 
 export async function joinChatRoom(id: number) {
   const url = `http://localhost:3000/api/chatroom/${id}/participants`;
-  const response = await fetch(url, {
-    method: 'POST',
-  });
-  console.log(response);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+    });
+    if (response.status === 401) {
+      throw new Error('로그인이 필요한 서비스입니다.');
+    }
+    if (!response.ok) {
+      throw new Error(`서버 오류:${response.status}`);
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }

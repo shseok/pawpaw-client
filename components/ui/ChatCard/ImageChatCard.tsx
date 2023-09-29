@@ -8,7 +8,6 @@ import { FlexBox, Divider, TagList, ChatCard } from '@/components/ui/ui';
 export default function ImageChatCard({ ...list }: EnteredChatList) {
   const {
     coverUrl,
-    description,
     hasNotice,
     hasSchedule,
     hashTagList,
@@ -20,7 +19,7 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
     participantNumber,
   } = list;
   return (
-    <Link href="/" className="w-fit">
+    <Link href={`/chat/${id}`} className="w-fit">
       <ChatCard>
         <Image
           src={coverUrl ?? '/default.png'}
@@ -28,7 +27,7 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
           width={300}
           height={200}
           priority
-          className="w-full h-80 rounded-[10px]"
+          className="w-full  h-80 rounded-[10px]"
         />
         <ChatCard.Header justify="between">
           <ChatCard.Title title={name} />
