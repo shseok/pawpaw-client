@@ -1,8 +1,6 @@
 'use client';
 
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -53,7 +51,6 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
           locationLimit: true,
         },
       });
-      console.log(response);
       if (response.chatroomId) {
         router.push(`/chat/${response.chatroomId}`);
       } else {

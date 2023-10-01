@@ -1,17 +1,27 @@
-import { cookies } from 'next/headers';
+'use client';
 
+import { SwiperSlide } from 'swiper/react';
 import FlexBox from '@/components/ui/FlexBox';
-import { getRecommendedChatList } from '@/service/community';
-import RecommendChatCarousel from './RecommendChatCarousel';
+import useGetRecommendChatList from '@/hooks/queries/useGetRecommendChatList';
+import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
+import RecommendChatLoading from '@/components/ui/Skeleton/RecommendChatLoading';
+import Carousel from './Carousel';
 
-export default async function RecommendChatList() {
-  const list = await getRecommendedChatList(
-    cookies().get('ACCESS')?.value as string,
-  );
-
+export default function RecommendChatList() {
+  const { data, isLoading } = useGetRecommendChatList();
+  if (isLoading) {
+    return <RecommendChatLoading />;
+  }
   return (
     <FlexBox direction="column" className="gap-3 tablet:gap-5">
-      <RecommendChatCarousel recommendedChatList={list} />
+      <Carousel>
+        {data &&
+          data.map((list) => (
+            <SwiperSlide key={list.id}>
+              <NormalChatCard {...list} />
+            </SwiperSlide>
+          ))}
+      </Carousel>
     </FlexBox>
   );
 }

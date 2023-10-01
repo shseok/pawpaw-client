@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers';
 import { UserInfo } from '@/types/types';
 
-// eslint-disable-next-line consistent-return
 export default async function getUserInfo(): Promise<UserInfo> {
   try {
     const url = 'http://localhost:3000/api/user';
@@ -11,9 +10,9 @@ export default async function getUserInfo(): Promise<UserInfo> {
         Cookie: `ACCESS=${cookies()?.get('ACCESS')?.value as string}`,
       },
     });
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error(error);
+    throw error;
   }
 }

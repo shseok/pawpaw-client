@@ -1,11 +1,24 @@
-import { cookies } from 'next/headers';
-import { getEnteredChatList } from '@/service/community';
-import EnteredChatCarousel from './EnteredChatCarousel';
+'use client';
 
-export default async function EnteredChatList() {
-  const list = await getEnteredChatList(
-    cookies().get('ACCESS')?.value as string,
+import { SwiperSlide } from 'swiper/react';
+import useGetEnteredChatList from '@/hooks/queries/useGetEnteredChatList';
+import ImageChatCard from '@/components/ui/ChatCard/ImageChatCard';
+import EnteredChatLoading from '@/components/ui/Skeleton/EnteredChatLoading';
+import Carousel from './Carousel';
+
+export default function EnteredChatList() {
+  const { data, isLoading } = useGetEnteredChatList();
+  if (isLoading) {
+    return <EnteredChatLoading />;
+  }
+  return (
+    <Carousel>
+      {data &&
+        data.map((list) => (
+          <SwiperSlide key={list.id}>
+            <ImageChatCard {...list} />
+          </SwiperSlide>
+        ))}
+    </Carousel>
   );
-
-  return <EnteredChatCarousel enteredChatlist={list} />;
 }

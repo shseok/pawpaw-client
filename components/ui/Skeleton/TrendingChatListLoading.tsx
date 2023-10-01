@@ -7,7 +7,7 @@ export default function TrendingChatListLoading() {
         <div
           className="w-full flex flex-col gap-2 max-w-[517px] shadow-chatCard p-4 sm:p-6 rounded-[10px]"
           // eslint-disable-next-line react/no-array-index-key
-          key={i}
+          key={`trending-${i}`}
         >
           <Skeleton className="w-20 h-8 rounded-lg mb-2.5" />
           <Skeleton className="w-40 h-8 mb-8 rounded-lg" />

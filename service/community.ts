@@ -1,77 +1,72 @@
-import {
-  RecommendedChatList,
-  EnteredChatList,
-  TrendingChatList,
-} from '@/types/types';
+/* eslint-disable consistent-return */
 
-export async function getRecommendedChatList(
-  cookie: string,
-): Promise<RecommendedChatList[]> {
+import { RecommendedChatList, EnteredChatList } from '@/types/types';
+import { AuthError } from '../lib/error';
+
+export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
   try {
     const url = `http://localhost:3000/api/chatroom/recommended`;
-    const response = await fetch(url, {
-      cache: 'no-store',
-      headers: {
-        Cookie: `ACCESS=${cookie}`,
-      },
-    });
+    const response = await fetch(url);
 
     if (response.status === 401) {
-      throw new Error('로그인이 필요한 서비스입니다.');
+      throw new AuthError('로그인이 필요한 서비스입니다.');
     }
     if (!response.ok) {
-      throw new Error(`서버 오류:${response.status}`);
+      throw new Error(`서버오류:${response.status}`);
     }
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
+    if (error instanceof AuthError) {
+      window.location.replace('/auth/login');
+      alert(error.message);
+    }
     console.error(error);
-    return [];
-    // throw error;
+    throw error;
   }
 }
-export async function getEnteredChatList(
-  cookie: string,
-): Promise<EnteredChatList[]> {
+
+export async function getEnteredChatList(): Promise<EnteredChatList[]> {
   try {
     const url = `http://localhost:3000/api/chatroom/participated`;
-    const response = await fetch(url, {
-      headers: {
-        Cookie: `ACCESS=${cookie}`,
-      },
-    });
+    const response = await fetch(url);
+
     if (response.status === 401) {
-      throw new Error('로그인이 필요한 서비스입니다.');
+      throw new AuthError('로그인이 필요한 서비스입니다.');
     }
     if (!response.ok) {
-      throw new Error(`서버 오류:${response.status}`);
+      throw new Error(`서버오류:${response.status}`);
     }
-
-    const data = await response.json();
-    return data;
+    console.log(response);
+    return await response.json();
   } catch (error) {
+    if (error instanceof AuthError) {
+      window.location.replace('/auth/login');
+      alert(error.message);
+    }
     console.error(error);
-    return [];
+    throw error;
   }
 }
-export async function getTrendingChatList(
-  beforeId: number,
-): Promise<TrendingChatList> {
+
+export async function getTrendingChatList(beforeId: number) {
   let url = 'http://localhost:3000/api/chatroom/trending?size=9';
   if (beforeId !== 0) {
     url += `&beforeId=${beforeId}`;
   }
   try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw Error(`서버 오류 ${response.status}`);
-    }
+    const response = await fetch(url, { credentials: 'include' });
     if (response.status === 401) {
-      throw new Error('로그인이 필요한 서비스입니다.');
+      throw new AuthError('로그인이 필요한 서비스입니다.');
     }
-
+    if (!response.ok) {
+      throw new Error(`서버오류:${response.status}`);
+    }
     return await response.json();
   } catch (error) {
+    if (error instanceof AuthError) {
+      window.location.replace('/auth/login');
+      alert(error.message);
+    }
     console.error(error);
     throw error;
   }

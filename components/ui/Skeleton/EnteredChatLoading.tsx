@@ -8,8 +8,9 @@ import Divider from '../Divider';
 export default function EnteredChatLoading() {
   return (
     <Carousel>
-      {new Array(10).fill('').map((i) => (
-        <SwiperSlide key={i}>
+      {new Array(10).fill('').map((_, index) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <SwiperSlide key={`entered-${index}`}>
           <div className="shadow-chatCard w-full max-w-[517px] h-full max-h-[538px] rounded-[10px]">
             <div className="flex flex-col gap-4 p-5">
               <Skeleton className="rounded-[10px] w-full h-80" />
