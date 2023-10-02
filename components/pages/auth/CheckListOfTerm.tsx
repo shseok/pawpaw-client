@@ -1,5 +1,5 @@
 import { shallow } from 'zustand/shallow';
-import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import { useSocialRegisterStore } from '@/hooks/stores/useSocialRegisterStore';
 import Divider from '@/components/ui/Divider';
 import { termList } from '@/constant/term';
 import Checkbox from './Checkbox';
@@ -7,7 +7,7 @@ import CheckList from './CheckList';
 
 export default function CheckListOfTerm() {
   const { isAllCheck, setIsAllCheck, isCheckList, setIsCheckList } =
-    useRegisterStore(
+    useSocialRegisterStore(
       (state) => ({
         isAllCheck: state.allCheked,
         setIsAllCheck: state.setAllCheked,

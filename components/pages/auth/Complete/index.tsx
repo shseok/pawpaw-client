@@ -2,12 +2,12 @@
 
 import React from 'react';
 import Congratulation from '@/public/Auth/congratulation.svg';
-import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import { useSocialRegisterStore } from '@/hooks/stores/useSocialRegisterStore';
 import { useRouter } from 'next/navigation';
 import BottomButton from '@/components/pages/auth/BottomButton';
 
 export default function Complete() {
-  const nickName = useRegisterStore((state) => state.nickname);
+  const nickName = useSocialRegisterStore((state) => state.nickname);
   const router = useRouter();
   return (
     <>

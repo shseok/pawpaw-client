@@ -1,7 +1,7 @@
 'use client';
 
 import { shallow } from 'zustand/shallow';
-import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import { useSocialRegisterStore } from '@/hooks/stores/useSocialRegisterStore';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDebounce } from 'use-debounce';
 import useGeolocation from '@/hooks/common/useGeolocation';
@@ -23,7 +23,7 @@ export default function Location({
   title: string;
 }) {
   const { position, setPosition, searchHistory, setSearchHistory } =
-    useRegisterStore(
+    useSocialRegisterStore(
       (state) => ({
         position: state.position,
         setPosition: state.setPosition,

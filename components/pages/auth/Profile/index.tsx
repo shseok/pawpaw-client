@@ -5,7 +5,7 @@ import ProgressBar from '@/components/pages/auth/ProgressBar';
 import { SelectInput } from '@/components/ui/ui';
 import { invertedPetMaps, petMaps } from '@/constant/pets';
 import useInput from '@/hooks/common/useInput';
-import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import { useSocialRegisterStore } from '@/hooks/stores/useSocialRegisterStore';
 import DefaultImg from '@/public/Auth/dog.svg';
 import Pencil from '@/public/Auth/pencil.svg';
 import createUserWithSocialLogin from '@/service/auth';
@@ -30,7 +30,7 @@ export default function Profile({
     checkList,
     imageFile,
     setImageFile,
-  } = useRegisterStore(
+  } = useSocialRegisterStore(
     (state) => ({
       nickname: state.nickname,
       petInfo: state.petInfo,

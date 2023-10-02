@@ -1,6 +1,6 @@
 'use client';
 
-import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import { useSocialRegisterStore } from '@/hooks/stores/useSocialRegisterStore';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ProgressBar from '../ProgressBar';
 import CheckListOfTerm from '../CheckListOfTerm';
@@ -13,7 +13,7 @@ export default function Policy({
   step: number;
   title: string;
 }) {
-  const checkList = useRegisterStore((state) => state.checkList);
+  const checkList = useSocialRegisterStore((state) => state.checkList);
   const router = useRouter();
   const searchParams = useSearchParams();
   const key = searchParams.get('key');
