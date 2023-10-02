@@ -22,7 +22,7 @@ function Overlay({
 }) {
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center w-full bg-black bg-opacity-70"
+      className="fixed inset-0 z-50 flex items-center justify-center w-full h-screen bg-black bg-opacity-70"
       onClick={onClose}
     >
       {children}
@@ -35,6 +35,7 @@ function ModalWrapper({ children }: { children: ReactNode }) {
 export default function Modal({ children, open, onClose }: ModalProps) {
   const [mounted, setMounted] = useState(false);
   const [modalRoot, setModalRoot] = useState<Element | null>(null);
+
   useEffect(() => {
     setMounted(true);
     setModalRoot(document.getElementById('modal-root'));

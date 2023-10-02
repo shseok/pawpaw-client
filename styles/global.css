@@ -39,6 +39,9 @@
   .focus-error {
     @apply duration-200 outline-none focus:ring-1 focus:ring-red;
   }
+  .focus-none {
+    @apply duration-200 outline-none focus:ring-0;
+  }
 }
 
 .swiper {
@@ -48,4 +51,25 @@
 .swiper-slide {
   /* width: fit-content !important; */
   margin-right: 20px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 1px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b4b0b0;
 }
