@@ -2,7 +2,7 @@
 
 import { SwiperSlide } from 'swiper/react';
 import Carousel from '@/components/pages/community/Carousel';
-import Skeleton from './Skeleton';
+import Skeleton from '../Skeleton/Skeleton';
 import Divider from '../Divider';
 
 export default function EnteredChatLoading() {

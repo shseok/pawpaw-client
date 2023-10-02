@@ -4,7 +4,7 @@ import { SwiperSlide } from 'swiper/react';
 import FlexBox from '@/components/ui/FlexBox';
 import useGetRecommendChatList from '@/hooks/queries/useGetRecommendChatList';
 import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
-import RecommendChatLoading from '@/components/ui/Skeleton/RecommendChatLoading';
+import RecommendChatLoading from '@/components/ui/Loading/RecommendChatLoading';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 import Carousel from './Carousel';
 

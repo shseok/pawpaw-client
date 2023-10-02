@@ -3,7 +3,7 @@
 import { SwiperSlide } from 'swiper/react';
 import useGetEnteredChatList from '@/hooks/queries/useGetEnteredChatList';
 import ImageChatCard from '@/components/ui/ChatCard/ImageChatCard';
-import EnteredChatLoading from '@/components/ui/Skeleton/EnteredChatLoading';
+import EnteredChatLoading from '@/components/ui/Loading/EnteredChatLoading';
 import Carousel from './Carousel';
 
 export default function EnteredChatList() {

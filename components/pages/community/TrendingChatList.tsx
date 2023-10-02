@@ -3,7 +3,7 @@
 import FlexBox from '@/components/ui/FlexBox';
 import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
 import useGetTrendingChatList from '@/hooks/queries/useGetTrendingChatList';
-import TrendingChatListLoading from '@/components/ui/Skeleton/TrendingChatListLoading';
+import TrendingChatListLoading from '@/components/ui/Loading/TrendingChatListLoading';
 
 export default function TrendingChatList() {
   const { data, Observer } = useGetTrendingChatList();
