@@ -6,16 +6,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import FlexBox from '@/components/ui/FlexBox';
 import ArrowClockIcon from '@/public/ArrowClockwise.svg';
+import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 
-interface PropsType {
-  geoCode: { lat: number; lng: number };
-}
 type RecommendedPlaceDetail = google.maps.places.PlaceResult;
 
-export default function RecommendPlace({ geoCode }: PropsType) {
+export default function RecommendPlace() {
   const [placeDetail, setPlaceDetail] = useState<RecommendedPlaceDetail>();
   const [placesArray, setPlacesArray] = useState<RecommendedPlaceDetail[]>([]);
   const [distance, setDistance] = useState('');
+  const { data } = useGetUserInfo();
+
   const libraries = useMemo(() => ['places'], []);
   const { isLoaded } = useJsApiLoader({
     language: 'KO',
@@ -28,8 +28,8 @@ export default function RecommendPlace({ geoCode }: PropsType) {
     (destination: RecommendedPlaceDetail) => {
       const distanceService = new window.google.maps.DistanceMatrixService();
       const userCurrentLocation = new window.google.maps.LatLng(
-        geoCode.lat,
-        geoCode.lng,
+        data?.position.latitude as number,
+        data?.position.longitude,
       );
       const destinationLatLng = destination.geometry?.location;
 
@@ -46,7 +46,7 @@ export default function RecommendPlace({ geoCode }: PropsType) {
         );
       }
     },
-    [geoCode.lat, geoCode.lng],
+    [data?.position.latitude, data?.position.longitude],
   );
 
   const changePlaceByIndex = useCallback(() => {
@@ -59,8 +59,8 @@ export default function RecommendPlace({ geoCode }: PropsType) {
   const onMapLoad = useCallback(
     (map: google.maps.Map) => {
       const userCurrentLocation = new window.google.maps.LatLng(
-        geoCode.lat,
-        geoCode.lng,
+        data?.position.latitude as number,
+        data?.position.longitude,
       );
       const placesService = new window.google.maps.places.PlacesService(map);
 
@@ -84,7 +84,7 @@ export default function RecommendPlace({ geoCode }: PropsType) {
         }
       });
     },
-    [calculateDistance, geoCode.lat, geoCode.lng],
+    [calculateDistance, data?.position.latitude, data?.position.longitude],
   );
 
   return (
@@ -114,7 +114,7 @@ export default function RecommendPlace({ geoCode }: PropsType) {
         </div>
         <FlexBox direction="column" align="start" className="w-full gap-1">
           <div className="flex gap-1">
-            <p className="w-5/6 truncate body2">
+            <p className="truncate w-52 body2">
               {placeDetail && placeDetail.name}
             </p>
             <p className="body3 min-w-fit text-grey-300">{distance}</p>
