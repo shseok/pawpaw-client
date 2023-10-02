@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
-const useImageUpload = (defaultImage: string) => {
+const useImageUpload = (defaultImage?: string) => {
   const [imagePreview, setImagePreview] = useState(defaultImage);
   const [imageFile, setImageFile] = useState<File>();
   // eslint-disable-next-line consistent-return
@@ -13,6 +13,6 @@ const useImageUpload = (defaultImage: string) => {
     setImagePreview(URL.createObjectURL(file));
   };
 
-  return { imagePreview, imageFile, handleImageUpload };
+  return { imagePreview, setImagePreview, imageFile, handleImageUpload };
 };
 export default useImageUpload;

@@ -12,7 +12,6 @@ import { postChatRoom } from '@/service/chatRoom';
 import { FlexBox, Divider, Button, Modal } from '../../ui';
 import HashTagInput from './HashTagInput';
 import ImageDisplay from './ImageDisplay';
-import ImageList from './ImageList';
 import MobileHeader from './MobileHeader';
 import OptionRadioGroup from './OptionRadioGroup';
 
@@ -24,9 +23,7 @@ interface FormData {
 export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [tag, onChangeTag, resetTag] = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
-  const { handleImageUpload, imageFile, imagePreview } = useImageUpload(
-    '/images/AddChatModal/default2.webp',
-  );
+  const { handleImageUpload, imageFile, imagePreview } = useImageUpload();
   const [option, setOption] = useState('1');
   const router = useRouter();
   const {
@@ -62,6 +59,11 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
     }
   };
   const onSubmit: SubmitHandler<FormData> = (data) => {
+    if (!imageFile) {
+      // 스낵바 컴포넌트가 완성되면 바꿀예정
+      alert('커버이미지를 업로드 해주세요.');
+      return;
+    }
     onCreateChatRoom(data);
   };
   return (
@@ -73,7 +75,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             event.preventDefault();
           }
         }}
-        className="flex flex-col w-screen tablet:w-[1028px] h-screen tablet:h-[720px]"
+        className="flex flex-col w-screen tablet:w-[800px] h-screen tablet:h-[720px]"
       >
         <div className="self-end hidden tablet:block">
           <button type="button" onClick={onClose}>
@@ -132,12 +134,11 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             />
           </FlexBox>
 
-          <FlexBox className="order-1 gap-4 tablet:order-2">
+          <FlexBox className="order-1 gap-2 tablet:order-2">
             <ImageDisplay
               image={imagePreview}
               onChangeImage={handleImageUpload}
             />
-            <ImageList onChangeImage={handleImageUpload} />
           </FlexBox>
           <OptionRadioGroup
             option={option}

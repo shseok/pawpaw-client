@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 
 export default async function CommunityPage() {
   const userInfo = await getUserInfo();
-  console.log('userInfo', userInfo);
   return (
     <main className="flex flex-col w-full gap-10  p-8 overflow-hidden mt-[60px] tablet:mt-0">
       <h1 className="header2">참여중인 채팅방</h1>

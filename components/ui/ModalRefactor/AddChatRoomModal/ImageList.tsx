@@ -1,40 +1,19 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import Image from 'next/image';
 import CameraIcon from '@/public/Camera.svg';
 import CaretLeftIcon from '@/public/CaretLeft.svg';
 import CaretRightIcon from '@/public/CaretRight.svg';
-
-const FIRST_IMAGWE_LIST = [
-  '/images/AddChatModal/default2.webp',
-  '/images/AddChatModal/default3.webp',
-  '/images/AddChatModal/default4.webp',
-  '/images/AddChatModal/default5.webp',
-  '/images/AddChatModal/default6.webp',
-  '/images/AddChatModal/default7.webp',
-  '/images/AddChatModal/default8.webp',
-];
-const SECOND_IMAGWE_LIST = [
-  '/images/AddChatModal/default9.webp',
-  '/images/AddChatModal/default10.webp',
-  '/images/AddChatModal/default11.webp',
-  '/images/AddChatModal/default12.webp',
-];
+import useGetCoverImageList from '@/hooks/queries/useGetCoverImageLIst';
 
 interface ImageListProps {
   onChangeImage: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function ImageList({ onChangeImage }: ImageListProps) {
-  const [imaegList, setImageList] = useState<string[]>(FIRST_IMAGWE_LIST);
-  const onNetxImageList = () => {
-    setImageList(SECOND_IMAGWE_LIST);
-  };
-  const onPrevImageList = () => {
-    setImageList(FIRST_IMAGWE_LIST);
-  };
+  const { data: coverImageList } = useGetCoverImageList();
 
   return (
-    <div className="flex-col flex-1 hidden gap-5 tablet:flex">
+    <div className="flex-col flex-1 hidden gap-3 tablet:flex">
       <div className="flex justify-between">
         <span className="text-grey-600 body3">커버선택</span>
         <div className="flex items-center gap-2">
@@ -42,14 +21,14 @@ export default function ImageList({ onChangeImage }: ImageListProps) {
           <div className="border divide-x rounded-[10px]">
             <button
               type="button"
-              onClick={onPrevImageList}
+              // onClick={onPrevImageList}
               className="p-2 rounded-l-[10px] hover:bg-gray-100 active:bg-grey-200"
             >
               <CaretLeftIcon className="w-[14px] h-[14px]" />
             </button>
             <button
               type="button"
-              onClick={onNetxImageList}
+              // onClick={onNetxImageList}
               className="p-2 rounded-r-[10px] hover:bg-gray-100 active:bg-grey-200"
             >
               <CaretRightIcon className="w-[14px] h-[14px]" />
@@ -60,7 +39,7 @@ export default function ImageList({ onChangeImage }: ImageListProps) {
       <ul className="grid grid-cols-4 gap-2 ">
         <li>
           <label
-            className="flex flex-col items-center justify-center w-full h-full cursor-pointer bg-grey-200"
+            className="flex flex-col items-center justify-center w-full h-24 rounded-md cursor-pointer bg-grey-200"
             htmlFor="imageUpload"
           >
             <input
@@ -74,14 +53,15 @@ export default function ImageList({ onChangeImage }: ImageListProps) {
             <span className="capion1 text-grey-400">사진추가</span>
           </label>
         </li>
-        {imaegList.map((img) => (
-          <li key={img} className="cursor-pointer ">
+        {coverImageList?.map((img) => (
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+          <li key={img.id} className="cursor-pointer">
             <Image
-              src={img}
+              src={img.coverUrl}
               alt=""
               width={120}
               height={90}
-              className="h-24 duration-150 w-30 hover:scale-105"
+              className="h-24 duration-150 rounded-md w-30 hover:scale-105"
             />
           </li>
         ))}
