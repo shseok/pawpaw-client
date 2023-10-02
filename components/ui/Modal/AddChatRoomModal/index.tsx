@@ -140,7 +140,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             />
           </FlexBox>
 
-          <FlexBox className="order-1 gap-2 tablet:order-2">
+          <FlexBox className="order-1 tablet:order-2">
             <ImageDisplay
               image={imagePreview}
               onChangeImage={handleImageUpload}
