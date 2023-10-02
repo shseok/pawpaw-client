@@ -1,3 +1,4 @@
+import Skeleton from './Skeleton/Skeleton';
 import DatePicker from './DatePicker';
 import ChatCard from './ChatCard';
 import Dropdown from './Dropdown/Dropdown';
@@ -28,4 +29,5 @@ export {
   DatePicker,
   ChatCard,
   RadioGroup,
+  Skeleton,
 };

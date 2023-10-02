@@ -3,10 +3,25 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const API_KEY = process.env.NEXT_PUBLIC_API_URL;
 
-const nextConfig = withBundleAnalyzer({
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/:path*',
+        destination: `https://pawpawdev.duckdns.org/:path*`,
+      },
+    ];
+  },
   reactStrictMode: true,
   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
     domains: ['via.placeholder.com'],
   },
@@ -18,6 +33,6 @@ const nextConfig = withBundleAnalyzer({
     });
     return config;
   },
-});
+};
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

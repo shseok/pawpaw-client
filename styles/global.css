@@ -46,6 +46,11 @@
 
 .swiper {
   overflow: unset !important;
+  width: 100%;
+}
+.swiper-slide {
+  /* width: fit-content !important; */
+  margin-right: 20px;
 }
 
 /* width */

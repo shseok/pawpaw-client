@@ -7,7 +7,7 @@ import ArrowRightIcon from '@/public/arrow-right.svg';
 import Modal from '@/components/ui/Modal';
 import ChatUserListMobile from './ChatUserListMobile';
 import ScheduleListMobile from '../Schedule/ScheduleListMobile';
-import LeaveChatRoomModal from '../Modal/LeaveChatRoomModal';
+import LeaveChatRoomModal from '../../../ui/Modal/LeaveChatRoomModal/LeaveChatRoomModal';
 
 type ModalType = '공지' | '사진' | '채팅방 나가기' | '인원' | '스케줄' | '';
 type ModalActionType = Dispatch<SetStateAction<ModalType>>;

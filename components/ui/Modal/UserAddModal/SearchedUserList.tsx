@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import ChatUser from '../ChatRoom/ChatUser';
+import ChatUser from '../../../pages/chat/ChatRoom/ChatUser';
 
 interface SearchedUserListType {
   userList: {

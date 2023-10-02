@@ -1,34 +1,59 @@
+'use client';
+
+/* eslint-disable no-alert */
+import { useRouter } from 'next/navigation';
 import ShareIcon from '@/public/share.svg';
 import BadgeIcon from '@/public/Badge.svg';
-import ChatCard from '.';
-import TagList from '../TagList';
-import Divider from '../Divider';
-import Button from '../Button';
+import { RecommendedChatList } from '@/types/types';
+import { joinChatRoom } from '@/service/chatRoom';
+import copyURL from '@/utils/copyURL';
+import { ChatCard } from '.';
+import { Button, Divider, TagList } from '../ui';
 
-export default function NormalChatCard() {
+export default function NormalChatCard({ ...list }: RecommendedChatList) {
+  const {
+    description,
+    hashTagList,
+    id,
+    managerImageUrl,
+    managerName,
+    name,
+    participantNumber,
+  } = list;
+  const router = useRouter();
+  const enterChatRoom = async () => {
+    if (window.confirm('채팅방에 입장하시겠습니까?')) {
+      await joinChatRoom(id);
+      router.push(`/chat/${id}`);
+    }
+    return false;
+  };
   return (
     <ChatCard>
       <ChatCard.Header justify="between">
         <div className="flex items-center gap-1">
-          <ChatCard.Title title="천하제일 내 반려동물 자랑방" />
+          <ChatCard.Title title={name} />
           <BadgeIcon />
         </div>
-        <button type="button">
+        <button
+          type="button"
+          onClick={() => copyURL(`http://localhost:3000/chat/${id}`)}
+        >
           <ShareIcon className="w-6 h-6" />
         </button>
       </ChatCard.Header>
       <ChatCard.Body>
-        <ChatCard.Description description="반려동물을 키우는 사람이라면 누구나 들어와서 자랑해주세요~" />
-        <TagList list={['20대', '30대', '강아지', '노원구']} />
+        <ChatCard.Description description={description} />
+        <TagList list={hashTagList} />
       </ChatCard.Body>
       <Divider type="horizontal" />
       <div className="flex justify-between w-full">
         <ChatCard.Info
-          image="/default.png"
-          name="지상최강감자"
-          participants={24}
+          image={managerImageUrl}
+          name={managerName}
+          participants={participantNumber}
         />
-        <Button>입장하기</Button>
+        <Button onClickAction={enterChatRoom}>입장하기</Button>
       </div>
     </ChatCard>
   );
