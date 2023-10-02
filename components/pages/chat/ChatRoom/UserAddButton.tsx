@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Modal from '@/components/ui/Modal';
-import UserAddModal from '../Modal/UserAddModal';
+import UserAddModal from '../../../ui/Modal/UserAddModal/UserAddModal';
 
 export default function UserAddButton() {
   const [open, setOpen] = useState(false);

@@ -10,7 +10,7 @@ const nextConfig = {
     return [
       {
         source: '/:path*',
-        destination: `${API_KEY}/:path*`,
+        destination: `https://pawpawdev.duckdns.org/:path*`,
       },
     ];
   },

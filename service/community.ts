@@ -7,7 +7,7 @@ export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
   try {
     const url = `http://localhost:3000/api/chatroom/recommended`;
     const response = await fetch(url);
-
+    console.log(response);
     if (response.status === 401) {
       throw new AuthError('로그인이 필요한 서비스입니다.');
     }
@@ -49,7 +49,7 @@ export async function getEnteredChatList(): Promise<EnteredChatList[]> {
 }
 
 export async function getTrendingChatList(beforeId: number) {
-  let url = 'http://localhost:3000/api/chatroom/trending?size=9';
+  let url = `/api/chatroom/trending?size=9`;
   if (beforeId !== 0) {
     url += `&beforeId=${beforeId}`;
   }

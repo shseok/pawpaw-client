@@ -1,7 +1,7 @@
 import { AuthParams } from '@/types/types';
 
 export default async function createUserWithSocialLogin(params: AuthParams) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/social`;
+  const url = `/api/auth/sign-up/social`;
   const formData = new FormData();
   const { body, image } = params;
   formData.append('image', image);
