@@ -43,14 +43,3 @@ export async function joinChatRoom(id: number) {
     console.error(error);
   }
 }
-
-// eslint-disable-next-line consistent-return
-export async function getCoverImageList() {
-  const url = 'http://localhost:3000/api/chatroom/default-cover';
-  try {
-    const response = await fetch(url);
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-  }
-}

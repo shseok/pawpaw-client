@@ -9,6 +9,7 @@ import useInput from '@/hooks/common/useInput';
 import XIcon from '@/public/X.svg';
 import useImageUpload from '@/hooks/common/useImageUpload';
 import { postChatRoom } from '@/service/chatRoom';
+import LoadingIcon from '@/public/loading.svg';
 import { FlexBox, Divider, Button, Modal } from '../../ui';
 import HashTagInput from './HashTagInput';
 import ImageDisplay from './ImageDisplay';
@@ -22,6 +23,7 @@ interface FormData {
 
 export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [tag, onChangeTag, resetTag] = useInput('');
+  const [isLoading, setIsLoading] = useState(false);
   const [tagList, setTagList] = useState<string[]>([]);
   const { handleImageUpload, imageFile, imagePreview } = useImageUpload();
   const [option, setOption] = useState('1');
@@ -37,6 +39,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   };
   const onCreateChatRoom = async (data: FormData) => {
     const { name, description } = data;
+    setIsLoading(true);
     try {
       const response = await postChatRoom({
         image: imageFile as File,
@@ -56,6 +59,8 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
     } catch (error) {
       // 스낵바 컴포넌트가 완성되면 바꿀예정
       alert(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -66,6 +71,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
     }
     onCreateChatRoom(data);
   };
+  console.log(isLoading);
   return (
     <Modal open={open} onClose={onClose}>
       <form
@@ -149,7 +155,14 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
               취소
             </Button>
             <Button fullWidth type="submit">
-              확인
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <LoadingIcon className="animate-spin" />
+                  채팅방 만드는중..<div className="animate-bounce">🐶</div>
+                </div>
+              ) : (
+                '확인'
+              )}
             </Button>
           </FlexBox>
         </div>
