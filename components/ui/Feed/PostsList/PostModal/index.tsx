@@ -2,8 +2,8 @@
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { Comment, Post } from '@/types/types';
+import Modal from '@/components/ui/Modal';
 import FlexBox from '../../../FlexBox';
-import Modal from '../../../Modal/Modal';
 import ModalHeader from './ModalHeader';
 import ModalContent from './ModalContent';
 import ModalCommentWrapper from './ModalCommentWrapper';
@@ -23,7 +23,7 @@ export default function PostModal({
   const filteredCommentsCount = comments ? comments.length : 0;
 
   return (
-    <Modal showModal={showModal} setShowModal={setShowModal} opacity>
+    <Modal open={showModal} onClose={() => setShowModal(false)}>
       <FlexBox direction="column" className="gap-4">
         <FlexBox justify="end" className="w-full">
           <button type="button" onClick={() => setShowModal(false)}>

@@ -3,7 +3,7 @@
 import { Dispatch, Fragment, SetStateAction, useState } from 'react';
 import Dropdown from '@/components/ui/Dropdown/Dropdown';
 import DotsIcon from '@/public/tabler_dots.svg';
-import Modal from '@/components/ui/Modal/Modal';
+import Modal from '@/components/ui/Modal';
 import ScheduleAddModal from '../Modal/ScheduleAddModal';
 
 function ScheduleAddOption({
@@ -36,7 +36,7 @@ export default function ScheduleDropdownButton() {
         </Dropdown.Menu>
       </Dropdown>
       {isOpen && (
-        <Modal setShowModal={setIsOpen} showModal={isOpen}>
+        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
           <ScheduleAddModal closeModal={() => setIsOpen(false)} />
         </Modal>
       )}

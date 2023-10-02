@@ -6,7 +6,8 @@ import Avatar from './Avatar';
 import Button from './Button';
 import FlexBox from './FlexBox';
 import { Select } from './Select';
-import SearchInput from './SearchInput';
+import SearchInput from './Input/SearchInput';
+import SelectInput from './Input/SelectInput';
 import Divider from './Divider';
 import Modal from './Modal';
 import Tag from './Tag';
@@ -19,6 +20,7 @@ export {
   Select,
   Dropdown,
   SearchInput,
+  SelectInput,
   Divider,
   Modal,
   Tag,
