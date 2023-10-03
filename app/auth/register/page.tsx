@@ -1,10 +1,11 @@
+import Register from '@/components/pages/auth/Register';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '회원가입',
+  title: '간편 회원가입',
   robots: 'noindex',
 };
 
 export default function RegisterPage() {
-  return <div>Register</div>;
+  return <Register step={1} title="계정을 생성하세요" />;
 }
