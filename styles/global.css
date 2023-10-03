@@ -73,3 +73,17 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #b4b0b0;
 }
+
+.Toastify__toast-container {
+  width: 800px;
+}
+
+.Toastify__toast--success {
+  width: 800px;
+  background-color: #1b1d1fb2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  border-radius: 100px;
+}
