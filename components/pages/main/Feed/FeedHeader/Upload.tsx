@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Notification from '@/utils/notification';
+import Toast from '@/utils/notification';
 import Avatar from '../../../../ui/Avatar';
 import Button from '../../../../ui/Button';
 import FlexBox from '../../../../ui/FlexBox';
@@ -49,6 +49,7 @@ export default function Upload() {
           variant="secondary"
           disabled={isOverMaxChar}
           className="w-40"
+          onClickAction={() => Toast.error('실패')}
         >
           파일
         </Button>
@@ -56,7 +57,7 @@ export default function Upload() {
           size="lg"
           disabled={isOverMaxChar}
           className="w-40"
-          onClickAction={() => Notification('success', '업로드 성공!')}
+          onClickAction={() => Toast.success('성공')}
         >
           업로드
         </Button>
