@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import { Comment } from '@/types/types';
-import PostCard from '.';
+import { PostCard } from '.';
 import FlexBox from '../FlexBox';
 
 interface FeedPostModalProps {

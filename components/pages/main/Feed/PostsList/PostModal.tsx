@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Comment, Post } from '@/types/types';
 import FeedPostModal from '@/components/ui/PostCard/FeedPostModal';
 import FlexBox from '../../../../ui/FlexBox';
-import Modal from '../../../../ui/Modal/Modal';
+import Modal from '../../../../ui/Modal';
 
 export default function PostModal({
   showModal,
@@ -18,7 +18,7 @@ export default function PostModal({
   comments: Comment[] | undefined;
 }) {
   return (
-    <Modal showModal={showModal} setShowModal={setShowModal} opacity>
+    <Modal open={showModal} onClose={() => setShowModal(false)}>
       <FlexBox direction="column" className="gap-4">
         <FlexBox justify="end" className="w-full">
           <button type="button" onClick={() => setShowModal(false)}>
