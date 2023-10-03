@@ -8,7 +8,7 @@ import { useState } from 'react';
 import CaretRight from 'public/CaretRight.svg';
 import CaretLeft from 'public/CaretLeft.svg';
 import DotsIcon from '@/public/tabler_dots.svg';
-import copyURL from '@/utils/copyURL';
+import copyToClipBoard from '@/utils/copyToClipBoard';
 import Avatar from '../Avatar';
 import Button from '../Button';
 import FlexBox from '../FlexBox';
@@ -36,7 +36,7 @@ PostCard.Dropdown = function PostCardDropdown() {
       </Dropdown.Trigger>
       <Dropdown.Menu>
         <Dropdown.Item>북마크 추가</Dropdown.Item>
-        <Dropdown.Item event={() => copyURL(window.location.href)}>
+        <Dropdown.Item event={() => copyToClipBoard(window.location.href)}>
           공유하기
         </Dropdown.Item>
         <Dropdown.Item>신고하기</Dropdown.Item>

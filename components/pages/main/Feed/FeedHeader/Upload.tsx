@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import SnackBar from '@/components/ui/SnackBar';
+import SnackBar from '@/components/ui/SnackBar/Snack';
+import Notification from '@/utils/notification';
 import Avatar from '../../../../ui/Avatar';
 import Button from '../../../../ui/Button';
 import FlexBox from '../../../../ui/FlexBox';
@@ -59,7 +60,8 @@ export default function Upload() {
             size="lg"
             disabled={isOverMaxChar}
             className="w-40"
-            onClickAction={() => setShowSnackBar(true)}
+            // onClickAction={() => setShowSnackBar(true)}
+            onClickAction={() => Notification('업로드 성공!', 'success')}
           >
             업로드
           </Button>
