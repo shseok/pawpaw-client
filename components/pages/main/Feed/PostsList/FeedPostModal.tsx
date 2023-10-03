@@ -1,7 +1,6 @@
-import Image from 'next/image';
 import { Comment } from '@/types/types';
-import { PostCard } from '.';
-import FlexBox from '../FlexBox';
+import { PostCard } from '../../../../ui/PostCard';
+import FlexBox from '../../../../ui/FlexBox';
 
 interface FeedPostModalProps {
   userId: number;
