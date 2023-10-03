@@ -16,19 +16,9 @@ module.exports = {
           '0%': { transform: 'scale(0)' },
           '100%': { transform: 'scale(1)' },
         },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        fadeOut: {
-          '0%': { opacity: '1' },
-          '100%': { opacity: '0' },
-        },
       },
       animation: {
         dropdown: 'dropdown .1s ease',
-        snackbarIn: 'fadeIn 1s ease',
-        snackbarOut: 'fadeOut 1s ease',
         scaleUp: 'scaleUp .2s ease-in-out',
         fadeIn: 'fadeIn .3s ease-in-out',
       },
