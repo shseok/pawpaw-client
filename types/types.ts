@@ -81,3 +81,9 @@ export interface ModalProps {
   open: boolean;
   onClose: () => void;
 }
+
+export interface VerifivationParams {
+  name: string;
+  recipient: string;
+  birthday: string;
+}
