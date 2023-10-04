@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import FlexBox from '../../FlexBox';
-import Divider from '../../Divider';
+import FlexBox from '../../../../ui/FlexBox';
+import Divider from '../../../../ui/Divider';
 
 export default function Location() {
   return (

@@ -6,7 +6,7 @@ import ShareIcon from '@/public/share.svg';
 import BadgeIcon from '@/public/Badge.svg';
 import { RecommendedChatList } from '@/types/types';
 import { joinChatRoom } from '@/service/chatRoom';
-import copyURL from '@/utils/copyURL';
+import copyToClipBoard from '@/utils/copyToClipBoard';
 import { ChatCard } from '.';
 import { Button, Divider, TagList } from '../ui';
 
@@ -37,7 +37,7 @@ export default function NormalChatCard({ ...list }: RecommendedChatList) {
         </div>
         <button
           type="button"
-          onClick={() => copyURL(`http://localhost:3000/chat/${id}`)}
+          onClick={() => copyToClipBoard(`http://localhost:3000/chat/${id}`)}
         >
           <ShareIcon className="w-6 h-6" />
         </button>

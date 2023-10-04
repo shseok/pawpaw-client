@@ -1,9 +1,8 @@
-/* eslint-disable react/no-array-index-key */
-import Dropdown from '@/components/ui/Dropdown/Dropdown';
-import DotsIcon from '@/public/tabler_dots.svg';
-import copyURL from '@/utils/copyURL';
+import DotsIcon from 'public/DotsIcon.svg';
+import copyToClipBoard from '@/utils/copyToClipBoard';
+import { Dropdown } from '../ui';
 
-export default function PostDropdownButton() {
+export default function PostCardDropdown() {
   return (
     <Dropdown>
       <Dropdown.Trigger>
@@ -11,7 +10,7 @@ export default function PostDropdownButton() {
       </Dropdown.Trigger>
       <Dropdown.Menu>
         <Dropdown.Item>북마크 추가</Dropdown.Item>
-        <Dropdown.Item event={() => copyURL(window.location.href)}>
+        <Dropdown.Item event={() => copyToClipBoard(window.location.href)}>
           공유하기
         </Dropdown.Item>
         <Dropdown.Item>신고하기</Dropdown.Item>

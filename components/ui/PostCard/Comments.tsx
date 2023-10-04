@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-export default function PostComments({
+export default function PostCardComments({
   id,
   userName,
   content,
@@ -12,6 +10,7 @@ export default function PostComments({
   onClickModal: () => void;
 }) {
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div key={id} onClick={onClickModal}>
       <div className="inline-block mr-1 body2 text-grey-500">{userName}</div>
       <div className="inline body4 text-grey-500">{content}</div>

@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import Avatar from '../../Avatar';
-import Button from '../../Button';
-import FlexBox from '../../FlexBox';
+import Toast from '@/utils/notification';
+import Avatar from '../../../../ui/Avatar';
+import Button from '../../../../ui/Button';
+import FlexBox from '../../../../ui/FlexBox';
 
 export default function Upload() {
   const [postText, setPostText] = useState('');
+
   const maxCharacters = 100;
   const isOverMaxChar = postText.length > maxCharacters;
 
@@ -27,7 +29,7 @@ export default function Upload() {
         />
         <div className="relative w-full">
           <textarea
-            className="bg-primary-50 w-full h-[77px] resize-none header4 text-grey-500 placeholder:text-grey-300"
+            className="bg-primary-50 w-full h-[77px] resize-none header4 text-grey-500 placeholder:text-grey-300 border-none focus:ring-primary-300"
             placeholder="동네 주민들에게 즐거운 소식을 전해보세요!"
             value={postText}
             onChange={handleTextChange}
@@ -42,10 +44,21 @@ export default function Upload() {
         </div>
       </FlexBox>
       <FlexBox justify="end" className="gap-[10px] w-full">
-        <Button size="lg" variant="secondary" disabled={isOverMaxChar}>
+        <Button
+          size="lg"
+          variant="secondary"
+          disabled={isOverMaxChar}
+          className="w-40"
+          onClickAction={() => Toast.error('실패')}
+        >
           파일
         </Button>
-        <Button size="lg" disabled={isOverMaxChar}>
+        <Button
+          size="lg"
+          disabled={isOverMaxChar}
+          className="w-40"
+          onClickAction={() => Toast.success('성공')}
+        >
           업로드
         </Button>
         <div className="mt-4" id="renderedText" />

@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import FlexBox from '../../../FlexBox';
-import Button from '../../../Button';
-import Avatar from '../../../Avatar';
+import Avatar from '../Avatar';
+import Button from '../Button';
+import FlexBox from '../FlexBox';
+import PostCardDropdown from './PostCardDropdown';
 
-export default function ModalHeader({ userId }: { userId: number }) {
+export default function PostCardHeader({ userId }: { userId: number }) {
   return (
     <FlexBox justify="between" className="w-full">
       <FlexBox className="gap-[10px]">
@@ -12,8 +12,8 @@ export default function ModalHeader({ userId }: { userId: number }) {
           image="/Feed/desktop/tempProfilePic.svg"
           name={String(userId)}
         />
-        <FlexBox direction="column" align="start" className="gap-[4px]">
-          <FlexBox className="gap-[8px]">
+        <FlexBox direction="column" align="start" className="gap-1">
+          <FlexBox className="gap-2">
             <div className="header4 text-grey-800">{userId}</div>
             <Button size="xs" variant="secondary">
               팔로우
@@ -24,14 +24,7 @@ export default function ModalHeader({ userId }: { userId: number }) {
           </div>
         </FlexBox>
       </FlexBox>
-      <button type="button">
-        <Image
-          src="/Feed/desktop/seeMore.svg"
-          alt="더보기"
-          width={24}
-          height={24}
-        />
-      </button>
+      <PostCardDropdown />
     </FlexBox>
   );
 }
