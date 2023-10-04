@@ -40,7 +40,7 @@ export default function PostCardContent({
     }
   };
 
-  const renderContent = () => (
+  const renderPostContent = () => (
     <FlexBox
       direction="column"
       align="start"
@@ -58,14 +58,16 @@ export default function PostCardContent({
       {children}
     </FlexBox>
   );
+
   if (imgs) {
+    // 이미지가 있는 경우
     return (
       // eslint-disable-next-line react/jsx-no-useless-fragment
       <>
         {type === 'mainPC' ? (
           <div className="grid w-full h-full grid-cols-2 gap-9">
             <Images imgs={imgs} onClickModal={onClickModal} />
-            {renderContent()}
+            {renderPostContent()}
           </div>
         ) : (
           <FlexBox className="gap-9">
@@ -88,11 +90,11 @@ export default function PostCardContent({
                 </button>
               </FlexBox>
             </div>
-            {renderContent()}
+            {renderPostContent()}
           </FlexBox>
         )}
       </>
     );
   }
-  return renderContent();
+  return renderPostContent(); // 이미지가 없는 경우 게시글 내용만 렌더
 }

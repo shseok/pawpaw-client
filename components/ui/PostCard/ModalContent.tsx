@@ -11,7 +11,7 @@ export default function PostCardModalContent({
   imgs?: string[];
   content: string;
 }) {
-  function renderContent() {
+  function renderModalPostContent() {
     return (
       <FlexBox
         direction="column"
@@ -40,10 +40,10 @@ export default function PostCardModalContent({
               />
             ))}
           </div>
-          {renderContent()}
+          {renderModalPostContent()}
         </FlexBox>
       ) : (
-        renderContent()
+        renderModalPostContent()
       )}
     </>
   );

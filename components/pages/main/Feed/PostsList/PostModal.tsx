@@ -2,7 +2,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { Comment, Post } from '@/types/types';
-import FeedPostModal from '@/components/pages/main/Feed/PostsList/FeedPostModal';
+import ModalPostCard from '@/components/pages/main/Feed/PostsList/PostCard/ModalPostCard';
 import FlexBox from '../../../../ui/FlexBox';
 import Modal from '../../../../ui/Modal';
 
@@ -31,7 +31,7 @@ export default function PostModal({
           </button>
         </FlexBox>
         {post ? (
-          <FeedPostModal
+          <ModalPostCard
             userId={post.albumId}
             imgs={[
               post.url,

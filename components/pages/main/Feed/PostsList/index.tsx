@@ -6,7 +6,7 @@ import useCommentsQuery from '@/hooks/queries/PostCommentsQuery';
 import useGetInfiniteData from '@/hooks/queries/InfiniteData';
 import { Comment, Post } from '@/types/types';
 import FlexBox from '../../../../ui/FlexBox';
-import FeedPostCard from './FeedPostCard';
+import FeedPostCard from './PostCard/FeedPostCard';
 
 export default function PostsList({
   setSelectedPost,

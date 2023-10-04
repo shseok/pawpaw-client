@@ -1,19 +1,19 @@
 import { Comment } from '@/types/types';
-import { PostCard } from '../../../../ui/PostCard';
-import FlexBox from '../../../../ui/FlexBox';
+import { PostCard } from '../../../../../ui/PostCard';
+import FlexBox from '../../../../../ui/FlexBox';
 
-interface FeedPostModalProps {
+interface ModalPostCardProps {
   userId: number;
   imgs?: string[];
   content: string;
   comments: Comment[] | undefined;
 }
-export default function FeedPostModal({
+export default function ModalPostCard({
   userId,
   imgs,
   content,
   comments,
-}: FeedPostModalProps) {
+}: ModalPostCardProps) {
   const filteredCommentsCount = comments ? comments.length : 0;
 
   return (

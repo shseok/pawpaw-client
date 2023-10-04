@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Comment } from '@/types/types';
-import { PostCard } from '../../../../ui/PostCard';
-import FlexBox from '../../../../ui/FlexBox';
+import { PostCard } from '../../../../../ui/PostCard';
+import FlexBox from '../../../../../ui/FlexBox';
 
 interface FeedPostCardProps {
   userId: number;
