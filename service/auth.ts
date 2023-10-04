@@ -21,7 +21,6 @@ export async function createUserWithSocialLogin(params: AuthParams) {
     throw new Error('소셜 회원가입에 실패하였습니다.');
   }
 }
-
 export async function createUserWithEmailAndPassword(params: EmailAuthParams) {
   const formData = new FormData();
   const { body, image } = params;

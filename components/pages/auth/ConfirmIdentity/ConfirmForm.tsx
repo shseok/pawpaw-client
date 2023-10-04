@@ -98,7 +98,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
     };
   }, [isLoading, timer]);
   return (
-    <div className="w-full flex flex-col gap-5">
+    <div className="flex flex-col w-full gap-5">
       {/* eslint-disable jsx-a11y/label-has-associated-control */}
       <div className="flex flex-col gap-2">
         <label htmlFor="name" className="body1 text-grey-800">
@@ -161,7 +161,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
             onChange={(e) => setCode(e.target.value)}
           />
           {isLoading && (
-            <span className="absolute top-1/2 right-0 transform -translate-x-1/2 -translate-y-1/2 text-primary-200">
+            <span className="absolute right-0 transform -translate-x-1/2 -translate-y-1/2 top-1/2 text-primary-200">
               {Math.floor(timer / 60)}:
               {`${timer % 60 < 10 ? '0' : ''}${timer % 60}`}
             </span>
