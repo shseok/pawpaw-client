@@ -28,7 +28,7 @@ export default function Policy({ title }: { title: string }) {
         isDisabled={checkList.slice(0, 3).some((v) => !v)}
         handleClick={() => {
           const link = key
-            ? `/auth/location?key=${key}}&step=2`
+            ? `/auth/location?key=${key}&step=2`
             : '/auth/register?step=2';
           router.push(link);
         }}

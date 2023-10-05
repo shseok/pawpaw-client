@@ -98,7 +98,7 @@ export default function Location({ title }: { title: string }) {
         isDisabled={!position.lat}
         handleClick={() => {
           const link = key
-            ? `/auth/profile?key=${key}?step=3`
+            ? `/auth/profile?key=${key}&step=3`
             : `/auth/profile?step=${parseInt(step ?? '2', 10) + 1}`;
           router.push(link);
         }}
