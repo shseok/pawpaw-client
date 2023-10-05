@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function PolicyPage() {
-  return <Policy step={1} title="약관동의" />;
+  return <Policy title="약관동의" />;
 }

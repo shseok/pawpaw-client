@@ -17,13 +17,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { shallow } from 'zustand/shallow';
 
-export default function Profile({
-  step,
-  title,
-}: {
-  step: number;
-  title: string;
-}) {
+export default function Profile({ title }: { title: string }) {
   const {
     nickname,
     petInfo,
@@ -62,6 +56,7 @@ export default function Profile({
   const router = useRouter();
   const searchParams = useSearchParams();
   const key = searchParams.get('key');
+  const step = searchParams.get('step');
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -168,7 +163,7 @@ export default function Profile({
       <div className="flex flex-col items-center max-w-[400px] w-full gap-[20px] mb-[98px]">
         <div className="flex flex-col items-center w-full">
           <h1 className="header1">{title}</h1>
-          <ProgressBar step={step} />
+          <ProgressBar step={parseInt(step ?? '3', 10)} limit={key ? 3 : 5} />
         </div>
         <div className="flex flex-col items-center w-full gap-[12px]">
           <div className="rounded-full border border-grey-200 w-[100px] h-[100px] bg-white relative">

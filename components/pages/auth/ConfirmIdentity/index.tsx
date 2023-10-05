@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 import ProgressBar from '../ProgressBar';
 import BottomButton from '../BottomButton';
@@ -12,13 +12,15 @@ interface Props {
 
 export default function ConfirmIdentity({ title }: Props) {
   const router = useRouter();
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
+  const step = useSearchParams().get('step');
+
   return (
     <>
       <div className="flex flex-col items-center w-full gap-[28px] mb-[48px]">
         <div className="flex flex-col items-center w-full">
           <h1 className="header1">{title}</h1>
-          <ProgressBar step={3} />
+          <ProgressBar step={parseInt(step ?? '3', 10)} limit={5} />
         </div>
         <ConfirmForm setIsActive={setIsActive} />
       </div>
@@ -28,7 +30,7 @@ export default function ConfirmIdentity({ title }: Props) {
         variant="primary"
         isDisabled={!isActive}
         handleClick={() => {
-          router.push(`/auth/location`);
+          router.push(`/auth/location?step=4`);
         }}
       />
     </>

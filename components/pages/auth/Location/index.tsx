@@ -15,13 +15,7 @@ import ProgressBar from '../ProgressBar';
 import LocationList from '../LocationList';
 import BottomButton from '../BottomButton';
 
-export default function Location({
-  step,
-  title,
-}: {
-  step: number;
-  title: string;
-}) {
+export default function Location({ title }: { title: string }) {
   const { position, setPosition, searchHistory, setSearchHistory } =
     useGeneralRegisterStore(
       (state) => ({
@@ -37,6 +31,7 @@ export default function Location({
   const router = useRouter();
   const searchParams = useSearchParams();
   const key = searchParams.get('key');
+  const step = searchParams.get('step');
 
   const [searchResult, onChangeValue, resetValue, setValueByInput] =
     useInput(searchHistory);
@@ -72,7 +67,7 @@ export default function Location({
       >
         <div className="flex flex-col items-center w-full">
           <h1 className="header1">{title}</h1>
-          <ProgressBar step={step} />
+          <ProgressBar step={parseInt(step ?? '2', 10)} limit={key ? 3 : 5} />
         </div>
         <div className="flex flex-col items-center w-full gap-[21px]">
           <SearchInput
@@ -102,7 +97,9 @@ export default function Location({
         variant="primary"
         isDisabled={!position.lat}
         handleClick={() => {
-          const link = key ? `/auth/profile?key=${key}` : '/auth/profile';
+          const link = key
+            ? `/auth/profile?key=${key}?step=3`
+            : `/auth/profile?step=${parseInt(step ?? '2', 10) + 1}`;
           router.push(link);
         }}
       />

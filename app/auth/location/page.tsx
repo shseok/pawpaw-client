@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function LocationPage() {
-  return <Location step={2} title="위치를 설정해주세요" />;
+  return <Location title="위치를 설정해주세요" />;
 }

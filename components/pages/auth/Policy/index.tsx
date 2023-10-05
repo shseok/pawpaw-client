@@ -6,13 +6,7 @@ import ProgressBar from '../ProgressBar';
 import CheckListOfTerm from '../CheckListOfTerm';
 import BottomButton from '../BottomButton';
 
-export default function Policy({
-  step,
-  title,
-}: {
-  step: number;
-  title: string;
-}) {
+export default function Policy({ title }: { title: string }) {
   const checkList = useGeneralRegisterStore((state) => state.checkList);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -23,7 +17,7 @@ export default function Policy({
       <div className="flex flex-col items-center w-full gap-[56px] mb-[155px]">
         <div className="flex flex-col items-center w-full">
           <h1 className="header1">{title}</h1>
-          <ProgressBar step={step} />
+          <ProgressBar step={1} limit={key ? 3 : 5} />
         </div>
         <CheckListOfTerm />
       </div>
@@ -33,7 +27,9 @@ export default function Policy({
         variant="primary"
         isDisabled={checkList.slice(0, 3).some((v) => !v)}
         handleClick={() => {
-          const link = key ? `/auth/location?key=${key}}` : '/auth/register';
+          const link = key
+            ? `/auth/location?key=${key}}&step=2`
+            : '/auth/register?step=2';
           router.push(link);
         }}
       />

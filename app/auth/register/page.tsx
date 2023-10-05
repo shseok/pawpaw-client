@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function RegisterPage() {
-  return <Register step={1} title="계정을 생성하세요" />;
+  return <Register title="계정을 생성하세요" />;
 }
