@@ -26,7 +26,7 @@ export default function EmailLogin({ title }: Props) {
   };
 
   return (
-    <form className="w-full flex flex-col gap-5">
+    <form className="flex flex-col w-full gap-5">
       <div className="flex flex-col item-center mb-[178px]">
         <div className="mb-10">
           <h1 className="header1 text-center w-full gap-[40px]">{title}</h1>
