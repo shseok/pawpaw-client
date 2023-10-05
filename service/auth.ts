@@ -1,11 +1,6 @@
-import {
-  AuthParams,
-  AuthParamsWithoutKey,
-  VerifivationParams,
-} from '@/types/types';
+import { AuthParams, EmailAuthParams, VerifivationParams } from '@/types/types';
 
 export async function createUserWithSocialLogin(params: AuthParams) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/social`;
   const formData = new FormData();
   const { body, image } = params;
   formData.append('image', image);
@@ -14,7 +9,7 @@ export async function createUserWithSocialLogin(params: AuthParams) {
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
   );
   // console.log(formData, formData.get('image'), formData.get('body'));
-  await fetch(url, {
+  const response = await fetch('/api/auth/sign-up/social', {
     method: 'POST',
     credentials: 'include',
     // headers: {
@@ -22,12 +17,13 @@ export async function createUserWithSocialLogin(params: AuthParams) {
     // },
     body: formData,
   });
+
+  if (!response.ok) {
+    throw new Error('소셜 회원가입에 실패하였습니다.');
+  }
 }
 
-export async function createUserWithEmailAndPassword(
-  params: AuthParamsWithoutKey,
-) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up`;
+export async function createUserWithEmailAndPassword(params: EmailAuthParams) {
   const formData = new FormData();
   const { body, image } = params;
   formData.append('image', image);
@@ -35,15 +31,14 @@ export async function createUserWithEmailAndPassword(
     'body',
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
   );
-  // console.log(formData, formData.get('image'), formData.get('body'));
-  await fetch(url, {
+  const response = await fetch('/api/auth/sign-up', {
     method: 'POST',
     credentials: 'include',
-    // headers: {
-    //   'Content-Type': 'application/json',
-    // },
     body: formData,
   });
+  if (!response.ok) {
+    throw new Error('간편 회원가입에 실패하였습니다.');
+  }
 }
 
 export async function loginWithEmailAndPassword({
@@ -53,9 +48,7 @@ export async function loginWithEmailAndPassword({
   email: string;
   password: string;
 }) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth`;
-
-  const response = await fetch(url, {
+  const response = await fetch('/api/auth', {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -72,15 +65,14 @@ export async function loginWithEmailAndPassword({
 }
 
 export async function isDuplicatedEmail(email: string) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/check/duplicate/email`;
+  const url = `/api/auth/sign-up/check/duplicate/email`;
   const response = await fetch(url.concat(`?email=${email}`));
   const data = await response.json();
   return data;
 }
 
 export async function requestVerification(params: VerifivationParams) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/verification`;
-  await fetch(url, {
+  await fetch('/api/auth/sign-up/verification', {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -97,8 +89,7 @@ export async function checkVerification({
   phoneNumber: string;
   code: string;
 }) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/verification/check`;
-  const response = await fetch(url, {
+  const response = await fetch('/api/auth/sign-up/verification/check', {
     method: 'POST',
     credentials: 'include',
     headers: {

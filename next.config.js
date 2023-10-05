@@ -5,6 +5,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = withBundleAnalyzer({
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
+      },
+    ];
+  },
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],

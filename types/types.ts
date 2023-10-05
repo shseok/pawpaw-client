@@ -78,8 +78,8 @@ export interface Position {
   name: string;
 }
 
-export type AuthParamsWithoutKey = Omit<AuthParams, 'body'> & {
-  body: Omit<AuthParams['body'], 'key'>;
+export type EmailAuthParams = Omit<AuthParams, 'body'> & {
+  body: Omit<AuthParams['body'], 'key'> & { email: string; password: string };
 };
 
 export interface ModalProps {
