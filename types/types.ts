@@ -77,6 +77,11 @@ export interface Position {
   longitude: number;
   name: string;
 }
+
+export type AuthParamsWithoutKey = Omit<AuthParams, 'body'> & {
+  body: Omit<AuthParams['body'], 'key'>;
+};
+
 export interface ModalProps {
   open: boolean;
   onClose: () => void;

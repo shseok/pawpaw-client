@@ -1,4 +1,8 @@
-import { AuthParams, VerifivationParams } from '@/types/types';
+import {
+  AuthParams,
+  AuthParamsWithoutKey,
+  VerifivationParams,
+} from '@/types/types';
 
 export async function createUserWithSocialLogin(params: AuthParams) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/social`;
@@ -18,6 +22,53 @@ export async function createUserWithSocialLogin(params: AuthParams) {
     // },
     body: formData,
   });
+}
+
+export async function createUserWithEmailAndPassword(
+  params: AuthParamsWithoutKey,
+) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up`;
+  const formData = new FormData();
+  const { body, image } = params;
+  formData.append('image', image);
+  formData.append(
+    'body',
+    new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
+  );
+  // console.log(formData, formData.get('image'), formData.get('body'));
+  await fetch(url, {
+    method: 'POST',
+    credentials: 'include',
+    // headers: {
+    //   'Content-Type': 'application/json',
+    // },
+    body: formData,
+  });
+}
+
+export async function loginWithEmailAndPassword({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (!response.ok) {
+    throw new Error('로그인에 실패하였습니다.');
+  }
+
+  return response;
 }
 
 export async function isDuplicatedEmail(email: string) {
