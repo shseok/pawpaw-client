@@ -1,4 +1,4 @@
-import { AuthParams, EmailAuthParams, VerifivationParams } from '@/types/types';
+import { AuthParams, EmailAuthParams, VerificationParams } from '@/types/types';
 
 export async function createUserWithSocialLogin(params: AuthParams) {
   const formData = new FormData();
@@ -30,6 +30,7 @@ export async function createUserWithEmailAndPassword(params: EmailAuthParams) {
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
   );
   formData.append('image', image);
+  console.log(body, formData.get('body'), formData.get('image'));
   const response = await fetch('/api/auth/sign-up', {
     method: 'POST',
     credentials: 'include',
@@ -70,7 +71,7 @@ export async function isDuplicatedEmail(email: string) {
   return data;
 }
 
-export async function requestVerification(params: VerifivationParams) {
+export async function requestVerification(params: VerificationParams) {
   await fetch('/api/auth/sign-up/verification', {
     method: 'POST',
     credentials: 'include',
