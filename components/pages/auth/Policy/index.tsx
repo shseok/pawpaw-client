@@ -1,6 +1,6 @@
 'use client';
 
-import { useSocialRegisterStore } from '@/hooks/stores/useSocialRegisterStore';
+import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ProgressBar from '../ProgressBar';
 import CheckListOfTerm from '../CheckListOfTerm';
@@ -13,11 +13,10 @@ export default function Policy({
   step: number;
   title: string;
 }) {
-  const checkList = useSocialRegisterStore((state) => state.checkList);
+  const checkList = useGeneralRegisterStore((state) => state.checkList);
   const router = useRouter();
   const searchParams = useSearchParams();
   const key = searchParams.get('key');
-  const next = searchParams.get('next');
 
   return (
     <>
@@ -34,11 +33,8 @@ export default function Policy({
         variant="primary"
         isDisabled={checkList.slice(0, 3).some((v) => !v)}
         handleClick={() => {
-          if (next) {
-            router.push(`${next}`);
-            return;
-          }
-          router.push(`/auth/location?key=${key}`);
+          const link = key ? `/auth/location?key=${key}}` : '/auth/register';
+          router.push(link);
         }}
       />
     </>

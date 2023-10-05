@@ -1,8 +1,10 @@
 import { ValidateInput } from '@/components/ui/Input/ValidateInput';
+import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore';
 import { isDuplicatedEmail } from '@/service/auth';
 import { validate } from '@/utils/validate';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { shallow } from 'zustand/shallow';
 
 interface Inputs {
   email: string;
@@ -15,14 +17,27 @@ interface Props {
 }
 
 export default function AuthForm({ setIsActive }: Props) {
+  const { email, password, setEmail, setPassword } = useGeneralRegisterStore(
+    (state) => ({
+      email: state.email,
+      password: state.password,
+      setEmail: state.setEmail,
+      setPassword: state.setPassword,
+    }),
+    shallow,
+  );
   const {
     register,
     getValues,
     formState: { errors, isValid },
   } = useForm<Inputs>({
     mode: 'onChange',
+    defaultValues: {
+      email,
+      password,
+      passwordConfirm: password,
+    },
   });
-
   const [emailValidated, setEmailValidated] = useState(false);
   const [passwordValidated, setPasswordValidated] = useState(false);
   const [confirmPasswordValidated, setConfirmPasswordValidated] =
@@ -36,9 +51,9 @@ export default function AuthForm({ setIsActive }: Props) {
     return true;
   };
 
-  const checkDuplicateEmail = useCallback(async (email: string) => {
+  const checkDuplicateEmail = useCallback(async (emailAddress: string) => {
     try {
-      const response = await isDuplicatedEmail(email);
+      const response = await isDuplicatedEmail(emailAddress);
       return !response.duplicate; // 중복되지 않은 경우 true 반환
     } catch (error) {
       console.error('Error checking duplicate email:', error);
@@ -47,6 +62,8 @@ export default function AuthForm({ setIsActive }: Props) {
   }, []);
 
   useEffect(() => {
+    setEmail(getValues('email'));
+    setPassword(getValues('password'));
     setIsActive(isValid);
   }, [isValid]);
   return (

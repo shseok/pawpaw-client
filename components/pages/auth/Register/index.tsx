@@ -29,7 +29,7 @@ export default function Register({ step, title }: Props) {
         variant="primary"
         isDisabled={!isActive}
         handleClick={() => {
-          router.push(`/auth/social/location`);
+          router.push(`/auth/identity`);
         }}
       />
     </>

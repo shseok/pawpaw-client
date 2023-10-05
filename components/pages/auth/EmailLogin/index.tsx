@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import BottomButton from '../BottomButton';
 import { loginWithEmailAndPassword } from '@/service/auth';
+import BottomButton from '../BottomButton';
 
 interface Props {
   title: string;

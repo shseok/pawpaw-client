@@ -5,10 +5,13 @@ import ProgressBar from '@/components/pages/auth/ProgressBar';
 import { SelectInput } from '@/components/ui/ui';
 import { invertedPetMaps, petMaps } from '@/constant/pets';
 import useInput from '@/hooks/common/useInput';
-import { useSocialRegisterStore } from '@/hooks/stores/useSocialRegisterStore';
+import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore';
 import DefaultImg from '@/public/Auth/dog.svg';
 import Pencil from '@/public/Auth/pencil.svg';
-import createUserWithSocialLogin from '@/service/auth';
+import {
+  createUserWithEmailAndPassword,
+  createUserWithSocialLogin,
+} from '@/service/auth';
 import { Species } from '@/types/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
@@ -30,7 +33,9 @@ export default function Profile({
     checkList,
     imageFile,
     setImageFile,
-  } = useSocialRegisterStore(
+    email,
+    password,
+  } = useGeneralRegisterStore(
     (state) => ({
       nickname: state.nickname,
       petInfo: state.petInfo,
@@ -40,6 +45,8 @@ export default function Profile({
       checkList: state.checkList,
       imageFile: state.imageFile,
       setImageFile: state.setImageFile,
+      email: state.email,
+      password: state.password,
     }),
     shallow,
   );
@@ -70,10 +77,6 @@ export default function Profile({
   const handleNext = async () => {
     // TODO: 현재 뒤로가거나 완료를 누르면 저장이 안되는데, 이는 위치를 변화시킬 때마다 임시저장 하는 방식으로 해결해야함. 일일이 입력할 때마다 상태가 변하면 다른 컴포넌트에도 영향을 주어 성능 이슈가 발생할지도
     // TODO: 에러 내용 UI상 표시
-    if (!key) {
-      console.error('key is not exist');
-      return;
-    }
     // if (!imageFile) {
     //   console.error('imageFile is not exist');
     //   return;
@@ -83,30 +86,55 @@ export default function Profile({
       return;
     }
     try {
-      await createUserWithSocialLogin({
-        image: imageFile ?? '',
-        body: {
-          key,
-          termAgrees: checkList
-            .map((check, idx) => (check ? idx + 1 : 0))
-            .filter((v) => v !== 0),
-          position: {
-            latitude: position.lat,
-            longitude: position.lng,
-            name: position.name,
-          },
-          nickname: profileName,
-          noImage: true,
-          petInfos: [
-            {
-              petName,
-              petType: petInfo.species,
+      if (key) {
+        await createUserWithSocialLogin({
+          image: imageFile ?? '',
+          body: {
+            key,
+            termAgrees: checkList
+              .map((check, idx) => (check ? idx + 1 : 0))
+              .filter((v) => v !== 0),
+            position: {
+              latitude: position.lat,
+              longitude: position.lng,
+              name: position.name,
             },
-          ],
-        },
-      });
-      console.log('success');
-      router.push(`/auth/complete?key=${key}`);
+            nickname: profileName,
+            noImage: true,
+            petInfos: [
+              {
+                petName,
+                petType: petInfo.species,
+              },
+            ],
+          },
+        });
+      } else {
+        await createUserWithEmailAndPassword({
+          image: imageFile ?? '',
+          body: {
+            email,
+            password,
+            termAgrees: checkList
+              .map((check, idx) => (check ? idx + 1 : 0))
+              .filter((v) => v !== 0),
+            position: {
+              latitude: position.lat,
+              longitude: position.lng,
+              name: position.name,
+            },
+            nickname: profileName,
+            noImage: true,
+            petInfos: [
+              {
+                petName,
+                petType: petInfo.species,
+              },
+            ],
+          },
+        });
+      }
+      router.push(`/auth/complete`);
     } catch (e) {
       console.error('fail');
     }

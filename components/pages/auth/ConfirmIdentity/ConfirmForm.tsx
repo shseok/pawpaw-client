@@ -1,21 +1,34 @@
 import Button from '@/components/ui/Button';
+import { useIdentityStore } from '@/hooks/stores/useIdentityStore';
 import { checkVerification, requestVerification } from '@/service/auth';
 import React, { useEffect, useRef, useState } from 'react';
+import { shallow } from 'zustand/shallow';
 
 interface Props {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ConfirmForm({ setIsActive }: Props) {
-  const [username, setUsername] = useState('');
-  const [birthDay, setBirthDay] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const { name, birthDate, phoneNum, setName, setBirthDate, setPhoneNum } =
+    useIdentityStore(
+      (state) => ({
+        name: state.name,
+        phoneNum: state.phoneNum,
+        birthDate: state.birthDate,
+        setName: state.setName,
+        setPhoneNum: state.setPhoneNum,
+        setBirthDate: state.setBirthDate,
+      }),
+      shallow,
+    );
+  const [username, setUsername] = useState(name);
+  const [birthDay, setBirthDay] = useState(birthDate);
+  const [phoneNumber, setPhoneNumber] = useState(phoneNum);
   const [code, setCode] = useState('');
   const [isDuplicatedRequest, setIsDuplicatedRequest] = useState(false); // 중복 요청 방지
   const [isLoading, setIsLoading] = useState(false);
   const [timer, setTimer] = useState(180); // 초기값: 180초 (3분)
   const inputRef = useRef<HTMLInputElement>(null);
-
   const handleVerificationRequest = async () => {
     // 초기화
     setIsLoading(false);
@@ -54,6 +67,9 @@ export default function ConfirmForm({ setIsActive }: Props) {
       const { success } = await checkVerification({ phoneNumber, code });
       if (success) {
         setIsActive(true);
+        setName(username);
+        setBirthDate(birthDay);
+        setPhoneNum(phoneNumber);
         setTimer(0); // 타이머 값 리셋
       } else {
         alert('인증번호가 일치하지 않습니다.');
@@ -92,6 +108,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
           id="name"
           className="h-[58px] rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
           type="text"
+          defaultValue={username}
           placeholder="이름"
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -105,6 +122,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
           className="h-[58px] rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
           id="birthDay"
           type="text"
+          defaultValue={birthDay}
           placeholder="8자리  ex) 20000503"
           onChange={(e) => setBirthDay(e.target.value)}
         />
@@ -119,6 +137,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
             className="grow rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
             id="phoneNumber"
             type="text"
+            defaultValue={phoneNumber}
             placeholder="(-)를 제외한 숫자만 입력"
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
