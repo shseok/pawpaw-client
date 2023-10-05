@@ -68,3 +68,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #b4b0b0;
 }
+
+html, body{
+  height: 100%;
+}
