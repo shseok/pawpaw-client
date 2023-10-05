@@ -38,8 +38,10 @@ export default function FeedPostCard({
             justify="start"
             className="max-h-[82px] overflow-scroll"
           >
-            {comments?.map((comment) => (
+            {comments?.map((comment, i) => (
               <PostCard.Comments
+                // eslint-disable-next-line react/no-array-index-key
+                key={i}
                 id={comment.id}
                 userName={comment.User.name}
                 content={comment.content}
