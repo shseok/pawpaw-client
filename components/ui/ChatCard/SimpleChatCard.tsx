@@ -1,7 +1,7 @@
 import ShareIcon from '@/public/share.svg';
 import NoticeIcon from '@/public/ChatCard/notice.svg';
 import BadgeIcon from '@/public/Badge.svg';
-import ChatCard from '.';
+import { ChatCard } from '.';
 
 export default function SimpleChatCard() {
   return (

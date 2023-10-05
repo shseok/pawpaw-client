@@ -9,8 +9,8 @@ interface ChatRoomType {
   };
 }
 
-export default async function postChatRoom(chatRoomData: ChatRoomType) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom`;
+export async function postChatRoom(chatRoomData: ChatRoomType) {
+  const url = `http://localhost:3000/api/chatroom`;
   const formData = new FormData();
   const { body, image } = chatRoomData;
   formData.append(
@@ -25,4 +25,21 @@ export default async function postChatRoom(chatRoomData: ChatRoomType) {
     body: formData,
   });
   return response.json();
+}
+
+export async function joinChatRoom(id: number) {
+  const url = `http://localhost:3000/api/chatroom/${id}/participants`;
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+    });
+    if (response.status === 401) {
+      throw new Error('로그인이 필요한 서비스입니다.');
+    }
+    if (!response.ok) {
+      throw new Error(`서버 오류:${response.status}`);
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }

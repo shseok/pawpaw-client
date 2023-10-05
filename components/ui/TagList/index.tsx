@@ -50,9 +50,7 @@ export default function TagList({ list }: { list: string[] }) {
         className="flex flex-wrap w-full h-8 gap-3 overflow-hidden"
         ref={tagListRef}
       >
-        {list.map((tag) => (
-          <Tag key={tag} tagName={tag} />
-        ))}
+        {list && list.map((tag) => <Tag key={tag} tagName={tag} />)}
       </ul>
       {isOverTagList ? <p>...</p> : null}
     </div>

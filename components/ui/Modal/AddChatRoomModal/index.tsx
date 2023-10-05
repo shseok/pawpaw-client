@@ -1,8 +1,6 @@
 'use client';
 
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -10,11 +8,11 @@ import { ModalProps } from '@/types/types';
 import useInput from '@/hooks/common/useInput';
 import XIcon from '@/public/X.svg';
 import useImageUpload from '@/hooks/common/useImageUpload';
-import postChatRoom from '@/service/chatRoom';
+import { postChatRoom } from '@/service/chatRoom';
+import LoadingIcon from '@/public/loading.svg';
 import { FlexBox, Divider, Button, Modal } from '../../ui';
 import HashTagInput from './HashTagInput';
 import ImageDisplay from './ImageDisplay';
-import ImageList from './ImageList';
 import MobileHeader from './MobileHeader';
 import OptionRadioGroup from './OptionRadioGroup';
 
@@ -25,10 +23,9 @@ interface FormData {
 
 export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [tag, onChangeTag, resetTag] = useInput('');
+  const [isLoading, setIsLoading] = useState(false);
   const [tagList, setTagList] = useState<string[]>([]);
-  const { handleImageUpload, imageFile, imagePreview } = useImageUpload(
-    '/images/AddChatModal/default2.webp',
-  );
+  const { handleImageUpload, imageFile, imagePreview } = useImageUpload();
   const [option, setOption] = useState('1');
   const router = useRouter();
   const {
@@ -42,6 +39,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   };
   const onCreateChatRoom = async (data: FormData) => {
     const { name, description } = data;
+    setIsLoading(true);
     try {
       const response = await postChatRoom({
         image: imageFile as File,
@@ -54,18 +52,26 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
         },
       });
       if (response.chatroomId) {
-        router.push(`chat/${response.chatroomId}`);
+        router.push(`/chat/${response.chatroomId}`);
       } else {
         throw new Error(response.message);
       }
     } catch (error) {
       // 스낵바 컴포넌트가 완성되면 바꿀예정
       alert(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   const onSubmit: SubmitHandler<FormData> = (data) => {
+    if (!imageFile) {
+      // 스낵바 컴포넌트가 완성되면 바꿀예정
+      alert('커버이미지를 업로드 해주세요.');
+      return;
+    }
     onCreateChatRoom(data);
   };
+  console.log(isLoading);
   return (
     <Modal open={open} onClose={onClose}>
       <form
@@ -75,7 +81,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             event.preventDefault();
           }
         }}
-        className="flex flex-col w-screen tablet:w-[1028px] h-screen tablet:h-[720px]"
+        className="flex flex-col w-screen tablet:w-[800px] h-screen tablet:h-[720px]"
       >
         <div className="self-end hidden tablet:block">
           <button type="button" onClick={onClose}>
@@ -134,12 +140,11 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             />
           </FlexBox>
 
-          <FlexBox className="order-1 gap-4 tablet:order-2">
+          <FlexBox className="order-1 tablet:order-2">
             <ImageDisplay
               image={imagePreview}
               onChangeImage={handleImageUpload}
             />
-            <ImageList onChangeImage={handleImageUpload} />
           </FlexBox>
           <OptionRadioGroup
             option={option}
@@ -150,7 +155,14 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
               취소
             </Button>
             <Button fullWidth type="submit">
-              확인
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <LoadingIcon className="animate-spin" />
+                  채팅방 만드는중..<div className="animate-bounce">🐶</div>
+                </div>
+              ) : (
+                '확인'
+              )}
             </Button>
           </FlexBox>
         </div>

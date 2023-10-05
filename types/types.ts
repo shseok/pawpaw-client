@@ -89,3 +89,43 @@ export interface VerifivationParams {
   recipient: string;
   birthday: string;
 }
+interface ChatList {
+  id: number;
+  name: string;
+  description: string;
+  hashTagList: string[];
+  managerName: string;
+  managerImageUrl: string;
+  participantNumber: number;
+  trendingId: number;
+}
+export interface RecommendedChatList extends ChatList {}
+export interface EnteredChatList extends ChatList {
+  coverUrl: string;
+  lastChatTime: string;
+  hasNotice: boolean;
+  hasSchedule: boolean;
+}
+export interface TrendingChatList {
+  size: number;
+  content: ChatList[];
+  number: number;
+  sort: {
+    empty: boolean;
+    unsorted: boolean;
+    sorted: boolean;
+  };
+  pageNumber: number;
+  pageSize: number;
+  paged: boolean;
+  unpaged: boolean;
+}
+
+export interface UserInfo {
+  email: string;
+  role: string;
+  nickname: string;
+  briefIntroduction: string;
+  position: { latitude: number; longitude: number; name: string };
+  imageUrl: string;
+}
