@@ -1,14 +1,15 @@
 import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
+import { Species } from '@/types/types';
 import DropdownIcon from '@/public/Auth/arrow-drop-down.svg';
 import Button from '../../Button';
 
 interface Props {
   isOpen: boolean;
   selected: string;
-  list: string[];
+  list: readonly Species[];
   placeholder: string;
   handleClick: () => void;
-  handleSelect: (value: string) => void;
+  handleSelect: (value: Species) => void;
 }
 
 export default function SelectInput({
@@ -39,7 +40,9 @@ export default function SelectInput({
   const handleConfirmCustomValue = () => {
     if (customValue.trim() !== '') {
       setIsCustomInputOpen(false);
-      handleSelect(customValue.trim());
+      // 서버에서 정해놓은 값이 아니므로 사용불가능 > 추후 변경 > 일단, 유저가 입력해도 강아지로 강제 기존 종류(타입) 선택
+      handleSelect('강아지');
+      // handleSelect(customValue.trim() as Species);
       setCustomValue('');
     }
   };

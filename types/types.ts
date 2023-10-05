@@ -1,3 +1,5 @@
+import { SPECIES } from '@/constant/pets';
+
 export interface SidebarProps {
   svgComponent: (props: { color: string }) => JSX.Element;
   activeButton: string;
@@ -42,16 +44,7 @@ export type LocationName = {
   koAddress: string;
 };
 
-export type Species =
-  | 'DOG'
-  | 'CAT'
-  | 'FISH'
-  | 'BIRD'
-  | 'HAMSTER'
-  | 'RABBIT'
-  | 'GUINEA_PIG'
-  | 'LIZARD'
-  | 'FROG';
+export type Species = (typeof SPECIES)[number];
 
 export interface AuthParams {
   image: File | string;
@@ -79,7 +72,11 @@ export interface Position {
 }
 
 export type EmailAuthParams = Omit<AuthParams, 'body'> & {
-  body: Omit<AuthParams['body'], 'key'> & { email: string; password: string };
+  body: Omit<AuthParams['body'], 'key' | 'noImage'> & {
+    email: string;
+    password: string;
+    phoneNumber: string;
+  };
 };
 
 export interface ModalProps {

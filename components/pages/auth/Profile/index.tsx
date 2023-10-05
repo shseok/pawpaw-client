@@ -3,9 +3,10 @@
 import BottomButton from '@/components/pages/auth/BottomButton';
 import ProgressBar from '@/components/pages/auth/ProgressBar';
 import { SelectInput } from '@/components/ui/ui';
-import { invertedPetMaps, petMaps } from '@/constant/pets';
+import { SPECIES } from '@/constant/pets';
 import useInput from '@/hooks/common/useInput';
 import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore';
+import { useIdentityStore } from '@/hooks/stores/useIdentityStore';
 import DefaultImg from '@/public/Auth/dog.svg';
 import Pencil from '@/public/Auth/pencil.svg';
 import {
@@ -44,14 +45,16 @@ export default function Profile({ title }: { title: string }) {
     }),
     shallow,
   );
+  const { phoneNumber } = useIdentityStore(
+    (state) => ({ phoneNumber: state.phoneNum }),
+    shallow,
+  );
   const [profileName, setProfileName] = useInput(nickname);
   const [petName, setPetName] = useInput(petInfo.name);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedPet, setSelectedPet] = useState(
-    petInfo.species ? petMaps[petInfo.species] : '',
-  );
+  const [selectedPet, setSelectedPet] = useState(petInfo.species);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -62,10 +65,10 @@ export default function Profile({ title }: { title: string }) {
     setIsOpen(!isOpen);
   };
 
-  const handleSelectPet = (pet: string) => {
+  const handleSelectPet = (pet: Species) => {
     setSelectedPet(pet);
     // TODO: invertedPetMaps[pet]이 undefined일 경우 처리 (백과 협의 필요)
-    setPetInfo({ ...petInfo, species: invertedPetMaps[pet] as Species });
+    setPetInfo({ ...petInfo, species: pet });
     setIsOpen(false);
   };
 
@@ -118,8 +121,9 @@ export default function Profile({ title }: { title: string }) {
               longitude: position.lng,
               name: position.name,
             },
+            phoneNumber,
             nickname: profileName,
-            noImage: true,
+
             petInfos: [
               {
                 petName,
@@ -228,7 +232,7 @@ export default function Profile({ title }: { title: string }) {
               <SelectInput
                 placeholder="반려동물 선택"
                 isOpen={isOpen}
-                list={Object.values(petMaps)}
+                list={SPECIES}
                 selected={selectedPet}
                 handleClick={handleToggleDropdown}
                 handleSelect={handleSelectPet}

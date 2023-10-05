@@ -69,7 +69,6 @@ export default function EmailLogin({ title }: Props) {
         text="로그인 하기"
         isFullWidth
         variant="primary"
-        isDisabled={!email || !password}
         handleClick={handleClick}
       />
     </form>

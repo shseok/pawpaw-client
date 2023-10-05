@@ -12,7 +12,7 @@ interface Props {
 
 export default function ConfirmIdentity({ title }: Props) {
   const router = useRouter();
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(false);
   const step = useSearchParams().get('step');
 
   return (

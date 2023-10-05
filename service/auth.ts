@@ -3,12 +3,11 @@ import { AuthParams, EmailAuthParams, VerifivationParams } from '@/types/types';
 export async function createUserWithSocialLogin(params: AuthParams) {
   const formData = new FormData();
   const { body, image } = params;
-  formData.append('image', image);
   formData.append(
     'body',
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
   );
-  // console.log(formData, formData.get('image'), formData.get('body'));
+  formData.append('image', image);
   const response = await fetch('/api/auth/sign-up/social', {
     method: 'POST',
     credentials: 'include',
@@ -26,11 +25,11 @@ export async function createUserWithSocialLogin(params: AuthParams) {
 export async function createUserWithEmailAndPassword(params: EmailAuthParams) {
   const formData = new FormData();
   const { body, image } = params;
-  formData.append('image', image);
   formData.append(
     'body',
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
   );
+  formData.append('image', image);
   const response = await fetch('/api/auth/sign-up', {
     method: 'POST',
     credentials: 'include',

@@ -11,7 +11,7 @@ export interface GeneralRegisterStore {
   nickname: string;
   petInfo: {
     name: string;
-    species: Species | null;
+    species: Species;
   };
   imageFile: File | null;
   email: string;
@@ -23,7 +23,7 @@ export interface GeneralRegisterStore {
   setPosition: (position: { lat: number; lng: number; name: string }) => void;
   setSearchHistory: (searchHistory: string) => void;
   setNickname: (nickname: string) => void;
-  setPetInfo: (info: { name: string; species: Species | null }) => void;
+  setPetInfo: (info: { name: string; species: Species }) => void;
   setImageFile: (imageFile: File) => void;
 }
 
@@ -37,7 +37,7 @@ export const useGeneralRegisterStore =
       nickname: '',
       petInfo: {
         name: '',
-        species: null,
+        species: '강아지',
       },
       imageFile: null,
       email: '',
@@ -65,7 +65,7 @@ export const useGeneralRegisterStore =
         set((store) => ({ ...store, searchHistory })),
       setNickname: (nickname: string) =>
         set((store) => ({ ...store, nickname })),
-      setPetInfo: (petInfo: { name: string; species: Species | null }) =>
+      setPetInfo: (petInfo: { name: string; species: Species }) =>
         set((store) => ({ ...store, petInfo })),
       setImageFile: (imageFile: File) =>
         set((store) => ({ ...store, imageFile })),
