@@ -12,6 +12,7 @@ import Pencil from '@/public/Auth/pencil.svg';
 import {
   createUserWithEmailAndPassword,
   createUserWithSocialLogin,
+  loginWithEmailAndPassword,
 } from '@/service/auth';
 import { Species } from '@/types/types';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -132,6 +133,11 @@ export default function Profile({ title }: { title: string }) {
             ],
           },
         });
+        // for getting token
+        await loginWithEmailAndPassword({
+          email,
+          password,
+        });
       }
       router.push(`/auth/complete`);
     } catch (e) {
@@ -154,7 +160,7 @@ export default function Profile({ title }: { title: string }) {
           setUploadedImage(event.target?.result as string);
         };
         reader.readAsDataURL(file);
-        console.log(file);
+        // console.log(file);
         setImageFile(file);
       }
     } catch (error) {

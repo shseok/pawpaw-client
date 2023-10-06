@@ -30,7 +30,6 @@ export async function createUserWithEmailAndPassword(params: EmailAuthParams) {
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
   );
   formData.append('image', image);
-  console.log(body, formData.get('body'), formData.get('image'));
   const response = await fetch('/api/auth/sign-up', {
     method: 'POST',
     credentials: 'include',
