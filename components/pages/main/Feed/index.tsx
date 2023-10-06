@@ -8,7 +8,6 @@ import { Post, Comment } from '@/types/types';
 import PostModal from './PostsList/PostModal';
 
 export default function Feed() {
-  // 모달창 구현에 필요
   const [showModal, setShowModal] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [selectedComments, setSelectedComments] = useState<
