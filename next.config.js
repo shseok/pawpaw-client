@@ -8,7 +8,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/:path*',
+        source: '/endpoint/:path*',
         destination: `https://pawpawdev.duckdns.org/:path*`,
       },
     ];
