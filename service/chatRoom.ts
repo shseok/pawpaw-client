@@ -1,3 +1,5 @@
+import { ChatRoomUserList } from '@/types/types';
+
 interface ChatRoomType {
   image: File;
   body: {
@@ -43,9 +45,20 @@ export async function joinChatRoom(id: number) {
     console.error(error);
   }
 }
-export async function getChatroomUserList(chatRoomId: string) {
+export async function getChatroomUserList(
+  chatRoomId: string,
+): Promise<ChatRoomUserList[]> {
   const url = `/endpoint/api/chatroom/${chatRoomId}/participants`;
   const response = await fetch(url);
   const data = await response.json();
   return data;
+}
+export async function getScheduleList(roomId: string) {
+  try {
+    const url = `/endpoint/api/chatroom/${roomId}/schedule`;
+    const response = await fetch(url);
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
 }

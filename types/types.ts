@@ -122,3 +122,9 @@ export interface UserInfo {
   position: { latitude: number; longitude: number; name: string };
   imageUrl: string;
 }
+export interface ChatRoomUserList {
+  briefIntroduction: string;
+  nickname: string;
+  imageUrl: string;
+  role: 'MANAGER' | 'PARTICIPANT';
+}
