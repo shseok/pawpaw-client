@@ -3,13 +3,12 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-const API_KEY = process.env.NEXT_PUBLIC_API_URL;
 
 const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/:path*',
+        source: '/endpoint/:path*',
         destination: `https://pawpawdev.duckdns.org/:path*`,
       },
     ];

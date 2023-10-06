@@ -21,7 +21,7 @@ export default function Sidebar() {
     viewportWidth?.width! < 1240 ? setToggle(false) : setToggle(true);
   }, [viewportWidth]);
   const login = async () => {
-    const response = await fetch(`/api/auth`, {
+    const response = await fetch(`/endpoint/api/auth`, {
       method: 'POST',
       body: JSON.stringify({
         email: 'test5@gmail.com',

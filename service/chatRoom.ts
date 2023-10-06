@@ -10,7 +10,7 @@ interface ChatRoomType {
 }
 
 export async function postChatRoom(chatRoomData: ChatRoomType) {
-  const url = `http://localhost:3000/api/chatroom`;
+  const url = `/endpoint/api/chatroom`;
   const formData = new FormData();
   const { body, image } = chatRoomData;
   formData.append(
@@ -28,7 +28,7 @@ export async function postChatRoom(chatRoomData: ChatRoomType) {
 }
 
 export async function joinChatRoom(id: number) {
-  const url = `http://localhost:3000/api/chatroom/${id}/participants`;
+  const url = `/endpoint/api/chatroom/${id}/participants`;
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -42,4 +42,10 @@ export async function joinChatRoom(id: number) {
   } catch (error) {
     console.error(error);
   }
+}
+export async function getChatroomUserList(chatRoomId: string) {
+  const url = `/endpoint/api/chatroom/${chatRoomId}/participants`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
 }

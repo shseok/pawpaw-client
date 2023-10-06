@@ -71,7 +71,6 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
     }
     onCreateChatRoom(data);
   };
-  console.log(isLoading);
   return (
     <Modal open={open} onClose={onClose}>
       <form
@@ -156,7 +155,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
             </Button>
             <Button fullWidth type="submit">
               {isLoading ? (
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center gap-2">
                   <LoadingIcon className="animate-spin" />
                   채팅방 만드는중..<div className="animate-bounce">🐶</div>
                 </div>

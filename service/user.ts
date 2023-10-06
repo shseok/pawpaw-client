@@ -3,7 +3,7 @@ import { AuthError } from '@/lib/error';
 
 export default async function getUserInfo(): Promise<UserInfo> {
   try {
-    const url = 'http://localhost:3000/api/user';
+    const url = '/endpoint/api/user';
     const response = await fetch(url, {
       credentials: 'include',
     });
