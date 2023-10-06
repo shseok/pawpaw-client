@@ -40,7 +40,7 @@ export default function FeedPostCard({
           >
             {comments?.map((comment) => (
               <PostCard.Comments
-                id={comment.id}
+                key={comment.id}
                 userName={comment.User.name}
                 content={comment.content}
                 onClickModal={() => setShowModal(true)}

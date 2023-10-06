@@ -12,8 +12,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <ReactQueryProvider>
-        <ToastContainer limit={5} />
-        <body>{children}</body>
+        <body>
+          <ToastContainer limit={5} />
+          {children}
+        </body>
       </ReactQueryProvider>
     </html>
   );

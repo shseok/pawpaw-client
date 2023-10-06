@@ -91,7 +91,6 @@ body {
   align-items: center;
   color: white;
   border-radius: 100px;
-  padding: 16px 120px;
 }
 
 .Toastify__toast--error {
@@ -99,7 +98,6 @@ body {
   background-color: #ffffff;
   color: #ff3257;
   border-radius: 10px;
-  padding: 20px 40px;
   border: 1px;
   border-color: #e9ebed;
   gap: 10px;
@@ -117,4 +115,32 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0;
+}
+
+@media (max-width: 1000px) {
+  .Toastify__toast-container {
+    width: 600px;
+  }
+
+  .Toastify__toast--success {
+    width: 600px;
+  }
+
+  .Toastify__toast--error {
+    width: 600px;
+  }
+}
+
+@media (max-width: 640px) {
+  .Toastify__toast-container {
+    width: 400px;
+  }
+
+  .Toastify__toast--success {
+    width: 400px;
+  }
+
+  .Toastify__toast--error {
+    width: 400px;
+  }
 }
