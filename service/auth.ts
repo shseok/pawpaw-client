@@ -8,7 +8,7 @@ export async function createUserWithSocialLogin(params: AuthParams) {
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
   );
   formData.append('image', image);
-  const response = await fetch('/api/auth/sign-up/social', {
+  const response = await fetch('/endpoint/api/auth/sign-up/social', {
     method: 'POST',
     credentials: 'include',
     // headers: {
@@ -30,7 +30,7 @@ export async function createUserWithEmailAndPassword(params: EmailAuthParams) {
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
   );
   formData.append('image', image);
-  const response = await fetch('/api/auth/sign-up', {
+  const response = await fetch('/endpoint/api/auth/sign-up', {
     method: 'POST',
     credentials: 'include',
     body: formData,
@@ -47,7 +47,7 @@ export async function loginWithEmailAndPassword({
   email: string;
   password: string;
 }) {
-  const response = await fetch('/api/auth', {
+  const response = await fetch('/endpoint/api/auth', {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -64,14 +64,14 @@ export async function loginWithEmailAndPassword({
 }
 
 export async function isDuplicatedEmail(email: string) {
-  const url = `/api/auth/sign-up/check/duplicate/email`;
+  const url = `/endpoint/api/auth/sign-up/check/duplicate/email`;
   const response = await fetch(url.concat(`?email=${email}`));
   const data = await response.json();
   return data;
 }
 
 export async function requestVerification(params: VerificationParams) {
-  await fetch('/api/auth/sign-up/verification', {
+  await fetch('/endpoint/api/auth/sign-up/verification', {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -88,14 +88,17 @@ export async function checkVerification({
   phoneNumber: string;
   code: string;
 }) {
-  const response = await fetch('/api/auth/sign-up/verification/check', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    '/endpoint/api/auth/sign-up/verification/check',
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ phoneNumber, code }),
     },
-    body: JSON.stringify({ phoneNumber, code }),
-  });
+  );
   const data = (await response.json()) as { success: boolean };
   return data;
 }
