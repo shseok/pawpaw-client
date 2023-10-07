@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function ProfilePage() {
-  return <Profile step={3} title="프로필을 설정해주세요" />;
+  return <Profile title="프로필을 설정해주세요" />;
 }

@@ -24,7 +24,7 @@ export default function LoginPage() {
         <div className="flex justify-center items-cente">
           <Link
             className="body1 text-grey-500 border-b-[1px] border-grey-400"
-            href="/"
+            href="/auth/email-login"
           >
             이메일로 로그인하기
           </Link>
@@ -32,7 +32,7 @@ export default function LoginPage() {
       </div>
       <BottomButton
         text="간편 회원가입 하기"
-        to="/auth/policy?next=/auth/register"
+        to="/auth/policy"
         variant="ghost"
         isFullWidth
       >

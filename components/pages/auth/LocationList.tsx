@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useRegisterStore } from '@/hooks/stores/useRegisterStore';
+import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore';
 import { LocationInfoType } from '@/types/types';
 import { getLocationList } from '@/service/map';
 import CheckList from './CheckList';
@@ -14,8 +14,8 @@ export default function LocationList({ value }: Props) {
     null,
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const position = useRegisterStore((state) => state.position);
-  const setPosition = useRegisterStore((state) => state.setPosition);
+  const position = useGeneralRegisterStore((state) => state.position);
+  const setPosition = useGeneralRegisterStore((state) => state.setPosition);
 
   useEffect(() => {
     const fetchLocationList = async () => {
