@@ -8,8 +8,6 @@ import UserAddButton from './UserAddButton';
 
 export default function ChatUserList({ roomId }: { roomId: string }) {
   const { data: userList, isLoading } = useGetChatRoomUserList(roomId);
-  console.log(userList);
-
   return (
     <FlexBox
       direction="column"
@@ -19,8 +17,8 @@ export default function ChatUserList({ roomId }: { roomId: string }) {
         <FlexBox as="header" className="gap-2 p-2">
           <h1 className="text-2xl font-bold">인원</h1>
           <FlexBox className="gap-1">
-            <p>21</p>
-            <p className="text-grey-500">/ 60</p>
+            <p>{userList?.length}</p>
+            <p className="text-grey-500">/60</p>
           </FlexBox>
         </FlexBox>
         <UserAddButton />
@@ -42,7 +40,6 @@ export default function ChatUserList({ roomId }: { roomId: string }) {
             </li>
           ))
         )}
-        <ChatUserListLoading />
       </ul>
     </FlexBox>
   );

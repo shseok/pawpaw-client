@@ -1,4 +1,5 @@
 import { ChatRoomUserList } from '@/types/types';
+import { toast } from 'react-toastify';
 
 interface ChatRoomType {
   image: File;
@@ -48,17 +49,30 @@ export async function joinChatRoom(id: number) {
 export async function getChatroomUserList(
   chatRoomId: string,
 ): Promise<ChatRoomUserList[]> {
-  const url = `/endpoint/api/chatroom/${chatRoomId}/participants`;
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
+  try {
+    const url = `/endpoint/api/chatroom/${chatRoomId}/participants`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('채팅룸 참가 유저리스트를 불러오지 못하였습니다.');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    toast.error(error as string);
+    throw error;
+  }
 }
 export async function getScheduleList(roomId: string) {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule`;
     const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('스케줄 리스트를 불러오지 못하였습니다.');
+    }
     return await response.json();
   } catch (error) {
     console.error(error);
+    throw error;
   }
 }
