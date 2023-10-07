@@ -74,6 +74,11 @@
   background: #b4b0b0;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 .Toastify__toast-container {
   width: 800px;
 }
