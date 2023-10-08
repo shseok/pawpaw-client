@@ -8,6 +8,8 @@ interface SearchInputType {
   onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
+  onClickSearchIcon?: () => void;
+  onPressEnter?: () => void;
 }
 
 export default function SearchInput({
@@ -16,6 +18,8 @@ export default function SearchInput({
   onChangeValue,
   placeholder,
   className,
+  onClickSearchIcon,
+  onPressEnter,
 }: SearchInputType) {
   return (
     <div className="relative w-full">
@@ -25,6 +29,11 @@ export default function SearchInput({
         onChange={onChangeValue}
         className={`border border-grey-600 block rounded-[10px] px-5 py-4 pr-20 w-full ${className}`}
         placeholder={placeholder}
+        onKeyUp={(event) => {
+          if (event.key === 'Enter') {
+            onPressEnter?.();
+          }
+        }}
       />
       <div className="absolute inset-y-0 top-0 flex gap-2 right-4">
         {value && (
@@ -32,7 +41,7 @@ export default function SearchInput({
             <InputDeleteIcon className="w-5 h-5 " />
           </button>
         )}
-        <button type="button" className="">
+        <button type="button" className="" onClick={onClickSearchIcon}>
           <SearchIcon className="w-6 h-6" />
         </button>
       </div>

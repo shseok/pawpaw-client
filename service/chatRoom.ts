@@ -1,5 +1,5 @@
 import { ChatRoomUserList, Schedule, ScheduleList } from '@/types/types';
-import { toast } from 'react-toastify';
+import Toast from '@/utils/notification';
 
 interface ChatRoomType {
   image: File;
@@ -74,7 +74,7 @@ export async function getChatroomUserList(
     return data;
   } catch (error) {
     console.error(error);
-    toast.error(error as string);
+    Toast.error(error as string);
     throw error;
   }
 }
@@ -112,4 +112,10 @@ export async function postSchedule(roomId: string, scheduleInfo: Schedule) {
     console.error(error);
     throw error;
   }
+}
+
+export async function getSearchedUserList(roomId: string, nickname: string) {
+  const url = `/endpoint/api/chatroom/${roomId}/non-participants?nickname=${nickname}`;
+  const response = await fetch(url);
+  return response.json();
 }

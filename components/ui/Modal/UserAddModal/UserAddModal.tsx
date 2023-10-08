@@ -5,28 +5,29 @@ import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import SearchInput from '@/components/ui/Input/SearchInput';
 import ArrowLeftIcon from '@/public/arrow-left.svg';
+import useGetSearchedUserList from '@/hooks/queries/useGetSearchedUserList';
+import { usePathname } from 'next/navigation';
 import SearchedUserList from './SearchedUserList';
 
-const userList = [
-  { image: '/default.png', name: '닉네임1', petName: '3살 감자' },
-  { image: '/default.png', name: '닉네임2', petName: '4살 감자' },
-  { image: '/default.png', name: '닉네임3', petName: '5살 감자' },
-  { image: '/default.png', name: '닉네임12', petName: '3살 감자' },
-  { image: '/default.png', name: '닉네임23', petName: '4살 감자' },
-  { image: '/default.png', name: '닉네임34', petName: '5살 감자' },
-  { image: '/default.png', name: '닉네임15', petName: '3살 감자' },
-  { image: '/default.png', name: '닉네임26', petName: '4살 감자' },
-  { image: '/default.png', name: '닉네임33', petName: '5살 감자' },
-];
-
 export default function UserAddModal({ onClose }: { onClose: () => void }) {
-  const [value, onChangeValue, resetValue] = useInput('');
+  const [nickname, onChangeNickname, resetValue] = useInput('');
   const { checkedList, handleCheckboxChange } = useCheckbox();
+  const roomId = usePathname().split('/')[2];
+  const {
+    data: searchedList,
+    // isLoading,
+    refetch,
+  } = useGetSearchedUserList(roomId, nickname);
+
+  const fetchSearchedUserList = () => {
+    if (nickname.length === 0) return;
+    refetch();
+  };
 
   return (
     <FlexBox
       direction="column"
-      className="w-screen tablet:w-[672px] gap-4 h-screen"
+      className="w-screen tablet:w-[672px] gap-4  h-screen"
     >
       <div className="self-end hidden tablet:block">
         <button type="button" onClick={onClose}>
@@ -49,12 +50,14 @@ export default function UserAddModal({ onClose }: { onClose: () => void }) {
         </header>
         <SearchInput
           placeholder="추가할 인원의 아이디나 닉네임을 검색해보세요"
-          value={value}
-          onChangeValue={onChangeValue}
+          value={nickname}
+          onChangeValue={onChangeNickname}
           resetValue={resetValue}
+          onClickSearchIcon={fetchSearchedUserList}
+          onPressEnter={fetchSearchedUserList}
         />
         <SearchedUserList
-          userList={userList}
+          userList={searchedList}
           checkedList={checkedList}
           handleCheckboxChange={handleCheckboxChange}
         />

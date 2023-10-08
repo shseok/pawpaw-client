@@ -7,8 +7,7 @@ interface ChatUserPropsType {
   image: string;
   name: string;
   petName: string;
-
-  role: string;
+  role?: string;
 }
 
 export default function ChatUser({
