@@ -2,16 +2,20 @@ import { QueryClient, useMutation } from '@tanstack/react-query';
 import { postSchedule } from '@/service/chatRoom';
 import Toast from '@/utils/notification';
 
-interface ScheduleInfoType {
+interface ScheduleInfo {
   name: string;
   description: string;
   startDate: string;
   endDate: string;
 }
-export default function useCreateSchedule(roomId: string) {
+interface Schedule {
+  roomId: string;
+  scheduleInfo: ScheduleInfo;
+}
+export default function useCreateSchedule() {
   const queryClient = new QueryClient();
   const { mutate } = useMutation({
-    mutationFn: (scheduleInfo: ScheduleInfoType) =>
+    mutationFn: ({ roomId, scheduleInfo }: Schedule) =>
       postSchedule(roomId, scheduleInfo),
     onSuccess: () => {
       queryClient.invalidateQueries(['scheduleList']);

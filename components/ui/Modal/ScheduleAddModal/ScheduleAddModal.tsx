@@ -21,7 +21,7 @@ export default function ScheduleAddModal({
   const [endDate, setEndDate] = useState(new Date());
   const roomId = usePathname().split('/')[2];
   const isScheduleValueSet = !!(startDate >= endDate || !title || !description);
-  const { mutate: scheduleMutate } = useCreateSchedule(roomId);
+  const { mutate: scheduleMutate } = useCreateSchedule();
 
   // 스케줄 생성시 하루종일 옵션을 체크하면 시,분 을 00시00분으로 초기화한다.
   useEffect(() => {
@@ -33,10 +33,13 @@ export default function ScheduleAddModal({
 
   const createNewSchedule = () => {
     scheduleMutate({
-      name: title,
-      description,
-      startDate: format(startDate, 'yyyy-MM-dd HH:mm:ss'),
-      endDate: format(endDate, 'yyyy-MM-dd HH:mm:ss'),
+      roomId,
+      scheduleInfo: {
+        name: title,
+        description,
+        startDate: format(startDate, 'yyyy-MM-dd HH:mm:ss'),
+        endDate: format(endDate, 'yyyy-MM-dd HH:mm:ss'),
+      },
     });
   };
 
