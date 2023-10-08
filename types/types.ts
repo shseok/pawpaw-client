@@ -141,5 +141,7 @@ export interface Schedule {
   description: string;
   startData: string;
   endDate: string;
+}
+export interface ScheduleList extends Schedule {
   participantList: { nickname: string; imageUrl: string }[];
 }

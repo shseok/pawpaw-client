@@ -1,4 +1,4 @@
-import { ChatRoomUserList, Schedule } from '@/types/types';
+import { ChatRoomUserList, Schedule, ScheduleList } from '@/types/types';
 import { toast } from 'react-toastify';
 
 interface ChatRoomType {
@@ -65,7 +65,7 @@ export async function getChatroomUserList(
   }
 }
 // 채팅룸에 등록되어있는 종료되지않은 스케줄 리스트 조회 API
-export async function getScheduleList(roomId: string): Promise<Schedule[]> {
+export async function getScheduleList(roomId: string): Promise<ScheduleList[]> {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule`;
     const response = await fetch(url);
@@ -78,14 +78,9 @@ export async function getScheduleList(roomId: string): Promise<Schedule[]> {
     throw error;
   }
 }
-interface ScheduleInfo {
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-}
+
 // 채팅룸 스케줄 등록 API
-export async function postSchedule(roomId: string, scheduleInfo: ScheduleInfo) {
+export async function postSchedule(roomId: string, scheduleInfo: Schedule) {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule`;
     const response = await fetch(url, {
