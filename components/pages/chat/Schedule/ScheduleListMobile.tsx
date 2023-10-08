@@ -8,7 +8,7 @@ interface PropsType {
 
 export default function ScheduleListMobile({ closeModal }: PropsType) {
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 z-50 w-full h-full bg-white tablet:hidden">
+    <div className="fixed top-0 bottom-0 left-0 right-0 z-20 w-full h-full bg-white tablet:hidden">
       <header className="flex w-full justify-between  h-16 items-center px-10 py-6 gap-4 tablet:h-20 border-b-[1px]">
         <div className="flex">
           <button type="button" onClick={closeModal}>

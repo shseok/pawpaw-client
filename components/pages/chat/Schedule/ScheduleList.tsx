@@ -12,8 +12,8 @@ export default function ScheduleList({ roomId }: { roomId: string }) {
   }
 
   return (
-    <FlexBox direction="column" className="gap-5 px-8 pt-8 h-1/2">
-      <FlexBox as="header" justify="between" className="w-full">
+    <FlexBox direction="column" className="gap-5 px-8 pt-8 ">
+      <FlexBox as="header" justify="between" className="w-full ">
         <h2 className="header2">스케줄</h2>
         <ScheduleDropdownButton />
       </FlexBox>
