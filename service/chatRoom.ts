@@ -1,4 +1,4 @@
-import { ChatRoomUserList } from '@/types/types';
+import { ChatRoomUserList, Schedule } from '@/types/types';
 import { toast } from 'react-toastify';
 
 interface ChatRoomType {
@@ -11,7 +11,7 @@ interface ChatRoomType {
     locationLimit: boolean;
   };
 }
-
+// 채팅방 생성 API
 export async function postChatRoom(chatRoomData: ChatRoomType) {
   const url = `/endpoint/api/chatroom`;
   const formData = new FormData();
@@ -29,7 +29,7 @@ export async function postChatRoom(chatRoomData: ChatRoomType) {
   });
   return response.json();
 }
-
+// 채팅룸 입장 API
 export async function joinChatRoom(id: number) {
   const url = `/endpoint/api/chatroom/${id}/participants`;
   try {
@@ -46,6 +46,7 @@ export async function joinChatRoom(id: number) {
     console.error(error);
   }
 }
+// 현재 채팅룸에 참여중인 유저리스트 조회 API
 export async function getChatroomUserList(
   chatRoomId: string,
 ): Promise<ChatRoomUserList[]> {
@@ -63,12 +64,39 @@ export async function getChatroomUserList(
     throw error;
   }
 }
-export async function getScheduleList(roomId: string) {
+// 채팅룸에 등록되어있는 종료되지않은 스케줄 리스트 조회 API
+export async function getScheduleList(roomId: string): Promise<Schedule[]> {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule`;
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error('스케줄 리스트를 불러오지 못하였습니다.');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+interface ScheduleInfo {
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+}
+// 채팅룸 스케줄 등록 API
+export async function postSchedule(roomId: string, scheduleInfo: ScheduleInfo) {
+  try {
+    const url = `/endpoint/api/chatroom/${roomId}/schedule`;
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(scheduleInfo),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`서버오류:${response.status}`);
     }
     return await response.json();
   } catch (error) {

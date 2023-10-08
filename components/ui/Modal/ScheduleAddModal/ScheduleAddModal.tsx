@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { startOfDay } from 'date-fns';
+import { format, startOfDay } from 'date-fns';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
 import useInput from '@/hooks/common/useInput';
 import DatePicker from '@/components/ui/DatePicker';
+import { usePathname } from 'next/navigation';
+import useCreateSchedule from '@/hooks/mutations/useCreateSchedule';
 import TimeSelect from './TimeSelect';
 
 export default function ScheduleAddModal({
@@ -12,21 +14,35 @@ export default function ScheduleAddModal({
 }: {
   closeModal: () => void;
 }) {
-  const [value, onChangeValue] = useInput('');
-  const [isChecked, setIsChecked] = useState(false);
+  const [title, onChangeTitle] = useInput('');
+  const [description, onChangeDescription] = useInput('');
+  const [isAlldayChecked, setIsAlldayChecked] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const roomId = usePathname().split('/')[2];
+  const isScheduleValueSet = !!(startDate >= endDate || !title || !description);
+  const { mutate: scheduleMutate } = useCreateSchedule(roomId);
+
+  // 스케줄 생성시 하루종일 옵션을 체크하면 시,분 을 00시00분으로 초기화한다.
   useEffect(() => {
-    if (isChecked) {
+    if (isAlldayChecked) {
       setStartDate(startOfDay(startDate));
       setEndDate(startOfDay(endDate));
     }
-  }, [isChecked]);
-  const isScheduleValueSet = !!(startDate >= endDate || !value);
+  }, [isAlldayChecked]);
+
+  const createNewSchedule = () => {
+    scheduleMutate({
+      name: title,
+      description,
+      startDate: format(startDate, 'yyyy-MM-dd HH:mm:ss'),
+      endDate: format(endDate, 'yyyy-MM-dd HH:mm:ss'),
+    });
+  };
 
   return (
-    <FlexBox direction="column" className="w-full md:w-[672px] gap-4 ">
-      <div className="self-end">
+    <FlexBox direction="column" className=" w-screen md:w-[672px] gap-4 ">
+      <div className="self-end hidden md:block">
         <button type="button" onClick={closeModal}>
           <XIcon className="w-8 h-8" />
         </button>
@@ -40,9 +56,16 @@ export default function ScheduleAddModal({
           <input
             type="text"
             className="px-5 py-4 rounded-[10px] w-full focus-primary body1"
-            placeholder="스케줄 제목을 입력해보세요"
-            value={value}
-            onChange={onChangeValue}
+            placeholder="스케줄 제목을 입력해보세요."
+            value={title}
+            onChange={onChangeTitle}
+          />
+          <input
+            type="text"
+            className="px-5 py-4 rounded-[10px] w-full focus-primary body1"
+            placeholder="스케줄에 대한 설명을 해주세요."
+            value={description}
+            onChange={onChangeDescription}
           />
 
           {/** 시작 날짜 */}
@@ -53,7 +76,7 @@ export default function ScheduleAddModal({
                 selectedDate={startDate}
                 setSelectedDate={setStartDate}
               />
-              {!isChecked && (
+              {!isAlldayChecked && (
                 <TimeSelect
                   selectedDate={startDate}
                   setSelectedDate={setStartDate}
@@ -67,7 +90,7 @@ export default function ScheduleAddModal({
             <span className="w-full body1">종료 날짜</span>
             <div className="flex flex-col w-full gap-2 tablet:flex-row">
               <DatePicker selectedDate={endDate} setSelectedDate={setEndDate} />
-              {!isChecked && (
+              {!isAlldayChecked && (
                 <TimeSelect
                   selectedDate={endDate}
                   setSelectedDate={setEndDate}
@@ -84,7 +107,7 @@ export default function ScheduleAddModal({
               type="checkbox"
               id="allday"
               className="w-6 h-6 rounded-full checked:bg-primary-200 checked:hover:bg-primary-200"
-              onChange={(e) => setIsChecked(e.target.checked)}
+              onChange={(e) => setIsAlldayChecked(e.target.checked)}
             />
             <p className="body1">하루종일</p>
           </label>
@@ -93,7 +116,11 @@ export default function ScheduleAddModal({
           <Button variant="secondary" onClickAction={closeModal} fullWidth>
             취소
           </Button>
-          <Button disabled={isScheduleValueSet} fullWidth>
+          <Button
+            disabled={isScheduleValueSet}
+            onClickAction={createNewSchedule}
+            fullWidth
+          >
             등록
           </Button>
         </div>

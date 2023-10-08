@@ -135,3 +135,11 @@ export interface ChatRoomUserList {
   imageUrl: string;
   role: 'MANAGER' | 'PARTICIPANT';
 }
+export interface Schedule {
+  id: number;
+  name: string;
+  description: string;
+  startData: string;
+  endDate: string;
+  participantList: { nickname: string; imageUrl: string }[];
+}
