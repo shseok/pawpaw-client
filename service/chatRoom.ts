@@ -46,6 +46,20 @@ export async function joinChatRoom(id: number) {
     console.error(error);
   }
 }
+// 채팅룸 나가기 API
+export async function leaveChatRoom(roomId: string) {
+  try {
+    const url = `/endpoint/api/chatroom/${roomId}/participants`;
+    const response = await fetch(url, { method: 'DELETE' });
+    if (!response.ok) {
+      throw new Error(`서버오류:${response.status}`);
+    }
+    window.location.replace('/community');
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // 현재 채팅룸에 참여중인 유저리스트 조회 API
 export async function getChatroomUserList(
   chatRoomId: string,

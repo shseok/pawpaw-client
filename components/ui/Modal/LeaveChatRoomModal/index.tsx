@@ -2,12 +2,18 @@
 
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
+import { leaveChatRoom } from '@/service/chatRoom';
+import { usePathname } from 'next/navigation';
 
 export default function LeaveChatRoomModal({
   closeModal,
 }: {
   closeModal: () => void;
 }) {
+  const roomId = usePathname().split('/')[2];
+  const onLeaveChatRoom = () => {
+    leaveChatRoom(roomId);
+  };
   return (
     <FlexBox
       direction="column"
@@ -22,10 +28,7 @@ export default function LeaveChatRoomModal({
         >
           취소
         </Button>
-        <Button
-          className="w-full body2"
-          onClickAction={() => window.location.replace('/community')}
-        >
+        <Button className="w-full body2" onClickAction={onLeaveChatRoom}>
           나가기
         </Button>
       </FlexBox>

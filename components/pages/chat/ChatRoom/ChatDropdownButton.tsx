@@ -5,9 +5,9 @@ import FlexBox from '@/components/ui/FlexBox';
 import Divider from '@/components/ui/Divider';
 import ArrowRightIcon from '@/public/arrow-right.svg';
 import Modal from '@/components/ui/Modal';
+import LeaveChatRoomModal from '@/components/ui/Modal/LeaveChatRoomModal';
 import ChatUserListMobile from './ChatUserListMobile';
 import ScheduleListMobile from '../Schedule/ScheduleListMobile';
-import LeaveChatRoomModal from '../../../ui/Modal/LeaveChatRoomModal/LeaveChatRoomModal';
 
 type ModalType = '공지' | '사진' | '채팅방 나가기' | '인원' | '스케줄' | '';
 type ModalActionType = Dispatch<SetStateAction<ModalType>>;
