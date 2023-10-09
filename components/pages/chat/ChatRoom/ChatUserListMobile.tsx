@@ -29,7 +29,6 @@ export default function ChatUserListMobile({ closeModal }: PropsType) {
             image="/default.png"
             name="닉네임입니다"
             petName="3살 감자"
-            icon
           />
         </ul>
       </div>

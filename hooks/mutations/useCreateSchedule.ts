@@ -1,22 +1,18 @@
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import { postSchedule } from '@/service/chatRoom';
 import Toast from '@/utils/notification';
+import { Schedule } from '@/types/types';
 
-interface ScheduleInfo {
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-}
-interface Schedule {
-  roomId: string;
-  scheduleInfo: ScheduleInfo;
-}
 export default function useCreateSchedule() {
   const queryClient = new QueryClient();
   const { mutate } = useMutation({
-    mutationFn: ({ roomId, scheduleInfo }: Schedule) =>
-      postSchedule(roomId, scheduleInfo),
+    mutationFn: ({
+      roomId,
+      scheduleInfo,
+    }: {
+      roomId: string;
+      scheduleInfo: Schedule;
+    }) => postSchedule(roomId, scheduleInfo),
     onSuccess: () => {
       queryClient.invalidateQueries(['scheduleList']);
       Toast.success('새로운 스케줄을 생성하였습니다.');
