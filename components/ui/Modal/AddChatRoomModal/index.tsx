@@ -10,6 +10,7 @@ import XIcon from '@/public/X.svg';
 import useImageUpload from '@/hooks/common/useImageUpload';
 import { postChatRoom } from '@/service/chatRoom';
 import LoadingIcon from '@/public/loading.svg';
+import Toast from '@/utils/notification';
 import { FlexBox, Divider, Button, Modal } from '../../ui';
 import HashTagInput from './HashTagInput';
 import ImageDisplay from './ImageDisplay';
@@ -52,21 +53,21 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
         },
       });
       if (response.chatroomId) {
+        Toast.success('채팅룸 오픈! 🦊');
         router.push(`/chat/${response.chatroomId}`);
       } else {
         throw new Error(response.message);
       }
     } catch (error) {
-      // 스낵바 컴포넌트가 완성되면 바꿀예정
-      alert(error);
+      console.error(error);
+      Toast.error('잠시후 다시 시도해주세요. 🐾');
     } finally {
       setIsLoading(false);
     }
   };
   const onSubmit: SubmitHandler<FormData> = (data) => {
     if (!imageFile) {
-      // 스낵바 컴포넌트가 완성되면 바꿀예정
-      alert('커버이미지를 업로드 해주세요.');
+      Toast.error('커버이미지를 업로드 해주세요. 🐈');
       return;
     }
     onCreateChatRoom(data);

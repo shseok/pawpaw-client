@@ -1,5 +1,6 @@
 import { ChatRoomUserList, Schedule, ScheduleList } from '@/types/types';
 import Toast from '@/utils/notification';
+import { ImageSizeError } from '@/lib/error';
 
 interface ChatRoomType {
   image: File;
@@ -13,21 +14,31 @@ interface ChatRoomType {
 }
 // 채팅방 생성 API
 export async function postChatRoom(chatRoomData: ChatRoomType) {
-  const url = `/endpoint/api/chatroom`;
-  const formData = new FormData();
-  const { body, image } = chatRoomData;
-  formData.append(
-    'body',
-    new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
-  );
-  formData.append('image', image);
-
-  const response = await fetch(url, {
-    method: 'POST',
-    credentials: 'include',
-    body: formData,
-  });
-  return response.json();
+  try {
+    const url = `/endpoint/api/chatroom`;
+    const formData = new FormData();
+    const { body, image } = chatRoomData;
+    formData.append(
+      'body',
+      new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
+    );
+    formData.append('image', image);
+    const response = await fetch(url, {
+      method: 'POST',
+      credentials: 'include',
+      body: formData,
+    });
+    if (response.status === 413) {
+      throw new ImageSizeError('이미지 크기가 업로드 제한을 초과했어요.😢');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    if (error instanceof ImageSizeError) {
+      Toast.error(error.message);
+    }
+    throw error;
+  }
 }
 // 채팅룸 입장 API
 export async function joinChatRoom(id: number) {
@@ -74,7 +85,6 @@ export async function getChatroomUserList(
     return data;
   } catch (error) {
     console.error(error);
-    Toast.error(error as string);
     throw error;
   }
 }

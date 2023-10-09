@@ -136,7 +136,7 @@ export interface ChatRoomUserList {
   role: 'MANAGER' | 'PARTICIPANT';
 }
 export interface Schedule {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   startDate: string;

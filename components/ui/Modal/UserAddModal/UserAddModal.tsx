@@ -21,15 +21,20 @@ export default function UserAddModal({
   const [nickname, onChangeNickname, resetValue] = useInput('');
   const { checkedList, handleCheckboxChange } = useCheckbox();
   const roomId = usePathname().split('/')[2];
-  const { mutate } = useInviteUserToChatroom(onClose);
   const { data: searchedList, refetch } = useGetSearchedUserList(
     roomId,
     nickname,
   );
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  const { mutate } = useInviteUserToChatroom(inviteUserSuccessCb);
   const fetchSearchedUserList = () => {
     if (nickname.length === 0) return;
     refetch();
   };
+  function inviteUserSuccessCb() {
+    onClose();
+    resetValue();
+  }
   return (
     <Modal open={open} onClose={onClose}>
       <FlexBox

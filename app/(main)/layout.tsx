@@ -13,7 +13,7 @@ export default function MainLayout({
 }) {
   return (
     <div className="flex">
-      {/* <Sidebar /> */}
+      <Sidebar />
       <div id="modal-root" />
       {children}
     </div>

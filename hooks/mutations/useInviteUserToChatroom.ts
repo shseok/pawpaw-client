@@ -14,6 +14,8 @@ export default function useInviteUserToChatroom(successCb: () => void) {
     }) => inviteUserToChatRoom(roomId, userId),
     onSuccess: () => {
       successCb();
+      Toast.success('성공적으로 친구를 초대했어요.🐶');
+      queryClient.resetQueries(['searchedUserList']);
       return queryClient.invalidateQueries({
         queryKey: ['chatRoomUserList'],
         refetchType: 'all',
