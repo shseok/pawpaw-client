@@ -32,30 +32,33 @@ export default function SearchedUserList({
         </div>
       )}
       <ul className="grid grid-cols-1 gap-4 p-2 overflow-auto md:grid-cols-2 max-h-72 scrollbar-hide">
-        {userList.map((user) => (
-          <li
-            className={`${
-              checkedList.includes(user.userId) ? 'ring-2 ring-primary-200' : ''
-            } rounded-[10px] duration-200`}
-            key={user.userId}
-          >
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label className="cursor-pointer">
-              <ChatUser
-                shadow
-                image={user.imageUrl}
-                name={user.nickname}
-                petName={user.briefIntroduction ?? '반려펫을 입력해주세요.🐶'}
-              />
-              <input
-                type="checkbox"
-                checked={checkedList.includes(user.userId)}
-                onChange={(event) => handleCheckboxChange(user.userId, event)}
-                className="hidden appearance-none"
-              />
-            </label>
-          </li>
-        ))}
+        {userList &&
+          userList.map((user) => (
+            <li
+              className={`${
+                checkedList.includes(user.userId)
+                  ? 'ring-2 ring-primary-200'
+                  : ''
+              } rounded-[10px] duration-200`}
+              key={user.userId}
+            >
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+              <label className="cursor-pointer">
+                <ChatUser
+                  shadow
+                  image={user.imageUrl}
+                  name={user.nickname}
+                  petName={user.briefIntroduction ?? '반려펫을 입력해주세요.🐶'}
+                />
+                <input
+                  type="checkbox"
+                  checked={checkedList.includes(user.userId)}
+                  onChange={(event) => handleCheckboxChange(user.userId, event)}
+                  className="hidden appearance-none"
+                />
+              </label>
+            </li>
+          ))}
       </ul>
     </div>
   );

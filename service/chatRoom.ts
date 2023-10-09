@@ -113,9 +113,28 @@ export async function postSchedule(roomId: string, scheduleInfo: Schedule) {
     throw error;
   }
 }
-
+// 현재 채팅에 참여중인 유저를 제외한 전체유저 검색 API
 export async function getSearchedUserList(roomId: string, nickname: string) {
   const url = `/endpoint/api/chatroom/${roomId}/non-participants?nickname=${nickname}`;
   const response = await fetch(url);
   return response.json();
+}
+
+export async function inviteUserToChatRoom(
+  roomId: string,
+  userId: { userId: string },
+) {
+  try {
+    const url = `/endpoint/api/chatroom/${roomId}/invite`;
+    await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(userId),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    throw new Error('유저초대 에러');
+  }
 }

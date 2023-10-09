@@ -1,13 +1,20 @@
 'use client';
 
 import FlexBox from '@/components/ui/FlexBox';
-import useGetChatRoomUserList from '@/hooks/queries/useGetChatRoomUsetList';
+import useGetChatRoomUserList from '@/hooks/queries/useGetChatRoomUserList';
 import ChatUserListLoading from '@/components/ui/Loading/ChatUserListLoading';
+import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 import ChatUser from './ChatUser';
 import UserAddButton from './UserAddButton';
 
 export default function ChatUserList({ roomId }: { roomId: string }) {
   const { data: userList, isLoading } = useGetChatRoomUserList(roomId);
+  const { data: userInfo } = useGetUserInfo();
+
+  const isManager =
+    userList?.find((user) => user.role === 'MANAGER')?.nickname ===
+    userInfo?.nickname;
+
   return (
     <FlexBox
       direction="column"
@@ -21,7 +28,7 @@ export default function ChatUserList({ roomId }: { roomId: string }) {
             <p className="text-grey-500">/60</p>
           </FlexBox>
         </FlexBox>
-        <UserAddButton />
+        {isManager && <UserAddButton />}
       </FlexBox>
       <ul className="w-full h-full overflow-auto scrollbar-hide">
         {isLoading ? (

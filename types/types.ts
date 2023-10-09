@@ -139,7 +139,7 @@ export interface Schedule {
   id: number;
   name: string;
   description: string;
-  startData: string;
+  startDate: string;
   endDate: string;
 }
 export interface ScheduleList extends Schedule {

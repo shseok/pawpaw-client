@@ -8,7 +8,6 @@ export default function useGetSearchedUserList(
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['searchedUserList', nickname],
     queryFn: () => getSearchedUserList(roomId, nickname),
-    staleTime: 60 * 1000,
     enabled: false,
   });
   return { data, isLoading, refetch };

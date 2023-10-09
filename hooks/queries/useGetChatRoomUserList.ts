@@ -3,9 +3,9 @@ import { getChatroomUserList } from '@/service/chatRoom';
 
 export default function useGetChatRoomUserList(chatRoomId: string) {
   const { data, isLoading } = useQuery({
-    queryKey: ['chatRoomUserList'],
+    queryKey: ['chatRoomUserList', chatRoomId],
     queryFn: () => getChatroomUserList(chatRoomId),
-    staleTime: 60 * 5000,
+    refetchOnWindowFocus: false,
     enabled: !!chatRoomId,
   });
   return { data, isLoading };
