@@ -42,7 +42,7 @@ export default function SideButton({
   const name = iconNames[buttonType];
   const ButtonIcon = buttonMaps[buttonType];
   const buttonStyle = cn(
-    'fill-grey-500',
+    'fill-grey-500 w-7 h-7',
     activeButton === buttonType ? 'fill-primary-200' : '',
   );
   const textStyle = cn(

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
-import Sidebar from '@/components/pages/main/Sidebar/Sidebar';
+import Sidebar from '@/components/pages/main/layout/Sidebar';
+import Header from '@/components/pages/main/layout/Header';
+import Footer from '@/components/pages/main/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'pawpaw | Home',
@@ -13,7 +15,9 @@ export default function MainLayout({
 }) {
   return (
     <div className="flex">
+      <Header />
       <Sidebar />
+      <Footer />
       <div id="modal-root" />
       {children}
     </div>
