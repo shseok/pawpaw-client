@@ -1,13 +1,12 @@
 import Image from 'next/image';
 import { SidebarProps } from '@/types/types';
-import DesktopSvg from './SideButton/DesktopSvg';
+import Logout from '@/public/sidebar/logout.svg';
 
 export default function BottomToggle({
   desktopWidth,
   toggleButton,
   viewport,
 }: Pick<SidebarProps, 'desktopWidth' | 'toggleButton' | 'viewport'>) {
-  const { Logout } = DesktopSvg;
   return (
     <div>
       <div
@@ -19,7 +18,7 @@ export default function BottomToggle({
           type="button"
           className={`absolute flex flex-row items-center bottom-16 `}
         >
-          {Logout()}
+          <Logout />
           {desktopWidth === true ? (
             <span className="text-base text-[#74787D] ml-[8px]">로그아웃</span>
           ) : null}

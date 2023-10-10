@@ -1,7 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { SidebarProps } from '@/types/types';
-import SideButton from './SideButton/SideButton';
-import DesktopSvg from './SideButton/DesktopSvg';
+import SideButton from './SideButton';
 
 export default function SideButtonContainer({
   desktopWidth,
@@ -12,35 +11,34 @@ export default function SideButtonContainer({
   SidebarProps,
   'desktopWidth' | 'activeButton' | 'setActive' | 'pathname'
 >) {
-  const { Feed, Community, Pawzone, Mypage, Search, Notice } = DesktopSvg;
   const router = useRouter();
   const pseudoElementWidth = desktopWidth === true ? 'w-[232px]' : 'w-[72px]';
 
   return (
     <>
       <SideButton
-        svgComponent={Feed}
+        buttonType="Feed"
         activeButton={activeButton}
         desktopWidth={desktopWidth}
         setActive={setActive}
         router={() => router.push('/')}
       />
       <SideButton
-        svgComponent={Community}
+        buttonType="Community"
         activeButton={activeButton}
         desktopWidth={desktopWidth}
         setActive={setActive}
         router={() => router.push('/community')}
       />
       <SideButton
-        svgComponent={Pawzone}
+        buttonType="Pawzone"
         activeButton={activeButton}
         desktopWidth={desktopWidth}
         setActive={setActive}
         router={() => router.push('/pawzone')}
       />
       <SideButton
-        svgComponent={Mypage}
+        buttonType="Mypage"
         activeButton={activeButton}
         desktopWidth={desktopWidth}
         setActive={setActive}
@@ -51,14 +49,14 @@ export default function SideButtonContainer({
         <div className={`h-[0.5px] bg-[#CBCDD2] ${pseudoElementWidth}`} />
       </div>
       <SideButton
-        svgComponent={Search}
+        buttonType="Search"
         activeButton={activeButton}
         desktopWidth={desktopWidth}
         setActive={setActive}
         router={() => router.push(pathname)}
       />
       <SideButton
-        svgComponent={Notice}
+        buttonType="Notice"
         activeButton={activeButton}
         desktopWidth={desktopWidth}
         setActive={setActive}
