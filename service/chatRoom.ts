@@ -1,6 +1,6 @@
 import { ChatRoomUserList, Schedule, ScheduleList } from '@/types/types';
 import Toast from '@/utils/notification';
-import { ImageSizeError } from '@/lib/error';
+import { AuthError, ImageSizeError } from '@/lib/error';
 
 interface ChatRoomType {
   image: File;
@@ -104,7 +104,10 @@ export async function getScheduleList(roomId: string): Promise<ScheduleList[]> {
 }
 
 // 채팅룸 스케줄 등록 API
-export async function postSchedule(roomId: string, scheduleInfo: Schedule) {
+export async function postSchedule(
+  roomId: string,
+  scheduleInfo: Omit<Schedule, 'id'>,
+) {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule`;
     const response = await fetch(url, {
@@ -129,7 +132,7 @@ export async function getSearchedUserList(roomId: string, nickname: string) {
   const response = await fetch(url);
   return response.json();
 }
-
+// 현재 채팅에 참여중인 유저를 제외한 유저 초대 API
 export async function inviteUserToChatRoom(
   roomId: string,
   userId: { userId: string },
@@ -146,5 +149,19 @@ export async function inviteUserToChatRoom(
   } catch (error) {
     console.error(error);
     throw new Error('유저초대 에러');
+  }
+}
+
+// 스케줄 참여 API
+export async function joinSchedule(roomId: string, scheduleId: number) {
+  try {
+    const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
+    const response = await fetch(url, { method: 'POST' });
+    console.log(response);
+    if (response.status === 401) {
+      throw new AuthError('로그인이 필요합니다.');
+    }
+  } catch (error) {
+    console.error(error);
   }
 }

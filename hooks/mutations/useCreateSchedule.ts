@@ -11,7 +11,7 @@ export default function useCreateSchedule() {
       scheduleInfo,
     }: {
       roomId: string;
-      scheduleInfo: Schedule;
+      scheduleInfo: Omit<Schedule, 'id'>;
     }) => postSchedule(roomId, scheduleInfo),
     onSuccess: () => {
       queryClient.invalidateQueries(['scheduleList']);

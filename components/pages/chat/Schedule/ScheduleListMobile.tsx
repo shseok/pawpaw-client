@@ -1,5 +1,5 @@
 import ArrowLeftIcon from '@/public/arrow-left.svg';
-import ScheduleCard from './ScheduleCard';
+// import ScheduleCard from './ScheduleCard';
 import ScheduleDropdownButton from './ScheduleDropdownButton';
 
 interface PropsType {
@@ -19,7 +19,7 @@ export default function ScheduleListMobile({ closeModal }: PropsType) {
         <ScheduleDropdownButton />
       </header>
       <ul className="flex flex-col overflow-auto h-[calc(100%-4rem)] gap-4 p-10">
-        <ScheduleCard />
+        {/* <ScheduleCard /> */}
       </ul>
     </div>
   );
