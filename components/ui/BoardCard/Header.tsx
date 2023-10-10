@@ -1,9 +1,9 @@
 import Avatar from '../Avatar';
 import Button from '../Button';
 import FlexBox from '../FlexBox';
-import PostCardDropdown from './PostCardDropdown';
+import BoardCardDropdown from './BoardCardDropdown';
 
-export default function PostCardHeader({ userId }: { userId: number }) {
+export default function BoardCardHeader({ userId }: { userId: number }) {
   return (
     <FlexBox justify="between" className="w-full">
       <FlexBox className="gap-[10px]">
@@ -24,7 +24,7 @@ export default function PostCardHeader({ userId }: { userId: number }) {
           </div>
         </FlexBox>
       </FlexBox>
-      <PostCardDropdown />
+      <BoardCardDropdown />
     </FlexBox>
   );
 }

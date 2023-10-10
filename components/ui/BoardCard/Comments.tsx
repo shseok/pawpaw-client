@@ -1,4 +1,4 @@
-export default function PostCardComments({
+export default function BoardCardComments({
   userName,
   content,
   onClickModal,

@@ -1,15 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import PostsList from '@/components/pages/main/Feed/PostsList';
+import PostsList from '@/components/pages/main/Feed/BoardsList';
 import FlexBox from '@/components/ui/FlexBox';
 import FeedHeader from '@/components/pages/main/Feed/FeedHeader';
-import { Post, Comment } from '@/types/types';
-import PostModal from './PostsList/PostModal';
+import { Board, Comment } from '@/types/types';
+import PostModal from './BoardsList/BoardModal';
 
 export default function Feed() {
   const [showModal, setShowModal] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [selectedBoard, setSelectedBoard] = useState<Board | null>(null);
   const [selectedComments, setSelectedComments] = useState<
     Comment[] | undefined
   >(undefined);
@@ -22,12 +22,12 @@ export default function Feed() {
       <PostsList
         setSelectedComments={setSelectedComments}
         setShowModal={setShowModal}
-        setSelectedPost={setSelectedPost}
+        setSelectedBoard={setSelectedBoard}
       />
       <PostModal
         showModal={showModal}
         setShowModal={setShowModal}
-        post={selectedPost}
+        post={selectedBoard}
         comments={selectedComments}
       />
     </FlexBox>

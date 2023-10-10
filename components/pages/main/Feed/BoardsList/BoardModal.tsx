@@ -1,12 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
-import { Comment, Post } from '@/types/types';
-import ModalPostCard from '@/components/pages/main/Feed/PostsList/PostCard/ModalPostCard';
+import { Comment, Board } from '@/types/types';
+import ModalBoardCard from '@/components/pages/main/Feed/BoardsList/BoardCard/ModalBoardCard';
 import FlexBox from '../../../../ui/FlexBox';
 import Modal from '../../../../ui/Modal';
 
-export default function PostModal({
+export default function BoardModal({
   showModal,
   setShowModal,
   post,
@@ -14,7 +14,7 @@ export default function PostModal({
 }: {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  post: Post | null;
+  post: Board | null;
   comments: Comment[] | undefined;
 }) {
   return (
@@ -31,7 +31,7 @@ export default function PostModal({
           </button>
         </FlexBox>
         {post ? (
-          <ModalPostCard
+          <ModalBoardCard
             userId={post.albumId}
             imgs={[
               post.url,

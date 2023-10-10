@@ -4,16 +4,16 @@
 import { Dispatch, SetStateAction } from 'react';
 import useCommentsQuery from '@/hooks/queries/PostCommentsQuery';
 import useGetInfiniteData from '@/hooks/queries/InfiniteData';
-import { Comment, Post } from '@/types/types';
+import { Comment, Board } from '@/types/types';
 import FlexBox from '../../../../ui/FlexBox';
-import FeedPostCard from './PostCard/FeedPostCard';
+import FeedBoardCard from './BoardCard/FeedBoardCard';
 
-export default function PostsList({
-  setSelectedPost,
+export default function BoardsList({
+  setSelectedBoard,
   setSelectedComments,
   setShowModal,
 }: {
-  setSelectedPost: Dispatch<SetStateAction<Post | null>>;
+  setSelectedBoard: Dispatch<SetStateAction<Board | null>>;
   setSelectedComments: Dispatch<SetStateAction<Comment[] | undefined>>;
   setShowModal: Dispatch<SetStateAction<boolean>>;
 }) {
@@ -33,12 +33,12 @@ export default function PostsList({
           <div
             key={post.id}
             onClick={() => {
-              setSelectedPost(post);
+              setSelectedBoard(post);
               setSelectedComments(filteredComments);
             }}
             className="w-full"
           >
-            <FeedPostCard
+            <FeedBoardCard
               userId={post.albumId}
               content={post.title}
               imgs={[post.url, post.url, post.url]}

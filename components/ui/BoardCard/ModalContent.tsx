@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Divider from '../Divider';
 import FlexBox from '../FlexBox';
 
-export default function PostCardModalContent({
+export default function BoardCardModalContent({
   imgs,
   content,
   children,
@@ -11,7 +11,7 @@ export default function PostCardModalContent({
   imgs?: string[];
   content: string;
 }) {
-  function renderModalPostContent() {
+  function renderModalBoardContent() {
     return (
       <FlexBox
         direction="column"
@@ -40,10 +40,10 @@ export default function PostCardModalContent({
               />
             ))}
           </div>
-          {renderModalPostContent()}
+          {renderModalBoardContent()}
         </FlexBox>
       ) : (
-        renderModalPostContent()
+        renderModalBoardContent()
       )}
     </>
   );

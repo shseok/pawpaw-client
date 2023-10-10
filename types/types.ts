@@ -11,7 +11,7 @@ export interface SidebarProps {
   pathname: string;
 }
 
-export interface Post {
+export interface Board {
   albumId: number;
   id: number;
   title: string;

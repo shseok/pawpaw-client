@@ -11,7 +11,7 @@ import Images from './Images';
 import ModalComments from './ModalComments';
 import ModalContent from './ModalContent';
 
-export default function PostCardWrapper({
+export default function BoardCardWrapper({
   children,
 }: {
   children: React.ReactNode;
@@ -27,7 +27,7 @@ export default function PostCardWrapper({
   );
 }
 
-export const PostCard = Object.assign(PostCardWrapper, {
+export const BoardCard = Object.assign(BoardCardWrapper, {
   Comments,
   CommentWrapper,
   Content,

@@ -11,7 +11,7 @@ import FlexBox from '../FlexBox';
 import Divider from '../Divider';
 import Images from './Images';
 
-export default function PostCardContent({
+export default function BoardCardContent({
   children,
   type,
   content,
@@ -40,7 +40,7 @@ export default function PostCardContent({
     }
   };
 
-  const renderPostContent = () => (
+  const renderBoardContent = () => (
     <FlexBox
       direction="column"
       align="start"
@@ -67,7 +67,7 @@ export default function PostCardContent({
         {type === 'mainPC' ? (
           <div className="grid w-full h-full grid-cols-2 gap-9">
             <Images imgs={imgs} onClickModal={onClickModal} />
-            {renderPostContent()}
+            {renderBoardContent()}
           </div>
         ) : (
           <FlexBox className="gap-9">
@@ -90,11 +90,11 @@ export default function PostCardContent({
                 </button>
               </FlexBox>
             </div>
-            {renderPostContent()}
+            {renderBoardContent()}
           </FlexBox>
         )}
       </>
     );
   }
-  return renderPostContent(); // 이미지가 없는 경우 게시글 내용만 렌더
+  return renderBoardContent(); // 이미지가 없는 경우 게시글 내용만 렌더
 }

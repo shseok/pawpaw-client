@@ -5,7 +5,7 @@ import { useState } from 'react';
 import FlexBox from '../FlexBox';
 import Modal from '../Modal';
 
-export default function PostCardModalComments({
+export default function BoardCardModalComments({
   id,
   userName,
   content,

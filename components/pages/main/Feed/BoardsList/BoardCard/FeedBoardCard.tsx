@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Comment } from '@/types/types';
-import { PostCard } from '../../../../../ui/PostCard';
+import { BoardCard } from '@/components/ui/BoardCard';
 import FlexBox from '../../../../../ui/FlexBox';
 
-interface FeedPostCardProps {
+interface FeedBoardCardProps {
   userId: number;
   content: string;
   imgs: string[];
@@ -11,13 +11,13 @@ interface FeedPostCardProps {
   comments: Comment[] | undefined;
 }
 
-export default function FeedPostCard({
+export default function FeedBoardCard({
   userId,
   content,
   imgs,
   setShowModal,
   comments,
-}: FeedPostCardProps) {
+}: FeedBoardCardProps) {
   const commentsCount = comments ? comments.length : 0;
   return (
     <FlexBox
@@ -25,21 +25,21 @@ export default function FeedPostCard({
       justify="between"
       className="max-h-[500px] p-9 rounded-[10px] border-[1px] border-grey-200 gap-4"
     >
-      <PostCard.Header userId={userId} />
-      <PostCard.Content
+      <BoardCard.Header userId={userId} />
+      <BoardCard.Content
         type="mainPC"
         content={content}
         imgs={imgs}
         onClickModal={() => setShowModal(true)}
       >
-        <PostCard.CommentWrapper commentsNum={commentsCount}>
+        <BoardCard.CommentWrapper commentsNum={commentsCount}>
           <FlexBox
             direction="column"
             justify="start"
             className="max-h-[82px] overflow-scroll"
           >
             {comments?.map((comment) => (
-              <PostCard.Comments
+              <BoardCard.Comments
                 key={comment.id}
                 userName={comment.User.name}
                 content={comment.content}
@@ -47,8 +47,8 @@ export default function FeedPostCard({
               />
             ))}
           </FlexBox>
-        </PostCard.CommentWrapper>
-      </PostCard.Content>
+        </BoardCard.CommentWrapper>
+      </BoardCard.Content>
     </FlexBox>
   );
 }
