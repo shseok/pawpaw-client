@@ -13,7 +13,7 @@ export default function RootLayout({
     <html lang="ko">
       <ReactQueryProvider>
         <body>
-          <ToastContainer limit={5} />
+          <ToastContainer />
           {children}
         </body>
       </ReactQueryProvider>
