@@ -3,9 +3,9 @@ import { getScheduleList } from '@/service/chatRoom';
 
 export default function useGetScheduleList(roomId: string) {
   const { data, isLoading } = useQuery({
-    queryKey: ['scheduleList'],
+    queryKey: ['scheduleList', roomId],
     queryFn: () => getScheduleList(roomId),
-    staleTime: 30000,
+    staleTime: 60 * 1000 * 5,
   });
   return { data, isLoading };
 }

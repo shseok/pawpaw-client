@@ -21,7 +21,7 @@ export default function ScheduleCard({
       as="li"
       direction="column"
       align="start"
-      className="gap-5 p-6 rounded-[10px] shadow-chatCard w-96"
+      className="gap-5 p-6 rounded-[10px] shadow-chatCard w-full"
     >
       <h3 className="header3">{name}</h3>
       <p className="text-[#474C51]">{description}</p>
