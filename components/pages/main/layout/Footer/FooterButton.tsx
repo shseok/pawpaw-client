@@ -19,18 +19,17 @@ const iconNames = {
   Mypage: '마이 페이지',
 };
 
-type ButtonType = keyof typeof buttonMaps;
+export type ButtonType = keyof typeof buttonMaps;
 
-type SideButtonProps = Pick<
-  SidebarProps,
-  'activeButton' | 'setActive' | 'router'
-> & { buttonType: ButtonType };
+type SideButtonProps = Pick<SidebarProps, 'activeButton'> & {
+  buttonType: ButtonType;
+  clickHandler: () => void;
+};
 
 export default function FooterButton({
   activeButton,
-  setActive,
   buttonType,
-  router,
+  clickHandler,
 }: SideButtonProps) {
   const name = iconNames[buttonType];
   const ButtonIcon = buttonMaps[buttonType];
@@ -42,10 +41,6 @@ export default function FooterButton({
     'w-full h-[10px] text-xs text-center text-grey-400 leading-[10px] text-[10px] font-normal',
     activeButton === buttonType ? 'text-primary-200' : '',
   );
-  const clickHandler = () => {
-    setActive(`${buttonType}`);
-    router();
-  };
 
   return (
     <div className="w-[88px] sm:w-[139px] flex flex-row justify-center flex-wrap">

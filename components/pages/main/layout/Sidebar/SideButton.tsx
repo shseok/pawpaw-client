@@ -27,17 +27,16 @@ const iconNames = {
 
 type ButtonType = keyof typeof buttonMaps;
 
-type SideButtonProps = Pick<
-  SidebarProps,
-  'activeButton' | 'setActive' | 'desktopWidth' | 'router'
-> & { buttonType: ButtonType };
+type SideButtonProps = Pick<SidebarProps, 'activeButton' | 'desktopWidth'> & {
+  buttonType: ButtonType;
+  clickHandler: () => void;
+};
 
 export default function SideButton({
   activeButton,
-  setActive,
   buttonType,
+  clickHandler,
   desktopWidth,
-  router,
 }: SideButtonProps) {
   const name = iconNames[buttonType];
   const ButtonIcon = buttonMaps[buttonType];
@@ -49,10 +48,6 @@ export default function SideButton({
     'ml-3 text-xl cursor-pointe text-grey-500',
     activeButton === buttonType ? 'text-primary-200' : '',
   );
-  const clickHandler = () => {
-    setActive(`${buttonType}`);
-    router();
-  };
   return (
     <div
       className={`relative flex flex-row ${
