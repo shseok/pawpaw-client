@@ -126,6 +126,22 @@ export async function postSchedule(
     throw error;
   }
 }
+
+// 채팅룸 스케줄 삭제 API
+export async function deleteSchedule(roomId: string, scheduleId: number) {
+  console.log(scheduleId);
+  try {
+    const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}`;
+    const response = await fetch(url, { method: 'DELETE' });
+    if (!response.ok) {
+      throw new Error('스케줄 삭제에 실패했어요.🥲 잠시후 다시 시도해주세요.');
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 // 현재 채팅에 참여중인 유저를 제외한 전체유저 검색 API
 export async function getSearchedUserList(roomId: string, nickname: string) {
   const url = `/endpoint/api/chatroom/${roomId}/non-participants?nickname=${nickname}`;
@@ -161,6 +177,17 @@ export async function joinSchedule(roomId: string, scheduleId: number) {
     if (response.status === 401) {
       throw new AuthError('로그인이 필요합니다.');
     }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// 스케줄 철회 API
+export async function withdrawSchedule(roomId: string, scheduleId: number) {
+  try {
+    const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
+    const response = await fetch(url, { method: 'DELETE' });
+    console.log(response);
   } catch (error) {
     console.error(error);
   }

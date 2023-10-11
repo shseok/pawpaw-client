@@ -4,9 +4,14 @@ import { format } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import { usePathname } from 'next/navigation';
 import useJoinSchedule from '@/hooks/mutations/useJoinSchedule';
+import Button from '@/components/ui/Button';
+import useDeleteSchedule from '@/hooks/mutations/useDeleteSchedule';
+import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
+import useWithdrawSchedule from '@/hooks/mutations/useWithdrawSchedule';
 import AvatarGroup from './AvatarGroup';
 
 export default function ScheduleCard({
+  isManager,
   id,
   description,
   endDate,
@@ -15,7 +20,30 @@ export default function ScheduleCard({
   startDate,
 }: ScheduleList) {
   const roomId = usePathname().split('/')[2];
-  const { mutate } = useJoinSchedule();
+  const { mutate: joinScheduleMutate } = useJoinSchedule();
+  const { mutate: deleteScheduleMutate } = useDeleteSchedule();
+  const { mutate: withdrawScheduleMutate } = useWithdrawSchedule();
+  const { data: userInfo } = useGetUserInfo();
+
+  const isJoinSchedule = participantList.some(
+    (user) => user.nickname === userInfo?.nickname,
+  );
+
+  const onDeleteSchedule = () => {
+    if (window.confirm(`${name} 일정을 삭제하시겠습니까?`)) {
+      deleteScheduleMutate({ roomId, scheduleId: id });
+    }
+  };
+  const onCreateSchedule = () => {
+    if (window.confirm(`${name} 일정에 참여하시겠습니까?`)) {
+      joinScheduleMutate({ roomId, scheduleId: id });
+    }
+  };
+  const onWithdrawSchedule = () => {
+    if (window.confirm(`${name} 일정 참여를 취소하시겠습니까?`)) {
+      withdrawScheduleMutate({ roomId, scheduleId: id });
+    }
+  };
   return (
     <FlexBox
       as="li"
@@ -42,13 +70,12 @@ export default function ScheduleCard({
             })}
           </p>
         </div>
-        <button
-          type="button"
-          className="body2 border-[1px] rounded-[10px] p-2 hover:bg-grey-100 active:bg-grey-200"
-          onClick={() => mutate({ roomId, scheduleId: id })}
+        <Button
+          variant="ghost"
+          onClickAction={isJoinSchedule ? onWithdrawSchedule : onCreateSchedule}
         >
-          참여하기
-        </button>
+          {isJoinSchedule ? '참여취소' : '참여하기'}
+        </Button>
       </FlexBox>
       <FlexBox justify="between" className="w-full">
         <FlexBox direction="column" className="gap-2">
@@ -59,6 +86,11 @@ export default function ScheduleCard({
           )}
           <AvatarGroup userList={participantList} />
         </FlexBox>
+        {isManager && (
+          <Button variant="ghost" onClickAction={onDeleteSchedule}>
+            삭제하기
+          </Button>
+        )}
       </FlexBox>
     </FlexBox>
   );

@@ -143,5 +143,6 @@ export interface Schedule {
   endDate: string;
 }
 export interface ScheduleList extends Schedule {
+  isManager?: boolean;
   participantList: { nickname: string; imageUrl: string }[];
 }

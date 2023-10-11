@@ -7,6 +7,7 @@ import useInput from '@/hooks/common/useInput';
 import DatePicker from '@/components/ui/DatePicker';
 import { usePathname } from 'next/navigation';
 import useCreateSchedule from '@/hooks/mutations/useCreateSchedule';
+import LoadingIcon from '@/public/loading.svg';
 import TimeSelect from './TimeSelect';
 
 export default function ScheduleAddModal({
@@ -21,7 +22,7 @@ export default function ScheduleAddModal({
   const [endDate, setEndDate] = useState(new Date());
   const roomId = usePathname().split('/')[2];
   const isScheduleValueSet = !!(startDate >= endDate || !title || !description);
-  const { mutate: scheduleMutate } = useCreateSchedule();
+  const { mutate: scheduleMutate, isLoading } = useCreateSchedule(closeModal);
 
   // 스케줄 생성시 하루종일 옵션을 체크하면 시,분 을 00시00분으로 초기화한다.
   useEffect(() => {
@@ -124,7 +125,14 @@ export default function ScheduleAddModal({
             onClickAction={createNewSchedule}
             fullWidth
           >
-            등록
+            {isLoading ? (
+              <p className="flex items-center justify-center gap-2">
+                <LoadingIcon className="animate-spin" />
+                스케줄 생성중...
+              </p>
+            ) : (
+              <span>등록</span>
+            )}
           </Button>
         </div>
       </FlexBox>

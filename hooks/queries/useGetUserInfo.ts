@@ -6,6 +6,8 @@ export default function useGetUserInfo() {
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
     refetchOnWindowFocus: false,
+    staleTime: Infinity,
+    cacheTime: Infinity,
   });
   return { data };
 }

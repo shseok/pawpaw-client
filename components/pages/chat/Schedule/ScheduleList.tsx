@@ -12,10 +12,10 @@ export default function ScheduleList({ roomId }: { roomId: string }) {
   const { data: scheduleList, isLoading } = useGetScheduleList(roomId);
   const { data: userList } = useGetChatRoomUserList(roomId);
   const { data: userInfo } = useGetUserInfo();
-
   const isManager =
     userList?.find((user) => user.role === 'MANAGER')?.nickname ===
     userInfo?.nickname;
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-auto">
@@ -38,7 +38,11 @@ export default function ScheduleList({ roomId }: { roomId: string }) {
           <p className="header3">등록된 스케줄이 없어요.📁</p>
         ) : (
           scheduleList?.map((schedule) => (
-            <ScheduleCard key={schedule.id} {...schedule} />
+            <ScheduleCard
+              key={schedule.id}
+              {...schedule}
+              isManager={isManager}
+            />
           ))
         )}
       </ul>
