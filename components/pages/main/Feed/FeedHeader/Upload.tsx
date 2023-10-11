@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import Toast from '@/utils/notification';
+import { postBoard } from '@/service/board';
 import Avatar from '../../../../ui/Avatar';
 import Button from '../../../../ui/Button';
 import FlexBox from '../../../../ui/FlexBox';
 
 export default function Upload() {
   const [postText, setPostText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const maxCharacters = 100;
   const isOverMaxChar = postText.length > maxCharacters;
@@ -16,10 +18,24 @@ export default function Upload() {
     setPostText(event.target.value);
   };
 
+  const onUploadBoard = async (data: string) => {
+    setIsLoading(true);
+    try {
+      const response = await postBoard({
+        title: 'title',
+        content: data,
+      });
+    } catch (error) {
+      Toast.error('잠시 후 다시 시도해주세요.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <FlexBox
-      direction="column"
-      className="bg-primary-50 p-5 border-[1px] border-primary-300 rounded-[10px] w-full"
+    <form
+      onSubmit={onUploadBoard}
+      className="flex flex-col bg-primary-50 p-5 border-[1px] border-primary-300 rounded-[10px] w-full"
     >
       <FlexBox justify="between" className="w-full gap-[24px]">
         <Avatar
@@ -63,6 +79,6 @@ export default function Upload() {
         </Button>
         <div className="mt-4" id="renderedText" />
       </FlexBox>
-    </FlexBox>
+    </form>
   );
 }
