@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import tempPostListApi from '@/service/tempPostListApi';
+import getBoardList from '@/service/board';
 
 interface InfiniteScrollProps {
   infiniteQueryKey: string[];
@@ -12,7 +12,7 @@ interface InfiniteScrollProps {
   inViewThreshold?: number;
 }
 
-export default function useGetInfiniteData({
+export default function useGetBoardListInfiniteData({
   infiniteQueryKey,
   pageParameter = 1,
   pageSize = 5,
@@ -22,7 +22,7 @@ export default function useGetInfiniteData({
     useInfiniteQuery({
       queryKey: infiniteQueryKey,
       queryFn: ({ pageParam = pageParameter }) =>
-        tempPostListApi({ pageParam, pageSize }),
+        getBoardList({ pageParam, pageSize }),
       getNextPageParam: (lastPage, allPages) =>
         allPages.length < 20 ? allPages.length + 1 : undefined,
       select: (d) => ({

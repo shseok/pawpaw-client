@@ -3,7 +3,7 @@ import { BoardCard } from '@/components/ui/BoardCard';
 import FlexBox from '../../../../../ui/FlexBox';
 
 interface ModalBoardCardProps {
-  userId: number;
+  userId: string;
   imgs?: string[];
   content: string;
   comments: Comment[] | undefined;
@@ -29,7 +29,7 @@ export default function ModalBoardCard({
           {comments?.map((comment) => (
             <BoardCard.ModalComments
               id={comment.id}
-              userName={comment.User.name}
+              userName={comment.userName}
               content={comment.content}
               userImg="/Feed/desktop/tempProfilePic.svg"
             />

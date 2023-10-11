@@ -3,7 +3,7 @@ import Button from '../Button';
 import FlexBox from '../FlexBox';
 import BoardCardDropdown from './BoardCardDropdown';
 
-export default function BoardCardHeader({ userId }: { userId: number }) {
+export default function BoardCardHeader({ userId }: { userId: string }) {
   return (
     <FlexBox justify="between" className="w-full">
       <FlexBox className="gap-[10px]">

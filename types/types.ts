@@ -11,25 +11,24 @@ export interface SidebarProps {
   pathname: string;
 }
 
-export interface Board {
-  albumId: number;
+export interface BoardList {
   id: number;
   title: string;
-  url: string;
-}
-
-export interface TempPostListApiProps {
-  pageParam: number;
-  pageSize: number;
+  content: string;
+  userName: string;
+  comments: Comment[];
+  image: string[];
+  likeNum: number;
+  commentNum: number;
+  created: string;
+  modified: string;
 }
 
 export interface Comment {
   id: number;
   content: string;
-  PostId: number;
-  User: {
-    name: string;
-  };
+  userName: string;
+  children: string[];
 }
 
 export interface LocationInfoType {

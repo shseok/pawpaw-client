@@ -4,7 +4,7 @@ import { BoardCard } from '@/components/ui/BoardCard';
 import FlexBox from '../../../../../ui/FlexBox';
 
 interface FeedBoardCardProps {
-  userId: number;
+  userId: string;
   content: string;
   imgs: string[];
   setShowModal: Dispatch<SetStateAction<boolean>>;
@@ -41,7 +41,7 @@ export default function FeedBoardCard({
             {comments?.map((comment) => (
               <BoardCard.Comments
                 key={comment.id}
-                userName={comment.User.name}
+                userName={comment.userName}
                 content={comment.content}
                 onClickModal={() => setShowModal(true)}
               />

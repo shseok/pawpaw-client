@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
-import { Comment, Board } from '@/types/types';
+import { Comment, BoardList } from '@/types/types';
 import ModalBoardCard from '@/components/pages/main/Feed/BoardsList/BoardCard/ModalBoardCard';
 import FlexBox from '../../../../ui/FlexBox';
 import Modal from '../../../../ui/Modal';
@@ -9,12 +9,12 @@ import Modal from '../../../../ui/Modal';
 export default function BoardModal({
   showModal,
   setShowModal,
-  post,
+  board,
   comments,
 }: {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  post: Board | null;
+  board: BoardList | null;
   comments: Comment[] | undefined;
 }) {
   return (
@@ -30,15 +30,15 @@ export default function BoardModal({
             />
           </button>
         </FlexBox>
-        {post ? (
+        {board ? (
           <ModalBoardCard
-            userId={post.albumId}
+            userId={board.userName}
             imgs={[
-              post.url,
+              board.image[0],
               '/Feed/desktop/tempPostPic/tempPostPic1.svg',
               '/Feed/desktop/tempPostPic/tempPostPic3.svg',
             ]}
-            content={post.title}
+            content={board.title}
             comments={comments}
           />
         ) : (

@@ -1,28 +1,46 @@
-// interface PostType {
-// 게시글 제목 : string;
-// }
+import { AuthError } from '@/lib/error';
+import { BoardList } from '@/types/types';
 
-// export async function postChatRoom(chatRoomData: ChatRoomType) {
-//   const url = `/endpoint/api/chatroom`;
-//   const formData = new FormData();
-//   const { body, image } = chatRoomData;
-//   formData.append(
-//     'body',
-//     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
-//   );
-//   formData.append('image', image);
+interface PostBoardType {
+  title: string;
+  content: string;
+}
 
-//   const response = await fetch(url, {
-//     method: 'POST',
-//     credentials: 'include',
-//     body: formData,
-//   });
-//   return response.json();
-// }
+interface TempPostListApiProps {
+  pageParam: number;
+  pageSize: number;
+}
 
-// export async function getChatroomUserList(chatRoomId: string) {
-//   const url = `/endpoint/api/chatroom/${chatRoomId}/participants`;
-//   const response = await fetch(url);
-//   const data = await response.json();
-//   return data;
-// }
+export async function postBoard(postBoardData: PostBoardType) {
+  const url = `/endpoint/api/board/register`;
+  const formData = new FormData();
+  const { title, content } = postBoardData;
+  formData.append(title, content);
+
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'include',
+    body: formData,
+  });
+  return response.json();
+}
+
+export default async function getBoardList({
+  pageParam,
+  pageSize,
+}: TempPostListApiProps): Promise<BoardList[]> {
+  try {
+    const url = `/endpoint/api/board/list?_page=${pageParam}&_limit=${pageSize}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`서버오류:${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    if (error instanceof AuthError) {
+      window.location.replace('/auth/login');
+      alert(error.message);
+    }
+    throw error;
+  }
+}
