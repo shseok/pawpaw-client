@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { format, startOfDay } from 'date-fns';
+import { format, startOfDay, endOfDay } from 'date-fns';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/X.svg';
@@ -21,17 +21,16 @@ export default function ScheduleAddModal({
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const roomId = usePathname().split('/')[2];
-  const isScheduleValueSet = !!(startDate >= endDate || !title || !description);
+  const isScheduleValueSet = startDate >= endDate || !title || !description;
   const { mutate: scheduleMutate, isLoading } = useCreateSchedule(closeModal);
 
   // 스케줄 생성시 하루종일 옵션을 체크하면 시,분 을 00시00분으로 초기화한다.
   useEffect(() => {
     if (isAlldayChecked) {
       setStartDate(startOfDay(startDate));
-      setEndDate(startOfDay(endDate));
+      setEndDate(endOfDay(endDate));
     }
   }, [isAlldayChecked]);
-
   const createNewSchedule = () => {
     scheduleMutate({
       roomId,
