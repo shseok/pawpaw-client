@@ -31,6 +31,7 @@ export default function Footer() {
             buttonType={buttonType as ButtonType}
             activeButton={activeButton}
             clickHandler={() => clickHandler(buttonType)}
+            key={buttonType}
           />
         ))}
       </div>

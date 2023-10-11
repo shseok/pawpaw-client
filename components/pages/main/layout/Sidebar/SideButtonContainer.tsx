@@ -34,6 +34,7 @@ export default function SideButtonContainer({
           activeButton={activeButton}
           desktopWidth={desktopWidth}
           clickHandler={() => clickHandler(buttonType)}
+          key={buttonType}
         />
       ))}
       <div className="flex flex-row items-center justify-center h-10">
