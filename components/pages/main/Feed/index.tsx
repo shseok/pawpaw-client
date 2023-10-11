@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import PostsList from '@/components/pages/main/Feed/BoardsList';
+import BoardsList from '@/components/pages/main/Feed/BoardsList';
 import FlexBox from '@/components/ui/FlexBox';
 import FeedHeader from '@/components/pages/main/Feed/FeedHeader';
 import { BoardList } from '@/types/types';
-import PostModal from './BoardsList/BoardModal';
+import BoardModal from './BoardsList/BoardModal';
 
 export default function Feed() {
   const [showModal, setShowModal] = useState(false);
@@ -17,11 +17,11 @@ export default function Feed() {
       className={`gap-10 ${showModal ? 'overflow-hidden' : null}`}
     >
       <FeedHeader />
-      <PostsList
+      <BoardsList
         setShowModal={setShowModal}
         setSelectedBoard={setSelectedBoard}
       />
-      <PostModal
+      <BoardModal
         showModal={showModal}
         setShowModal={setShowModal}
         board={selectedBoard}
