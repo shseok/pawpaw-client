@@ -38,7 +38,7 @@ export default function Sidebar() {
   return (
     <>
       <nav
-        className={`fixed top-0 h-screen left-0 bg-[#F7F8F9] hidden tablet:block ${desktopWidth}`}
+        className={`sticky top-0 h-screen left-0 bg-[#F7F8F9] hidden tablet:block ${desktopWidth}`}
       >
         <SidebarLogo desktopWidth={toggle} />
         <SideButtonContainer
@@ -53,9 +53,6 @@ export default function Sidebar() {
           viewport={viewportWidth?.width}
         />
       </nav>
-      <div>
-        <div className={`sticky hidden tablet:block ${desktopWidth}`} />
-      </div>
     </>
   );
 }

@@ -14,12 +14,12 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       <Header />
       <Sidebar />
-      <Footer />
       <div id="modal-root" />
       {children}
+      <Footer />
     </div>
   );
 }

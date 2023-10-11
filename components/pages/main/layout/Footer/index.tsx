@@ -11,7 +11,10 @@ export default function Footer() {
   const pathname = useGetPathname();
   const router = useRouter();
   const [activeButton, setActiveButton] = useState(pathname);
-
+  const footerClass = cn(
+    'sticky bottom-0 tablet:hidden flex flex-row items-center justify-between border-t-[1px] border-grey-200 h-[54px] w-full bg-white z-10',
+    pathname === 'Chat' ? 'hidden' : '',
+  );
   const clickHandler = (link: string) => {
     const activeLink =
       link === 'Feed'
@@ -22,19 +25,15 @@ export default function Footer() {
   };
 
   return (
-    <footer
-      className={cn('block tablet:hidden', pathname === 'Chat' ? 'hidden' : '')}
-    >
-      <div className="fixed bottom-0 flex flex-row items-center justify-between border-t-[1px] border-grey-200 h-[54px] w-full bg-white z-10">
-        {buttonArrays.map((buttonType) => (
-          <FooterButton
-            buttonType={buttonType as ButtonType}
-            activeButton={activeButton}
-            clickHandler={() => clickHandler(buttonType)}
-            key={buttonType}
-          />
-        ))}
-      </div>
+    <footer className={footerClass}>
+      {buttonArrays.map((buttonType) => (
+        <FooterButton
+          buttonType={buttonType as ButtonType}
+          activeButton={activeButton}
+          clickHandler={() => clickHandler(buttonType)}
+          key={buttonType}
+        />
+      ))}
     </footer>
   );
 }
