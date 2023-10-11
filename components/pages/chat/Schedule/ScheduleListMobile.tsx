@@ -1,5 +1,4 @@
 import ArrowLeftIcon from '@/public/arrow-left.svg';
-// import ScheduleCard from './ScheduleCard';
 import useGetScheduleList from '@/hooks/queries/useGetScheduleList';
 import { usePathname } from 'next/navigation';
 import useGetChatRoomUserList from '@/hooks/queries/useGetChatRoomUserList';
