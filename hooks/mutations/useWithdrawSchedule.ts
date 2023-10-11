@@ -1,17 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { withdrawSchedule } from '@/service/chatRoom';
 import Toast from '@/utils/notification';
+import { ScheduleEventArgType } from '@/types/types';
 
 export default function useWithdrawSchedule() {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: ({
-      roomId,
-      scheduleId,
-    }: {
-      roomId: string;
-      scheduleId: number;
-    }) => withdrawSchedule(roomId, scheduleId),
+    mutationFn: ({ roomId, scheduleId }: ScheduleEventArgType) =>
+      withdrawSchedule(roomId, scheduleId),
     onSuccess: () => {
       Toast.success('일정을 취소했어요. 🐾');
       return queryClient.invalidateQueries(['scheduleList']);

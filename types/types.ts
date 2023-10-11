@@ -135,6 +135,12 @@ export interface ChatRoomUserList {
   imageUrl: string;
   role: 'MANAGER' | 'PARTICIPANT';
 }
+
+export interface ScheduleEventArgType {
+  roomId: string;
+  scheduleId: number;
+}
+
 export interface Schedule {
   id: number;
   name: string;
