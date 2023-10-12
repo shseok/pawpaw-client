@@ -2,18 +2,28 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
 import { useState } from 'react';
-import useGetBoardListInfiniteData from '@/hooks/queries/useGetBoardListInfiniteData';
 import { MyBoardList } from '@/types/types';
 import MyBoardCard from '@/components/ui/BoardCard/MyBoardCard';
 import BoardModal from '@/components/ui/BoardModal';
+import useGetMyBoardListInfiniteData from '@/hooks/queries/useGetMyBoardListInfiniteData';
+import MyBoardListLoading from '@/components/ui/Loading/MyBoardListLoading';
 
 export default function MyBoardsList() {
-  const { Observer, data: myBoards } = useGetBoardListInfiniteData({
+  const {
+    Observer,
+    data: myBoards,
+    isLoading,
+  } = useGetMyBoardListInfiniteData({
     infiniteQueryKey: ['myBoards'],
   });
+
+  // 모달을 위한 상태
   const [showModal, setShowModal] = useState(false);
   const [selectedBoard, setSelectedBoard] = useState<MyBoardList | null>(null);
 
+  if (isLoading) {
+    return <MyBoardListLoading />;
+  }
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>

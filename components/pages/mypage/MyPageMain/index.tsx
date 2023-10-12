@@ -5,7 +5,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import MyBoardsList from './MyBoardsList';
 
 export default function MyPageMain() {
-  const MYPAGE_TABS = ['내 게시물', '채팅방', '북마크', '내 장소'];
+  const MYPAGE_TABS = ['내 게시물', '채팅방', '북마크'];
   const [selectedTab, setSelectedTab] = useState('내 게시물');
 
   // 선택된 탭에 따라 해당 컴포넌트를 렌더링
@@ -17,10 +17,8 @@ export default function MyPageMain() {
         return <div>채팅방 컴포넌트</div>;
       case '북마크':
         return <div>북마크 컴포넌트</div>;
-      case '내 장소':
-        return <div>내 장소 컴포넌트</div>;
       default:
-        return <div>다시 선택하세요</div>;
+        return <div>다시 선택해주세요🐾</div>;
     }
   };
   return (
