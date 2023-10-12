@@ -27,49 +27,51 @@ const iconNames = {
 
 type ButtonType = keyof typeof buttonMaps;
 
-type SideButtonProps = Pick<SidebarProps, 'activeButton' | 'desktopWidth'> & {
+type SideButtonProps = Pick<SidebarProps, 'activeButton'> & {
   buttonType: ButtonType;
   clickHandler: () => void;
+  isOpenSidebar: boolean;
 };
 
 export default function SideButton({
   activeButton,
   buttonType,
   clickHandler,
-  desktopWidth,
+  isOpenSidebar,
 }: SideButtonProps) {
   const name = iconNames[buttonType];
   const ButtonIcon = buttonMaps[buttonType];
   const buttonStyle = cn(
     'fill-grey-500 w-7 h-7',
-    activeButton === buttonType ? 'fill-primary-200' : '',
+    activeButton === buttonType ? 'fill-primary-200' : null,
   );
   const textStyle = cn(
-    'ml-3 text-xl cursor-pointe text-grey-500',
-    activeButton === buttonType ? 'text-primary-200' : '',
+    'ml-3 header3 cursor-pointer text-grey-500 hidden desktop:block',
+    activeButton === buttonType ? 'text-primary-200' : null,
+    isOpenSidebar ? null : 'desktop:hidden',
   );
   return (
     <div
-      className={`relative flex flex-row ${
-        desktopWidth === true ? 'items' : 'justify'
-      }-center h-16 flex-nowrap`}
+      className={cn(
+        'relative flex flex-row justify-center desktop:justify-start h-16 flex-nowrap',
+        isOpenSidebar ? null : 'desktop:justify-center',
+      )}
     >
       <button type="button" onClick={clickHandler}>
         {activeButton === buttonType &&
         buttonType !== 'Search' &&
         buttonType !== 'Notice' ? (
-          <div className="absolute top-0 left-0 w-[5px] h-16 bg-[#0ABE7D]" />
+          <div className="absolute top-0 left-0 w-[5px] h-16 bg-primary-200" />
         ) : null}
-        {desktopWidth === true ? (
-          <div className="flex ml-6 flex-nowrap">
-            <ButtonIcon className={buttonStyle} />
-            <div className={textStyle}>{name}</div>
-          </div>
-        ) : (
-          <div className="flex flex-row items-center">
-            <ButtonIcon className={buttonStyle} />
-          </div>
-        )}
+        <div
+          className={cn(
+            'flex desktop:ml-6 desktop:flex-nowrap items-center',
+            isOpenSidebar ? null : 'desktop:ml-0',
+          )}
+        >
+          <ButtonIcon className={buttonStyle} />
+          <div className={textStyle}>{name}</div>
+        </div>
       </button>
     </div>
   );

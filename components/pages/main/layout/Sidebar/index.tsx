@@ -3,54 +3,38 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
-import useViewportTracker from '@/hooks/common/useViewportTracker';
 import useGetPathname from '@/hooks/common/useGetPathname';
 import SideButtonContainer from './SideButtonContainer';
-import BottomToggle from './BottomToggle';
+import BottomButtonContainer from './BottomButtonContainer';
 import SidebarLogo from './SidebarLogo';
+import { cn } from '@/utils/common';
+import { useState } from 'react';
 
+// 사이드 바 토글에 따라 사이드바의 너비를 조절합니다. 또한, 뷰포트의 너비가 1240px 이하일 때 사이드바를 닫습니다.
 export default function Sidebar() {
-  const [toggle, setToggle] = useState(true);
-  const desktopWidth = toggle === true ? `w-[256px]` : `w-[96px]`;
-  const viewportWidth = useViewportTracker();
   const pathname = useGetPathname();
+  const [toggle, setToggle] = useState(true);
   const [activeButton, setActiveButton] = useState(pathname);
-  useEffect(() => {
-    viewportWidth?.width! < 1240 ? setToggle(false) : setToggle(true);
-  }, [viewportWidth]);
-  // const login = async () => {
-  //   const response = await fetch(`/endpoint/api/auth`, {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       email: 'test5@gmail.com',
-  //       password: '1234',
-  //     }),
-  //     mode: 'cors',
-  //     cache: 'no-cache',
-  //     credentials: 'include',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   });
-  //   console.log(response);
-  // };
   return (
     <>
       <nav
-        className={`sticky top-0 h-screen left-0 bg-[#F7F8F9] hidden tablet:block ${desktopWidth}`}
+        className={cn(
+          'sticky left-0 top-0 h-screen hidden tablet:block tablet:w-24 desktop:w-64 bg-grey-100',
+          toggle
+            ? 'tablet:w-24 desktop:w-64 transtion-none'
+            : 'tablet:w-24 desktop:w-24 transition-width duration-200 ease-in-out',
+        )}
       >
-        <SidebarLogo desktopWidth={toggle} />
+        <SidebarLogo isSidebarOpen={toggle} />
         <SideButtonContainer
-          desktopWidth={toggle}
+          isSidebarOpen={toggle}
           activeButton={activeButton}
           setActive={setActiveButton}
           pathname={pathname}
         />
-        <BottomToggle
-          desktopWidth={toggle}
-          toggleButton={() => setToggle(!toggle)}
-          viewport={viewportWidth?.width}
+        <BottomButtonContainer
+          isSidebarOpen={toggle}
+          handleClick={() => setToggle(!toggle)}
         />
       </nav>
     </>

@@ -6,16 +6,14 @@ import { ButtonType } from '../Footer/FooterButton';
 export const buttonArrays = ['Feed', 'Community', 'Pawzone', 'Mypage'];
 
 export default function SideButtonContainer({
-  desktopWidth,
+  isSidebarOpen,
   activeButton,
   setActive,
   pathname,
-}: Pick<
-  SidebarProps,
-  'desktopWidth' | 'activeButton' | 'setActive' | 'pathname'
->) {
+}: Pick<SidebarProps, 'activeButton' | 'setActive' | 'pathname'> & {
+  isSidebarOpen: boolean;
+}) {
   const router = useRouter();
-  const pseudoElementWidth = desktopWidth === true ? 'w-[232px]' : 'w-[72px]';
 
   const clickHandler = (link: string) => {
     const activeLink =
@@ -32,24 +30,22 @@ export default function SideButtonContainer({
         <SideButton
           buttonType={buttonType as ButtonType}
           activeButton={activeButton}
-          desktopWidth={desktopWidth}
+          isOpenSidebar={isSidebarOpen}
           clickHandler={() => clickHandler(buttonType)}
           key={buttonType}
         />
       ))}
-      <div className="flex flex-row items-center justify-center h-10">
-        <div className={`h-[0.5px] bg-[#CBCDD2] ${pseudoElementWidth}`} />
-      </div>
+      <div className={`h-[0.5px] bg-grey-300 mx-3 my-[19.75px]`} />
       <SideButton
         buttonType="Search"
         activeButton={activeButton}
-        desktopWidth={desktopWidth}
+        isOpenSidebar={isSidebarOpen}
         clickHandler={() => clickHandler(pathname)}
       />
       <SideButton
         buttonType="Notice"
         activeButton={activeButton}
-        desktopWidth={desktopWidth}
+        isOpenSidebar={isSidebarOpen}
         clickHandler={() => clickHandler(pathname)}
       />
     </>
