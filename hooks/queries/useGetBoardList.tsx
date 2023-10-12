@@ -12,7 +12,7 @@ interface InfiniteScrollProps {
   inViewThreshold?: number;
 }
 
-export default function useGetBoardListInfiniteData({
+export default function useGetBoardList({
   infiniteQueryKey,
   pageParameter = 1,
   pageSize = 5,

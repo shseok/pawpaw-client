@@ -52,11 +52,13 @@ export interface BoardList {
 
 export interface MyBoardList extends BoardList {}
 
+export interface BookmarkedBoardList extends BoardList {}
+
 export interface Comment {
   id: number;
   content: string;
   nickname: string;
-  children: string[];
+  // children: string[];
 }
 
 export interface LocationInfoType {

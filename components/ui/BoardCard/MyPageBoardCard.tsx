@@ -9,7 +9,7 @@ interface MyBoardCardProps {
   commentsCount: number;
 }
 
-export default function MyBoardCard({
+export default function MyPageBoardCard({
   userName,
   content,
   imgs,
@@ -18,7 +18,7 @@ export default function MyBoardCard({
 }: MyBoardCardProps) {
   return (
     <BoardCard>
-      <BoardCard.Header userId={userName} isMy />
+      <BoardCard.Header userId={userName} />
       <BoardCard.Content
         type="myPage"
         content={content}

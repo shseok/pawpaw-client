@@ -8,7 +8,7 @@ import { MyBoardList } from '@/types/types';
 
 const QUERY_KEY = ['myBoards'];
 
-export default function useGetMyBoardListInfiniteData() {
+export default function useGetMyBoardList() {
   const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: QUERY_KEY,

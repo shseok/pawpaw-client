@@ -4,6 +4,7 @@ import { useState } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import MyBoardsList from './MyBoardsList';
 import MyChatRoom from './MyChatRoom';
+import BookmarkedBoardsList from './BookmarkedBoardsList';
 
 export default function MyPageMain() {
   const MYPAGE_TABS = ['내 게시물', '채팅방', '북마크'];
@@ -17,7 +18,7 @@ export default function MyPageMain() {
       case '채팅방':
         return <MyChatRoom />;
       case '북마크':
-        return <div>북마크 컴포넌트</div>;
+        return <BookmarkedBoardsList />;
       default:
         return <div>다시 선택해주세요🐾</div>;
     }

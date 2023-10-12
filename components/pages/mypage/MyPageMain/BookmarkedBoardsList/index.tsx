@@ -5,11 +5,11 @@ import { useState } from 'react';
 import { Board } from '@/types/types';
 import MyBoardCard from '@/components/ui/BoardCard/MyPageBoardCard';
 import BoardModal from '@/components/ui/BoardModal';
-import useGetMyBoardList from '@/hooks/queries/useGetMyBoardList';
 import MyBoardListLoading from '@/components/ui/Loading/MyBoardListLoading';
+import useGetBookmarkedBoardList from '@/hooks/queries/useGetMyBookmarkedBoardList';
 
-export default function MyBoardsList() {
-  const { Observer, data: myBoards, isLoading } = useGetMyBoardList();
+export default function BookmarkedBoardsList() {
+  const { Observer, data, isLoading } = useGetBookmarkedBoardList();
 
   // 모달을 위한 상태
   const [showModal, setShowModal] = useState(false);
@@ -20,13 +20,12 @@ export default function MyBoardsList() {
   }
 
   // TODO: 게시물 없을 경우 없다고 띄우기
-  // if (myBoards?.pages)
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       <div className="grid w-full gap-5 tablet:grid-cols-2 tablet:mt-4">
-        {myBoards &&
-          myBoards?.pages?.map((page) =>
+        {data &&
+          data?.pages?.map((page) =>
             page.content.map((board) => (
               <div
                 key={board.id}
