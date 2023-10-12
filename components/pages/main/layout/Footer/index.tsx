@@ -12,7 +12,7 @@ export default function Footer() {
   const router = useRouter();
   const [activeButton, setActiveButton] = useState(pathname);
   const footerClass = cn(
-    'sticky bottom-0 tablet:hidden flex flex-row items-center justify-between border-t-[1px] border-grey-200 h-[54px] w-full bg-white z-10',
+    'tablet:hidden flex flex-row items-center justify-between border-t-[1px] border-grey-200 h-[54px] w-full bg-white z-10',
     pathname === 'Chat' ? 'hidden' : '',
   );
   const clickHandler = (link: string) => {

@@ -11,7 +11,7 @@ import Logo from '@/public/logo.svg';
 export default function Header() {
   const pathname = useGetPathname();
   const headerClass = cn(
-    'sticky top-0 w-full tablet:hidden flex flex-row items-center justify-between border-b-[1px] border-grey-200 flex-nowrap h-[60px]  w-full bg-white z-10',
+    'w-full tablet:hidden flex flex-row items-center justify-between border-b-[1px] border-grey-200 flex-nowrap h-[60px]  w-full bg-white z-10',
     pathname === 'Chat' ? 'hidden' : '',
   );
   return (

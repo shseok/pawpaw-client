@@ -14,7 +14,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-col tablet:flex-row flex-wrap h-full">
       <Header />
       <Sidebar />
       <div id="modal-root" />
