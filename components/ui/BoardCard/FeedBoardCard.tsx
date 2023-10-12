@@ -9,6 +9,7 @@ interface FeedBoardCardProps {
   imgs: string[];
   setShowModal: Dispatch<SetStateAction<boolean>>;
   comments: Comment[] | undefined;
+  commentsCount: number;
 }
 
 export default function FeedBoardCard({
@@ -17,8 +18,8 @@ export default function FeedBoardCard({
   imgs,
   setShowModal,
   comments,
+  commentsCount,
 }: FeedBoardCardProps) {
-  const commentsCount = comments ? comments.length : 0;
   return (
     <FlexBox
       direction="column"
@@ -41,7 +42,7 @@ export default function FeedBoardCard({
             {comments?.map((comment) => (
               <BoardCard.Comments
                 key={comment.id}
-                userName={comment.userName}
+                userName={comment.nickname}
                 content={comment.content}
                 onClickModal={() => setShowModal(true)}
               />

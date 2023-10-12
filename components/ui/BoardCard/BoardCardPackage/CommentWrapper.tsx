@@ -66,9 +66,9 @@ export function BoardCardCommentWrapper({
 }
 
 export function MyPageBoardCardCommentWrapper({
-  commentsNum,
+  commentsCount,
 }: {
-  commentsNum: number;
+  commentsCount: number;
 }) {
   return (
     <FlexBox
@@ -81,7 +81,7 @@ export function MyPageBoardCardCommentWrapper({
         <FlexBox className="gap-5">
           <FlexBox className="gap-2 body3 text-grey-500">
             <div>댓글</div>
-            <div>{commentsNum}</div>
+            <div>{commentsCount}</div>
           </FlexBox>
           <FlexBox className="gap-2 body3 text-grey-500">
             <div>좋아요</div>

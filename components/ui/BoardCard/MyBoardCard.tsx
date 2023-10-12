@@ -1,15 +1,30 @@
 import { BoardCard } from '@/components/ui/BoardCard/BoardCardPackage';
+// import { Dispatch, SetStateAction } from 'react';
 
-export default function MyBoardCard() {
+interface MyBoardCardProps {
+  userName: string;
+  content: string;
+  imgs: string[];
+  // setShowModal: Dispatch<SetStateAction<boolean>>;
+  // comments: Comment[] | undefined;
+  commentsCount: number;
+}
+
+export default function MyBoardCard({
+  userName,
+  content,
+  imgs,
+  // setShowModal,
+  // comments,
+  commentsCount,
+}: MyBoardCardProps) {
   return (
     <BoardCard>
-      <BoardCard.Header userId="id" />
-      <BoardCard.Content
-        type="myPage"
-        content="천재고양이 구름이를 소개합니다. 누구 고양이길래 이렇게 귀엽고"
-        imgs={['/Feed/desktop/tempPostPic/tempPostPic1.svg']}
-      >
-        <BoardCard.MyPageBoardCardCommentWrapper commentsNum={13} />
+      <BoardCard.Header userId={userName} />
+      <BoardCard.Content type="myPage" content={content} imgs={imgs}>
+        <BoardCard.MyPageBoardCardCommentWrapper
+          commentsCount={commentsCount}
+        />
       </BoardCard.Content>
     </BoardCard>
   );

@@ -15,21 +15,23 @@ export interface BoardList {
   id: number;
   title: string;
   content: string;
-  userName: string;
-  comments: Comment[];
-  image: string[];
-  likeNum: number;
-  commentNum: number;
-  created: string;
-  modified: string;
+  writer: string;
+  replyListDto: Comment[];
+  fileNames: string[];
+  likedCount: number;
+  replyCount: number;
+  createdDate: string;
+  modifiedDate: string;
 }
 
 export interface Comment {
   id: number;
   content: string;
-  userName: string;
+  nickname: string;
   children: string[];
 }
+
+export interface MyBoardList extends BoardList {}
 
 export interface LocationInfoType {
   predictions: string[];

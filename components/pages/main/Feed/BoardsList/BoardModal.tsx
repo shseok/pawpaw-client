@@ -32,7 +32,7 @@ export default function BoardModal({
         </FlexBox>
         {board ? (
           <ModalBoardCard
-            userId={board.userName}
+            userId={board.writer}
             imgs={[
               // TODO: 이미지 연결
               '/Feed/desktop/tempPostPic/tempPostPic1.svg',

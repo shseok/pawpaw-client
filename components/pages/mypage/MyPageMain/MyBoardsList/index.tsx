@@ -4,10 +4,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import useGetBoardListInfiniteData from '@/hooks/queries/useGetBoardListInfiniteData';
 import { BoardList } from '@/types/types';
+import MyBoardCard from '@/components/ui/BoardCard/MyBoardCard';
 import FlexBox from '../../../../ui/FlexBox';
-import FeedBoardCard from '../../../../ui/BoardCard/FeedBoardCard';
 
-export default function BoardsList({
+export default function MyBoardsList({
   setSelectedBoard,
   setShowModal,
 }: {
@@ -28,13 +28,13 @@ export default function BoardsList({
           }}
           className="w-full"
         >
-          <FeedBoardCard
-            userId={board.writer}
-            content={board.title}
+          <MyBoardCard
+            userName={board.writer}
+            content={board.content}
             // TODO: 이미지 연결
             imgs={[]}
-            setShowModal={setShowModal}
-            comments={board.replyListDto}
+            // setShowModal={setShowModal}
+            // comments={board.replyListDto}
             commentsCount={board.replyCount}
           />
         </div>
