@@ -13,9 +13,7 @@ export default function MyBoardsList() {
     Observer,
     data: myBoards,
     isLoading,
-  } = useGetMyBoardListInfiniteData({
-    infiniteQueryKey: ['myBoards'],
-  });
+  } = useGetMyBoardListInfiniteData();
 
   // 모달을 위한 상태
   const [showModal, setShowModal] = useState(false);
@@ -24,28 +22,32 @@ export default function MyBoardsList() {
   if (isLoading) {
     return <MyBoardListLoading />;
   }
+
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       <div className="grid w-full gap-5 mt-10 tablet:grid-cols-2 tablet:mt-0">
-        {myBoards?.pages?.map((board) => (
-          <div
-            key={board.id}
-            onClick={() => {
-              setSelectedBoard(board);
-            }}
-            className="w-full"
-          >
-            <MyBoardCard
-              userName={board.writer}
-              content={board.content}
-              // TODO: 이미지 연결
-              imgs={[]}
-              commentsCount={board.replyCount}
-              setShowModal={setShowModal}
-            />
-          </div>
-        ))}
+        {myBoards
+          ? myBoards?.pages?.map((board) => (
+              <div
+                key={board.id}
+                onClick={() => {
+                  setSelectedBoard(board);
+                  console.log(myBoards);
+                }}
+                className="w-full"
+              >
+                <MyBoardCard
+                  userName={board.writer}
+                  content={board.content}
+                  // TODO: 이미지 연결
+                  imgs={[]}
+                  commentsCount={board.replyCount}
+                  setShowModal={setShowModal}
+                />
+              </div>
+            ))
+          : '아직 게시물이 없어요ㅠㅠ'}
         <Observer>
           <div>로딩스피너...</div>
         </Observer>
