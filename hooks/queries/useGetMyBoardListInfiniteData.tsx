@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import getMyBoardList from '@/service/myPage';
+import { MyBoardList } from '@/types/types';
 
 const QUERY_KEY = ['myBoards'];
 
@@ -11,7 +12,8 @@ export default function useGetMyBoardListInfiniteData() {
   const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: QUERY_KEY,
-      queryFn: ({ pageParam = 0 }) => getMyBoardList(pageParam),
+      queryFn: ({ pageParam = 0 }): Promise<MyBoardList> =>
+        getMyBoardList(pageParam),
       getNextPageParam: (lastPage, allPages) =>
         allPages.length < 20 ? allPages.length + 1 : undefined,
       select: (d) => ({

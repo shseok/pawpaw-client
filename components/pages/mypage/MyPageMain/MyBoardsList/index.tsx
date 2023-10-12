@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
 import { useState } from 'react';
-import { MyBoardList } from '@/types/types';
+import { Board } from '@/types/types';
 import MyBoardCard from '@/components/ui/BoardCard/MyBoardCard';
 import BoardModal from '@/components/ui/BoardModal';
 import useGetMyBoardListInfiniteData from '@/hooks/queries/useGetMyBoardListInfiniteData';
@@ -17,47 +17,48 @@ export default function MyBoardsList() {
 
   // 모달을 위한 상태
   const [showModal, setShowModal] = useState(false);
-  const [selectedBoard, setSelectedBoard] = useState<MyBoardList | null>(null);
+  const [selectedBoard, setSelectedBoard] = useState<Board | null>(null);
 
   if (isLoading) {
     return <MyBoardListLoading />;
   }
 
-  return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
-      <div className="grid w-full gap-5 tablet:grid-cols-2 tablet:mt-4">
-        {myBoards?.pages
-          ? myBoards?.pages?.map((board) => (
-              <div
-                key={board.id}
-                onClick={() => {
-                  setSelectedBoard(board);
-                  console.log(myBoards);
-                }}
-                className="w-full"
-              >
-                <MyBoardCard
-                  userName={board.writer}
-                  content={board.content}
-                  // TODO: 이미지 연결
-                  imgs={[]}
-                  commentsCount={board.replyCount}
-                  setShowModal={setShowModal}
-                />
-              </div>
-            ))
-          : '아직 게시물이 없어요ㅠㅠ'}
-        <Observer>
-          <div>로딩스피너...</div>
-        </Observer>
-      </div>
-      <BoardModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        board={selectedBoard}
-        comments={selectedBoard?.replyListDto}
-      />
-    </>
-  );
+  if (myBoards?.pages)
+    return (
+      // eslint-disable-next-line react/jsx-no-useless-fragment
+      <>
+        <div className="grid w-full gap-5 tablet:grid-cols-2 tablet:mt-4">
+          {myBoards &&
+            myBoards?.pages?.map((page) =>
+              page.content.map((board) => (
+                <div
+                  key={board.id}
+                  onClick={() => {
+                    setSelectedBoard(board);
+                  }}
+                  className="w-full"
+                >
+                  <MyBoardCard
+                    userName={board.writer}
+                    content={board.content}
+                    // TODO: 이미지 연결
+                    imgs={[]}
+                    commentsCount={board.replyCount}
+                    setShowModal={setShowModal}
+                  />
+                </div>
+              )),
+            )}
+          <Observer>
+            <div>로딩스피너...</div>
+          </Observer>
+        </div>
+        <BoardModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          board={selectedBoard}
+          comments={selectedBoard?.replyListDto}
+        />
+      </>
+    );
 }

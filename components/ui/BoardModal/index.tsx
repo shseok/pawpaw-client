@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
-import { Comment, BoardList } from '@/types/types';
+import { Comment, Board } from '@/types/types';
 import ModalBoardCard from '@/components/ui/BoardCard/ModalBoardCard';
 import FlexBox from '../FlexBox';
 import Modal from '../Modal';
@@ -14,7 +14,7 @@ export default function BoardModal({
 }: {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  board: BoardList | null;
+  board: Board | null;
   comments: Comment[] | undefined;
 }) {
   return (

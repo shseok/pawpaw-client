@@ -11,7 +11,7 @@ export interface SidebarProps {
   pathname: string;
 }
 
-export interface BoardList {
+export interface Board {
   id: number;
   title: string;
   content: string;
@@ -23,6 +23,34 @@ export interface BoardList {
   createdDate: string;
   modifiedDate: string;
 }
+export interface BoardList {
+  content: Board[];
+  pageable: {
+    sort: {
+      empty: boolean;
+      unsorted: boolean;
+      sorted: boolean;
+    };
+    offset: number;
+    pageSize: number;
+    pageNumber: number;
+    paged: boolean;
+    unpaged: boolean;
+  };
+  size: number;
+  number: number;
+  sort: {
+    empty: true;
+    unsorted: true;
+    sorted: false;
+  };
+  numberOfElements: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
+
+export interface MyBoardList extends BoardList {}
 
 export interface Comment {
   id: number;
@@ -30,8 +58,6 @@ export interface Comment {
   nickname: string;
   children: string[];
 }
-
-export interface MyBoardList extends BoardList {}
 
 export interface LocationInfoType {
   predictions: string[];
