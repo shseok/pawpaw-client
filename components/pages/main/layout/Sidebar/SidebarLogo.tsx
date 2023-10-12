@@ -1,6 +1,7 @@
 import Logo from '@/public/logo.svg';
 import SmallLogo from '@/public/sidebar/small-logo.svg';
 import { cn } from '@/utils/common';
+import Link from 'next/link';
 
 // 사이드바를 열었을 때, Logo 컴포넌트를 렌더링하고, 닫았을 때는 SmallLogo 컴포넌트를 렌더링합니다.
 export default function SidebarLogo({
@@ -9,7 +10,8 @@ export default function SidebarLogo({
   isSidebarOpen: boolean;
 }) {
   return (
-    <figure
+    <Link
+      href="/"
       className={`${
         isSidebarOpen ? 'mt-8 mb-10' : 'mt-8 mb-11'
       } flex flex-row justify-center`}
@@ -26,6 +28,6 @@ export default function SidebarLogo({
           isSidebarOpen ? null : 'desktop:block',
         )}
       />
-    </figure>
+    </Link>
   );
 }

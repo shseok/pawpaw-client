@@ -16,9 +16,9 @@ export default function Header() {
   );
   return (
     <header className={headerClass}>
-      <div className="ml-5 sm:ml-10">
+      <Link href="/" className="ml-5 sm:ml-10">
         <Logo className="w-20 h-[23.72px]" />
-      </div>
+      </Link>
       <div className="flex flex-row mr-5 flex-nowra sm:mr-10">
         <Link href={pathname} className="mr-[18px]">
           <Search className="fill-grey-500 w-6 h-6" />
