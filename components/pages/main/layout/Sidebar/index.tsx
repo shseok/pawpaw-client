@@ -24,17 +24,21 @@ export default function Sidebar() {
           : 'tablet:w-24 desktop:w-24 transition-width duration-200 ease-in-out',
       )}
     >
-      <SidebarLogo isSidebarOpen={toggle} />
-      <SideButtonContainer
-        isSidebarOpen={toggle}
-        activeButton={activeButton}
-        setActive={setActiveButton}
-        pathname={pathname}
-      />
-      <BottomButtonContainer
-        isSidebarOpen={toggle}
-        handleClick={() => setToggle(!toggle)}
-      />
+      <div className="flex flex-col justify-between h-full">
+        <div>
+          <SidebarLogo isSidebarOpen={toggle} />
+          <SideButtonContainer
+            isSidebarOpen={toggle}
+            activeButton={activeButton}
+            setActive={setActiveButton}
+            pathname={pathname}
+          />
+        </div>
+        <BottomButtonContainer
+          isSidebarOpen={toggle}
+          handleClick={() => setToggle(!toggle)}
+        />
+      </div>
     </nav>
   );
 }
