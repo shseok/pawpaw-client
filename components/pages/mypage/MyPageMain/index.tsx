@@ -2,16 +2,16 @@
 
 import { useState } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
-import MyBoardCard from './MyBoardsList/MyBoard/MyBoardCard';
+import MyBoardCard from '../../../ui/BoardCard/MyBoardCard';
 
 export default function MyPageMain() {
-  const MYPAGE_TABS = ['게시물', '채팅방', '북마크', '내 장소'];
+  const MYPAGE_TABS = ['내 게시물', '채팅방', '북마크', '내 장소'];
   const [selectedTab, setSelectedTab] = useState('게시물');
 
   // 선택된 탭에 따라 해당 컴포넌트를 렌더링
   const renderTabContent = () => {
     switch (selectedTab) {
-      case '게시물':
+      case '내 게시물':
         return <MyBoardCard />;
       case '채팅방':
         return <div>채팅방 컴포넌트</div>;

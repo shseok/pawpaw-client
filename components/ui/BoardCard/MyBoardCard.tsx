@@ -1,4 +1,4 @@
-import { BoardCard } from '@/components/ui/BoardCard';
+import { BoardCard } from '@/components/ui/BoardCard/BoardCardPackage';
 
 export default function MyBoardCard() {
   return (

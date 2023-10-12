@@ -1,5 +1,5 @@
 import { Comment } from '@/types/types';
-import { BoardCardModal } from '@/components/ui/BoardCard/BoardCardModal';
+import { BoardCardModal } from '@/components/ui/BoardCard/BoardCardPackage/BoardCardModalPackage';
 
 interface ModalBoardCardProps {
   userId: string;

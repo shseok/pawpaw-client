@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import FlexBox from '../FlexBox';
+import FlexBox from '../../FlexBox';
 
 export function BoardCardCommentWrapper({
   children,

@@ -29,7 +29,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/ui/BoardCard/BoardCardModal"
+    "components/ui/BoardCard/BoardCardPackage/BoardCardModalPackage"
   ],
   "exclude": ["node_modules", ".next"]
 }

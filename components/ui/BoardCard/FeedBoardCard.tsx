@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Comment } from '@/types/types';
-import { BoardCard } from '@/components/ui/BoardCard';
-import FlexBox from '../../../../../ui/FlexBox';
+import { BoardCard } from '@/components/ui/BoardCard/BoardCardPackage';
+import FlexBox from '../FlexBox';
 
 interface FeedBoardCardProps {
   userId: string;
@@ -32,7 +32,7 @@ export default function FeedBoardCard({
         imgs={imgs}
         onClickModal={() => setShowModal(true)}
       >
-        <BoardCard.CommentWrapper commentsNum={commentsCount}>
+        <BoardCard.BoardCardCommentWrapper commentsNum={commentsCount}>
           <FlexBox
             direction="column"
             justify="start"
@@ -47,7 +47,7 @@ export default function FeedBoardCard({
               />
             ))}
           </FlexBox>
-        </BoardCard.CommentWrapper>
+        </BoardCard.BoardCardCommentWrapper>
       </BoardCard.Content>
     </FlexBox>
   );

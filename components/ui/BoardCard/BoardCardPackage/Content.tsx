@@ -7,8 +7,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import CaretLeft from 'public/CaretLeft.svg';
 import CaretRight from 'public/CaretRight.svg';
-import FlexBox from '../FlexBox';
-import Divider from '../Divider';
+import FlexBox from '../../FlexBox';
+import Divider from '../../Divider';
 import Images from './Images';
 
 export default function BoardCardContent({

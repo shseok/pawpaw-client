@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from 'react';
 import useGetBoardListInfiniteData from '@/hooks/queries/useGetBoardListInfiniteData';
 import { BoardList } from '@/types/types';
 import FlexBox from '../../../../ui/FlexBox';
-import FeedBoardCard from './BoardCard/FeedBoardCard';
+import FeedBoardCard from '../../../../ui/BoardCard/FeedBoardCard';
 
 export default function BoardsList({
   setSelectedBoard,

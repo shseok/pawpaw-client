@@ -1,6 +1,6 @@
 import DotsIcon from 'public/DotsIcon.svg';
 import copyToClipBoard from '@/utils/copyToClipBoard';
-import { Dropdown } from '../ui';
+import { Dropdown } from '../../ui';
 
 export default function PostCardDropdown() {
   return (

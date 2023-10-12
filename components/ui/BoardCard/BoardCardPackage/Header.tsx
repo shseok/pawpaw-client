@@ -1,6 +1,6 @@
-import Avatar from '../Avatar';
-import Button from '../Button';
-import FlexBox from '../FlexBox';
+import Avatar from '../../Avatar';
+import Button from '../../Button';
+import FlexBox from '../../FlexBox';
 import BoardCardDropdown from './BoardCardDropdown';
 
 export default function BoardCardHeader({ userId }: { userId: string }) {

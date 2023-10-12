@@ -1,4 +1,4 @@
-import FlexBox from '../../FlexBox';
+import FlexBox from '../../../FlexBox';
 import { BoardCardCommentWrapper } from '../CommentWrapper';
 import Content from '../Content';
 import Header from '../Header';
