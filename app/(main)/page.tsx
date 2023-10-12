@@ -4,7 +4,7 @@ import RecommendPlace from '@/components/pages/main/RecommendPlace';
 
 export default function Home() {
   return (
-    <main className="flex-1 w-full flex p-8 gap-10 mt-0 overflow-y-scroll h-full tablet:h-full items-start">
+    <main className="flex-1 w-full flex p-8 gap-10 mt-0 overflow-y-scroll h-full items-start">
       <Feed />
       <aside className="sticky top-0 flex-col justify-between hidden w-3/6 h-screen py-4 tablet:flex">
         <SimpleChatCardList />
