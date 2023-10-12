@@ -14,7 +14,7 @@ export default function BottomButtonContainer({
       <button
         type="button"
         className={cn(
-          'w-full h-16 flex flex-row items-center justify-center desktop:justify-start desktop:pl-6',
+          'w-full h-16 flex flex-row items-center justify-center desktop:justify-start desktop:pl-6 hover:bg-grey-120 transition-all duration-300',
           isSidebarOpen ? null : 'desktop:justify-center desktop:pl-0',
         )}
       >

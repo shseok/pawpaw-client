@@ -46,18 +46,21 @@ export default function SideButton({
     activeButton === buttonType ? 'fill-primary-200' : null,
   );
   const textStyle = cn(
-    'ml-3 header3 cursor-pointer text-grey-500 hidden desktop:block',
+    'ml-3 header3 text-grey-500 hidden desktop:block',
     activeButton === buttonType ? 'text-primary-200' : null,
     isOpenSidebar ? null : 'desktop:hidden',
   );
+  // SEO를 위해 추후 링크로 변경
   return (
-    <div
+    <button
+      type="button"
+      onClick={clickHandler}
       className={cn(
-        'relative flex flex-row justify-center desktop:justify-start h-16 flex-nowrap',
+        'w-full relative flex flex-row justify-center items-center desktop:justify-start h-16 flex-nowrap hover:bg-grey-120 transition-all duration-300 cursor-pointer',
         isOpenSidebar ? null : 'desktop:justify-center',
       )}
     >
-      <button type="button" onClick={clickHandler}>
+      <div>
         {activeButton === buttonType &&
         buttonType !== 'Search' &&
         buttonType !== 'Notice' ? (
@@ -72,7 +75,7 @@ export default function SideButton({
           <ButtonIcon className={buttonStyle} />
           <div className={textStyle}>{name}</div>
         </div>
-      </button>
-    </div>
+      </div>
+    </button>
   );
 }
