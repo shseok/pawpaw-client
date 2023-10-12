@@ -5,8 +5,7 @@ import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
 import MessageInput from './MessageInput';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function ChatRoom({ roomId }: { roomId: string }) {
+export default function ChatRoom() {
   // input 관련로직이 여기있는게 맞나? 분리를 해보자. 드랍다운 구현후에 그리고 여기는 서버컴포넌트로 바꾸자;
   const [message, onChangeValue, resetValue] = useInput('');
   const sendMessage = () => {

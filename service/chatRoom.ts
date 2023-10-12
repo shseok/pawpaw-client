@@ -1,4 +1,9 @@
-import { ChatRoomUserList, Schedule, ScheduleList } from '@/types/types';
+import {
+  ChatHistory,
+  ChatRoomUserList,
+  Schedule,
+  ScheduleList,
+} from '@/types/types';
 import Toast from '@/utils/notification';
 import { AuthError, ImageSizeError } from '@/lib/error';
 
@@ -191,4 +196,15 @@ export async function withdrawSchedule(roomId: string, scheduleId: number) {
   } catch (error) {
     console.error(error);
   }
+}
+
+// 채팅룸 이전 채팅기록 조회 API
+export async function getChatHistory(
+  roomId: string,
+  targetId: number,
+): Promise<ChatHistory> {
+  const url = `/endpoint/api/chatroom/${roomId}/message?targetId=${targetId}&size=20`;
+  const response = await fetch(url);
+  console.log(response);
+  return response.json();
 }

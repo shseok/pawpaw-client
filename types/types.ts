@@ -152,3 +152,17 @@ export interface ScheduleList extends Schedule {
   isManager?: boolean;
   participantList: { nickname: string; imageUrl: string }[];
 }
+
+export interface MessageType {
+  id: number;
+  chatroomId: number;
+  chatType: 'MESSAGE' | 'IMAGE' | 'JOIN' | 'LEAVE';
+  data: string;
+  senderId: string;
+  sender: string;
+  senderImageUrl: string;
+  createdDate: string;
+}
+export interface ChatHistory {
+  content: MessageType[];
+}
