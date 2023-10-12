@@ -34,7 +34,7 @@ export default function BoardModal({
           <ModalBoardCard
             userId={board.userName}
             imgs={[
-              board.image[0],
+              // TODO: 이미지 연결
               '/Feed/desktop/tempPostPic/tempPostPic1.svg',
               '/Feed/desktop/tempPostPic/tempPostPic3.svg',
             ]}

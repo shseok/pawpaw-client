@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import FlexBox from '../FlexBox';
-import Modal from '../Modal';
+import FlexBox from '../../FlexBox';
+import Modal from '../../Modal';
 
 export default function BoardCardModalComments({
   id,

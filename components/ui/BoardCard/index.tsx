@@ -4,12 +4,9 @@
 import FlexBox from '../FlexBox';
 import CommentWrapper from './CommentWrapper';
 import Comments from './Comments';
-
 import Content from './Content';
 import Header from './Header';
 import Images from './Images';
-import ModalComments from './ModalComments';
-import ModalContent from './ModalContent';
 
 export default function BoardCardWrapper({
   children,
@@ -33,6 +30,4 @@ export const BoardCard = Object.assign(BoardCardWrapper, {
   Content,
   Header,
   Images,
-  ModalComments,
-  ModalContent,
 });
