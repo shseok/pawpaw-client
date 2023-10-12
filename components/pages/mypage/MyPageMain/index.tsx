@@ -22,8 +22,11 @@ export default function MyPageMain() {
     }
   };
   return (
-    <FlexBox direction="column" className="w-full gap-5 md:w-auto md:pl-80">
-      <div className="w-full h-[50px] sticky top-16 tablet:top-5 border-b-[3px] bg-white">
+    <FlexBox
+      direction="column"
+      className="relative w-full gap-5 md:w-auto md:pl-80"
+    >
+      <div className="w-full h-[50px] sticky -top-8 border-b-[3px] bg-white">
         {MYPAGE_TABS.map((tab) => (
           <button
             key={tab}

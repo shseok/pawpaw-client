@@ -26,7 +26,7 @@ export default function MyBoardsList() {
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      <div className="grid w-full gap-5 mt-10 tablet:grid-cols-2 tablet:mt-0">
+      <div className="grid w-full gap-5 tablet:grid-cols-2 tablet:mt-4">
         {myBoards?.pages
           ? myBoards?.pages?.map((board) => (
               <div
