@@ -4,7 +4,7 @@ import {
   Schedule,
   ScheduleList,
 } from '@/types/types';
-import Toast from '@/utils/notification';
+// import Toast from '@/utils/notification';
 import { AuthError, ImageSizeError } from '@/lib/error';
 
 interface ChatRoomType {
@@ -17,6 +17,7 @@ interface ChatRoomType {
     locationLimit: boolean;
   };
 }
+
 // 채팅방 생성 API
 export async function postChatRoom(chatRoomData: ChatRoomType) {
   try {
@@ -40,7 +41,7 @@ export async function postChatRoom(chatRoomData: ChatRoomType) {
   } catch (error) {
     console.error(error);
     if (error instanceof ImageSizeError) {
-      Toast.error(error.message);
+      // Toast.error(error.message);
     }
     throw error;
   }
