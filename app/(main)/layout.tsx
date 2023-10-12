@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
-import Sidebar from '@/components/pages/main/Sidebar/Sidebar';
+import Sidebar from '@/components/pages/main/layout/Sidebar';
+import Header from '@/components/pages/main/layout/Header';
+import Footer from '@/components/pages/main/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'pawpaw | Home',
@@ -12,10 +14,12 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex">
+    <div className="flex flex-col tablet:flex-row flex-wrap h-full">
+      <Header />
       <Sidebar />
       <div id="modal-root" />
       {children}
+      <Footer />
     </div>
   );
 }
