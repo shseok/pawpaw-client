@@ -14,31 +14,35 @@ export default function BoardsList({
   setSelectedBoard: Dispatch<SetStateAction<BoardList | null>>;
   setShowModal: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { Observer, data: boards } = useGetBoardListInfiniteData({
+  const { Observer, data: boardList } = useGetBoardListInfiniteData({
     infiniteQueryKey: ['boards'],
   });
 
   return (
     <FlexBox direction="column" className="gap-10">
-      {boards?.pages?.map((board) => (
-        <div
-          key={board.id}
-          onClick={() => {
-            setSelectedBoard(board);
-          }}
-          className="w-full"
-        >
-          <FeedBoardCard
-            userId={board.writer}
-            content={board.title}
-            // TODO: 이미지 연결
-            imgs={[]}
-            setShowModal={setShowModal}
-            comments={board.replyListDto}
-            commentsCount={board.replyCount}
-          />
-        </div>
-      ))}
+      {boardList?.pages ? (
+        boardList?.pages?.map((board) => (
+          <div
+            key={board.id}
+            onClick={() => {
+              setSelectedBoard(board);
+            }}
+            className="w-full"
+          >
+            <FeedBoardCard
+              userId={board.writer}
+              content={board.title}
+              // TODO: 이미지 연결
+              imgs={[]}
+              setShowModal={setShowModal}
+              comments={board.replyListDto}
+              commentsCount={board.replyCount}
+            />
+          </div>
+        ))
+      ) : (
+        <div>아직 게시물이 없어요ㅠㅠ</div>
+      )}
       <Observer>
         <div>로딩스피너...</div>
       </Observer>
