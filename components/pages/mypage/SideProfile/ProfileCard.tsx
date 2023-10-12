@@ -7,7 +7,7 @@ export default function ProfileCard() {
   return (
     <FlexBox
       direction="column"
-      className="relative w-[517px] gap-4 p-10 bg-white rounded-[10px] shadow-chatCard"
+      className="relative gap-4 p-10 bg-white rounded-[10px] shadow-chatCard"
     >
       <Image
         src="/MyPage/preferenceIcon.svg"
@@ -51,7 +51,7 @@ export default function ProfileCard() {
         </FlexBox>
         <Divider type="horizontal" />
       </FlexBox>
-      <Button size="lg" className="w-full header3">
+      <Button size="lg" className="header3">
         <FlexBox className="gap-1">
           <Image
             src="/MyPage/editIcon.svg"
@@ -62,7 +62,7 @@ export default function ProfileCard() {
           <div>내 프로필 편집</div>
         </FlexBox>
       </Button>
-      <Button size="lg" variant="secondary" className="w-full header3">
+      <Button size="lg" variant="secondary" className="header3">
         <FlexBox className="gap-1">
           <Image
             src="/MyPage/puppyIcon.svg"

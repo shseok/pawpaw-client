@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
-import MyPost from './MyPost';
+import MyBoardCard from './MyBoardsList/MyBoard/MyBoardCard';
 
 export default function MyPageMain() {
   const MYPAGE_TABS = ['게시물', '채팅방', '북마크', '내 장소'];
@@ -12,7 +12,7 @@ export default function MyPageMain() {
   const renderTabContent = () => {
     switch (selectedTab) {
       case '게시물':
-        return <MyPost />;
+        return <MyBoardCard />;
       case '채팅방':
         return <div>채팅방 컴포넌트</div>;
       case '북마크':

@@ -19,7 +19,7 @@ export default function BoardCardContent({
   onClickModal,
 }: {
   children: React.ReactNode;
-  type: 'mainPC' | 'modal';
+  type: 'mainPC' | 'modal' | 'myPage';
   content: string;
   imgs?: string[];
   onClickModal?: () => void;
@@ -64,12 +64,14 @@ export default function BoardCardContent({
     return (
       // eslint-disable-next-line react/jsx-no-useless-fragment
       <>
-        {type === 'mainPC' ? (
+        {type === 'mainPC' && (
           <div className="grid w-full h-full grid-cols-2 gap-9">
             <Images imgs={imgs} onClickModal={onClickModal} />
             {renderBoardContent()}
           </div>
-        ) : (
+        )}
+
+        {type === 'modal' && (
           <FlexBox className="gap-9">
             <div className="relative w-[545px] h-[574px]">
               <Image
@@ -92,6 +94,13 @@ export default function BoardCardContent({
             </div>
             {renderBoardContent()}
           </FlexBox>
+        )}
+
+        {type === 'myPage' && (
+          <div className="grid w-full h-full grid-rows-2 gap-9">
+            <Images imgs={imgs} onClickModal={onClickModal} />
+            {renderBoardContent()}
+          </div>
         )}
       </>
     );

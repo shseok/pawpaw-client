@@ -19,7 +19,7 @@ export default function ModalBoardCard({
     <BoardCardModal imgs={imgs}>
       <BoardCardModal.Header userId={userId} />
       <BoardCardModal.Content type="modal" content={content} imgs={imgs}>
-        <BoardCardModal.CommentWrapper
+        <BoardCardModal.BoardCardCommentWrapper
           commentsNum={filteredCommentsCount}
           isModal
         >
@@ -31,7 +31,7 @@ export default function ModalBoardCard({
               userImg="/Feed/desktop/tempProfilePic.svg"
             />
           ))}
-        </BoardCardModal.CommentWrapper>
+        </BoardCardModal.BoardCardCommentWrapper>
       </BoardCardModal.Content>
     </BoardCardModal>
   );

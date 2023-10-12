@@ -2,7 +2,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
 import FlexBox from '../FlexBox';
-import CommentWrapper from './CommentWrapper';
+import {
+  BoardCardCommentWrapper,
+  MyPageBoardCardCommentWrapper,
+} from './CommentWrapper';
 import Comments from './Comments';
 import Content from './Content';
 import Header from './Header';
@@ -26,7 +29,8 @@ export default function BoardCardWrapper({
 
 export const BoardCard = Object.assign(BoardCardWrapper, {
   Comments,
-  CommentWrapper,
+  BoardCardCommentWrapper,
+  MyPageBoardCardCommentWrapper,
   Content,
   Header,
   Images,

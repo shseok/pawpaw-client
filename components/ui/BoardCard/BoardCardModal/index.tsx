@@ -1,5 +1,5 @@
 import FlexBox from '../../FlexBox';
-import CommentWrapper from '../CommentWrapper';
+import { BoardCardCommentWrapper } from '../CommentWrapper';
 import Content from '../Content';
 import Header from '../Header';
 import Images from '../Images';
@@ -25,7 +25,7 @@ export default function BoardCardModalWrapper({
 }
 
 export const BoardCardModal = Object.assign(BoardCardModalWrapper, {
-  CommentWrapper,
+  BoardCardCommentWrapper,
   Content,
   Header,
   Images,
