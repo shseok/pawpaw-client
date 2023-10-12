@@ -1,14 +1,13 @@
-import Link from 'next/link';
 import Avatar from '@/components/ui/Avatar';
 import FlexBox from '@/components/ui/FlexBox';
-import ArrowRightIcon from '@/public/arrow-right.svg';
+import CrownIcon from '@/public/CrownSimple.svg';
 
 interface ChatUserPropsType {
   shadow?: boolean;
   image: string;
   name: string;
   petName: string;
-  icon?: boolean;
+  role?: string;
 }
 
 export default function ChatUser({
@@ -16,7 +15,7 @@ export default function ChatUser({
   image,
   name,
   petName,
-  icon = false,
+  role,
 }: ChatUserPropsType) {
   const shadowClass = shadow ? 'shadow-chatCard' : '';
   return (
@@ -28,11 +27,7 @@ export default function ChatUser({
       <FlexBox direction="column" align="start" className="gap-1 ">
         <FlexBox className="gap-1">
           <p className="font-bold">{name}</p>
-          {icon && (
-            <Link href={`/${name}`}>
-              <ArrowRightIcon />
-            </Link>
-          )}
+          {role === 'MANAGER' ? <CrownIcon /> : ''}
         </FlexBox>
         <p className="text-grey-500 ">{petName}</p>
       </FlexBox>

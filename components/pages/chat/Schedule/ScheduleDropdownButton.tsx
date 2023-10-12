@@ -15,11 +15,8 @@ function ScheduleAddOption({
     <Dropdown.Item event={() => setIsOpen(true)}>스케줄 추가</Dropdown.Item>
   );
 }
-function ScheduleEditOption() {
-  return <Dropdown.Item>스케줄 편집</Dropdown.Item>;
-}
 
-const OPTION_LIST = [ScheduleAddOption, ScheduleEditOption];
+const OPTION_LIST = [ScheduleAddOption];
 export default function ScheduleDropdownButton() {
   const [isOpen, setIsOpen] = useState(false);
   return (
