@@ -26,7 +26,7 @@ export default function ModalBoardCard({
           {comments?.map((comment) => (
             <BoardCardModal.ModalComments
               id={comment.id}
-              userName={comment.userName}
+              userName={comment.nickname}
               content={comment.content}
               userImg="/Feed/desktop/tempProfilePic.svg"
             />

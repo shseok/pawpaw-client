@@ -67,28 +67,33 @@ export function BoardCardCommentWrapper({
 
 export function MyPageBoardCardCommentWrapper({
   commentsCount,
+  onClickModal,
 }: {
   commentsCount: number;
+  onClickModal: () => void;
 }) {
   return (
-    <FlexBox
-      direction="column"
-      align="stretch"
-      justify="between"
-      className="w-full h-full"
-    >
-      <FlexBox direction="column" align="start" className="w-full gap-3">
-        <FlexBox className="gap-5">
-          <FlexBox className="gap-2 body3 text-grey-500">
-            <div>댓글</div>
-            <div>{commentsCount}</div>
-          </FlexBox>
-          <FlexBox className="gap-2 body3 text-grey-500">
-            <div>좋아요</div>
-            <div>2</div>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div onClick={onClickModal}>
+      <FlexBox
+        direction="column"
+        align="stretch"
+        justify="between"
+        className="w-full h-full"
+      >
+        <FlexBox direction="column" align="start" className="w-full gap-3">
+          <FlexBox className="gap-5">
+            <FlexBox className="gap-2 body3 text-grey-500">
+              <div>댓글</div>
+              <div>{commentsCount}</div>
+            </FlexBox>
+            <FlexBox className="gap-2 body3 text-grey-500">
+              <div>좋아요</div>
+              <div>2</div>
+            </FlexBox>
           </FlexBox>
         </FlexBox>
       </FlexBox>
-    </FlexBox>
+    </div>
   );
 }

@@ -4,7 +4,7 @@ import ProfileCard from './ProfileCard';
 
 export default function SideProfile() {
   return (
-    <FlexBox direction="column" className="sticky top-0 gap-4 -z-10">
+    <FlexBox direction="column" className="absolute top-0 gap-4 -z-10">
       <ProfileCard />
       {/* <FollowingFollowerCard /> */}
     </FlexBox>

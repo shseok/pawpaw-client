@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { Comment, BoardList } from '@/types/types';
 import ModalBoardCard from '@/components/ui/BoardCard/ModalBoardCard';
-import FlexBox from '../../../../ui/FlexBox';
-import Modal from '../../../../ui/Modal';
+import FlexBox from '../FlexBox';
+import Modal from '../Modal';
 
 export default function BoardModal({
   showModal,

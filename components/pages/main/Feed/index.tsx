@@ -5,7 +5,7 @@ import BoardsList from '@/components/pages/main/Feed/BoardsList';
 import FlexBox from '@/components/ui/FlexBox';
 import FeedHeader from '@/components/pages/main/Feed/FeedHeader';
 import { BoardList } from '@/types/types';
-import BoardModal from './BoardsList/BoardModal';
+import BoardModal from '../../../ui/BoardModal';
 
 export default function Feed() {
   const [showModal, setShowModal] = useState(false);
