@@ -15,14 +15,20 @@ export async function postBoard(postBoardData: PostBoardType) {
   const url = `/endpoint/api/board/register`;
   const formData = new FormData();
   const { title, content } = postBoardData;
-  formData.append(title, content);
+  formData.append('title', title);
+  formData.append('content', content);
 
   const response = await fetch(url, {
     method: 'POST',
     credentials: 'include',
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
     body: formData,
   });
-  return response.json();
+  // return response.json();
+  const data = await response.json();
+  console.log(data);
 }
 
 export default async function getBoardList({

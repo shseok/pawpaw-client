@@ -18,25 +18,34 @@ export default function Upload() {
     setPostText(event.target.value);
   };
 
-  const onUploadBoard = async (data: string) => {
+  // 데이터 전송을 위한 함수
+  const onUploadBoard = async () => {
+    if (!postText || isOverMaxChar) {
+      return; // Don't proceed if postText is empty or over the character limit.
+    }
+
     setIsLoading(true);
     try {
       const response = await postBoard({
         title: 'title',
-        content: data,
+        content: postText,
       });
+      console.log(response);
+      if (response.ok) {
+        Toast.success('게시물이 성공적으로 업로드되었습니다.');
+        setPostText('');
+      } else {
+        Toast.error('업로드에 실패했습니다. 잠시 후 다시 시도해주세요.');
+      }
     } catch (error) {
-      Toast.error('잠시 후 다시 시도해주세요.');
+      Toast.error('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <form
-      onSubmit={onUploadBoard}
-      className="flex flex-col bg-primary-50 p-5 border-[1px] border-primary-300 rounded-[10px] w-full"
-    >
+    <form className="flex flex-col bg-primary-50 p-5 border-[1px] border-primary-300 rounded-[10px] w-full">
       <FlexBox justify="between" className="w-full gap-[24px]">
         <Avatar
           size="xxl"
@@ -73,7 +82,7 @@ export default function Upload() {
           size="lg"
           disabled={isOverMaxChar}
           className="w-40"
-          onClickAction={() => Toast.success('성공')}
+          onClickAction={() => onUploadBoard()}
         >
           업로드
         </Button>

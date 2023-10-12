@@ -31,7 +31,8 @@ export default function BoardsList({
           <FeedBoardCard
             userId={board.userName}
             content={board.title}
-            imgs={[board.image[0], board.image[1], board.image[2]]}
+            // TODO: 이미지 연결
+            imgs={[]}
             setShowModal={setShowModal}
             comments={board.comments}
           />
