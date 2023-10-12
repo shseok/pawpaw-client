@@ -1,4 +1,4 @@
-import Logo from '@/public/sidebar/logo.svg';
+import Logo from '@/public/logo.svg';
 import SmallLogo from '@/public/sidebar/small-logo.svg';
 import { cn } from '@/utils/common';
 
@@ -16,7 +16,7 @@ export default function SidebarLogo({
     >
       <Logo
         className={cn(
-          'hidden desktop:block',
+          'w-[140px] h-[42px] hidden desktop:block',
           isSidebarOpen ? null : 'desktop:hidden',
         )}
       />

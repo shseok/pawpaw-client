@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { cn } from '@/utils/common';
 import useGetPathname from '@/hooks/common/useGetPathname';
-import HeaderLogo from './HeaderLogo';
 import Search from '@/public/sidebar/magnifying-glass.svg';
 import Alert from '@/public/sidebar/bell.svg';
-import Link from 'next/link';
+import Logo from '@/public/logo.svg';
 
 export default function Header() {
   const pathname = useGetPathname();
@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <header className={headerClass}>
       <div className="ml-5 sm:ml-10">
-        <HeaderLogo />
+        <Logo className="w-20 h-[23.72px]" />
       </div>
       <div className="flex flex-row mr-5 flex-nowra sm:mr-10">
         <Link href={pathname} className="mr-[18px]">
