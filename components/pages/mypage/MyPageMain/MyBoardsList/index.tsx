@@ -8,8 +8,8 @@ import MyBoardCard from '@/components/ui/BoardCard/MyBoardCard';
 import BoardModal from '@/components/ui/BoardModal';
 
 export default function MyBoardsList() {
-  const { Observer, data: boards } = useGetBoardListInfiniteData({
-    infiniteQueryKey: ['boards'],
+  const { Observer, data: myBoards } = useGetBoardListInfiniteData({
+    infiniteQueryKey: ['myBoards'],
   });
   const [showModal, setShowModal] = useState(false);
   const [selectedBoard, setSelectedBoard] = useState<MyBoardList | null>(null);
@@ -17,8 +17,8 @@ export default function MyBoardsList() {
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      <div className="grid grid-cols-2">
-        {boards?.pages?.map((board) => (
+      <div className="grid w-full gap-5 mt-10 tablet:grid-cols-2 tablet:mt-0">
+        {myBoards?.pages?.map((board) => (
           <div
             key={board.id}
             onClick={() => {
@@ -31,7 +31,6 @@ export default function MyBoardsList() {
               content={board.content}
               // TODO: 이미지 연결
               imgs={[]}
-              // comments={board.replyListDto}
               commentsCount={board.replyCount}
               setShowModal={setShowModal}
             />

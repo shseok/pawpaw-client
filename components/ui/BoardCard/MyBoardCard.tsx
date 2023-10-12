@@ -6,7 +6,6 @@ interface MyBoardCardProps {
   content: string;
   imgs: string[];
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  // comments: Comment[] | undefined;
   commentsCount: number;
 }
 
@@ -15,12 +14,11 @@ export default function MyBoardCard({
   content,
   imgs,
   setShowModal,
-  // comments,
   commentsCount,
 }: MyBoardCardProps) {
   return (
     <BoardCard>
-      <BoardCard.Header userId={userName} />
+      <BoardCard.Header userId={userName} isMy />
       <BoardCard.Content
         type="myPage"
         content={content}
