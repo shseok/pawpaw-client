@@ -129,3 +129,26 @@ export interface UserInfo {
   position: { latitude: number; longitude: number; name: string };
   imageUrl: string;
 }
+export interface ChatRoomUserList {
+  briefIntroduction: string;
+  nickname: string;
+  imageUrl: string;
+  role: 'MANAGER' | 'PARTICIPANT';
+}
+
+export interface ScheduleEventArgType {
+  roomId: string;
+  scheduleId: number;
+}
+
+export interface Schedule {
+  id: number;
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+}
+export interface ScheduleList extends Schedule {
+  isManager?: boolean;
+  participantList: { nickname: string; imageUrl: string }[];
+}

@@ -1,20 +1,20 @@
+'use client';
+
 import FlexBox from '@/components/ui/FlexBox';
+import useGetChatRoomUserList from '@/hooks/queries/useGetChatRoomUserList';
+import ChatUserListLoading from '@/components/ui/Loading/ChatUserListLoading';
+import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 import ChatUser from './ChatUser';
 import UserAddButton from './UserAddButton';
 
-const userList = [
-  { image: '/default.png', name: '닉네임1', petName: '3살 감자' },
-  { image: '/default.png', name: '닉네임2', petName: '4살 감자' },
-  { image: '/default.png', name: '닉네임3', petName: '5살 감자' },
-  { image: '/default.png', name: '닉네임5', petName: '5살 감자' },
-  { image: '/default.png', name: '닉네임6', petName: '5살 감자' },
-  { image: '/default.png', name: '닉네임7', petName: '5살 감자' },
-  { image: '/default.png', name: '닉네임8', petName: '5살 감자' },
-  { image: '/default.png', name: '닉네임9', petName: '5살 감자' },
-  { image: '/default.png', name: '닉네임10', petName: '5살 감자' },
-];
+export default function ChatUserList({ roomId }: { roomId: string }) {
+  const { data: userList, isLoading } = useGetChatRoomUserList(roomId);
+  const { data: userInfo } = useGetUserInfo();
 
-export default function ChatUserList() {
+  const isManager =
+    userList?.find((user) => user.role === 'MANAGER')?.nickname ===
+    userInfo?.nickname;
+
   return (
     <FlexBox
       direction="column"
@@ -24,23 +24,29 @@ export default function ChatUserList() {
         <FlexBox as="header" className="gap-2 p-2">
           <h1 className="text-2xl font-bold">인원</h1>
           <FlexBox className="gap-1">
-            <p>21</p>
-            <p className="text-grey-500">/ 60</p>
+            <p>{userList?.length}</p>
+            <p className="text-grey-500">/60</p>
           </FlexBox>
         </FlexBox>
-        <UserAddButton />
+        {isManager && <UserAddButton />}
       </FlexBox>
       <ul className="w-full h-full overflow-auto scrollbar-hide">
-        {userList.map((user) => (
-          <li key={user.name}>
-            <ChatUser
-              image={user.image}
-              name={user.name}
-              petName={user.petName}
-              icon
-            />
-          </li>
-        ))}
+        {isLoading ? (
+          <ChatUserListLoading />
+        ) : (
+          userList?.map((user) => (
+            <li key={user.nickname}>
+              <ChatUser
+                role={user.role}
+                image={user.imageUrl}
+                name={user.nickname}
+                petName={
+                  user.briefIntroduction ?? '나의 반려견을 등록해주세요.🐶'
+                }
+              />
+            </li>
+          ))
+        )}
       </ul>
     </FlexBox>
   );

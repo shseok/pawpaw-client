@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Modal from '@/components/ui/Modal';
 import UserAddModal from '../../../ui/Modal/UserAddModal/UserAddModal';
 
 export default function UserAddButton() {
@@ -19,9 +18,7 @@ export default function UserAddButton() {
       >
         추가
       </button>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <UserAddModal onClose={() => setOpen(false)} />
-      </Modal>
+      <UserAddModal open={open} onClose={() => setOpen(false)} />
     </>
   );
 }

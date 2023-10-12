@@ -5,7 +5,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import FocusLock from 'react-focus-lock';
 
 interface ModalProps {
@@ -33,11 +32,9 @@ function ModalWrapper({ children }: { children: ReactNode }) {
   return <div onClick={(event) => event.stopPropagation()}>{children}</div>;
 }
 export default function Modal({ children, open, onClose }: ModalProps) {
-  const [mounted, setMounted] = useState(false);
   const [modalRoot, setModalRoot] = useState<Element | null>(null);
 
   useEffect(() => {
-    setMounted(true);
     setModalRoot(document.getElementById('modal-root'));
   }, []);
 
@@ -56,7 +53,7 @@ export default function Modal({ children, open, onClose }: ModalProps) {
     };
   }, [open]);
 
-  if (!mounted || !modalRoot) {
+  if (!modalRoot) {
     return null;
   }
   return createPortal(

@@ -5,29 +5,20 @@ import FlexBox from '@/components/ui/FlexBox';
 import Divider from '@/components/ui/Divider';
 import ArrowRightIcon from '@/public/arrow-right.svg';
 import Modal from '@/components/ui/Modal';
+import LeaveChatRoomModal from '@/components/ui/Modal/LeaveChatRoomModal';
+import copyToClipBoard from '@/utils/copyToClipBoard';
 import ChatUserListMobile from './ChatUserListMobile';
 import ScheduleListMobile from '../Schedule/ScheduleListMobile';
-import LeaveChatRoomModal from '../../../ui/Modal/LeaveChatRoomModal/LeaveChatRoomModal';
 
-type ModalType = '공지' | '사진' | '채팅방 나가기' | '인원' | '스케줄' | '';
+type ModalType = '채팅방 나가기' | '인원' | '스케줄' | '';
 type ModalActionType = Dispatch<SetStateAction<ModalType>>;
 
-function NotiOption({ setModalType }: { setModalType: ModalActionType }) {
-  return <Dropdown.Item event={() => setModalType('공지')}>공지</Dropdown.Item>;
-}
-function PhotoOption({ setModalType }: { setModalType: ModalActionType }) {
-  return <Dropdown.Item event={() => setModalType('사진')}>사진</Dropdown.Item>;
-}
 function ShareOption() {
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      alert('복사 성공');
-    } catch {
-      alert('복사 실패');
-    }
-  };
-  return <Dropdown.Item event={copyToClipboard}>공유하기</Dropdown.Item>;
+  return (
+    <Dropdown.Item event={() => copyToClipBoard(window.location.href)}>
+      공유하기
+    </Dropdown.Item>
+  );
 }
 
 function LeaveChatRoomOption({
@@ -62,7 +53,7 @@ function ScheduleOption({ setModalType }: { setModalType: ModalActionType }) {
     </Dropdown.Item>
   );
 }
-const OPTION_LIST = [NotiOption, PhotoOption, ShareOption, LeaveChatRoomOption];
+const OPTION_LIST = [ShareOption, LeaveChatRoomOption];
 const MOBILE_OPTION_LIST = [UserOption, ScheduleOption];
 export default function ChatDropdownButton() {
   const [modalType, setModalType] = useState<ModalType>('');
@@ -76,22 +67,6 @@ export default function ChatDropdownButton() {
         return <ChatUserListMobile closeModal={closeModal} />;
       case '스케줄':
         return <ScheduleListMobile closeModal={closeModal} />;
-      case '공지':
-        return (
-          <div className="fixed top-0 bottom-0 left-0 z-50 w-full h-screen bg-white">
-            <button type="button" onClick={closeModal}>
-              {type}
-            </button>
-          </div>
-        );
-      case '사진':
-        return (
-          <div className="fixed top-0 bottom-0 left-0 z-50 w-full h-screen bg-white">
-            <button type="button" onClick={closeModal}>
-              {type}
-            </button>
-          </div>
-        );
       case '채팅방 나가기':
         return (
           <Modal open={modalType === '채팅방 나가기'} onClose={closeModal}>

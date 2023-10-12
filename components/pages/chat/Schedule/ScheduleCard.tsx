@@ -1,44 +1,96 @@
 import FlexBox from '@/components/ui/FlexBox';
-import ShareIcon from '@/public/share.svg';
+import { ScheduleList } from '@/types/types';
+import { format } from 'date-fns';
+import ko from 'date-fns/locale/ko';
+import { usePathname } from 'next/navigation';
+import useJoinSchedule from '@/hooks/mutations/useJoinSchedule';
+import Button from '@/components/ui/Button';
+import useDeleteSchedule from '@/hooks/mutations/useDeleteSchedule';
+import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
+import useWithdrawSchedule from '@/hooks/mutations/useWithdrawSchedule';
 import AvatarGroup from './AvatarGroup';
 
-export default function ScheduleCard() {
-  const testArr1 = [1, 2, 3, 4, 5, 6, 78, 9, 0];
+export default function ScheduleCard({
+  isManager,
+  id,
+  description,
+  endDate,
+  name,
+  participantList,
+  startDate,
+}: ScheduleList) {
+  const roomId = usePathname().split('/')[2];
+  const { mutate: joinScheduleMutate } = useJoinSchedule();
+  const { mutate: deleteScheduleMutate } = useDeleteSchedule();
+  const { mutate: withdrawScheduleMutate } = useWithdrawSchedule();
+  const { data: userInfo } = useGetUserInfo();
+
+  const isJoinSchedule = participantList.some(
+    (user) => user.nickname === userInfo?.nickname,
+  );
+
+  const onDeleteSchedule = () => {
+    if (window.confirm(`${name} 일정을 삭제하시겠습니까?`)) {
+      deleteScheduleMutate({ roomId, scheduleId: id });
+    }
+  };
+  const onCreateSchedule = () => {
+    if (window.confirm(`${name} 일정에 참여하시겠습니까?`)) {
+      joinScheduleMutate({ roomId, scheduleId: id });
+    }
+  };
+  const onWithdrawSchedule = () => {
+    if (window.confirm(`${name} 일정 참여를 취소하시겠습니까?`)) {
+      withdrawScheduleMutate({ roomId, scheduleId: id });
+    }
+  };
   return (
     <FlexBox
       as="li"
       direction="column"
       align="start"
-      className="gap-5 p-8 rounded-[10px] shadow-chatCard "
+      className="gap-5 p-6 rounded-[10px] shadow-chatCard w-full"
     >
-      <h3 className="header3">한강 산책</h3>
-      <p className="text-[#474C51]">
-        한강으로 산책갑시다! 배변봉투, 물 등 챙겨오세요~
-      </p>
+      <h3 className="header3">{name}</h3>
+      <p className="text-[#474C51]">{description}</p>
       <FlexBox
         justify="between"
         align="center"
         className="gap-2 border-l-[5px] border-l-yellow border w-full rounded-r-[10px] p-4"
       >
-        <div className="header4">
-          <p>2023년 7월 28일 금요일</p>
-          <p>11:00 ~ 12:00</p>
+        <div className="caption4">
+          <p>
+            {format(new Date(startDate), '시작: yyyy-MM-dd hh:mm (eee) ', {
+              locale: ko,
+            })}
+          </p>
+          <p>
+            {format(new Date(endDate), '종료: yyyy-MM-dd hh:mm (eee)', {
+              locale: ko,
+            })}
+          </p>
         </div>
-        <button
-          type="button"
-          className="body2 border-[1px] rounded-[10px] p-2 hover:bg-grey-100 active:bg-grey-200"
+        <Button
+          variant="ghost"
+          onClickAction={isJoinSchedule ? onWithdrawSchedule : onCreateSchedule}
         >
-          참여하기
-        </button>
+          {isJoinSchedule ? '참여취소' : '참여하기'}
+        </Button>
       </FlexBox>
       <FlexBox justify="between" className="w-full">
         <FlexBox direction="column" className="gap-2">
-          <div className="w-full caption1">참여자</div>
-          <AvatarGroup userList={testArr1} />
+          {participantList.length === 0 ? (
+            <div>아직 참여한 친구가 없어요.🥹</div>
+          ) : (
+            <div className="w-full caption1">{participantList.length}명</div>
+          )}
+          <AvatarGroup userList={participantList} />
         </FlexBox>
-        <button type="button" className="self-end p-2">
-          <ShareIcon className="w-6 h-6 tablet:h-8 tablet:w-8" />
-        </button>
+        {isManager && (
+          <Button variant="ghost" onClickAction={onDeleteSchedule}>
+            삭제하기
+          </Button>
+        )}
       </FlexBox>
     </FlexBox>
   );
