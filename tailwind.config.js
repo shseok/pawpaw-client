@@ -63,7 +63,20 @@ module.exports = {
         dropdown: '0px 0px 14px 0px #07D5801A',
       },
       screens: {
+        sm: '640px',
+        // => @media (min-width: 640px) { ... }
+        md: '768px',
+        // => @media (min-width: 768px) { ... }
         tablet: '1000px',
+        // => @media (min-width: 1000px) { ... }
+        lg: '1024px',
+        // => @media (min-width: 1024px) { ... }
+        desktop: '1240px',
+        // => @media (min-width: 1280px) { ... }
+        xl: '1280px',
+        // => @media (min-width: 1280px) { ... }
+        '2xl': '1536px',
+        // => @media (min-width: 1536px) { ... }
       },
       fontSize: {
         h1PC: ['32px', { lineHeight: '40px', fontWeight: 'bold' }],
@@ -105,6 +118,9 @@ module.exports = {
         cap2PC: ['14px', { lineHeight: '22px', fontWeight: 'normal' }],
         cap2TAB: ['13px', { lineHeight: '21px', fontWeight: 'normal' }],
         cap2MOB: ['11px', { lineHeight: '19px', fontWeight: 'normal' }],
+      },
+      transitionProperty: {
+        width: 'width',
       },
     },
   },
