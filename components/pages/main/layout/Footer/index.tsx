@@ -1,10 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import FooterButton, { ButtonType } from './FooterButton';
-import useGetPathname from '@/hooks/common/useGetPathname';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/utils/common';
+import useGetPathname from '@/hooks/common/useGetPathname';
+import FooterButton, { ButtonType } from './FooterButton';
 import { buttonArrays } from '../Sidebar/SideButtonContainer';
 
 export default function Footer() {

@@ -35,7 +35,7 @@ export default function SideButtonContainer({
           key={buttonType}
         />
       ))}
-      <div className={`h-[0.5px] bg-grey-300 mx-3 my-[19.75px]`} />
+      <div className="h-[0.5px] bg-grey-300 mx-3 my-[19.75px]" />
       <SideButton
         buttonType="Search"
         activeButton={activeButton}

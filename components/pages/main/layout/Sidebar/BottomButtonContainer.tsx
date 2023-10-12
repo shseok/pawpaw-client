@@ -18,9 +18,7 @@ export default function BottomButtonContainer({
       >
         <button
           type="button"
-          className={
-            'absolute bottom-16 left-0 w-full flex flex-row items-center justify-center desktop:justify-start desktop:ml-6'
-          }
+          className="absolute bottom-16 left-0 w-full flex flex-row items-center justify-center desktop:justify-start desktop:ml-6"
         >
           <Logout />
           <span
