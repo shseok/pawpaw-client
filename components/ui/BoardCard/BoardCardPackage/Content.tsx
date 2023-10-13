@@ -21,7 +21,7 @@ export default function BoardCardContent({
   children: React.ReactNode;
   type: 'mainPC' | 'modal' | 'myPage';
   content: string;
-  imgs?: string[];
+  imgs: string[];
   onClickModal?: () => void;
 }) {
   const [imgNum, setImgNum] = useState(0);
@@ -59,7 +59,7 @@ export default function BoardCardContent({
     </FlexBox>
   );
 
-  if (imgs) {
+  if (imgs.length > 0) {
     // 이미지가 있는 경우
     return (
       // eslint-disable-next-line react/jsx-no-useless-fragment

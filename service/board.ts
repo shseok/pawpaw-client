@@ -1,5 +1,4 @@
 import { AuthError } from '@/lib/error';
-import { BoardList } from '@/types/types';
 
 interface PostBoardType {
   title: string;
@@ -26,15 +25,13 @@ export async function postBoard(postBoardData: PostBoardType) {
     },
     body: formData,
   });
-  // return response.json();
-  const data = await response.json();
-  console.log(data);
+  return response.json();
 }
 
 export default async function getBoardList({
   pageParam,
   pageSize,
-}: TempPostListApiProps): Promise<BoardList[]> {
+}: TempPostListApiProps) {
   try {
     const url = `/endpoint/api/board/list?_page=${pageParam}&_limit=${pageSize}`;
     const response = await fetch(url);

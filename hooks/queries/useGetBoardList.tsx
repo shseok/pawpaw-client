@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import getBoardList from '@/service/board';
+import { BoardList } from '@/types/types';
 
 interface InfiniteScrollProps {
   infiniteQueryKey: string[];
@@ -16,15 +17,14 @@ export default function useGetBoardList({
   infiniteQueryKey,
   pageParameter = 1,
   pageSize = 5,
-  inViewThreshold = 1,
 }: InfiniteScrollProps) {
   const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: infiniteQueryKey,
-      queryFn: ({ pageParam = pageParameter }) =>
+      queryFn: ({ pageParam = pageParameter }): Promise<BoardList> =>
         getBoardList({ pageParam, pageSize }),
-      getNextPageParam: (lastPage, allPages) =>
-        allPages.length < 20 ? allPages.length + 1 : undefined,
+      getNextPageParam: (boardlist) =>
+        boardlist.last ? undefined : boardlist.number + 1,
       select: (d) => ({
         pages: d.pages.flatMap((page) => page),
         pageParams: d.pageParams,
@@ -33,7 +33,7 @@ export default function useGetBoardList({
 
   // 무한 스크롤 화면 가장 아래 부분 탐지하는 observer
   function Observer({ children }: { children: React.ReactNode }) {
-    const { ref, inView } = useInView({ threshold: inViewThreshold });
+    const { ref, inView } = useInView({ threshold: 1 });
 
     useEffect(() => {
       if (inView && hasNextPage) {
@@ -50,5 +50,6 @@ export default function useGetBoardList({
   return {
     Observer,
     data,
+    isLoading,
   };
 }
