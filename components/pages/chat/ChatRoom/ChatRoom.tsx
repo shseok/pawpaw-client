@@ -13,6 +13,7 @@ import MessageInput from './MessageInput';
 
 export default function ChatRoom({ roomId }: { roomId: string }) {
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
+
   const [message, onChangeValue, resetValue] = useInput('');
   const stompClient = useRef<CompatClient>();
   const sendMessage = () => {
@@ -24,8 +25,8 @@ export default function ChatRoom({ roomId }: { roomId: string }) {
           JSON.stringify({ data: message }),
         );
       }
-      resetValue();
     }
+    resetValue();
   };
   const handleOnKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
@@ -45,11 +46,12 @@ export default function ChatRoom({ roomId }: { roomId: string }) {
       console.log('debug', debug);
     };
     stompClient.current.connect({}, (frame: Frame) => {
-      // console.log(frame);
+      console.log(frame);
       stompClient.current?.subscribe(
         `/sub/chatroom/${roomId}/message`,
         (chat) => {
           const newMessage = JSON.parse(chat.body);
+          console.log(newMessage);
           setCurrentMessages((prevMessages) => [...prevMessages, newMessage]);
         },
       );
@@ -58,6 +60,7 @@ export default function ChatRoom({ roomId }: { roomId: string }) {
       stompClient.current?.disconnect();
     };
   }, []);
+
   return (
     <div className="flex flex-col w-full h-screen bg-[#F5FFF6] border-r-[1px]">
       <ChatRoomHeader title="awdawd" />

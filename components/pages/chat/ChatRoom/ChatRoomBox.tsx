@@ -2,6 +2,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import { usePathname } from 'next/navigation';
 import useGetChatHistory from '@/hooks/queries/useGetChatHistory';
 import { MessageType } from '@/types/types';
+import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 import Message from './Message';
 
 export default function ChatRoomBox({
@@ -11,7 +12,7 @@ export default function ChatRoomBox({
 }) {
   const roomId = usePathname().split('/')[2];
   const { data: chatHistory, Observer } = useGetChatHistory(roomId);
-  // console.log(chatHistory);
+  const { data: userInfo } = useGetUserInfo();
   return (
     <>
       <Observer>
@@ -20,13 +21,15 @@ export default function ChatRoomBox({
       <FlexBox
         direction="column"
         justify="start"
-        className="flex-1 w-full px-4 pt-10 overflow-auto scrollbar-hide tablet:px-10"
+        className="flex-1 w-full px-4 pt-10 overflow-y-scroll tablet:px-10"
       >
         {chatHistory?.pages.map((history) =>
-          history.content.map((chat) => <Message key={chat.id} {...chat} />),
+          history.content.map((chat) => (
+            <Message key={chat.id} {...chat} userId={userInfo?.userId} />
+          )),
         )}
         {currentMessages.map((message) => (
-          <Message key={message.id} {...message} />
+          <Message key={message.id} {...message} userId={userInfo?.userId} />
         ))}
       </FlexBox>
     </>

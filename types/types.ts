@@ -122,6 +122,7 @@ export interface TrendingChatList {
 }
 
 export interface UserInfo {
+  userId: string;
   email: string;
   role: string;
   nickname: string;
@@ -154,6 +155,7 @@ export interface ScheduleList extends Schedule {
 }
 
 export interface MessageType {
+  userId: string;
   id: number;
   chatroomId: number;
   chatType: 'MESSAGE' | 'IMAGE' | 'JOIN' | 'LEAVE';

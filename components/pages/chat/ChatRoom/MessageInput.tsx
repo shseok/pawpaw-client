@@ -1,5 +1,3 @@
-'use client';
-
 import { useRef, useEffect, ChangeEvent } from 'react';
 import PlusCircleIcon from '@/public/PlusCircle.svg';
 import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
@@ -32,7 +30,7 @@ export default function MessageInput({
       </button>
       <textarea
         ref={textareaRef}
-        className="w-full p-2 pl-20 pr-14 shadow-chatCard rounded-[10px] outline-none scrollbar-hide resize-none max-h-40"
+        className="w-full p-2 pl-20 pr-14 shadow-chatCard rounded-[10px] focus:ring-0 border-none scrollbar-hide resize-none max-h-40"
         onKeyUp={handleOnKeyPress}
         onChange={onChangeValue}
         value={message}
