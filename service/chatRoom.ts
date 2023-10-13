@@ -17,7 +17,12 @@ interface ChatRoomType {
     locationLimit: boolean;
   };
 }
-
+// 채팅방 정보 조회 API
+export async function getChatRoomInfo(roomId: string) {
+  const url = `https://pawpawdev.duckdns.org/api/chatroom/${roomId}`;
+  const response = await fetch(url);
+  return response.json();
+}
 // 채팅방 생성 API
 export async function postChatRoom(chatRoomData: ChatRoomType) {
   try {
@@ -204,8 +209,10 @@ export async function getChatHistory(
   roomId: string,
   targetId: number,
 ): Promise<ChatHistory> {
-  const url = `/endpoint/api/chatroom/${roomId}/message?targetId=${targetId}&size=20`;
+  let url = `/endpoint/api/chatroom/${roomId}/message?size=20`;
+  if (targetId !== 0) {
+    url += `&targetId=${targetId}`;
+  }
   const response = await fetch(url);
-  console.log(response);
   return response.json();
 }

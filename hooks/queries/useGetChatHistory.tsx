@@ -10,7 +10,7 @@ export default function useGetChatHistory(roomId: string) {
       queryFn: ({ pageParam = 0 }) => getChatHistory(roomId, pageParam),
       refetchOnWindowFocus: false,
       getNextPageParam: (history) => {
-        console.log(history);
+        // console.log(history);
       },
     });
   function Observer({ children }: { children: React.ReactNode }) {

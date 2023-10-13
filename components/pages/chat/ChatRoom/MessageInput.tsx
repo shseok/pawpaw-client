@@ -26,27 +26,25 @@ export default function MessageInput({
   }, [message]);
   const messageEmpty = message.trim().length === 0;
   return (
-    <form
-      className="relative flex items-center px-10 py-6 "
-      onSubmit={sendMessage}
-    >
+    <div className="relative flex items-center px-10 py-6 ">
       <button type="button" className="absolute left-14">
         <PlusCircleIcon className="w-8 h-8" />
       </button>
       <textarea
         ref={textareaRef}
         className="w-full p-2 pl-20 pr-14 shadow-chatCard rounded-[10px] outline-none scrollbar-hide resize-none max-h-40"
-        onKeyDown={handleOnKeyPress}
+        onKeyUp={handleOnKeyPress}
         onChange={onChangeValue}
         value={message}
       />
       <button
-        type="submit"
+        type="button"
+        onClick={sendMessage}
         className="absolute right-14"
         disabled={messageEmpty}
       >
         <PaperPlaneIcon className="w-8 h-8" />
       </button>
-    </form>
+    </div>
   );
 }

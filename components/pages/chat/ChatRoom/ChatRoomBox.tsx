@@ -1,21 +1,34 @@
 import FlexBox from '@/components/ui/FlexBox';
 import { usePathname } from 'next/navigation';
 import useGetChatHistory from '@/hooks/queries/useGetChatHistory';
+import { MessageType } from '@/types/types';
 import Message from './Message';
 
-export default function ChatRoomBox() {
+export default function ChatRoomBox({
+  currentMessages,
+}: {
+  currentMessages: MessageType[];
+}) {
   const roomId = usePathname().split('/')[2];
-  const { data: chatHistory } = useGetChatHistory(roomId);
-
+  const { data: chatHistory, Observer } = useGetChatHistory(roomId);
+  // console.log(chatHistory);
   return (
-    <FlexBox
-      direction="column"
-      justify="start"
-      className="flex-1 w-full px-4 pt-10 overflow-auto scrollbar-hide tablet:px-10"
-    >
-      {chatHistory?.pages.map((history) =>
-        history.content.map((chat) => <Message key={chat.id} {...chat} />),
-      )}
-    </FlexBox>
+    <>
+      <Observer>
+        <div>이전 채팅 불러오는중</div>
+      </Observer>
+      <FlexBox
+        direction="column"
+        justify="start"
+        className="flex-1 w-full px-4 pt-10 overflow-auto scrollbar-hide tablet:px-10"
+      >
+        {chatHistory?.pages.map((history) =>
+          history.content.map((chat) => <Message key={chat.id} {...chat} />),
+        )}
+        {currentMessages.map((message) => (
+          <Message key={message.id} {...message} />
+        ))}
+      </FlexBox>
+    </>
   );
 }

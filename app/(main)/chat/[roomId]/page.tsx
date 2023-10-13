@@ -38,7 +38,7 @@ export default function ChatRoomPage({
   const { roomId } = params;
   return (
     <main className="flex flex-1 w-screen">
-      <ChatRoom />
+      <ChatRoom roomId={roomId} />
       <aside className="flex-col hidden w-3/6 h-screen min-w-fit tablet:flex">
         <ChatUserList roomId={roomId} />
         <ScheduleList roomId={roomId} />
