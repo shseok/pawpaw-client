@@ -38,10 +38,16 @@ export default function MessageInput({
       <button
         type="button"
         onClick={sendMessage}
-        className="absolute right-14"
+        className={`absolute right-14 ${
+          messageEmpty ? 'cursor-not-allowed' : ''
+        }`}
         disabled={messageEmpty}
       >
-        <PaperPlaneIcon className="w-8 h-8" />
+        <PaperPlaneIcon
+          className={`w-8 h-8 duration-200 ${
+            messageEmpty ? 'fill-gray-300' : 'fill-primary-200'
+          }`}
+        />
       </button>
     </div>
   );
