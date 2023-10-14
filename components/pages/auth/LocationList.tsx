@@ -64,9 +64,9 @@ export default function LocationList({ value }: Props) {
     );
   };
   return (
-    <div className="w-full">
+    <div className="w-full min-h-[212px]">
       <h4 className="header4 mb-[26px]">{`'${value}' 검색 결과`}</h4>
-      {isLoading ? '로딩 중...' : renderLocationList()}
+      {isLoading ? <h4>정보를 불러오는 중...</h4> : renderLocationList()}
     </div>
   );
 }

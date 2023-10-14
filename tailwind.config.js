@@ -64,6 +64,8 @@ module.exports = {
         dropdown: '0px 0px 14px 0px #07D5801A',
       },
       screens: {
+        '2xs': '430px',
+        xs: '584px',
         sm: '640px',
         // => @media (min-width: 640px) { ... }
         md: '768px',
