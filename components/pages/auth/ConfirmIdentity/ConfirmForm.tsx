@@ -106,7 +106,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
         </label>
         <input
           id="name"
-          className="h-[58px] rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
+          className="h-[58px] text-xs 2xs:text-sm sm:body1 rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
           type="text"
           defaultValue={username}
           placeholder="이름"
@@ -119,7 +119,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
           생년월일
         </label>
         <input
-          className="h-[58px] rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
+          className="h-[58px] text-xs 2xs:text-sm sm:body1 rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
           id="birthDay"
           type="text"
           defaultValue={birthDay}
@@ -132,9 +132,9 @@ export default function ConfirmForm({ setIsActive }: Props) {
         <label htmlFor="phoneNumber" className="body1 text-grey-800">
           휴대폰 번호
         </label>
-        <div className="h-[58px] flex flex-row gap-[10px]">
+        <div className="w-full h-[58px] flex flex-row gap-[10px]">
           <input
-            className="grow rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
+            className="w-full grow text-xs 2xs:text-sm sm:body1 rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
             id="phoneNumber"
             type="text"
             defaultValue={phoneNumber}
@@ -142,7 +142,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
           <Button
-            className="flex-none body2 h-full w-[100px]"
+            className="flex-none body2 h-full w-[75px] 2xs:w-[100px]"
             variant="primary"
             onClickAction={handleVerificationRequest}
             disabled={!username || !birthDay || !phoneNumber || isLoading}
@@ -155,7 +155,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
         <div className="relative w-full">
           <input
             ref={inputRef}
-            className="w-full grow rounded-[10px] placeholder-grey-400 py-4 pl-5 pr-[50px] border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
+            className="w-full grow text-xs 2xs:text-sm sm:body1 rounded-[10px] placeholder-grey-400 py-4 pl-5 pr-[50px] border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
             type="text"
             placeholder="인증번호"
             onChange={(e) => setCode(e.target.value)}
@@ -168,7 +168,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
           )}
         </div>
         <Button
-          className="flex-none body2 h-full w-[100px]"
+          className="flex-none body2 h-full w-[75px] 2xs:w-[100px]"
           variant={!isDuplicatedRequest ? 'primary' : 'ghost'}
           onClickAction={handleVerificationCheck}
           disabled={!isLoading}

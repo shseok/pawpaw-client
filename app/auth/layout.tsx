@@ -1,4 +1,4 @@
-import Logo from '@/public/Auth/desktop-logo.svg';
+import Logo from '@/public/logo.svg';
 import Link from 'next/link';
 
 export default function AuthLayout({
@@ -7,13 +7,13 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full h-full bg-primary-50 px-20 py-12 overflow-y-scroll">
-      <header className="flex justify-start">
+    <div className="w-full h-full bg-primary-50 px-8 xs:px-20 py-12 overflow-y-scroll">
+      <header className="flex justify-center xs:justify-start">
         <Link href="/">
-          <Logo className="w-36 h-10" />
+          <Logo className="w-36 h-10 hidden xs:block" />
         </Link>
       </header>
-      <div className="max-w-[530px] h-auto bg-white px-[60px] py-[60px] flex flex-col items-center justify-between mx-auto mt-8 rounded-[10px] shadow-md">
+      <div className="max-w-[530px] h-auto bg-white px-5 py-10 xs:px-[60px] xs:py-[60px] flex flex-col items-center justify-between mx-auto xs:mt-8 rounded-[10px] shadow-md">
         {children}
       </div>
       <div id="modal-root" />

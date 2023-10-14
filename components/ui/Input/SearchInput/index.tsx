@@ -27,7 +27,7 @@ export default function SearchInput({
         type="text"
         value={value}
         onChange={onChangeValue}
-        className={`border border-grey-600 block rounded-[10px] px-5 py-4 pr-20 w-full ${className}`}
+        className={`text-xs 2xs:text-sm sm:body1 border border-grey-600 block rounded-[10px] pl-5 pr-[60px] py-4 w-full ${className}`}
         placeholder={placeholder}
         onKeyUp={(event) => {
           if (event.key === 'Enter') {
