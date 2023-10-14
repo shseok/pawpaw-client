@@ -8,6 +8,7 @@ interface Props {
   text: string;
   children?: React.ReactNode;
   isDisabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
   handleClick?: () => void;
 }
 
@@ -16,6 +17,7 @@ export default function BottomButton({
   isFullWidth = false,
   text,
   to,
+  type = 'button',
   children,
   handleClick,
   isDisabled = false,
@@ -29,6 +31,7 @@ export default function BottomButton({
         to={to}
         onClickAction={handleClick}
         disabled={isDisabled}
+        type={type}
       >
         {text}
       </Button>
