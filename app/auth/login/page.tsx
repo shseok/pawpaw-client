@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <>
-      <div className="flex flex-col items-center max-w-[80%] mb-[68px]">
+      <div className="flex flex-col items-center w-full 2xs:px-[35px] mb-[68px]">
         <h1 className="header1">로그인</h1>
         <span className="text-center mt-4 mb-[50px] text-grey-600 body1 break-keep">
           SNS로 간편하게 로그인하고 더 많은 서비스를 즐겨보세요!
@@ -37,11 +37,11 @@ export default function LoginPage() {
         isFullWidth
       >
         <div className="flex justify-between gap-[24px]">
-          <Link href="/" className="text-grey-400 body1">
+          <Link href="/" className="text-grey-400 text-xs 2xs:body1">
             아이디(이메일)찾기
           </Link>
           <div className="w-[1px] h-[24px] bg-grey-200" />
-          <Link href="/" className="text-grey-400 body1">
+          <Link href="/" className="text-grey-400 text-xs 2xs:body1">
             비밀번호 찾기
           </Link>
         </div>
