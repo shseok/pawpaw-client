@@ -15,7 +15,7 @@ export default function Message({ ...message }: MessageType) {
     senderImageUrl,
   } = message;
 
-  const isWriter = senderId === userId;
+  const isWriter = userId === senderId;
   const messageSelfClass = isWriter ? 'self-end' : 'self-start';
   const messageFlexClass = isWriter ? 'flex-row-reverse' : 'flex-row-rerverse';
   const messageStyleClass = isWriter
@@ -41,10 +41,10 @@ export default function Message({ ...message }: MessageType) {
       </div>
     );
   }
-  if (chatType === 'JOIN') {
-    return <div className="text-grey-500 body4">{data}</div>;
+  if (chatType === 'JOIN' || chatType === 'LEAVE') {
+    return <div className="self-center mb-5 text-grey-500 body4">{data}</div>;
   }
-  if (chatType === 'LEAVE') {
-    return <div>채팅방 나감 메세지</div>;
+  if (chatType === 'IMAGE') {
+    return <div>d</div>;
   }
 }

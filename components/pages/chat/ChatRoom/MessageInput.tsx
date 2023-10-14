@@ -24,7 +24,7 @@ export default function MessageInput({
   }, [message]);
   const messageEmpty = message.trim().length === 0;
   return (
-    <div className="relative flex items-center px-10 py-6 ">
+    <div className="relative flex items-center w-full px-8 mb-6">
       <button type="button" className="absolute left-14">
         <PlusCircleIcon className="w-8 h-8" />
       </button>

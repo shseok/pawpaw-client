@@ -1,9 +1,7 @@
 'use client';
 
-/* eslint-disable import/no-extraneous-dependencies */
 import useInput from '@/hooks/common/useInput';
 import { Frame, Stomp, CompatClient } from '@stomp/stompjs';
-// import * as StompJs from '@stomp/stompjs';
 import { useEffect, useRef, useState } from 'react';
 import SockJs from 'sockjs-client';
 import { MessageType } from '@/types/types';
@@ -13,7 +11,6 @@ import MessageInput from './MessageInput';
 
 export default function ChatRoom({ roomId }: { roomId: string }) {
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
-
   const [message, onChangeValue, resetValue] = useInput('');
   const stompClient = useRef<CompatClient>();
   const sendMessage = () => {

@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import getUserInfo from '@/service/user';
-import { UserInfo } from '@/types/types';
 
 export default function useGetUserInfo() {
-  const { data } = useQuery<UserInfo>({
+  const { data } = useQuery({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
     refetchOnWindowFocus: false,
