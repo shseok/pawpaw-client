@@ -21,9 +21,9 @@ export default function EmailLogin({ title }: Props) {
       await loginWithEmailAndPassword({ email, password });
       console.log('Success logging in');
       router.push('/');
-    } catch (error) {
+    } catch (e) {
       setError('"아이디 또는 비밀번호가 일치하지 않습니다. 다시 입력해주세요"');
-      console.error('Error logging in:', error);
+      console.error('Error logging in:', e);
     }
   };
 
