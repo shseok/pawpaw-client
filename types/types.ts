@@ -169,3 +169,9 @@ export interface MessageType {
 export interface ChatHistory {
   content: MessageType[];
 }
+export interface ChatRoomInfo {
+  name: string;
+  description: string;
+  participantNumber: number;
+  coverUrl: string;
+}

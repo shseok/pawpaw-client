@@ -9,7 +9,13 @@ import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
 import MessageInput from './MessageInput';
 
-export default function ChatRoom({ roomId }: { roomId: string }) {
+export default function ChatRoom({
+  roomId,
+  title,
+}: {
+  roomId: string;
+  title: string;
+}) {
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [message, onChangeValue, resetValue] = useInput('');
   const stompClient = useRef<CompatClient>();
@@ -59,7 +65,7 @@ export default function ChatRoom({ roomId }: { roomId: string }) {
 
   return (
     <div className="flex flex-col w-full h-screen bg-[#F5FFF6] border-r-[1px]">
-      <ChatRoomHeader title="awdawd" />
+      <ChatRoomHeader title={title} />
       <ChatRoomBox currentMessages={currentMessages} />
       <MessageInput
         onChangeValue={onChangeValue}

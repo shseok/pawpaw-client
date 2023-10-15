@@ -73,12 +73,16 @@ export async function leaveChatRoom(roomId: string) {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/participants`;
     const response = await fetch(url, { method: 'DELETE' });
+    if (response.status === 400) {
+      Toast.error('방장은 채팅방 삭제만 가능해요.');
+    }
     if (!response.ok) {
       throw new Error(`서버오류:${response.status}`);
     }
     window.location.replace('/community');
   } catch (error) {
     console.error(error);
+    // throw error;
   }
 }
 

@@ -1,8 +1,20 @@
 import ChatRoom from '@/components/pages/chat/ChatRoom/ChatRoom';
 import ChatUserList from '@/components/pages/chat/ChatRoom/ChatUserList';
 import ScheduleList from '@/components/pages/chat/Schedule/ScheduleList';
+import { ChatRoomInfo } from '@/types/types';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
+
+// 쿠키에 접근해야해서 해당파일에서 fetch 함수를 작성하였습니다.
+async function getChatRoomInfo(roomId: string): Promise<ChatRoomInfo> {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}`;
+  const response = await fetch(url, {
+    headers: {
+      Cookie: `ACCESS=${cookies().get('ACCESS')?.value}`,
+    },
+  });
+  return response.json();
+}
 
 export async function generateMetadata({
   params,
@@ -10,14 +22,8 @@ export async function generateMetadata({
   params: { roomId: string };
 }): Promise<Metadata> {
   const { roomId } = params;
-  const url = `https://pawpawdev.duckdns.org/api/chatroom/${roomId}`;
-  const response = await fetch(url, {
-    headers: {
-      Cookie: `ACCESS=${cookies().get('ACCESS')?.value}`,
-    },
-  });
-  const { name, description, participantNumber, coverUrl } =
-    await response.json();
+  const { coverUrl, description, name, participantNumber } =
+    await getChatRoomInfo(roomId);
   return {
     title: `${name} | Chat`,
     description,
@@ -30,15 +36,17 @@ export async function generateMetadata({
   };
 }
 
-export default function ChatRoomPage({
+export default async function ChatRoomPage({
   params,
 }: {
   params: { roomId: string };
 }) {
   const { roomId } = params;
+  const { name } = await getChatRoomInfo(roomId);
+
   return (
     <main className="flex flex-1 w-screen">
-      <ChatRoom roomId={roomId} />
+      <ChatRoom roomId={roomId} title={name} />
       <aside className="flex-col hidden w-3/6 h-screen min-w-fit tablet:flex">
         <ChatUserList roomId={roomId} />
         <ScheduleList roomId={roomId} />
