@@ -6,6 +6,8 @@ import ChatUserListLoading from '@/components/ui/Loading/ChatUserListLoading';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 import ChatUser from './ChatUser';
 import UserAddButton from './UserAddButton';
+import DelegateOwnerButton from './DelegateOwnerButton';
+import DeleteChatRoomButton from './DeleteChatRoomButton';
 
 export default function ChatUserList({ roomId }: { roomId: string }) {
   const { data: userList, isLoading } = useGetChatRoomUserList(roomId);
@@ -28,7 +30,13 @@ export default function ChatUserList({ roomId }: { roomId: string }) {
             <p className="text-grey-500">/60</p>
           </FlexBox>
         </FlexBox>
-        {isManager && <UserAddButton />}
+        {isManager && (
+          <div className="flex gap-2">
+            <DeleteChatRoomButton roomId={roomId} />
+            <DelegateOwnerButton />
+            <UserAddButton />
+          </div>
+        )}
       </FlexBox>
       <ul className="w-full h-full overflow-auto scrollbar-hide">
         {isLoading ? (

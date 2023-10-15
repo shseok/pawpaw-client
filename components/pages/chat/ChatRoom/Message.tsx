@@ -52,16 +52,14 @@ export default function Message({ ...message }: MessageType) {
         <div className="flex flex-col gap-1">
           {!isWriter && <p className="body3 text-grey-600">{sender}</p>}
           <div className={`flex gap-1 ${messageFlexClass}`}>
-            <p className={`rounded-2xl ${messageStyleClass}`}>
-              <Image
-                alt={sender}
-                src={data}
-                width={200}
-                height={200}
-                priority
-                className="rounded-md"
-              />
-            </p>
+            <Image
+              alt={sender}
+              src={data}
+              width={200}
+              height={200}
+              priority
+              className="rounded-md"
+            />
             <span className="self-end w-fit caption2 text-grey-500">
               {format(new Date(createdDate), 'aa h:mm', { locale: ko })}
             </span>

@@ -131,6 +131,7 @@ export interface UserInfo {
   imageUrl: string;
 }
 export interface ChatRoomUserList {
+  userId: string;
   briefIntroduction: string;
   nickname: string;
   imageUrl: string;

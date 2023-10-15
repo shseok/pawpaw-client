@@ -228,11 +228,40 @@ export async function uploadChatImage(roomId: string, image: File) {
       body: formData,
     });
     if (response.status === 413) {
-      throw new ImageSizeError('이미지 크기가 한도를 초과했어요.😢');
+      throw new ImageSizeError('2MB 이하의 이미지만 업로드 가능해요.🤯');
     }
   } catch (error) {
     if (error instanceof ImageSizeError) {
       Toast.error(error.message);
     }
   }
+}
+
+// 채팅룸 방장 권한위임 API
+export async function delegateRoomOwner(roomId: string, userId: string) {
+  try {
+    const url = `/endpoint/api/chatroom/${roomId}/manager`;
+    const response = await fetch(url, {
+      method: 'PUT',
+      body: JSON.stringify({
+        nextManagerId: userId,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error('');
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// 채팅룸 삭제 API
+export async function deleteChatRoom(roomId: string) {
+  const url = `/endpoint/api/chatroom/${roomId}`;
+  const response = await fetch(url, { method: 'DELETE' });
+  console.log(response);
 }

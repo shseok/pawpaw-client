@@ -37,6 +37,7 @@ export default function ChatUserListMobile({ closeModal }: PropsType) {
         <ul className="grid w-full grid-cols-1 gap-2 h-fit sm:grid-cols-2 ">
           {userList?.map((user) => (
             <ChatUser
+              key={user.userId}
               shadow
               role={user.role}
               image={user.imageUrl}

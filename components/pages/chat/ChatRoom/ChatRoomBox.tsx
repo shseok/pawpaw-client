@@ -2,7 +2,6 @@ import { usePathname } from 'next/navigation';
 import useGetChatHistory from '@/hooks/queries/useGetChatHistory';
 import { MessageType } from '@/types/types';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
-// import CaretDownIcon from '@/public/CaretDown.svg';
 import { useRef } from 'react';
 import useChatScroll from '@/hooks/common/useChatScroll';
 import Message from './Message';
@@ -30,7 +29,6 @@ export default function ChatRoomBox({
     beforeChatLoadMore: fetchNextPage,
     shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
   });
-  console.log('chatHistory', chatHistory);
   return (
     <div className="flex flex-col flex-1 p-4 overflow-y-scroll " ref={chatRef}>
       {chatHistory?.pages.map((history) =>

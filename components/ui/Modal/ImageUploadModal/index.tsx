@@ -3,8 +3,9 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { uploadChatImage } from '@/service/chatRoom';
 import { useState } from 'react';
-import Toast from '@/utils/notification';
 import LoadingIcon from '@/public/loading.svg';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import prettyBytes from 'pretty-bytes';
 import Modal from '..';
 import Button from '../../Button';
 
@@ -18,8 +19,8 @@ export default function ImageUploadModal({
   imageFile,
 }: ImageUploadModalProps) {
   const roomId = usePathname().split('/')[2];
-  const imageSize = imageFile && (imageFile.size / 1000).toFixed(0);
   const [isLoading, setIsLoading] = useState(false);
+
   const handleUploadImage = async () => {
     try {
       if (imageFile) {
@@ -28,7 +29,6 @@ export default function ImageUploadModal({
       }
     } catch (error) {
       console.error(error);
-      Toast.error('이미지 전송에 실패헀어요.😢');
     } finally {
       setIsLoading(false);
       onClose();
@@ -51,7 +51,12 @@ export default function ImageUploadModal({
 
           <div className="flex flex-col justify-between">
             <span>{imageFile?.name}</span>
-            <span className="text-gray-400 caption2">{imageSize}KB</span>
+            <span className="text-gray-400 caption2">
+              {imageFile &&
+                prettyBytes(imageFile.size, {
+                  locale: 'ko',
+                })}
+            </span>
           </div>
         </div>
         <div className="flex w-full gap-2">

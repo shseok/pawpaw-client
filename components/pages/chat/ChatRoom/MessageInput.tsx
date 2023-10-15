@@ -27,9 +27,7 @@ export default function MessageInput({
     }
   }, [message]);
   const messageEmpty = message.trim().length === 0;
-  const onImageSelectAndOpenModal = async (
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
+  const onImageSelectAndOpenModal = (event: ChangeEvent<HTMLInputElement>) => {
     const image = event;
     try {
       handleImageUpload(image);
