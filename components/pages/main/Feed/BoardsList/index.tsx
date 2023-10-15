@@ -19,6 +19,7 @@ export default function BoardsList({
     Observer,
     data: boardList,
     isLoading,
+    hasNextPage,
   } = useGetBoardList({
     infiniteQueryKey: ['boards'],
   });
@@ -42,7 +43,6 @@ export default function BoardsList({
                 <FeedBoardCard
                   userId={board.writer}
                   content={board.content}
-                  // TODO: 이미지 연결
                   imgs={board.fileNames}
                   setShowModal={setShowModal}
                   comments={board.replyListDto}
@@ -55,6 +55,7 @@ export default function BoardsList({
           ),
         )
       )}
+      {hasNextPage ? null : <div>🐾 더이상 게시물이 없어요 🐾</div>}
       <Observer>
         <div>로딩스피너...</div>
       </Observer>

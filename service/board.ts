@@ -29,7 +29,7 @@ export default async function getBoardList({
   pageSize,
 }: TempPostListApiProps) {
   try {
-    const url = `/endpoint/api/board/list?_page=${pageParam}&_limit=${pageSize}`;
+    const url = `/endpoint/api/board/list?pageNumber=${pageParam}&pageSize=${pageSize}`;
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`서버오류:${response.status}`);

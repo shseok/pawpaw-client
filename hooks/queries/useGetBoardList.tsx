@@ -51,5 +51,6 @@ export default function useGetBoardList({
     Observer,
     data,
     isLoading,
+    hasNextPage,
   };
 }
