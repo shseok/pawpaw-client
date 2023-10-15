@@ -9,7 +9,7 @@ import FlexBox from '../../../../ui/FlexBox';
 
 export default function Upload() {
   const [postText, setPostText] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   const maxCharacters = 100;
   const isOverMaxChar = postText.length > maxCharacters;
@@ -21,17 +21,15 @@ export default function Upload() {
   // 데이터 전송을 위한 함수
   const onUploadBoard = async () => {
     if (!postText || isOverMaxChar) {
-      return; // Don't proceed if postText is empty or over the character limit.
+      return;
     }
-
-    setIsLoading(true);
+    setIsUploading(true);
     try {
       const response = await postBoard({
         title: 'title',
         content: postText,
       });
-      console.log(response);
-      if (response.ok) {
+      if (response.content) {
         Toast.success('게시물이 성공적으로 업로드되었습니다.');
         setPostText('');
       } else {
@@ -40,7 +38,7 @@ export default function Upload() {
     } catch (error) {
       Toast.error('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
     } finally {
-      setIsLoading(false);
+      setIsUploading(false);
     }
   };
 
@@ -78,14 +76,18 @@ export default function Upload() {
         >
           파일
         </Button>
-        <Button
-          size="lg"
-          disabled={isOverMaxChar}
-          className="w-40"
-          onClickAction={() => onUploadBoard()}
-        >
-          업로드
-        </Button>
+        {isUploading ? (
+          <div>업로드 중</div>
+        ) : (
+          <Button
+            size="lg"
+            disabled={isOverMaxChar}
+            className="w-40"
+            onClickAction={() => onUploadBoard()}
+          >
+            업로드
+          </Button>
+        )}
         <div className="mt-4" id="renderedText" />
       </FlexBox>
     </form>

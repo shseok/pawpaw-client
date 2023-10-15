@@ -11,19 +11,15 @@ interface TempPostListApiProps {
 }
 
 export async function postBoard(postBoardData: PostBoardType) {
-  const url = `/endpoint/api/board/register`;
-  const formData = new FormData();
-  const { title, content } = postBoardData;
-  formData.append('title', title);
-  formData.append('content', content);
+  const url = `endpoint/api/board/register`;
 
   const response = await fetch(url, {
     method: 'POST',
     credentials: 'include',
     headers: {
-      'Content-Type': 'multipart/form-data',
+      'Content-Type': 'application/json',
     },
-    body: formData,
+    body: JSON.stringify(postBoardData),
   });
   return response.json();
 }
