@@ -30,12 +30,7 @@ export default function ChatRoomBox({
     beforeChatLoadMore: fetchNextPage,
     shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
   });
-  // const moveToBottom = () => {
-  //   if (bottomRef.current) {
-  //     bottomRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // };
-
+  console.log('chatHistory', chatHistory);
   return (
     <div className="flex flex-col flex-1 p-4 overflow-y-scroll " ref={chatRef}>
       {chatHistory?.pages.map((history) =>
@@ -47,13 +42,6 @@ export default function ChatRoomBox({
         <Message key={message.id} {...message} userId={userInfo!.userId} />
       ))}
       <div ref={bottomRef} />
-      {/* <button
-        type="button"
-        className="fixed bottom-0 right-0 z-50 p-2 bg-white rounded-full shadow-lg"
-        onClick={moveToBottom}
-      >
-        <CaretDownIcon className="w-10 h-10" />
-      </button> */}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import {
   Schedule,
   ScheduleList,
 } from '@/types/types';
-// import Toast from '@/utils/notification';
+import Toast from '@/utils/notification';
 import { AuthError, ImageSizeError } from '@/lib/error';
 
 interface ChatRoomType {
@@ -40,13 +40,13 @@ export async function postChatRoom(chatRoomData: ChatRoomType) {
       body: formData,
     });
     if (response.status === 413) {
-      throw new ImageSizeError('이미지 크기가 업로드 제한을 초과했어요.😢');
+      throw new ImageSizeError('이미지 크기가 한도를 초과했어요.😢');
     }
     return await response.json();
   } catch (error) {
     console.error(error);
     if (error instanceof ImageSizeError) {
-      // Toast.error(error.message);
+      Toast.error(error.message);
     }
     throw error;
   }
@@ -215,4 +215,24 @@ export async function getChatHistory(
   }
   const response = await fetch(url);
   return response.json();
+}
+
+// 채팅룸 이미지 전송 API
+export async function uploadChatImage(roomId: string, image: File) {
+  try {
+    const formData = new FormData();
+    formData.append('multipartFile', image);
+    const url = `/endpoint/api/chatroom/${roomId}/message/image`;
+    const response = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    });
+    if (response.status === 413) {
+      throw new ImageSizeError('이미지 크기가 한도를 초과했어요.😢');
+    }
+  } catch (error) {
+    if (error instanceof ImageSizeError) {
+      Toast.error(error.message);
+    }
+  }
 }

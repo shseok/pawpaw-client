@@ -46,9 +46,8 @@ export default function ChatRoom({ roomId }: { roomId: string }) {
       console.log(frame);
       stompClient.current?.subscribe(
         `/sub/chatroom/${roomId}/message`,
-        (chat) => {
-          const newMessage = JSON.parse(chat.body);
-          console.log(newMessage);
+        ({ body }) => {
+          const newMessage = JSON.parse(body);
           setCurrentMessages((prevMessages) => [...prevMessages, newMessage]);
         },
       );
