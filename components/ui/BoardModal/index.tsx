@@ -33,13 +33,10 @@ export default function BoardModal({
         {board ? (
           <ModalBoardCard
             userId={board.writer}
-            imgs={[
-              // TODO: 이미지 연결
-              '/Feed/desktop/tempPostPic/tempPostPic1.svg',
-              '/Feed/desktop/tempPostPic/tempPostPic3.svg',
-            ]}
+            imgs={board.fileNames}
             content={board.title}
             comments={comments}
+            commentsCount={board.replyCount}
           />
         ) : (
           <div>내용이 없습니다.</div>

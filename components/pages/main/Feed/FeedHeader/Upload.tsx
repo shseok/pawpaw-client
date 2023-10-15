@@ -77,7 +77,7 @@ export default function Upload() {
           파일
         </Button>
         {isUploading ? (
-          <div>업로드 중</div>
+          <div>업로드 중입니다</div>
         ) : (
           <Button
             size="lg"

@@ -3,24 +3,24 @@ import { BoardCardModal } from '@/components/ui/BoardCard/BoardCardPackage/Board
 
 interface ModalBoardCardProps {
   userId: string;
-  imgs?: string[];
+  imgs: string[];
   content: string;
   comments: Comment[] | undefined;
+  commentsCount: number;
 }
 export default function ModalBoardCard({
   userId,
   imgs,
   content,
   comments,
+  commentsCount,
 }: ModalBoardCardProps) {
-  const filteredCommentsCount = comments ? comments.length : 0;
-
   return (
     <BoardCardModal imgs={imgs}>
       <BoardCardModal.Header userId={userId} />
       <BoardCardModal.Content type="modal" content={content} imgs={imgs}>
         <BoardCardModal.BoardCardCommentWrapper
-          commentsNum={filteredCommentsCount}
+          commentsNum={commentsCount}
           isModal
         >
           {comments?.map((comment) => (

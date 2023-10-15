@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import getBoardList from '@/service/board';
+import { getBoardList } from '@/service/board';
 import { BoardList } from '@/types/types';
 
 interface InfiniteScrollProps {

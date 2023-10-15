@@ -47,6 +47,7 @@ export default function BoardsList({
                   setShowModal={setShowModal}
                   comments={board.replyListDto}
                   commentsCount={board.replyCount}
+                  boardId={board.id}
                 />
               </div>
             ))
