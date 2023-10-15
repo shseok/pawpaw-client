@@ -16,17 +16,17 @@ export default function ImageUploadModal({
   imageFile,
 }: ImageUploadModalProps) {
   const roomId = usePathname().split('/')[2];
-
   const imageSize = imageFile && (imageFile.size / 1000).toFixed(0);
   const handleUploadImage = async () => {
     try {
       if (imageFile) {
         await uploadChatImage(roomId, imageFile);
       }
-      onClose();
     } catch (error) {
       console.error(error);
       Toast.error('이미지 전송에 실패헀어요.😢');
+    } finally {
+      onClose();
     }
   };
   return (
