@@ -2,7 +2,9 @@ import { ModalProps } from '@/types/types';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { uploadChatImage } from '@/service/chatRoom';
+import { useState } from 'react';
 import Toast from '@/utils/notification';
+import LoadingIcon from '@/public/loading.svg';
 import Modal from '..';
 import Button from '../../Button';
 
@@ -17,15 +19,18 @@ export default function ImageUploadModal({
 }: ImageUploadModalProps) {
   const roomId = usePathname().split('/')[2];
   const imageSize = imageFile && (imageFile.size / 1000).toFixed(0);
+  const [isLoading, setIsLoading] = useState(false);
   const handleUploadImage = async () => {
     try {
       if (imageFile) {
+        setIsLoading(true);
         await uploadChatImage(roomId, imageFile);
       }
     } catch (error) {
       console.error(error);
       Toast.error('이미지 전송에 실패헀어요.😢');
     } finally {
+      setIsLoading(false);
       onClose();
     }
   };
@@ -59,7 +64,9 @@ export default function ImageUploadModal({
             취소
           </Button>
           <Button size="xs" fullWidth onClickAction={handleUploadImage}>
-            전송
+            <span className="flex justify-center">
+              {isLoading ? <LoadingIcon className="animate-spin" /> : '전송'}
+            </span>
           </Button>
         </div>
       </div>
