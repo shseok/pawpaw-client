@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { postComment } from '@/service/board';
-import Toast from '@/utils/notification';
+import usePostComment from '@/hooks/mutations/usePostComment';
 import FlexBox from '../../FlexBox';
 import Button from '../../Button';
 
@@ -19,32 +18,16 @@ export function BoardCardCommentWrapper({
   likedCount: number;
 }) {
   const [commentText, setCommentText] = useState('');
-  const [isUploading, setIsUploading] = useState(false);
+  const { mutate: commentMutate, isLoading } = usePostComment();
 
-  // 데이터 전송을 위한 함수
-  const onUploadComment = async () => {
-    if (!commentText) {
-      return;
-    }
-    setIsUploading(true);
-    try {
-      const response = await postComment({
-        boardId,
-        parentId: 1,
-        content: commentText,
-      });
-      if (response.content) {
-        Toast.success('댓글이 성공적으로 업로드되었습니다.');
-        setCommentText('');
-      } else {
-        Toast.error('업로드에 실패했습니다. 잠시 후 다시 시도해주세요.');
-      }
-    } catch (error) {
-      Toast.error('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-    } finally {
-      setIsUploading(false);
-    }
+  const postNewComment = () => {
+    commentMutate({
+      boardId,
+      parentId: 1,
+      content: commentText,
+    });
   };
+
   return (
     <FlexBox
       direction="column"
@@ -97,8 +80,8 @@ export function BoardCardCommentWrapper({
           value={commentText}
           onChange={(event) => setCommentText(event.target.value)}
         />
-        <Button onClickAction={() => onUploadComment()} disabled={isUploading}>
-          등록
+        <Button onClickAction={postNewComment} disabled={isLoading}>
+          {isLoading ? <p>등록 중...</p> : <span>등록</span>}
         </Button>
       </FlexBox>
     </FlexBox>

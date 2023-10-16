@@ -61,6 +61,17 @@ export interface Comment {
   // children: string[];
 }
 
+export interface PostBoardType {
+  title: string;
+  content: string;
+}
+
+export interface PostCommentType {
+  boardId: number;
+  parentId: number;
+  content: string;
+}
+
 export interface LocationInfoType {
   predictions: string[];
   location: {

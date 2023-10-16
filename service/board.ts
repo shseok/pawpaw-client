@@ -1,15 +1,5 @@
 import { AuthError } from '@/lib/error';
-
-interface PostBoardType {
-  title: string;
-  content: string;
-}
-
-interface PostCommentType {
-  boardId: number;
-  parentId: number;
-  content: string;
-}
+import { PostBoardType, PostCommentType } from '@/types/types';
 
 export async function postBoard(postBoardData: PostBoardType) {
   const url = `endpoint/api/board/register`;

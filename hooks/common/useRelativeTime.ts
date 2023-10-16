@@ -8,14 +8,15 @@ export default function useRelativeTime(createdDate: string): string {
     const daysAgo = Math.floor(timeDifference / (24 * 60 * 60 * 1000));
     return `${daysAgo}일 전`;
   }
+  // 시간 단위
   if (
-    // 시간 단위
     timeDifference < 24 * 60 * 60 * 1000 &&
     timeDifference >= 60 * 60 * 1000
   ) {
     const hoursAgo = Math.floor(timeDifference / (60 * 60 * 1000));
     return `${hoursAgo}시간 전`;
   }
+  // 1시간 이내 일 경우
   if (timeDifference < 60 * 60 * 1000) {
     return '1시간 전';
   }
