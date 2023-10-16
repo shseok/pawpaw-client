@@ -1,9 +1,15 @@
+import useRelativeTime from '@/hooks/common/useRelativeTime';
 import Avatar from '../../Avatar';
-// import Button from '../../Button';
 import FlexBox from '../../FlexBox';
 import BoardCardDropdown from './BoardCardDropdown';
 
-export default function BoardCardHeader({ userName }: { userName: string }) {
+export default function BoardCardHeader({
+  userName,
+  createdDate,
+}: {
+  userName: string;
+  createdDate: string;
+}) {
   return (
     <FlexBox justify="between" className="w-full">
       <FlexBox className="gap-[10px]">
@@ -18,7 +24,7 @@ export default function BoardCardHeader({ userName }: { userName: string }) {
             <div className="header4 text-grey-800">{userName}</div>
           </FlexBox>
           <div className="caption2 text-grey-400">
-            고양이 아무튼 자격증 보유중 ・ 3시간 전
+            {useRelativeTime(createdDate)}
           </div>
         </FlexBox>
       </FlexBox>
