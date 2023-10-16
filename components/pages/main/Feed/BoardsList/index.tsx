@@ -47,6 +47,7 @@ export default function BoardsList({
                   comments={board.replyListDto}
                   commentsCount={board.replyCount}
                   likedCount={board.likedCount}
+                  createdDate={board.createdDate}
                 />
               </div>
             ))

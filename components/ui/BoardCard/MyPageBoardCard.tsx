@@ -8,6 +8,7 @@ interface MyBoardCardProps {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   commentsCount: number;
   likedCount: number;
+  createdDate: string;
 }
 
 export default function MyPageBoardCard({
@@ -17,10 +18,11 @@ export default function MyPageBoardCard({
   setShowModal,
   commentsCount,
   likedCount,
+  createdDate,
 }: MyBoardCardProps) {
   return (
     <BoardCard>
-      <BoardCard.Header userName={userName} />
+      <BoardCard.Header userName={userName} createdDate={createdDate} />
       <BoardCard.Content
         type="myPage"
         content={content}

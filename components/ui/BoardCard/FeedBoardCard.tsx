@@ -12,6 +12,7 @@ interface FeedBoardCardProps {
   comments: Comment[] | undefined;
   commentsCount: number;
   likedCount: number;
+  createdDate: string;
 }
 
 export default function FeedBoardCard({
@@ -23,6 +24,7 @@ export default function FeedBoardCard({
   comments,
   commentsCount,
   likedCount,
+  createdDate,
 }: FeedBoardCardProps) {
   return (
     <FlexBox
@@ -30,7 +32,7 @@ export default function FeedBoardCard({
       justify="between"
       className="max-h-[500px] p-9 rounded-[10px] border-[1px] border-grey-200 gap-4"
     >
-      <BoardCard.Header userName={userName} />
+      <BoardCard.Header userName={userName} createdDate={createdDate} />
       <BoardCard.Content
         type="mainPC"
         content={content}

@@ -9,6 +9,7 @@ interface ModalBoardCardProps {
   comments: Comment[] | undefined;
   commentsCount: number;
   likedCount: number;
+  createdDate: string;
 }
 export default function ModalBoardCard({
   boardId,
@@ -18,10 +19,11 @@ export default function ModalBoardCard({
   comments,
   commentsCount,
   likedCount,
+  createdDate,
 }: ModalBoardCardProps) {
   return (
     <BoardCardModal imgs={imgs}>
-      <BoardCardModal.Header userName={userName} />
+      <BoardCardModal.Header userName={userName} createdDate={createdDate} />
       <BoardCardModal.Content type="modal" content={content} imgs={imgs}>
         <BoardCardModal.BoardCardCommentWrapper
           isModal

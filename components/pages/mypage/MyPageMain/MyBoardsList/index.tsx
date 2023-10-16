@@ -42,6 +42,7 @@ export default function MyBoardsList() {
                   setShowModal={setShowModal}
                   commentsCount={board.replyCount}
                   likedCount={board.likedCount}
+                  createdDate={board.createdDate}
                 />
               </div>
             )),

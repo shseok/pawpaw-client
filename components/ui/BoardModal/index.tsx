@@ -39,6 +39,7 @@ export default function BoardModal({
             comments={comments}
             commentsCount={board.replyCount}
             likedCount={board.likedCount}
+            createdDate={board.createdDate}
           />
         ) : (
           <div>내용이 없습니다.</div>

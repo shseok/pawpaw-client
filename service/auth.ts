@@ -1,6 +1,6 @@
 import { AuthParams, EmailAuthParams, VerificationParams } from '@/types/types';
 
-export default async function createUserWithSocialLogin(params: AuthParams) {
+export async function createUserWithSocialLogin(params: AuthParams) {
   const formData = new FormData();
   const { body, image } = params;
   formData.append(

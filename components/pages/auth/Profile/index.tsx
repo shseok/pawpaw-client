@@ -182,17 +182,17 @@ export default function Profile({ title }: { title: string }) {
                 <img
                   src={uploadedImage}
                   alt="Uploaded Profile"
-                  className="w-full h-full object-cover rounded-full"
+                  className="object-cover w-full h-full rounded-full"
                 />
               ) : (
-                <DefaultImg className="fill-grey-200 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                <DefaultImg className="absolute transform -translate-x-1/2 -translate-y-1/2 fill-grey-200 top-1/2 left-1/2" />
               )}
               <button
                 type="button"
                 onClick={handleButtonClick}
                 className="cursor-pointer rounded-full border border-grey-200 w-[38px] h-[38px] bg-white absolute bottom-0 right-0"
               >
-                <Pencil className="fill-grey-200 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                <Pencil className="absolute transform -translate-x-1/2 -translate-y-1/2 fill-grey-200 top-1/2 left-1/2" />
               </button>
               <input
                 type="file"
@@ -246,7 +246,7 @@ export default function Profile({ title }: { title: string }) {
             </div>
           </div>
         </div>
-        <p className="text-xs 2xs:text-sm sm:body4 break-keep text-center text-grey-500">
+        <p className="text-xs text-center 2xs:text-sm sm:body4 break-keep text-grey-500">
           마이페이지에서 반려동물을 추가로 설정하실 수 있습니다.
         </p>
       </div>
