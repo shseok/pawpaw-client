@@ -13,10 +13,10 @@ export default function UserAddButton() {
     <>
       <button
         type="button"
-        className="font-bold text-primary-200"
+        className="body2 text-primary-200"
         onClick={handleOpenPopup}
       >
-        추가
+        초대
       </button>
       <UserAddModal open={open} onClose={() => setOpen(false)} />
     </>

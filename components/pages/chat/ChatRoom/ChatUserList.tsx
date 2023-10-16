@@ -24,7 +24,7 @@ export default function ChatUserList({ roomId }: { roomId: string }) {
     >
       <FlexBox justify="between" className="w-full">
         <FlexBox as="header" className="gap-2 p-2">
-          <h1 className="text-2xl font-bold">인원</h1>
+          <h1 className="header2">인원</h1>
           <FlexBox className="gap-1">
             <p>{userList?.length}</p>
             <p className="text-grey-500">/60</p>
