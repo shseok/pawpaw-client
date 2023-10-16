@@ -10,13 +10,13 @@ export default function BoardCardModalWrapper({
   imgs,
 }: {
   children: React.ReactNode;
-  imgs?: string[];
+  imgs: string[];
 }) {
   return (
     <FlexBox
       direction="column"
       className={` ${
-        imgs ? 'w-[1028px]' : 'w-[434px]'
+        imgs.length !== 0 ? 'w-[1028px]' : 'w-[434px]'
       } h-[720px] p-9 gap-4 bg-white opacity-100 border-[1px] border-grey-200 rounded-[10px]`}
     >
       {children}

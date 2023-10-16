@@ -44,7 +44,9 @@ export default function BoardCardContent({
     <FlexBox
       direction="column"
       align="start"
-      className={`${type === 'mainPC' ? 'w-full' : 'w-[375px] h-full'} gap-3`}
+      className={`${(type === 'mainPC' || type === 'myPage') && 'w-full'} ${
+        type === 'modal' && 'w-[375px] h-full'
+      } gap-3`}
     >
       <div
         className={`body3 text-grey-800 ${
