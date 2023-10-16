@@ -1,12 +1,11 @@
-import { Comment } from '@/types/types';
 import { BoardCardModal } from '@/components/ui/BoardCard/BoardCardPackage/BoardCardModalPackage';
+import useGetCommentList from '@/hooks/queries/useGetCommentList';
 
 interface ModalBoardCardProps {
   boardId: number;
   userName: string;
   imgs: string[];
   content: string;
-  comments: Comment[] | undefined;
   commentsCount: number;
   likedCount: number;
   createdDate: string;
@@ -16,11 +15,12 @@ export default function ModalBoardCard({
   userName,
   imgs,
   content,
-  comments,
   commentsCount,
   likedCount,
   createdDate,
 }: ModalBoardCardProps) {
+  const { data: commentList, Observer } = useGetCommentList(boardId);
+
   return (
     <BoardCardModal imgs={imgs}>
       <BoardCardModal.Header userName={userName} createdDate={createdDate} />
@@ -31,15 +31,18 @@ export default function ModalBoardCard({
           commentsCount={commentsCount}
           likedCount={likedCount}
         >
-          {comments?.map((comment) => (
-            <BoardCardModal.ModalComments
-              id={comment.id}
-              userName={comment.nickname}
-              content={comment.content}
-              // TODO: 유저 프로필 사진 연결!
-              userImg="/Feed/desktop/tempProfilePic.svg"
-            />
-          ))}
+          {commentList?.pages.map((page) =>
+            page.content.map((comment) => (
+              <BoardCardModal.ModalComments
+                id={comment.id}
+                userName={comment.nickname}
+                content={comment.content}
+                // TODO: 유저 프로필 사진 연결!
+                userImg="/Feed/desktop/tempProfilePic.svg"
+              />
+            )),
+          )}
+          <Observer>로딩중...</Observer>
         </BoardCardModal.BoardCardCommentWrapper>
       </BoardCardModal.Content>
     </BoardCardModal>

@@ -9,7 +9,7 @@ interface FeedBoardCardProps {
   content: string;
   imgs: string[];
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  comments: Comment[] | undefined;
+  comments: Comment[];
   commentsCount: number;
   likedCount: number;
   createdDate: string;
@@ -26,6 +26,7 @@ export default function FeedBoardCard({
   likedCount,
   createdDate,
 }: FeedBoardCardProps) {
+  // const { data: commentList } = useGetShortCommentList(boardId);
   return (
     <FlexBox
       direction="column"
@@ -46,8 +47,8 @@ export default function FeedBoardCard({
         >
           <FlexBox
             direction="column"
-            justify="start"
-            className="max-h-[82px] overflow-scroll"
+            align="start"
+            className="max-h-[82px] overflow-hidden"
           >
             {comments?.map((comment) => (
               <BoardCard.Comments

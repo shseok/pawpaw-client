@@ -26,6 +26,7 @@ export function BoardCardCommentWrapper({
       parentId: 1,
       content: commentText,
     });
+    setCommentText('');
   };
 
   return (
@@ -50,6 +51,7 @@ export function BoardCardCommentWrapper({
           <FlexBox
             direction="column"
             justify="start"
+            align="start"
             className="gap-[5px] overflow-scroll h-full"
           >
             {children}
@@ -80,8 +82,12 @@ export function BoardCardCommentWrapper({
           value={commentText}
           onChange={(event) => setCommentText(event.target.value)}
         />
-        <Button onClickAction={postNewComment} disabled={isLoading}>
-          {isLoading ? <p>등록 중...</p> : <span>등록</span>}
+        <Button
+          onClickAction={postNewComment}
+          disabled={isLoading}
+          variant="ghost"
+        >
+          {isLoading ? <p>...</p> : <span>⇧</span>}
         </Button>
       </FlexBox>
     </FlexBox>

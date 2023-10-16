@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
-import { Comment, Board } from '@/types/types';
+import { Board } from '@/types/types';
 import ModalBoardCard from '@/components/ui/BoardCard/ModalBoardCard';
 import FlexBox from '../FlexBox';
 import Modal from '../Modal';
@@ -10,12 +10,10 @@ export default function BoardModal({
   showModal,
   setShowModal,
   board,
-  comments,
 }: {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
   board: Board | null;
-  comments: Comment[] | undefined;
 }) {
   return (
     <Modal open={showModal} onClose={() => setShowModal(false)}>
@@ -36,7 +34,6 @@ export default function BoardModal({
             userName={board.writer}
             imgs={board.fileNames}
             content={board.title}
-            comments={comments}
             commentsCount={board.replyCount}
             likedCount={board.likedCount}
             createdDate={board.createdDate}

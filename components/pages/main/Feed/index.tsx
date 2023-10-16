@@ -25,7 +25,6 @@ export default function Feed() {
         showModal={showModal}
         setShowModal={setShowModal}
         board={selectedBoard}
-        comments={selectedBoard?.replyListDto}
       />
     </FlexBox>
   );

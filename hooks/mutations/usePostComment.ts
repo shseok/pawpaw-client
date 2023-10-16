@@ -10,7 +10,7 @@ export default function usePostComment() {
       postComment(postCommentData),
     onSuccess: () => {
       Toast.success('댓글이 성공적으로 업로드 되었습니다.');
-      return queryClient.invalidateQueries(['comment']);
+      return queryClient.invalidateQueries(['commentList']);
     },
     onError: () => {
       Toast.error('댓글을 업로드하지 못했습니다. 잠시후 다시 시도해주세요.🥲');

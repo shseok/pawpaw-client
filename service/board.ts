@@ -1,5 +1,5 @@
 import { AuthError } from '@/lib/error';
-import { PostBoardType, PostCommentType } from '@/types/types';
+import { CommentList, PostBoardType, PostCommentType } from '@/types/types';
 
 export async function postBoard(postBoardData: PostBoardType) {
   const url = `endpoint/api/board/register`;
@@ -40,7 +40,6 @@ export async function getBoardList(pageParam: number) {
 
 export async function postComment(postCommentData: PostCommentType) {
   const url = `endpoint/api/reply/register`;
-
   const response = await fetch(url, {
     method: 'POST',
     credentials: 'include',
@@ -50,4 +49,30 @@ export async function postComment(postCommentData: PostCommentType) {
     body: JSON.stringify(postCommentData),
   });
   return response.json();
+}
+
+export async function getCommentList(
+  pageParam: number,
+  boardId: number,
+): Promise<CommentList> {
+  let url = `/endpoint/api/reply/list?boardId=${boardId}&pageSize=3`;
+  if (pageParam) {
+    url += `&pageNumber=${pageParam}`;
+  }
+  try {
+    const response = await fetch(url);
+    if (response.status === 401) {
+      throw new AuthError('로그인이 필요한 서비스입니다.');
+    }
+    if (!response.ok) {
+      throw new Error(`서버오류:${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    if (error instanceof AuthError) {
+      window.location.replace('/auth/login');
+      alert(error.message);
+    }
+    throw error;
+  }
 }

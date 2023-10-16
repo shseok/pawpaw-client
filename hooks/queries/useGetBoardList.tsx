@@ -7,7 +7,7 @@ import useInfiniteScroll from '../common/useInfiniteScroll';
 export default function useGetBoardList() {
   const { data, isLoading, Observer, hasNextPage } =
     useInfiniteScroll<BoardList>({
-      queryKey: 'boardsList',
+      queryKey: 'boardList',
       firstPageParam: 0,
       queryFn: getBoardList,
       getNextPageParamFn: (boardList) =>

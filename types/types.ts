@@ -61,6 +61,33 @@ export interface Comment {
   // children: string[];
 }
 
+export interface CommentList {
+  content: Comment[];
+  pageable: {
+    sort: {
+      empty: boolean;
+      unsorted: boolean;
+      sorted: boolean;
+    };
+    offset: 0;
+    pageSize: 3;
+    pageNumber: 0;
+    paged: boolean;
+    unpaged: boolean;
+  };
+  size: 3;
+  number: 0;
+  sort: {
+    empty: boolean;
+    unsorted: boolean;
+    sorted: boolean;
+  };
+  numberOfElements: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
+
 export interface PostBoardType {
   title: string;
   content: string;
