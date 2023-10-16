@@ -39,13 +39,14 @@ export default function BoardsList({
                 className="w-full"
               >
                 <FeedBoardCard
-                  userId={board.writer}
+                  boardId={board.id}
+                  userName={board.writer}
                   content={board.content}
                   imgs={board.fileNames}
                   setShowModal={setShowModal}
                   comments={board.replyListDto}
                   commentsCount={board.replyCount}
-                  boardId={board.id}
+                  likedCount={board.likedCount}
                 />
               </div>
             ))

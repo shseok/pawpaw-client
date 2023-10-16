@@ -2,32 +2,39 @@ import { Comment } from '@/types/types';
 import { BoardCardModal } from '@/components/ui/BoardCard/BoardCardPackage/BoardCardModalPackage';
 
 interface ModalBoardCardProps {
-  userId: string;
+  boardId: number;
+  userName: string;
   imgs: string[];
   content: string;
   comments: Comment[] | undefined;
   commentsCount: number;
+  likedCount: number;
 }
 export default function ModalBoardCard({
-  userId,
+  boardId,
+  userName,
   imgs,
   content,
   comments,
   commentsCount,
+  likedCount,
 }: ModalBoardCardProps) {
   return (
     <BoardCardModal imgs={imgs}>
-      <BoardCardModal.Header userId={userId} />
+      <BoardCardModal.Header userName={userName} />
       <BoardCardModal.Content type="modal" content={content} imgs={imgs}>
         <BoardCardModal.BoardCardCommentWrapper
-          commentsNum={commentsCount}
           isModal
+          boardId={boardId}
+          commentsCount={commentsCount}
+          likedCount={likedCount}
         >
           {comments?.map((comment) => (
             <BoardCardModal.ModalComments
               id={comment.id}
               userName={comment.nickname}
               content={comment.content}
+              // TODO: 유저 프로필 사진 연결!
               userImg="/Feed/desktop/tempProfilePic.svg"
             />
           ))}

@@ -32,11 +32,13 @@ export default function BoardModal({
         </FlexBox>
         {board ? (
           <ModalBoardCard
-            userId={board.writer}
+            boardId={board.id}
+            userName={board.writer}
             imgs={board.fileNames}
             content={board.title}
             comments={comments}
             commentsCount={board.replyCount}
+            likedCount={board.likedCount}
           />
         ) : (
           <div>내용이 없습니다.</div>

@@ -4,23 +4,25 @@ import { BoardCard } from '@/components/ui/BoardCard/BoardCardPackage';
 import FlexBox from '../FlexBox';
 
 interface FeedBoardCardProps {
-  userId: string;
+  boardId: number;
+  userName: string;
   content: string;
   imgs: string[];
   setShowModal: Dispatch<SetStateAction<boolean>>;
   comments: Comment[] | undefined;
   commentsCount: number;
-  boardId: number;
+  likedCount: number;
 }
 
 export default function FeedBoardCard({
-  userId,
+  boardId,
+  userName,
   content,
   imgs,
   setShowModal,
   comments,
   commentsCount,
-  boardId,
+  likedCount,
 }: FeedBoardCardProps) {
   return (
     <FlexBox
@@ -28,7 +30,7 @@ export default function FeedBoardCard({
       justify="between"
       className="max-h-[500px] p-9 rounded-[10px] border-[1px] border-grey-200 gap-4"
     >
-      <BoardCard.Header userId={userId} />
+      <BoardCard.Header userName={userName} />
       <BoardCard.Content
         type="mainPC"
         content={content}
@@ -36,8 +38,9 @@ export default function FeedBoardCard({
         onClickModal={() => setShowModal(true)}
       >
         <BoardCard.BoardCardCommentWrapper
-          commentsNum={commentsCount}
           boardId={boardId}
+          commentsCount={commentsCount}
+          likedCount={likedCount}
         >
           <FlexBox
             direction="column"

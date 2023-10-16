@@ -37,10 +37,10 @@ export default function BookmarkedBoardsList() {
                 <MyBoardCard
                   userName={board.writer}
                   content={board.content}
-                  // TODO: 이미지 연결
-                  imgs={[]}
-                  commentsCount={board.replyCount}
+                  imgs={board.fileNames}
                   setShowModal={setShowModal}
+                  commentsCount={board.replyCount}
+                  likedCount={board.likedCount}
                 />
               </div>
             )),

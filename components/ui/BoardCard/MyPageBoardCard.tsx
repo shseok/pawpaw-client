@@ -7,6 +7,7 @@ interface MyBoardCardProps {
   imgs: string[];
   setShowModal: Dispatch<SetStateAction<boolean>>;
   commentsCount: number;
+  likedCount: number;
 }
 
 export default function MyPageBoardCard({
@@ -15,10 +16,11 @@ export default function MyPageBoardCard({
   imgs,
   setShowModal,
   commentsCount,
+  likedCount,
 }: MyBoardCardProps) {
   return (
     <BoardCard>
-      <BoardCard.Header userId={userName} />
+      <BoardCard.Header userName={userName} />
       <BoardCard.Content
         type="myPage"
         content={content}
@@ -26,8 +28,9 @@ export default function MyPageBoardCard({
         onClickModal={() => setShowModal(true)}
       >
         <BoardCard.MyPageBoardCardCommentWrapper
-          commentsCount={commentsCount}
           onClickModal={() => setShowModal(true)}
+          commentsCount={commentsCount}
+          likedCount={likedCount}
         />
       </BoardCard.Content>
     </BoardCard>

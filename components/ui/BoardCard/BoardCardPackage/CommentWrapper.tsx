@@ -8,13 +8,15 @@ import Button from '../../Button';
 export function BoardCardCommentWrapper({
   children,
   isModal = false,
-  commentsNum,
   boardId,
+  commentsCount,
+  likedCount,
 }: {
   children: React.ReactNode;
   isModal?: boolean;
-  commentsNum: number;
   boardId: number;
+  commentsCount: number;
+  likedCount: number;
 }) {
   const [commentText, setCommentText] = useState('');
   const [isUploading, setIsUploading] = useState(false);
@@ -54,11 +56,11 @@ export function BoardCardCommentWrapper({
         <FlexBox className="gap-5">
           <FlexBox className="gap-2 body3 text-grey-500">
             <div>댓글</div>
-            <div>{commentsNum}</div>
+            <div>{commentsCount}</div>
           </FlexBox>
           <FlexBox className="gap-2 body3 text-grey-500">
             <div>좋아요</div>
-            <div>2</div>
+            <div>{likedCount}</div>
           </FlexBox>
         </FlexBox>
         {isModal ? (
@@ -104,11 +106,13 @@ export function BoardCardCommentWrapper({
 }
 
 export function MyPageBoardCardCommentWrapper({
-  commentsCount,
   onClickModal,
+  commentsCount,
+  likedCount,
 }: {
-  commentsCount: number;
   onClickModal: () => void;
+  commentsCount: number;
+  likedCount: number;
 }) {
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -127,7 +131,7 @@ export function MyPageBoardCardCommentWrapper({
             </FlexBox>
             <FlexBox className="gap-2 body3 text-grey-500">
               <div>좋아요</div>
-              <div>2</div>
+              <div>{likedCount}</div>
             </FlexBox>
           </FlexBox>
         </FlexBox>
