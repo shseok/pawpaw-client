@@ -10,10 +10,6 @@ interface PostCommentType {
   parentId: number;
   content: string;
 }
-interface GetListApiProps {
-  pageParam: number;
-  pageSize: number;
-}
 
 export async function postBoard(postBoardData: PostBoardType) {
   const url = `endpoint/api/board/register`;
@@ -29,10 +25,16 @@ export async function postBoard(postBoardData: PostBoardType) {
   return response.json();
 }
 
-export async function getBoardList({ pageParam, pageSize }: GetListApiProps) {
+export async function getBoardList(pageParam: number) {
+  let url = `/endpoint/api/board/list?pageSize=5`;
+  if (pageParam !== 0) {
+    url += `&pageNumber=${pageParam}`;
+  }
   try {
-    const url = `/endpoint/api/board/list?pageNumber=${pageParam}&pageSize=${pageSize}`;
     const response = await fetch(url);
+    if (response.status === 401) {
+      throw new AuthError('로그인이 필요한 서비스입니다.');
+    }
     if (!response.ok) {
       throw new Error(`서버오류:${response.status}`);
     }
@@ -59,20 +61,3 @@ export async function postComment(postCommentData: PostCommentType) {
   });
   return response.json();
 }
-
-// export async function getCommentList({ pageParam, pageSize }: GetListApiProps) {
-//   try {
-//     const url = `/endpoint/api/reply/list?pageNumber=${pageParam}&pageSize=${pageSize}`;
-//     const response = await fetch(url);
-//     if (!response.ok) {
-//       throw new Error(`서버오류:${response.status}`);
-//     }
-//     return await response.json();
-//   } catch (error) {
-//     if (error instanceof AuthError) {
-//       window.location.replace('/auth/login');
-//       alert(error.message);
-//     }
-//     throw error;
-//   }
-// }

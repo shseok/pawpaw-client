@@ -20,9 +20,7 @@ export default function BoardsList({
     data: boardList,
     isLoading,
     hasNextPage,
-  } = useGetBoardList({
-    infiniteQueryKey: ['boards'],
-  });
+  } = useGetBoardList();
 
   return (
     <FlexBox direction="column" className="w-full gap-10">

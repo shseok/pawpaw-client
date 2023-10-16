@@ -1,19 +1,26 @@
-'use client';
-
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import getMyBoardList from '@/service/myPage';
-import { BookmarkedBoardList } from '@/types/types';
 
-export default function useGetBookmarkedBoardList() {
+interface InfiniteScrollProps<T> {
+  queryKey: string;
+  firstPageParam: number;
+  queryFn: (pageNumber: number) => Promise<T>;
+  getNextPageParamFn: (page: T) => void;
+}
+
+export default function useInfiniteScroll<T>({
+  queryKey,
+  firstPageParam,
+  queryFn,
+  getNextPageParamFn,
+}: InfiniteScrollProps<T>) {
   const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ['bookmarkedBoards'],
-      queryFn: ({ pageParam = 0 }): Promise<BookmarkedBoardList> =>
-        getMyBoardList(pageParam),
-      getNextPageParam: (boardlist) =>
-        boardlist.last ? undefined : boardlist.number + 1,
+      queryKey: [queryKey],
+      queryFn: ({ pageParam = firstPageParam }): Promise<T> =>
+        queryFn(pageParam),
+      getNextPageParam: getNextPageParamFn,
     });
 
   // 무한 스크롤 화면 가장 아래 부분 탐지하는 observer
@@ -34,5 +41,6 @@ export default function useGetBookmarkedBoardList() {
     Observer,
     data,
     isLoading,
+    hasNextPage,
   };
 }
