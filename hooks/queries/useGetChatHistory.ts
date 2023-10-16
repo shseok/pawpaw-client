@@ -11,10 +11,17 @@ export default function useGetChatHistory(roomId: string) {
         const lowestId = history.content.sort((a, b) => a.id - b.id).at(0)?.id;
         return lowestId;
       },
-      select: (chatHistory) => ({
-        pages: chatHistory.pages.slice().reverse(),
-        pageParams: chatHistory.pageParams,
-      }),
+      select: (chatHistory) => {
+        const reversedChatContent = chatHistory.pages
+          .slice()
+          .reverse()
+          .flatMap((chat) => chat.content);
+        reversedChatContent.forEach((el) => el.createdDate);
+        return {
+          pages: reversedChatContent,
+          pageParams: chatHistory.pageParams,
+        };
+      },
     });
 
   return { data, isFetchingNextPage, hasNextPage, fetchNextPage };

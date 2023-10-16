@@ -4,6 +4,8 @@ import { MessageType } from '@/types/types';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 import { useRef } from 'react';
 import useChatScroll from '@/hooks/common/useChatScroll';
+
+import makeDateSection from '@/utils/makeDateSection';
 import Message from './Message';
 
 export default function ChatRoomBox({
@@ -21,7 +23,6 @@ export default function ChatRoomBox({
   const { data: userInfo } = useGetUserInfo();
   const chatRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
-
   useChatScroll({
     chatRef,
     bottomRef,
@@ -29,15 +30,21 @@ export default function ChatRoomBox({
     beforeChatLoadMore: fetchNextPage,
     shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
   });
+
+  const messageList = [...(chatHistory?.pages ?? []), ...currentMessages];
+  const messageListWithDateSection = makeDateSection(
+    messageList && messageList,
+  );
+
   return (
     <div className="flex flex-col flex-1 p-4 overflow-y-scroll " ref={chatRef}>
-      {chatHistory?.pages.map((history) =>
-        history.content.map((chat) => (
-          <Message key={chat.id} {...chat} userId={userInfo!.userId} />
-        )),
-      )}
-      {currentMessages.map((message) => (
-        <Message key={message.id} {...message} userId={userInfo!.userId} />
+      {Object.entries(messageListWithDateSection).map(([date, list]) => (
+        <>
+          <div className="mb-5 text-center text-grey-500 body4">{date}</div>
+          {list.map((el) => (
+            <Message key={el.id} {...el} userId={userInfo!.userId} />
+          ))}
+        </>
       ))}
       <div ref={bottomRef} />
     </div>
