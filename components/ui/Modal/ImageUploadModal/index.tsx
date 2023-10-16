@@ -4,7 +4,6 @@ import { usePathname } from 'next/navigation';
 import { uploadChatImage } from '@/service/chatRoom';
 import { useState } from 'react';
 import LoadingIcon from '@/public/loading.svg';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import prettyBytes from 'pretty-bytes';
 import Modal from '..';
 import Button from '../../Button';

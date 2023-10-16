@@ -6,16 +6,16 @@ import ImageUploadModal from '@/components/ui/Modal/ImageUploadModal';
 
 interface MessageInputType {
   onChangeValue: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  sendMessage: () => void;
+  sendChat: () => void;
   handleOnKeyPress: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  message: string;
+  chatText: string;
 }
 
 export default function MessageInput({
   onChangeValue,
-  sendMessage,
+  sendChat,
   handleOnKeyPress,
-  message,
+  chatText,
 }: MessageInputType) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [imageUploadModalOpen, setImageUploadModalOpen] = useState(false);
@@ -25,8 +25,8 @@ export default function MessageInput({
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [message]);
-  const messageEmpty = message.trim().length === 0;
+  }, [chatText]);
+  const messageEmpty = chatText.trim().length === 0;
   const onImageSelectAndOpenModal = (event: ChangeEvent<HTMLInputElement>) => {
     const image = event;
     try {
@@ -56,11 +56,11 @@ export default function MessageInput({
         className="w-full p-2 pl-20 pr-14 shadow-chatCard rounded-[10px] focus:ring-0 border-none scrollbar-hide resize-none max-h-40"
         onKeyUp={handleOnKeyPress}
         onChange={onChangeValue}
-        value={message}
+        value={chatText}
       />
       <button
         type="button"
-        onClick={sendMessage}
+        onClick={sendChat}
         className={`absolute right-14 ${
           messageEmpty ? 'cursor-not-allowed' : ''
         }`}

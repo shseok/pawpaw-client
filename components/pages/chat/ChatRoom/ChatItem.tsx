@@ -9,7 +9,6 @@ export default function Message({ ...message }: MessageType) {
     userId,
     sender,
     chatType,
-    // chatroomId,
     createdDate,
     data,
     senderId,

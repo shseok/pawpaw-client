@@ -7,7 +7,7 @@ import SockJs from 'sockjs-client';
 import { MessageType } from '@/types/types';
 import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
-import MessageInput from './MessageInput';
+import ChatInput from './ChatInput';
 
 export default function ChatRoom({
   roomId,
@@ -16,16 +16,16 @@ export default function ChatRoom({
   roomId: string;
   title: string;
 }) {
-  const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
-  const [message, onChangeValue, resetValue] = useInput('');
+  const [currentChatList, setCurrentChatList] = useState<MessageType[]>([]);
+  const [chatText, onChangeValue, resetValue] = useInput('');
   const stompClient = useRef<CompatClient>();
-  const sendMessage = () => {
-    if (message.trim().length !== 0) {
+  const sendChat = () => {
+    if (chatText.trim().length !== 0) {
       if (stompClient.current?.connected) {
         stompClient.current?.send(
           `/pub/chatroom/${roomId}/message`,
           {},
-          JSON.stringify({ data: message }),
+          JSON.stringify({ data: chatText }),
         );
       }
     }
@@ -35,7 +35,7 @@ export default function ChatRoom({
     if (e.key === 'Enter') {
       if (!e.shiftKey) {
         e.preventDefault();
-        sendMessage();
+        sendChat();
       }
     }
   };
@@ -53,8 +53,8 @@ export default function ChatRoom({
       stompClient.current?.subscribe(
         `/sub/chatroom/${roomId}/message`,
         ({ body }) => {
-          const newMessage = JSON.parse(body);
-          setCurrentMessages((prevMessages) => [...prevMessages, newMessage]);
+          const newChat = JSON.parse(body);
+          setCurrentChatList((prevChatList) => [...prevChatList, newChat]);
         },
       );
     });
@@ -66,12 +66,12 @@ export default function ChatRoom({
   return (
     <div className="flex flex-col w-full h-screen bg-[#F5FFF6] border-r-[1px]">
       <ChatRoomHeader title={title} />
-      <ChatRoomBox currentMessages={currentMessages} />
-      <MessageInput
+      <ChatRoomBox currentChatList={currentChatList} />
+      <ChatInput
         onChangeValue={onChangeValue}
-        sendMessage={sendMessage}
+        sendChat={sendChat}
         handleOnKeyPress={handleOnKeyPress}
-        message={message}
+        chatText={chatText}
       />
     </div>
   );

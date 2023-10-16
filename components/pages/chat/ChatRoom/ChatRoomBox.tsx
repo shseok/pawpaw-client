@@ -6,12 +6,12 @@ import { useRef } from 'react';
 import useChatScroll from '@/hooks/common/useChatScroll';
 
 import makeDateSection from '@/utils/makeDateSection';
-import Message from './Message';
+import ChatItem from './ChatItem';
 
 export default function ChatRoomBox({
-  currentMessages,
+  currentChatList,
 }: {
-  currentMessages: MessageType[];
+  currentChatList: MessageType[];
 }) {
   const roomId = usePathname().split('/')[2];
   const {
@@ -26,23 +26,23 @@ export default function ChatRoomBox({
   useChatScroll({
     chatRef,
     bottomRef,
-    count: currentMessages.length,
+    count: currentChatList.length,
     beforeChatLoadMore: fetchNextPage,
     shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
   });
 
-  const messageList = [...(chatHistory?.pages ?? []), ...currentMessages];
-  const messageListWithDateSection = makeDateSection(
-    messageList && messageList,
+  const mergedChatList = [...(chatHistory?.pages ?? []), ...currentChatList];
+  const chatListWithDateSection = makeDateSection(
+    mergedChatList && mergedChatList,
   );
 
   return (
     <div className="flex flex-col flex-1 p-4 overflow-y-scroll " ref={chatRef}>
-      {Object.entries(messageListWithDateSection).map(([date, list]) => (
+      {Object.entries(chatListWithDateSection).map(([date, chatList]) => (
         <>
           <div className="mb-5 text-center text-grey-500 body4">{date}</div>
-          {list.map((el) => (
-            <Message key={el.id} {...el} userId={userInfo!.userId} />
+          {chatList.map((chat) => (
+            <ChatItem key={chat.id} {...chat} userId={userInfo!.userId} />
           ))}
         </>
       ))}
