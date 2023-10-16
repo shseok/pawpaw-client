@@ -1,13 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactQueryProvider from '@/hooks/queries/ReactQueryProvider';
 import localFont from 'next/font/local';
-
 import 'styles/global.css';
 
 const myFont = localFont({
-  src: './font/SUIT-Variable.woff2',
+  src: '../font/SUIT-Variable.woff2',
   display: 'swap',
 });
 
