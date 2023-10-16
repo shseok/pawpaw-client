@@ -16,7 +16,6 @@ export default function useGetChatHistory(roomId: string) {
           .slice()
           .reverse()
           .flatMap((chat) => chat.content);
-        reversedChatContent.forEach((el) => el.createdDate);
         return {
           pages: reversedChatContent,
           pageParams: chatHistory.pageParams,

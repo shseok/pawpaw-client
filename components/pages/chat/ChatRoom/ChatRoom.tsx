@@ -4,7 +4,7 @@ import useInput from '@/hooks/common/useInput';
 import { Frame, Stomp, CompatClient } from '@stomp/stompjs';
 import { useEffect, useRef, useState } from 'react';
 import SockJs from 'sockjs-client';
-import { MessageType } from '@/types/types';
+import { ChatType } from '@/types/types';
 import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
 import ChatInput from './ChatInput';
@@ -16,12 +16,14 @@ export default function ChatRoom({
   roomId: string;
   title: string;
 }) {
-  const [currentChatList, setCurrentChatList] = useState<MessageType[]>([]);
+  const [currentChatList, setCurrentChatList] = useState<ChatType[]>([]);
   const [chatText, onChangeValue, resetValue] = useInput('');
   const stompClient = useRef<CompatClient>();
+
   const sendChat = () => {
     if (chatText.trim().length !== 0) {
-      if (stompClient.current?.connected) {
+      const isConnected = stompClient.current?.connected;
+      if (isConnected) {
         stompClient.current?.send(
           `/pub/chatroom/${roomId}/message`,
           {},
@@ -31,6 +33,7 @@ export default function ChatRoom({
     }
     resetValue();
   };
+
   const handleOnKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       if (!e.shiftKey) {

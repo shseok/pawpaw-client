@@ -1,17 +1,17 @@
-import { MessageType } from '@/types/types';
+import { ChatType } from '@/types/types';
 import { format, parseISO } from 'date-fns';
 
 interface DateSection {
-  [key: string]: MessageType[];
+  [key: string]: ChatType[];
 }
 
-export default function makeDateSection(chatList: MessageType[]) {
+export default function makeDateSection(chatList: ChatType[]) {
   const section: DateSection = {};
   chatList.forEach((chat) => {
     // 채팅에 표시하고자 하는 날짜 형식 변수
     const date = format(parseISO(chat.createdDate), 'yyyy년 MM월 dd일');
 
-    // 섹션의 날짜가 "이미" 존재하는지 확인.
+    // 섹션에 날짜가 "이미" 존재하는지 확인.
     if (section[date]) {
       // 섹션에 날짜가 "이미" 존재하고 있다면 해당 섹션에 채팅추가
       section[date].push(chat);

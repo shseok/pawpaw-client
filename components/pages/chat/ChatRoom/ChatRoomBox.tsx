@@ -1,6 +1,6 @@
 import { usePathname } from 'next/navigation';
 import useGetChatHistory from '@/hooks/queries/useGetChatHistory';
-import { MessageType } from '@/types/types';
+import { ChatType } from '@/types/types';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 import { useRef } from 'react';
 import useChatScroll from '@/hooks/common/useChatScroll';
@@ -11,7 +11,7 @@ import ChatItem from './ChatItem';
 export default function ChatRoomBox({
   currentChatList,
 }: {
-  currentChatList: MessageType[];
+  currentChatList: ChatType[];
 }) {
   const roomId = usePathname().split('/')[2];
   const {

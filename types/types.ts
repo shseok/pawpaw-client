@@ -155,7 +155,7 @@ export interface ScheduleList extends Schedule {
   participantList: { nickname: string; imageUrl: string }[];
 }
 
-export interface MessageType {
+export interface ChatType {
   userId: string;
   id: number;
   chatroomId: number;
@@ -167,7 +167,7 @@ export interface MessageType {
   createdDate: string;
 }
 export interface ChatHistory {
-  content: MessageType[];
+  content: ChatType[];
 }
 export interface ChatRoomInfo {
   name: string;
