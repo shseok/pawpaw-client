@@ -12,7 +12,7 @@ export interface InputProps
 const ValidateInput = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, error, success, ...props }, ref) => {
     const inputClassName = cn(
-      'w-full h-[58px] rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200',
+      'w-full h-[58px] text-xs 2xs:body1 rounded-[10px] placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200',
       className,
       {
         'ring-grey-200 focus:ring-grey-200': !error && !success,

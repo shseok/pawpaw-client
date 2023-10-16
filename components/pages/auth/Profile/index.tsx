@@ -205,7 +205,7 @@ export default function Profile({ title }: { title: string }) {
           <div className="w-full">
             <input
               type="text"
-              className="px-5 py-4 rounded-[10px] w-full focus-primary body1 placeholder-grey-400"
+              className="px-5 py-4 rounded-[10px] w-full focus-primary text-xs 2xs:text-sm sm:body1 placeholder-grey-400"
               placeholder="프로필 닉네임을 설정해주세요."
               value={profileName}
               onChange={(e) => {
@@ -225,7 +225,7 @@ export default function Profile({ title }: { title: string }) {
             <div className="flex flex-col w-full gap-3 tablet:flex-row">
               <input
                 type="text"
-                className="px-5 py-4 rounded-[10px] focus-primary body1 placeholder-grey-400 w-full"
+                className="px-5 py-4 rounded-[10px] focus-primary text-xs 2xs:text-sm sm:body1 placeholder-grey-400 w-full"
                 placeholder="반려동물 이름"
                 value={petName}
                 onChange={(e) => {
@@ -246,7 +246,7 @@ export default function Profile({ title }: { title: string }) {
             </div>
           </div>
         </div>
-        <p className="body4 text-grey-500">
+        <p className="text-xs 2xs:text-sm sm:body4 break-keep text-center text-grey-500">
           마이페이지에서 반려동물을 추가로 설정하실 수 있습니다.
         </p>
       </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import KakaoTalk from '@/public/Auth/kakotalk.svg';
+import KakaoTalk from '@/public/Auth/kakao.svg';
 import Naver from '@/public/Auth/naver.svg';
 import Google from '@/public/Auth/google.svg';
 
@@ -19,8 +19,8 @@ const bgColor = {
 
 const sizes = {
   medium: {
-    btn: 'w-[75px] h-[75px]',
-    svg: 'w-[50px] h-[50px]',
+    btn: 'w-14 h-14 2xs:w-[75px] 2xs:h-[75px]',
+    svg: 'w-[38px] h-[38px] 2xs:w-[50px] 2xs:h-[50px]',
   },
 };
 
