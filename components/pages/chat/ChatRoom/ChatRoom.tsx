@@ -35,11 +35,11 @@ export default function ChatRoom({
   };
 
   const handleOnKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && e.shiftKey) {
+      return;
+    }
     if (e.key === 'Enter') {
-      if (!e.shiftKey) {
-        e.preventDefault();
-        sendChat();
-      }
+      sendChat();
     }
   };
 

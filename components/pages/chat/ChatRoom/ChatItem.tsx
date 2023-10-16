@@ -29,7 +29,7 @@ export default function ChatItem({ ...chat }: ChatType) {
           {!isWriter && <p className="body3 text-grey-600">{sender}</p>}
           <div className={`flex gap-1 ${chatFlexClass}`}>
             <p
-              className={`p-4  break-words body1 rounded-2xl ${chatStyleClass}`}
+              className={`p-4 w-fit break-words whitespace-pre-line body1 rounded-2xl ${chatStyleClass}`}
             >
               {data}
             </p>
