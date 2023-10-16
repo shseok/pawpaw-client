@@ -11,7 +11,7 @@ export default function DelegateOwnerButton() {
     <>
       <button
         type="button"
-        className="font-bold text-primary-200"
+        className="body2 text-primary-200"
         onClick={handleOpenPopup}
       >
         방장넘기기

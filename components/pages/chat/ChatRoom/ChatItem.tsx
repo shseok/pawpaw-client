@@ -19,8 +19,9 @@ export default function ChatItem({ ...chat }: ChatType) {
   const chatSelfClass = isWriter ? 'self-end' : 'self-start';
   const chatFlexClass = isWriter ? 'flex-row-reverse' : 'flex-row-rerverse';
   const chatStyleClass = isWriter
-    ? 'bg-primary-200 text-white rounded-tr-none'
-    : 'bg-primary-100 text-black rounded-tl-none';
+    ? 'bg-primary-100 text-blaek rounded-tr-none'
+    : 'bg-primary-200 text-white rounded-tl-none';
+
   if (chatType === 'MESSAGE') {
     return (
       <div className={`flex gap-3 mb-5 w-fit ${chatSelfClass} `}>

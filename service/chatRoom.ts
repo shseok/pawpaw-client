@@ -254,8 +254,8 @@ export async function delegateRoomOwner(roomId: string, userId: string) {
         'Content-Type': 'application/json',
       },
     });
-    if (!response.ok) {
-      throw new Error('');
+    if (response.status === 409) {
+      throw new Error('본인에게 방장을 넘길수 없어요.🥸');
     }
   } catch (error) {
     console.error(error);
@@ -267,5 +267,7 @@ export async function delegateRoomOwner(roomId: string, userId: string) {
 export async function deleteChatRoom(roomId: string) {
   const url = `/endpoint/api/chatroom/${roomId}`;
   const response = await fetch(url, { method: 'DELETE' });
-  console.log(response);
+  if (response.status === 400) {
+    Toast.error('채팅방 삭제는 채팅방 참여자가 없어야 가능해요.🐶');
+  }
 }

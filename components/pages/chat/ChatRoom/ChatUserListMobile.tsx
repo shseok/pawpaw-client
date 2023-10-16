@@ -4,6 +4,8 @@ import { usePathname } from 'next/navigation';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 import ChatUser from './ChatUser';
 import UserAddButton from './UserAddButton';
+import DelegateOwnerButton from './DelegateOwnerButton';
+import DeleteChatRoomButton from './DeleteChatRoomButton';
 
 interface PropsType {
   closeModal: () => void;
@@ -31,7 +33,13 @@ export default function ChatUserListMobile({ closeModal }: PropsType) {
             </span>
           </div>
         </div>
-        {isManager && <UserAddButton />}
+        {isManager && (
+          <div className="flex gap-2">
+            <DeleteChatRoomButton roomId={roomId} />
+            <DelegateOwnerButton />
+            <UserAddButton />
+          </div>
+        )}
       </header>
       <div className="h-[calc(100%-4rem)] overflow-auto px-5 sm:px-10 pt-2">
         <ul className="grid w-full grid-cols-1 gap-2 h-fit sm:grid-cols-2 ">

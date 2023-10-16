@@ -27,7 +27,7 @@ export default function DeleteChatRoomButton({ roomId }: { roomId: string }) {
     <>
       <button
         type="button"
-        className="font-bold text-red"
+        className="body2 text-red"
         onClick={handleOpenPopup}
       >
         채팅방삭제
