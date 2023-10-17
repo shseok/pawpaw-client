@@ -45,7 +45,9 @@ export default function ChatRoom({
   };
 
   useEffect(() => {
-    stompClient.current = createClient('/endpoint/ws');
+    stompClient.current = createClient(
+      process.env.NEXT_PUBLIC_SOCKET_URL as string,
+    );
     stompClient.current.debug = (debug) => {
       console.log('debug', debug);
     };
