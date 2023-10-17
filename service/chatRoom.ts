@@ -1,4 +1,9 @@
-import { ChatRoomUserList, Schedule, ScheduleList } from '@/types/types';
+import {
+  ChatHistory,
+  ChatRoomUserList,
+  Schedule,
+  ScheduleList,
+} from '@/types/types';
 import Toast from '@/utils/notification';
 import { AuthError, ImageSizeError } from '@/lib/error';
 
@@ -12,6 +17,7 @@ interface ChatRoomType {
     locationLimit: boolean;
   };
 }
+
 // 채팅방 생성 API
 export async function postChatRoom(chatRoomData: ChatRoomType) {
   try {
@@ -29,7 +35,7 @@ export async function postChatRoom(chatRoomData: ChatRoomType) {
       body: formData,
     });
     if (response.status === 413) {
-      throw new ImageSizeError('이미지 크기가 업로드 제한을 초과했어요.😢');
+      throw new ImageSizeError('이미지 크기가 한도를 초과했어요.😢');
     }
     return await response.json();
   } catch (error) {
@@ -62,12 +68,16 @@ export async function leaveChatRoom(roomId: string) {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/participants`;
     const response = await fetch(url, { method: 'DELETE' });
+    if (response.status === 400) {
+      Toast.error('방장은 채팅방 삭제만 가능해요.');
+    }
     if (!response.ok) {
       throw new Error(`서버오류:${response.status}`);
     }
     window.location.replace('/community');
   } catch (error) {
     console.error(error);
+    throw error;
   }
 }
 
@@ -190,5 +200,69 @@ export async function withdrawSchedule(roomId: string, scheduleId: number) {
     console.log(response);
   } catch (error) {
     console.error(error);
+  }
+}
+
+// 채팅룸 이전 채팅기록 조회 API
+export async function getChatHistory(
+  roomId: string,
+  targetId: number,
+): Promise<ChatHistory> {
+  let url = `/endpoint/api/chatroom/${roomId}/message?size=20`;
+  if (targetId !== 0) {
+    url += `&targetId=${targetId}`;
+  }
+  const response = await fetch(url);
+  return response.json();
+}
+
+// 채팅룸 이미지 전송 API
+export async function uploadChatImage(roomId: string, image: File) {
+  try {
+    const formData = new FormData();
+    formData.append('multipartFile', image);
+    const url = `/endpoint/api/chatroom/${roomId}/message/image`;
+    const response = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    });
+    if (response.status === 413) {
+      throw new ImageSizeError('2MB 이하의 이미지만 업로드 가능해요.🤯');
+    }
+  } catch (error) {
+    if (error instanceof ImageSizeError) {
+      Toast.error(error.message);
+    }
+  }
+}
+
+// 채팅룸 방장 권한위임 API
+export async function delegateRoomOwner(roomId: string, userId: string) {
+  try {
+    const url = `/endpoint/api/chatroom/${roomId}/manager`;
+    const response = await fetch(url, {
+      method: 'PUT',
+      body: JSON.stringify({
+        nextManagerId: userId,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (response.status === 409) {
+      throw new Error('본인에게 방장을 넘길수 없어요.🥸');
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// 채팅룸 삭제 API
+export async function deleteChatRoom(roomId: string) {
+  const url = `/endpoint/api/chatroom/${roomId}`;
+  const response = await fetch(url, { method: 'DELETE' });
+  if (response.status === 400) {
+    Toast.error('채팅방 삭제는 채팅방 참여자가 없어야 가능해요.🐶');
   }
 }

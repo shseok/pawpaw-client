@@ -1,9 +1,7 @@
-'use client';
-
 import { useState } from 'react';
-import UserAddModal from '../../../ui/Modal/UserAddModal/UserAddModal';
+import OwnerDelegationModal from '@/components/ui/Modal/OwnerDelegationModal';
 
-export default function UserAddButton() {
+export default function DelegateOwnerButton() {
   const [open, setOpen] = useState(false);
   const handleOpenPopup = () => {
     setOpen(true);
@@ -16,9 +14,9 @@ export default function UserAddButton() {
         className="body2 text-primary-200"
         onClick={handleOpenPopup}
       >
-        초대
+        방장넘기기
       </button>
-      <UserAddModal open={open} onClose={() => setOpen(false)} />
+      <OwnerDelegationModal open={open} onClose={() => setOpen(false)} />
     </>
   );
 }

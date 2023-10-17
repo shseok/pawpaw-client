@@ -1,38 +1,77 @@
 'use client';
 
 import useInput from '@/hooks/common/useInput';
+import { CompatClient } from '@stomp/stompjs';
+import { useEffect, useRef, useState } from 'react';
+import { ChatType } from '@/types/types';
+import useSocket from '@/hooks/common/useSocket';
 import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
-import MessageInput from './MessageInput';
+import ChatInput from './ChatInput';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function ChatRoom({ roomId }: { roomId: string }) {
-  // input 관련로직이 여기있는게 맞나? 분리를 해보자. 드랍다운 구현후에 그리고 여기는 서버컴포넌트로 바꾸자;
-  const [message, onChangeValue, resetValue] = useInput('');
-  const sendMessage = () => {
-    if (message.trim().length === 0) {
-      return;
+export default function ChatRoom({
+  roomId,
+  title,
+}: {
+  roomId: string;
+  title: string;
+}) {
+  const [currentChatList, setCurrentChatList] = useState<ChatType[]>([]);
+  const [chatText, onChangeValue, resetValue] = useInput('');
+  const stompClient = useRef<CompatClient>();
+  const { createClient } = useSocket();
+
+  const sendChat = () => {
+    if (chatText.trim().length !== 0) {
+      const isConnected = stompClient.current?.connected;
+      if (isConnected) {
+        stompClient.current?.send(
+          `/pub/chatroom/${roomId}/message`,
+          {},
+          JSON.stringify({ data: chatText }),
+        );
+      }
     }
     resetValue();
   };
+
   const handleOnKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && e.shiftKey) {
+      return;
+    }
     if (e.key === 'Enter') {
-      if (!e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
+      sendChat();
     }
   };
 
+  useEffect(() => {
+    stompClient.current = createClient('/endpoint/ws');
+    stompClient.current.debug = (debug) => {
+      console.log('debug', debug);
+    };
+    stompClient.current.connect({}, () => {
+      stompClient.current?.subscribe(
+        `/sub/chatroom/${roomId}/message`,
+        ({ body }) => {
+          const newChat = JSON.parse(body);
+          setCurrentChatList((prevChatList) => [...prevChatList, newChat]);
+        },
+      );
+    });
+    return () => {
+      stompClient.current?.disconnect();
+    };
+  }, []);
+
   return (
     <div className="flex flex-col w-full h-screen bg-[#F5FFF6] border-r-[1px]">
-      <ChatRoomHeader title="awdawd" />
-      <ChatRoomBox />
-      <MessageInput
+      <ChatRoomHeader title={title} />
+      <ChatRoomBox currentChatList={currentChatList} />
+      <ChatInput
         onChangeValue={onChangeValue}
-        sendMessage={sendMessage}
+        sendChat={sendChat}
         handleOnKeyPress={handleOnKeyPress}
-        message={message}
+        chatText={chatText}
       />
     </div>
   );

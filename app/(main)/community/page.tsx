@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function CommunityPage() {
   return (
-    <main className="flex-1 flex flex-col w-full h-full overflow-x-hidden overflow-y-scroll gap-10 p-8 tablet:mt-0">
+    <main className="flex flex-col flex-1 w-full h-full gap-10 p-8 overflow-x-hidden tablet:mt-0">
       <h1 className="header2">참여중인 채팅방</h1>
       <EnteredChatList />
       <RecommendChatList />
