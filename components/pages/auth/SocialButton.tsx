@@ -44,7 +44,7 @@ export default function SocialButton({
   const ButtonIcon = socialMap[socialProvider];
   const buttonStyle = `${sizes[size].btn} rounded-full ${bgColor[socialProvider]} flex items-center justify-center ${hasBorder}`;
   const handleLogin = (provider: string) => {
-    window.location.href = `https://pawpawdev.duckdns.org/oauth2/authorize/${provider}?redirect_uri=${REDIRECT_URI}`;
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorize/${provider}?redirect_uri=${REDIRECT_URI}`;
   };
   return (
     <button
