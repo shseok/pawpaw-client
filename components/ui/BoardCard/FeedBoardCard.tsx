@@ -47,6 +47,7 @@ export default function FeedBoardCard({
         >
           <FlexBox
             direction="column"
+            justify="start"
             align="start"
             className="max-h-[82px] overflow-hidden"
           >

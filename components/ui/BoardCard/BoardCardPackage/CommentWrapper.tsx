@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import usePostComment from '@/hooks/mutations/usePostComment';
+import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
 import FlexBox from '../../FlexBox';
-import Button from '../../Button';
 
 export function BoardCardCommentWrapper({
   children,
@@ -69,12 +69,14 @@ export function BoardCardCommentWrapper({
         )}
       </FlexBox>
       <FlexBox className="gap-[9px] w-full">
-        <Image
-          src="/Feed/desktop/like.svg"
-          alt="좋아요"
-          width={24}
-          height={24}
-        />
+        <button type="button">
+          <Image
+            src="/Feed/desktop/like.svg"
+            alt="좋아요"
+            width={24}
+            height={24}
+          />
+        </button>
         <input
           type="text"
           placeholder="댓글로 이웃과 소통해보세요!"
@@ -82,13 +84,13 @@ export function BoardCardCommentWrapper({
           value={commentText}
           onChange={(event) => setCommentText(event.target.value)}
         />
-        <Button
-          onClickAction={postNewComment}
-          disabled={isLoading}
-          variant="ghost"
-        >
-          {isLoading ? <p>...</p> : <span>⇧</span>}
-        </Button>
+        <button type="button" onClick={() => postNewComment}>
+          <PaperPlaneIcon
+            className={`w-8 h-8 ${
+              isLoading ? 'fill-grey-300' : 'fill-primary-300'
+            }`}
+          />
+        </button>
       </FlexBox>
     </FlexBox>
   );
