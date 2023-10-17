@@ -82,7 +82,7 @@ export async function leaveChatRoom(roomId: string) {
     window.location.replace('/community');
   } catch (error) {
     console.error(error);
-    // throw error;
+    throw error;
   }
 }
 

@@ -17,7 +17,7 @@ export default function ChatItem({ ...chat }: ChatType) {
 
   const isWriter = userId === senderId;
   const chatSelfClass = isWriter ? 'self-end' : 'self-start';
-  const chatFlexClass = isWriter ? 'flex-row-reverse' : '';
+  const chatFlexClass = isWriter ? 'flex-row-reverse' : 'flex-row';
   const chatStyleClass = isWriter
     ? 'bg-primary-100 text-black rounded-tr-none'
     : 'bg-primary-200 text-white rounded-tl-none';
@@ -47,7 +47,7 @@ export default function ChatItem({ ...chat }: ChatType) {
   }
   if (chatType === 'IMAGE') {
     return (
-      <div className="flex flex-row-reverse gap-3 mb-5 w-fit">
+      <div className={`flex gap-3 mb-5 w-fit ${chatSelfClass}`}>
         {!isWriter && <Avatar image={senderImageUrl} name={sender} />}
         <div className="flex flex-col gap-1">
           {!isWriter && <p className="body3 text-grey-600">{sender}</p>}
