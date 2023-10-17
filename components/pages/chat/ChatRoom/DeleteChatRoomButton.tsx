@@ -18,7 +18,7 @@ export default function DeleteChatRoomButton({ roomId }: { roomId: string }) {
       router.replace('/community');
     } catch (error) {
       console.error(error);
-      Toast.error('채팅방을 삭제하지 못했어요.🧐');
+      Toast.error('채팅방을 삭제하지 못했어요.🧐 잠시후 다시 시도해주세요.');
     } finally {
       setOpen(false);
     }
