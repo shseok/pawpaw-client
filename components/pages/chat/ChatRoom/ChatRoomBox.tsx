@@ -1,44 +1,54 @@
-import FlexBox from '@/components/ui/FlexBox';
-import Message from './Message';
+import { usePathname } from 'next/navigation';
+import useGetChatHistory from '@/hooks/queries/useGetChatHistory';
+import { ChatType } from '@/types/types';
+import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
+import { Fragment, useRef } from 'react';
+import useChatScroll from '@/hooks/common/useChatScroll';
+import makeDateSection from '@/utils/makeDateSection';
+import ChatItem from './ChatItem';
 
-const messageList = [
-  {
-    userInfo: { userImg: '/default.png', userName: '홍길동' },
-    sender: true,
-    text: '안녕하세요 처음뵙겠습니다. 다들 반가워요!',
-    sendTime: '오후 11:39',
-  },
-  {
-    userInfo: { userImg: '/default.png', userName: '김떙땡' },
-    sender: false,
-    text: '반가워요 홍길동님',
-    sendTime: '오후 11:40',
-  },
-  {
-    userInfo: { userImg: '/default.png', userName: '홍길동' },
-    sender: true,
-    text: '반가워요 김땡땡님!! 😎',
-    sendTime: '오후 11:40',
-  },
-  {
-    userInfo: { userImg: '/default.png', userName: '김떙땡' },
-    sender: false,
-    text: '홍길동님은 어떤 반려동물을 키우시나요?? 🐶',
-    sendTime: '오후 11:40',
-  },
-];
+export default function ChatRoomBox({
+  currentChatList,
+}: {
+  currentChatList: ChatType[];
+}) {
+  const roomId = usePathname().split('/')[2];
+  const {
+    data: chatHistory,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useGetChatHistory(roomId);
+  const { data: userInfo } = useGetUserInfo();
+  const chatRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  useChatScroll({
+    chatRef,
+    bottomRef,
+    count: currentChatList.length,
+    beforeChatLoadMore: fetchNextPage,
+    shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
+  });
 
-export default function ChatRoomBox() {
+  const mergedChatList = [...(chatHistory?.pages ?? []), ...currentChatList];
+  const chatListWithDateSection = makeDateSection(
+    mergedChatList && mergedChatList,
+  );
+
   return (
-    <FlexBox
-      direction="column"
-      justify="start"
-      className="flex-1 w-full px-4 pt-10 overflow-auto scrollbar-hide tablet:px-10"
-    >
-      {messageList.map((message, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <Message key={index} message={message} />
-      ))}
-    </FlexBox>
+    <div className="flex flex-col flex-1 p-4 overflow-y-scroll " ref={chatRef}>
+      {Object.entries(chatListWithDateSection).map(
+        ([date, chatList], index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Fragment key={`date-${index}`}>
+            <div className="mb-5 text-center text-grey-500 body4">{date}</div>
+            {chatList.map((chat) => (
+              <ChatItem key={chat.id} {...chat} userId={userInfo!.userId} />
+            ))}
+          </Fragment>
+        ),
+      )}
+      <div ref={bottomRef} />
+    </div>
   );
 }

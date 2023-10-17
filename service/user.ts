@@ -17,7 +17,7 @@ export default async function getUserInfo(): Promise<UserInfo> {
   } catch (error) {
     if (error instanceof AuthError) {
       alert(error.message);
-      // window.location.replace('/auth/login');
+      window.location.replace('/auth/login');
     }
     console.error(error);
     throw error;

@@ -26,7 +26,7 @@ export default function ChatUser({
       <Avatar image={image} name={name} size="xl" />
       <FlexBox direction="column" align="start" className="gap-1 ">
         <FlexBox className="gap-1">
-          <p className="font-bold">{name}</p>
+          <p className="body2">{name}</p>
           {role === 'MANAGER' ? <CrownIcon /> : ''}
         </FlexBox>
         <p className="text-grey-500 ">{petName}</p>

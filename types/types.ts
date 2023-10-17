@@ -189,6 +189,7 @@ export interface TrendingChatList {
 }
 
 export interface UserInfo {
+  userId: string;
   email: string;
   role: string;
   nickname: string;
@@ -197,6 +198,7 @@ export interface UserInfo {
   imageUrl: string;
 }
 export interface ChatRoomUserList {
+  userId: string;
   briefIntroduction: string;
   nickname: string;
   imageUrl: string;
@@ -218,4 +220,25 @@ export interface Schedule {
 export interface ScheduleList extends Schedule {
   isManager?: boolean;
   participantList: { nickname: string; imageUrl: string }[];
+}
+
+export interface ChatType {
+  userId: string;
+  id: number;
+  chatroomId: number;
+  chatType: 'MESSAGE' | 'IMAGE' | 'JOIN' | 'LEAVE';
+  data: string;
+  senderId: string;
+  sender: string;
+  senderImageUrl: string;
+  createdDate: string;
+}
+export interface ChatHistory {
+  content: ChatType[];
+}
+export interface ChatRoomInfo {
+  name: string;
+  description: string;
+  participantNumber: number;
+  coverUrl: string;
 }

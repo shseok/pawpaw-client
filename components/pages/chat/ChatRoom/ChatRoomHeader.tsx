@@ -15,7 +15,7 @@ export default function ChatRoomHeader({ title }: { title: string }) {
         <Link href="/community">
           <ArrowLeftIcon className="w-7 h-7" />
         </Link>
-        <p className="text-xl font-bold">{title}</p>
+        <p className="header2">{title}</p>
       </FlexBox>
       <ChatDropdownButton />
     </FlexBox>
