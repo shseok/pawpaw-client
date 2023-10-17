@@ -35,7 +35,7 @@ export async function postChatRoom(chatRoomData: ChatRoomType) {
       body: formData,
     });
     if (response.status === 413) {
-      throw new ImageSizeError('이미지 크기가 한도를 초과했어요.😢');
+      throw new ImageSizeError('이미지 크기는 2MB를 초과할 수 없어요.😢');
     }
     return await response.json();
   } catch (error) {

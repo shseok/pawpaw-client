@@ -60,7 +60,6 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
       }
     } catch (error) {
       console.error(error);
-      Toast.error('잠시후 다시 시도해주세요. 🐾');
     } finally {
       setIsLoading(false);
     }
