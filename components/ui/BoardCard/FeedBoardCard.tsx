@@ -49,7 +49,7 @@ export default function FeedBoardCard({
             direction="column"
             justify="start"
             align="start"
-            className="max-h-[82px] overflow-hidden"
+            className="max-h-[74px] overflow-hidden"
           >
             {comments?.map((comment) => (
               <BoardCard.Comments
