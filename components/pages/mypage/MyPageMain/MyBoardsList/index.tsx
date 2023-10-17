@@ -55,7 +55,6 @@ export default function MyBoardsList() {
         showModal={showModal}
         setShowModal={setShowModal}
         board={selectedBoard}
-        comments={selectedBoard?.replyListDto}
       />
     </>
   );

@@ -54,7 +54,6 @@ export default function BookmarkedBoardsList() {
         showModal={showModal}
         setShowModal={setShowModal}
         board={selectedBoard}
-        comments={selectedBoard?.replyListDto}
       />
     </>
   );
