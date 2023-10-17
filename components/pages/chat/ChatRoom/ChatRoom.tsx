@@ -1,10 +1,10 @@
 'use client';
 
 import useInput from '@/hooks/common/useInput';
-import { Frame, Stomp, CompatClient } from '@stomp/stompjs';
+import { CompatClient } from '@stomp/stompjs';
 import { useEffect, useRef, useState } from 'react';
-import SockJs from 'sockjs-client';
 import { ChatType } from '@/types/types';
+import useSocket from '@/hooks/common/useSocket';
 import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
 import ChatInput from './ChatInput';
@@ -19,6 +19,7 @@ export default function ChatRoom({
   const [currentChatList, setCurrentChatList] = useState<ChatType[]>([]);
   const [chatText, onChangeValue, resetValue] = useInput('');
   const stompClient = useRef<CompatClient>();
+  const { createClient } = useSocket();
 
   const sendChat = () => {
     if (chatText.trim().length !== 0) {
@@ -44,15 +45,11 @@ export default function ChatRoom({
   };
 
   useEffect(() => {
-    stompClient.current = Stomp.over(() => {
-      const socketUrl = new SockJs('/endpoint/ws');
-      return socketUrl;
-    });
+    stompClient.current = createClient('/endpoint/ws');
     stompClient.current.debug = (debug) => {
       console.log('debug', debug);
     };
-    stompClient.current.connect({}, (frame: Frame) => {
-      console.log(frame);
+    stompClient.current.connect({}, () => {
       stompClient.current?.subscribe(
         `/sub/chatroom/${roomId}/message`,
         ({ body }) => {
