@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 export default function FindChangePage() {
   return (
     <div className="w-full flex flex-col">
-      <FindChange title="아이디 찾기/비밀번호 변경" />
+      <h1 className="header1 text-center w-full gap-[40px] pb-8">
+        아이디 찾기/비밀번호 변경
+      </h1>
+      <FindChange />
     </div>
   );
 }
