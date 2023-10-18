@@ -32,6 +32,7 @@ export default function FeedBoardCard({
           boardId={board.id}
           commentsCount={board.replyCount}
           likedCount={board.likedCount}
+          isLiked={board.boardLiked}
         >
           <FlexBox
             direction="column"

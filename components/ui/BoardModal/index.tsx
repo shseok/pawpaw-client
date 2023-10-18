@@ -28,19 +28,7 @@ export default function BoardModal({
             />
           </button>
         </FlexBox>
-        {board ? (
-          <ModalBoardCard
-            boardId={board.id}
-            userName={board.writer}
-            imgs={board.fileNames}
-            content={board.title}
-            commentsCount={board.replyCount}
-            likedCount={board.likedCount}
-            createdDate={board.createdDate}
-          />
-        ) : (
-          <div>내용이 없습니다.</div>
-        )}
+        {board ? <ModalBoardCard board={board} /> : <div>내용이 없습니다.</div>}
       </FlexBox>
     </Modal>
   );

@@ -73,3 +73,31 @@ export async function getCommentList(
     throw error;
   }
 }
+
+export async function updateBoardLike(boardId: number) {
+  const url = `endpoint/api/boardLike/like?boardId=${boardId}`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    // body: JSON.stringify(true),
+  });
+  return response.json();
+}
+
+export async function deleteBoardLike(boardId: number) {
+  const url = `endpoint/api/boardLike/deleteLike?boardId=${boardId}`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    // body: JSON.stringify(true),
+  });
+  return response.json();
+}

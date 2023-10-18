@@ -1,35 +1,28 @@
 import { BoardCardModal } from '@/components/ui/BoardCard/BoardCardPackage/BoardCardModalPackage';
 import useGetCommentList from '@/hooks/queries/useGetCommentList';
+import { Board } from '@/types/types';
 
-interface ModalBoardCardProps {
-  boardId: number;
-  userName: string;
-  imgs: string[];
-  content: string;
-  commentsCount: number;
-  likedCount: number;
-  createdDate: string;
-}
-export default function ModalBoardCard({
-  boardId,
-  userName,
-  imgs,
-  content,
-  commentsCount,
-  likedCount,
-  createdDate,
-}: ModalBoardCardProps) {
-  const { data: commentList, Observer } = useGetCommentList(boardId);
+export default function ModalBoardCard({ board }: { board: Board }) {
+  const { data: commentList, Observer } = useGetCommentList(board.id);
 
   return (
-    <BoardCardModal imgs={imgs}>
-      <BoardCardModal.Header userName={userName} createdDate={createdDate} />
-      <BoardCardModal.Content type="modal" content={content} imgs={imgs}>
+    <BoardCardModal imgs={board.fileNames}>
+      <BoardCardModal.Header
+        userName={board.writer}
+        userImage={board.userImageUrl}
+        createdDate={board.createdDate}
+      />
+      <BoardCardModal.Content
+        type="modal"
+        content={board.content}
+        imgs={board.fileNames}
+      >
         <BoardCardModal.BoardCardCommentWrapper
           isModal
-          boardId={boardId}
-          commentsCount={commentsCount}
-          likedCount={likedCount}
+          boardId={board.id}
+          commentsCount={board.replyCount}
+          likedCount={board.likedCount}
+          isLiked={board.boardLiked}
         >
           {commentList?.pages.map((page) =>
             page.content.map((comment) => (
@@ -38,7 +31,7 @@ export default function ModalBoardCard({
                 userName={comment.nickname}
                 content={comment.content}
                 // TODO: 유저 프로필 사진 연결!
-                userImg="/Feed/desktop/tempProfilePic.svg"
+                userImage="/Feed/desktop/tempProfilePic.svg"
               />
             )),
           )}

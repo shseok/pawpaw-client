@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import usePostComment from '@/hooks/mutations/usePostComment';
 import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
+import LikeButton from '@/public/like.svg';
 import FlexBox from '../../FlexBox';
 
 export function BoardCardCommentWrapper({
@@ -10,12 +11,14 @@ export function BoardCardCommentWrapper({
   boardId,
   commentsCount,
   likedCount,
+  isLiked,
 }: {
   children: React.ReactNode;
   isModal?: boolean;
   boardId: number;
   commentsCount: number;
   likedCount: number;
+  isLiked: boolean;
 }) {
   const [commentText, setCommentText] = useState('');
   const { mutate: commentMutate, isLoading } = usePostComment();
@@ -70,11 +73,8 @@ export function BoardCardCommentWrapper({
       </FlexBox>
       <FlexBox className="gap-[9px] w-full">
         <button type="button">
-          <Image
-            src="/Feed/desktop/like.svg"
-            alt="좋아요"
-            width={24}
-            height={24}
+          <LikeButton
+            className={`w-6 h-6  ${isLiked ? 'fill-red' : 'fill-grey-500'}`}
           />
         </button>
         <input
