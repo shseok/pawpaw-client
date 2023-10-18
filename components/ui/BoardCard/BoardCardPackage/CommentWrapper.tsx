@@ -38,8 +38,9 @@ export function BoardCardCommentWrapper({
   const updateLike = () => {
     if (isLiked) {
       unlikeMutate(boardId);
+    } else {
+      likeMutate(boardId);
     }
-    likeMutate(boardId);
   };
 
   return (
