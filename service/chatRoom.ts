@@ -257,6 +257,9 @@ export async function deleteChatRoom(roomId: string) {
   const url = `/endpoint/api/chatroom/${roomId}`;
   const response = await fetch(url, { method: 'DELETE' });
   if (response.status === 400) {
-    Toast.error('채팅방 삭제는 채팅방 참여자가 없어야 가능해요.🐶');
+    throw new Error('채팅방 삭제는 채팅방 참여자가 없어야 가능해요.🐶');
+  }
+  if (!response.ok) {
+    throw new Error('채팅방을 삭제하지 못했어요.🧐 잠시후 다시 시도해주세요.');
   }
 }
