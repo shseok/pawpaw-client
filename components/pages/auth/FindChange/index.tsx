@@ -5,6 +5,7 @@ import BottomButton from '../BottomButton';
 import TabButton from './TabButton';
 import { sendEmailChangeVerificationLink, findUserEmail } from '@/service/auth';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Toast from '@/utils/notification';
 
 export type TabType = 'findId' | 'changePwd';
 const tabInfo = {
@@ -30,7 +31,6 @@ export default function FindChange() {
   const [name, setName] = useState('');
   const [confirmContent, setConfirmContent] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState('');
   const [result, setResult] = useState({
     email: '',
     registrationDate: '',
@@ -46,16 +46,18 @@ export default function FindChange() {
         setResult((prev) => ({ ...prev, email, registrationDate }));
         setIsSuccess(true);
       } catch (e) {
-        console.error(e);
-        setError('일치하는 정보가 없습니다. 다시 입력해주세요.');
+        if (e instanceof Error) {
+          Toast.error(e.message);
+        }
       }
     } else {
       try {
         await sendEmailChangeVerificationLink({ name, email: confirmContent });
         setIsSuccess(true);
       } catch (e) {
-        console.error(e);
-        setError('일치하는 정보가 없습니다. 다시 입력해주세요.');
+        if (e instanceof Error) {
+          Toast.error(e.message);
+        }
       }
     }
   };
@@ -64,7 +66,6 @@ export default function FindChange() {
     setActiveTab(params);
     setName('');
     setConfirmContent('');
-    setError('');
     setIsSuccess(false);
   };
 
@@ -147,11 +148,6 @@ export default function FindChange() {
               autoComplete="on"
             />
           </div>
-          {error && (
-            <p className="body3 mt-[30px] text-red break-keep text-center">
-              {error}
-            </p>
-          )}
         </div>
         <div className="mt-[140px]">
           <BottomButton

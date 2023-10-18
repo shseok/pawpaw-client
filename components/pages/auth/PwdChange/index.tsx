@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { validate } from '@/utils/validate';
 import { changePassword } from '@/service/auth';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Toast from '@/utils/notification';
 
 interface Inputs {
   password: string;
@@ -39,7 +40,9 @@ export default function PwdChangeForm() {
       await changePassword({ key, password: data.password });
       router.push('/auth/email-login');
     } catch (e) {
-      console.error(e);
+      if (e instanceof Error) {
+        Toast.error(e.message);
+      }
     }
   };
 

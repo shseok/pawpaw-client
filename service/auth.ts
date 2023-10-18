@@ -124,7 +124,7 @@ export async function findUserEmail({
 }: {
   name: string;
   phoneNumber: string;
-}) {
+}): Promise<SearchEmailResult> {
   const query = stringify({ name, phoneNumber }, { addQueryPrefix: true });
   const response = await fetch('/endpoint/api/auth/email'.concat(query), {
     method: 'GET',
@@ -135,11 +135,11 @@ export async function findUserEmail({
   });
 
   if (!response.ok) {
-    throw new Error('이메일을 찾을 수 없습니다.');
-  }
-
-  if (response.status === 404) {
-    throw new Error('존재하지 않는 유저입니다.');
+    if (response.status === 404) {
+      throw new Error('존재하지 않는 유저입니다.');
+    } else {
+      throw new Error('이메일을 찾을 수 없습니다.');
+    }
   }
 
   const data = (await response.json()) as SearchEmailResult;
@@ -163,7 +163,11 @@ export async function sendEmailChangeVerificationLink({
   });
 
   if (!response.ok) {
-    throw new Error('비밀번호 변경에 실패하였습니다.');
+    if (response.status === 404) {
+      throw new Error('존재하지 않는 유저입니다.');
+    } else {
+      throw new Error('비밀번호 변경에 실패하였습니다.');
+    }
   }
 }
 
@@ -183,10 +187,10 @@ export async function changePassword({
     body: JSON.stringify({ key, password }),
   });
   if (!response.ok) {
-    throw new Error('비밀번호 변경에 실패하였습니다.');
+    if (response.status === 404) {
+      throw new Error('존재하지 않는 비밀번호 변경 임시키입니다.');
+    } else {
+      throw new Error('비밀번호 변경에 실패하였습니다.');
+    }
   }
-  if (response.status === 404) {
-    throw new Error('존재하지 않는 비밀번호 변경 임시키입니다.');
-  }
-  return response;
 }
