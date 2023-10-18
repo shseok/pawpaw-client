@@ -102,3 +102,12 @@ export async function checkVerification({
   const data = (await response.json()) as { success: boolean };
   return data;
 }
+export async function logout() {
+  const response = await fetch('/endpoint/api/auth', {
+    method: 'DELETE',
+    credentials: 'include',
+  });
+  if (!response.ok) {
+    throw new Error('로그아웃에 실패하였습니다.');
+  }
+}
