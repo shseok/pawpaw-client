@@ -53,6 +53,7 @@ export default function FindChange() {
     } else {
       try {
         await sendEmailChangeVerificationLink({ name, email: confirmContent });
+        setResult((prev) => ({ ...prev, email: confirmContent }));
         setIsSuccess(true);
       } catch (e) {
         if (e instanceof Error) {
