@@ -31,7 +31,6 @@ export default function PwdChangeForm() {
   });
 
   const handleFindChange: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
     if (!key) {
       alert('key가 존재하지 않습니다.');
       return;

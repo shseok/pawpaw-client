@@ -19,7 +19,6 @@ export default function EmailLogin({ title }: Props) {
     event.preventDefault();
     try {
       await loginWithEmailAndPassword({ email, password });
-      console.log('Success logging in');
       router.push('/');
     } catch (e) {
       setError('"아이디 또는 비밀번호가 일치하지 않습니다. 다시 입력해주세요"');
