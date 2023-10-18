@@ -9,12 +9,14 @@ import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore'
 import { useIdentityStore } from '@/hooks/stores/useIdentityStore';
 import DefaultImg from '@/public/Auth/dog.svg';
 import Pencil from '@/public/Auth/pencil.svg';
+import Cancel from '@/public/X.svg';
 import {
   createUserWithEmailAndPassword,
   createUserWithSocialLogin,
   loginWithEmailAndPassword,
 } from '@/service/auth';
 import { Species } from '@/types/types';
+import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { shallow } from 'zustand/shallow';
@@ -53,6 +55,7 @@ export default function Profile({ title }: { title: string }) {
   const [profileName, setProfileName] = useInput(nickname);
   const [petName, setPetName] = useInput(petInfo.name);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [initImage, setInitImage] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPet, setSelectedPet] = useState(petInfo.species);
@@ -99,7 +102,7 @@ export default function Profile({ title }: { title: string }) {
               name: position.name,
             },
             nickname: profileName,
-            noImage: true,
+            noImage: false,
             petInfos: [
               {
                 petName,
@@ -124,7 +127,6 @@ export default function Profile({ title }: { title: string }) {
             },
             phoneNumber,
             nickname: profileName,
-
             petInfos: [
               {
                 petName,
@@ -145,7 +147,7 @@ export default function Profile({ title }: { title: string }) {
     }
   };
 
-  const handleButtonClick = () => {
+  const handleImageUploadButtonClick = () => {
     fileInputRef.current?.click();
   };
   // TODO: 기본이미지 선택시, 기본이미지로 설정되도록 수정
@@ -167,6 +169,11 @@ export default function Profile({ title }: { title: string }) {
       setUploadedImage(null);
     }
   };
+  const CancelImageSelect = () => {
+    setInitImage(true);
+    setUploadedImage(null);
+    setImageFile(null);
+  };
 
   return (
     <>
@@ -178,18 +185,29 @@ export default function Profile({ title }: { title: string }) {
         <div className="flex flex-col items-center w-full gap-[12px]">
           <div className="rounded-full border border-grey-200 w-[100px] h-[100px] bg-white relative">
             <div className="rounded-full w-[94px] h-[94px] bg-grey-200 relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              {uploadedImage ? (
-                <img
-                  src={uploadedImage}
-                  alt="Uploaded Profile"
-                  className="w-full h-full object-cover rounded-full"
-                />
+              {uploadedImage && !initImage ? (
+                <>
+                  <Image
+                    src={uploadedImage}
+                    alt="Uploaded Profile"
+                    className="w-full h-full object-cover rounded-full"
+                    fill
+                    sizes="100vw"
+                  />
+                  <button
+                    type="button"
+                    onClick={CancelImageSelect}
+                    className="absolute top-0 right-0"
+                  >
+                    <Cancel className="w-4 h-4 fill-grey-400" />
+                  </button>
+                </>
               ) : (
                 <DefaultImg className="fill-grey-200 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               )}
               <button
                 type="button"
-                onClick={handleButtonClick}
+                onClick={handleImageUploadButtonClick}
                 className="cursor-pointer rounded-full border border-grey-200 w-[38px] h-[38px] bg-white absolute bottom-0 right-0"
               >
                 <Pencil className="fill-grey-200 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />

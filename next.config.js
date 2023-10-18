@@ -9,7 +9,7 @@ const nextConfig = {
     return [
       {
         source: '/endpoint/:path*',
-        destination: `https://pawpawdev.duckdns.org/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
       },
     ];
   },

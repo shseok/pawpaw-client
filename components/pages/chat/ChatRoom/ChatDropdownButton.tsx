@@ -7,8 +7,8 @@ import ArrowRightIcon from '@/public/arrow-right.svg';
 import Modal from '@/components/ui/Modal';
 import LeaveChatRoomModal from '@/components/ui/Modal/LeaveChatRoomModal';
 import copyToClipBoard from '@/utils/copyToClipBoard';
-import ChatUserListMobile from './ChatUserListMobile';
 import ScheduleListMobile from '../Schedule/ScheduleListMobile';
+import ChatUserListMobile from './ChatUserListMobile';
 
 type ModalType = '채팅방 나가기' | '인원' | '스케줄' | '';
 type ModalActionType = Dispatch<SetStateAction<ModalType>>;
@@ -53,6 +53,7 @@ function ScheduleOption({ setModalType }: { setModalType: ModalActionType }) {
     </Dropdown.Item>
   );
 }
+
 const OPTION_LIST = [ShareOption, LeaveChatRoomOption];
 const MOBILE_OPTION_LIST = [UserOption, ScheduleOption];
 export default function ChatDropdownButton() {

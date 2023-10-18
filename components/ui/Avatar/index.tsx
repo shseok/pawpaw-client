@@ -1,5 +1,4 @@
 import Image from 'next/image';
-// import Link from "next/link";
 
 interface AvatarType {
   image: string;
@@ -20,7 +19,7 @@ export default function Avatar({ size = 'base', image, name }: AvatarType) {
 
   return (
     <Image
-      src={image}
+      src={image ?? '/images/default.avif'}
       alt={name}
       width={40}
       height={40}
@@ -29,4 +28,3 @@ export default function Avatar({ size = 'base', image, name }: AvatarType) {
     />
   );
 }
-/* 만약 프로필 사진 클릭하여 해당유저의 마이페이지로 가려면 Link 태그 사용 */
