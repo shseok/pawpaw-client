@@ -16,10 +16,7 @@ export async function postBoard(postBoardData: PostBoardType) {
 }
 
 export async function getBoardList(pageParam: number) {
-  let url = `/endpoint/api/board/list?pageSize=5`;
-  if (pageParam !== 0) {
-    url += `&pageNumber=${pageParam}`;
-  }
+  const url = `/endpoint/api/board/list?pageSize=5&pageNumber=${pageParam}`;
   try {
     const response = await fetch(url);
     if (response.status === 401) {

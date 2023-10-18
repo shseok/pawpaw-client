@@ -84,10 +84,19 @@ export function BoardCardCommentWrapper({
           value={commentText}
           onChange={(event) => setCommentText(event.target.value)}
         />
-        <button type="button" onClick={postNewComment}>
+        <button
+          type="button"
+          onClick={postNewComment}
+          disabled={commentText.length === 0}
+          className={`${
+            commentText.length === 0 ? 'cursor-not-allowed' : null
+          }`}
+        >
           <PaperPlaneIcon
             className={`w-8 h-8 ${
-              isLoading ? 'fill-grey-300' : 'fill-primary-300'
+              isLoading || commentText.length === 0
+                ? 'fill-grey-300'
+                : 'fill-primary-300'
             }`}
           />
         </button>

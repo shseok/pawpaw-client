@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import Avatar from '@/components/ui/Avatar';
 import FlexBox from '../../../FlexBox';
 import Modal from '../../../Modal';
 
@@ -9,19 +10,19 @@ export default function BoardCardModalComments({
   id,
   userName,
   content,
-  userImg,
+  userImage,
 }: {
   id: number;
   userName: string;
   content: string;
-  userImg: string;
+  userImage: string;
 }) {
   const [showSmallModal, setShowSmallModal] = useState(false);
 
   return (
     <div key={id}>
       <FlexBox align="start" className="gap-3 group">
-        <Image src={userImg} alt="사용자 프로필" width={36} height={36} />
+        <Avatar size="base" image={userImage} name={userName} />
         <FlexBox direction="column" align="start" className="gap-1">
           <div>
             <div className="inline-block mr-1 body2 text-grey-500">

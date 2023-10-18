@@ -20,6 +20,8 @@ export interface Board {
   fileNames: string[];
   likedCount: number;
   replyCount: number;
+  userImageUrl: string;
+  boardLiked: boolean;
   createdDate: string;
   modifiedDate: string;
 }

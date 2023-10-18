@@ -38,17 +38,7 @@ export default function BoardsList({
                 }}
                 className="w-full"
               >
-                <FeedBoardCard
-                  boardId={board.id}
-                  userName={board.writer}
-                  content={board.content}
-                  imgs={board.fileNames}
-                  setShowModal={setShowModal}
-                  comments={board.replyListDto}
-                  commentsCount={board.replyCount}
-                  likedCount={board.likedCount}
-                  createdDate={board.createdDate}
-                />
+                <FeedBoardCard board={board} setShowModal={setShowModal} />
               </div>
             ))
           ) : (

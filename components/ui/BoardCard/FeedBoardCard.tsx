@@ -1,31 +1,15 @@
 import { Dispatch, SetStateAction } from 'react';
-import { Comment } from '@/types/types';
+import { Board } from '@/types/types';
 import { BoardCard } from '@/components/ui/BoardCard/BoardCardPackage';
 import FlexBox from '../FlexBox';
 
-interface FeedBoardCardProps {
-  boardId: number;
-  userName: string;
-  content: string;
-  imgs: string[];
-  setShowModal: Dispatch<SetStateAction<boolean>>;
-  comments: Comment[];
-  commentsCount: number;
-  likedCount: number;
-  createdDate: string;
-}
-
 export default function FeedBoardCard({
-  boardId,
-  userName,
-  content,
-  imgs,
+  board,
   setShowModal,
-  comments,
-  commentsCount,
-  likedCount,
-  createdDate,
-}: FeedBoardCardProps) {
+}: {
+  board: Board;
+  setShowModal: Dispatch<SetStateAction<boolean>>;
+}) {
   // const { data: commentList } = useGetShortCommentList(boardId);
   return (
     <FlexBox
@@ -33,17 +17,21 @@ export default function FeedBoardCard({
       justify="between"
       className="max-h-[500px] p-9 rounded-[10px] border-[1px] border-grey-200 gap-4"
     >
-      <BoardCard.Header userName={userName} createdDate={createdDate} />
+      <BoardCard.Header
+        userName={board.writer}
+        createdDate={board.createdDate}
+        userImage={board.userImageUrl}
+      />
       <BoardCard.Content
         type="mainPC"
-        content={content}
-        imgs={imgs}
+        content={board.content}
+        imgs={board.fileNames}
         onClickModal={() => setShowModal(true)}
       >
         <BoardCard.BoardCardCommentWrapper
-          boardId={boardId}
-          commentsCount={commentsCount}
-          likedCount={likedCount}
+          boardId={board.id}
+          commentsCount={board.replyCount}
+          likedCount={board.likedCount}
         >
           <FlexBox
             direction="column"
@@ -51,7 +39,7 @@ export default function FeedBoardCard({
             align="start"
             className="max-h-[74px] overflow-hidden"
           >
-            {comments?.map((comment) => (
+            {board.replyListDto?.map((comment) => (
               <BoardCard.Comments
                 key={comment.id}
                 userName={comment.nickname}
