@@ -3,6 +3,8 @@ import { useState } from 'react';
 import usePostComment from '@/hooks/mutations/usePostComment';
 import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
 import LikeButton from '@/public/like.svg';
+import useLikeBoard from '@/hooks/mutations/useLikeBoard';
+import useUnlikeBoard from '@/hooks/mutations/useUnlikeBoard';
 import FlexBox from '../../FlexBox';
 
 export function BoardCardCommentWrapper({
@@ -22,6 +24,8 @@ export function BoardCardCommentWrapper({
 }) {
   const [commentText, setCommentText] = useState('');
   const { mutate: commentMutate, isLoading } = usePostComment();
+  const { mutate: likeMutate } = useLikeBoard();
+  const { mutate: unlikeMutate } = useUnlikeBoard();
 
   const postNewComment = () => {
     commentMutate({
@@ -30,6 +34,12 @@ export function BoardCardCommentWrapper({
       content: commentText,
     });
     setCommentText('');
+  };
+  const updateLike = () => {
+    if (isLiked) {
+      unlikeMutate(boardId);
+    }
+    likeMutate(boardId);
   };
 
   return (
@@ -72,7 +82,7 @@ export function BoardCardCommentWrapper({
         )}
       </FlexBox>
       <FlexBox className="gap-[9px] w-full">
-        <button type="button">
+        <button type="button" onClick={updateLike}>
           <LikeButton
             className={`w-6 h-6  ${isLiked ? 'fill-red' : 'fill-grey-500'}`}
           />
