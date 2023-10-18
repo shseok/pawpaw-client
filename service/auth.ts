@@ -1,4 +1,10 @@
-import { AuthParams, EmailAuthParams, VerificationParams } from '@/types/types';
+import {
+  AuthParams,
+  EmailAuthParams,
+  SearchEmailResult,
+  VerificationParams,
+} from '@/types/types';
+import { stringify } from 'qs';
 
 export async function createUserWithSocialLogin(params: AuthParams) {
   const formData = new FormData();
@@ -109,5 +115,54 @@ export async function logout() {
   });
   if (!response.ok) {
     throw new Error('로그아웃에 실패하였습니다.');
+  }
+}
+
+export async function findUserEmail({
+  name,
+  phoneNumber,
+}: {
+  name: string;
+  phoneNumber: string;
+}) {
+  const query = stringify({ name, phoneNumber }, { addQueryPrefix: true });
+  const response = await fetch('/endpoint/api/auth/email'.concat(query), {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('이메일을 찾을 수 없습니다.');
+  }
+
+  if (response.status === 404) {
+    throw new Error('존재하지 않는 유저입니다.');
+  }
+
+  const data = (await response.json()) as SearchEmailResult;
+  return data;
+}
+
+export async function changePassword({
+  name,
+  email,
+}: {
+  name: string;
+  email: string;
+}) {
+  const response = await fetch('/endpoint/api/auth/password/reset/mail', {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, email }),
+  });
+
+  if (!response.ok) {
+    throw new Error('비밀번호 변경에 실패하였습니다.');
   }
 }
