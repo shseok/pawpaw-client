@@ -13,6 +13,7 @@ export default function useGetChatHistory(roomId: string) {
       },
       select: (chatHistory) => {
         const reversedChatContent = chatHistory.pages
+          .slice()
           .reverse()
           .flatMap((chat) => chat.content);
         return {
