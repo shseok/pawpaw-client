@@ -6,10 +6,12 @@ export default function middleware(req: NextRequest) {
   const query = pathname === '/' ? '' : `?next=${pathname}`;
   if (!hasToken) {
     return NextResponse.redirect(new URL(`/auth/login${query}`, req.nextUrl));
+  } else if (hasToken && pathname.includes('/auth')) {
+    return NextResponse.redirect(new URL('/', req.nextUrl));
   }
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/', '/community', '/chat/:path*'],
+  matcher: ['/', '/community', '/chat/:path*', '/auth/:path*'],
 };
