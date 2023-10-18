@@ -1,10 +1,11 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getChatHistory } from '@/service/chatRoom';
+import { queryKeys } from '@/constant/query-keys';
 
 export default function useGetChatHistory(roomId: string) {
   const { data, hasNextPage, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery({
-      queryKey: ['chatHistory', roomId],
+      queryKey: [queryKeys.CHAT_HISTORY_LIST, roomId],
       queryFn: ({ pageParam = 0 }) => getChatHistory(roomId, pageParam),
       refetchOnWindowFocus: false,
       getNextPageParam: (history) => {

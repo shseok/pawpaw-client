@@ -2,6 +2,7 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { postSchedule } from '@/service/chatRoom';
 import Toast from '@/utils/notification';
 import { Schedule } from '@/types/types';
+import { queryKeys } from '@/constant/query-keys';
 
 export default function useCreateSchedule(closeModal: () => void) {
   const queryClient = useQueryClient();
@@ -16,7 +17,7 @@ export default function useCreateSchedule(closeModal: () => void) {
     onSuccess: () => {
       Toast.success('새로운 스케줄을 생성하였습니다.');
       closeModal();
-      return queryClient.invalidateQueries(['scheduleList']);
+      return queryClient.invalidateQueries([queryKeys.SCHEDULE_LIST]);
     },
     onError: () => {
       Toast.error(

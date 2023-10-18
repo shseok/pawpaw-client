@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { inviteUserToChatRoom } from '@/service/chatRoom';
 import Toast from '@/utils/notification';
+import { queryKeys } from '@/constant/query-keys';
 
 export default function useInviteUserToChatroom(successCb: () => void) {
   const queryClient = useQueryClient();
@@ -15,7 +16,7 @@ export default function useInviteUserToChatroom(successCb: () => void) {
     onSuccess: () => {
       successCb();
       Toast.success('성공적으로 친구를 초대했어요.🐶');
-      queryClient.resetQueries(['searchedUserList']);
+      queryClient.resetQueries([queryKeys.SEARCHED_USER_LIST]);
       return queryClient.invalidateQueries({
         queryKey: ['chatRoomUserList'],
         refetchType: 'all',

@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { getChatroomUserList } from '@/service/chatRoom';
+import { queryKeys } from '@/constant/query-keys';
 
 export default function useGetChatRoomUserList(chatRoomId: string) {
   const { data, isLoading } = useQuery({
-    queryKey: ['chatRoomUserList', chatRoomId],
+    queryKey: [queryKeys.CHATROOM_USER_LIST, chatRoomId],
     queryFn: () => getChatroomUserList(chatRoomId),
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000 * 5,
     enabled: !!chatRoomId,
   });
   return { data, isLoading };

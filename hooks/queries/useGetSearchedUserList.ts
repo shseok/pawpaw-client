@@ -1,3 +1,4 @@
+import { queryKeys } from '@/constant/query-keys';
 import { getSearchedUserList } from '@/service/chatRoom';
 import { useQuery } from '@tanstack/react-query';
 
@@ -6,7 +7,7 @@ export default function useGetSearchedUserList(
   nickname: string,
 ) {
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ['searchedUserList', nickname],
+    queryKey: [queryKeys.SEARCHED_USER_LIST, nickname],
     queryFn: () => getSearchedUserList(roomId, nickname),
     enabled: false,
   });
