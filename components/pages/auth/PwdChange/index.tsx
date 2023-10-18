@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import BottomButton from '../BottomButton';
-import { ValidateInput } from '@/components/ui/Input/ValidateInput';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import Toast from '@/utils/notification';
 import { validate } from '@/utils/validate';
 import { changePassword } from '@/service/auth';
-import { useRouter, useSearchParams } from 'next/navigation';
-import Toast from '@/utils/notification';
+import { ValidateInput } from '@/components/ui/Input/ValidateInput';
+import BottomButton from '../BottomButton';
 
 interface Inputs {
   password: string;

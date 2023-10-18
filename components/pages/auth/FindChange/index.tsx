@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { sendEmailChangeVerificationLink, findUserEmail } from '@/service/auth';
+import Toast from '@/utils/notification';
 import BottomButton from '../BottomButton';
 import TabButton from './TabButton';
-import { sendEmailChangeVerificationLink, findUserEmail } from '@/service/auth';
-import { useRouter, useSearchParams } from 'next/navigation';
-import Toast from '@/utils/notification';
 
 export type TabType = 'findId' | 'changePwd';
 const tabInfo = {
@@ -70,8 +70,8 @@ export default function FindChange() {
     setIsSuccess(false);
   };
 
-  const renderResult = () => {
-    return (
+  const renderBody = {
+    result: (
       <div className="pt-10">
         {activeTab === 'findId' ? (
           <div className="flex flex-col justify-center">
@@ -107,11 +107,8 @@ export default function FindChange() {
           />
         </div>
       </div>
-    );
-  };
-
-  const renderForm = () => {
-    return (
+    ),
+    form: (
       <div>
         {activeTab === 'findId' && (
           <p className="caption2 text-grey-400 pt-6 text-center break-keep">
@@ -161,9 +158,8 @@ export default function FindChange() {
           />
         </div>
       </div>
-    );
+    ),
   };
-
   return (
     <>
       <div className="w-full flex items-center">
@@ -180,7 +176,7 @@ export default function FindChange() {
           text="비밀번호 변경"
         />
       </div>
-      {isSuccess ? renderResult() : renderForm()}
+      {isSuccess ? renderBody.result : renderBody.form}
     </>
   );
 }
