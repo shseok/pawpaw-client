@@ -38,14 +38,14 @@ export default function LoginPage() {
       >
         <div className="flex justify-between gap-[24px]">
           <Link
-            href="/auth/find-change"
+            href="/auth/find-change?mode=findId"
             className="text-grey-400 text-xs 2xs:body1"
           >
             아이디(이메일)찾기
           </Link>
           <div className="w-[1px] h-[24px] bg-grey-200" />
           <Link
-            href="/auth/find-change"
+            href="/auth/find-change?mode=changePwd"
             className="text-grey-400 text-xs 2xs:body1"
           >
             비밀번호 변경

@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import BottomButton from '../BottomButton';
 import TabButton from './TabButton';
-import { changePassword, findUserEmail } from '@/service/auth';
-import { useRouter } from 'next/navigation';
+import { sendEmailChangeVerificationLink, findUserEmail } from '@/service/auth';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export type TabType = 'findId' | 'changePwd';
 const tabInfo = {
@@ -23,7 +23,10 @@ const tabInfo = {
 };
 
 export default function FindChange() {
-  const [activeTab, setActiveTab] = useState<TabType>('findId');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const mode = searchParams.get('mode') as TabType | null;
+  const [activeTab, setActiveTab] = useState<TabType>(mode ?? 'findId');
   const [name, setName] = useState('');
   const [confirmContent, setConfirmContent] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
@@ -32,7 +35,6 @@ export default function FindChange() {
     email: '',
     registrationDate: '',
   });
-  const router = useRouter();
 
   const handleFindChange = async () => {
     if (activeTab === 'findId') {
@@ -49,7 +51,7 @@ export default function FindChange() {
       }
     } else {
       try {
-        await changePassword({ name, email: confirmContent });
+        await sendEmailChangeVerificationLink({ name, email: confirmContent });
         setIsSuccess(true);
       } catch (e) {
         console.error(e);

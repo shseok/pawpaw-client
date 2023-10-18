@@ -146,7 +146,7 @@ export async function findUserEmail({
   return data;
 }
 
-export async function changePassword({
+export async function sendEmailChangeVerificationLink({
   name,
   email,
 }: {
@@ -165,4 +165,28 @@ export async function changePassword({
   if (!response.ok) {
     throw new Error('비밀번호 변경에 실패하였습니다.');
   }
+}
+
+export async function changePassword({
+  key,
+  password,
+}: {
+  key: string;
+  password: string;
+}) {
+  const response = await fetch('/endpoint/api/auth/password', {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ key, password }),
+  });
+  if (!response.ok) {
+    throw new Error('비밀번호 변경에 실패하였습니다.');
+  }
+  if (response.status === 404) {
+    throw new Error('존재하지 않는 비밀번호 변경 임시키입니다.');
+  }
+  return response;
 }
