@@ -85,18 +85,15 @@ export async function leaveChatRoom(roomId: string) {
 export async function getChatroomUserList(
   chatRoomId: string,
 ): Promise<ChatRoomUserList[]> {
-  try {
-    const url = `/endpoint/api/chatroom/${chatRoomId}/participants`;
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('채팅룸 참가 유저리스트를 불러오지 못하였습니다.');
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw error;
+  const url = `/endpoint/api/chatroom/${chatRoomId}/participants`;
+  const response = await fetch(url);
+  if (response.status === 400) {
+    window.location.replace('/community');
   }
+  if (!response.ok) {
+    throw new Error('채팅룸 참가 유저리스트를 불러오지 못하였습니다.');
+  }
+  return response.json();
 }
 // 채팅룸에 등록되어있는 종료되지않은 스케줄 리스트 조회 API
 export async function getScheduleList(roomId: string): Promise<ScheduleList[]> {
@@ -139,7 +136,6 @@ export async function postSchedule(
 
 // 채팅룸 스케줄 삭제 API
 export async function deleteSchedule(roomId: string, scheduleId: number) {
-  console.log(scheduleId);
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}`;
     const response = await fetch(url, { method: 'DELETE' });
@@ -183,7 +179,6 @@ export async function joinSchedule(roomId: string, scheduleId: number) {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
     const response = await fetch(url, { method: 'POST' });
-    console.log(response);
     if (response.status === 401) {
       throw new AuthError('로그인이 필요합니다.');
     }
@@ -196,8 +191,7 @@ export async function joinSchedule(roomId: string, scheduleId: number) {
 export async function withdrawSchedule(roomId: string, scheduleId: number) {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
-    const response = await fetch(url, { method: 'DELETE' });
-    console.log(response);
+    await fetch(url, { method: 'DELETE' });
   } catch (error) {
     console.error(error);
   }
