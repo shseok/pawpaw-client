@@ -5,12 +5,12 @@ import { getTrendingChatList } from '@/service/community';
 import { TrendingChatList } from '@/types/types';
 
 const QUERY_KEY = ['trendingChatList'];
-export default function useGetTrendingChatList() {
+export default function useGetTrendingChatList({ size }: { size: number }) {
   const { data, hasNextPage, isLoading, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: QUERY_KEY,
       queryFn: ({ pageParam = 0 }): Promise<TrendingChatList> =>
-        getTrendingChatList(pageParam),
+        getTrendingChatList(pageParam, size),
       refetchOnWindowFocus: false,
       getNextPageParam: (chatList) => {
         const lowestTrendingId = chatList.content
@@ -30,5 +30,5 @@ export default function useGetTrendingChatList() {
       <div ref={ref}>{isFetchingNextPage || isLoading ? children : null}</div>
     );
   }
-  return { data, Observer };
+  return { data, Observer, isLoading };
 }

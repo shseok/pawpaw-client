@@ -88,7 +88,7 @@ export default function RecommendPlace() {
   );
 
   return (
-    <FlexBox direction="column" className="w-full gap-3">
+    <FlexBox direction="column" className="w-full gap-3 ">
       <h3 className="flex items-center justify-between w-full header3">
         <p>
           <span className="text-primary-300">수박이</span>와 가기 좋은 장소

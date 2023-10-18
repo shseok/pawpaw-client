@@ -1,11 +1,12 @@
 'use client';
 
 import FlexBox from '@/components/ui/FlexBox';
-import RightButton from '@/public/ChatCard/arrow-right.svg';
-import LeftButton from '@/public/ChatCard/arrow-left.svg';
 import SimpleChatCard from '@/components/ui/ChatCard/SimpleChatCard';
+import useGetTrendingChatList from '@/hooks/queries/useGetTrendingChatList';
+import SimpleChatListLoading from '@/components/ui/Loading/SimpleChatListLoading';
 
 export default function SimpleChatCardList() {
+  const { data, isLoading } = useGetTrendingChatList({ size: 3 });
   return (
     <FlexBox
       direction="column"
@@ -14,18 +15,20 @@ export default function SimpleChatCardList() {
     >
       <FlexBox justify="between" className="w-full">
         <h3 className="header3">지금 뜨고있는 채팅방 🔥</h3>
-        <FlexBox className="gap-4">
-          <button type="button">
-            <RightButton />
-          </button>
-          <button type="button">
-            <LeftButton />
-          </button>
-        </FlexBox>
       </FlexBox>
-      <SimpleChatCard />
-      <SimpleChatCard />
-      <SimpleChatCard />
+      <ul className="flex flex-col gap-2">
+        {isLoading ? (
+          <SimpleChatListLoading />
+        ) : (
+          data?.pages.map((page) =>
+            page.content.map((list) => (
+              <li key={list.id}>
+                <SimpleChatCard {...list} />
+              </li>
+            )),
+          )
+        )}
+      </ul>
     </FlexBox>
   );
 }

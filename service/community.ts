@@ -46,8 +46,8 @@ export async function getEnteredChatList(): Promise<EnteredChatList[]> {
   }
 }
 
-export async function getTrendingChatList(beforeId: number) {
-  let url = `/endpoint/api/chatroom/trending?size=9`;
+export async function getTrendingChatList(beforeId: number, size: number) {
+  let url = `/endpoint/api/chatroom/trending?size=${size}`;
   if (beforeId !== 0) {
     url += `&beforeId=${beforeId}`;
   }

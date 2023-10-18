@@ -89,7 +89,7 @@ export interface VerificationParams {
   recipient: string;
   birthday: string;
 }
-interface ChatList {
+export interface ChatList {
   id: number;
   name: string;
   description: string;
