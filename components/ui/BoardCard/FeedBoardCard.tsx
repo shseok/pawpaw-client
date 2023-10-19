@@ -10,7 +10,6 @@ export default function FeedBoardCard({
   board: Board;
   setShowModal: Dispatch<SetStateAction<boolean>>;
 }) {
-  // const { data: commentList } = useGetShortCommentList(boardId);
   return (
     <FlexBox
       direction="column"

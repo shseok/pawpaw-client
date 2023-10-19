@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 interface AvatarType {
-  image: string;
+  image: string | undefined;
   name: string;
   size?: 'small' | 'base' | 'large' | 'xl' | 'xxl';
 }

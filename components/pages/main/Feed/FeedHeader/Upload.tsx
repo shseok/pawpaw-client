@@ -7,7 +7,13 @@ import Avatar from '../../../../ui/Avatar';
 import Button from '../../../../ui/Button';
 import FlexBox from '../../../../ui/FlexBox';
 
-export default function Upload() {
+export default function Upload({
+  userImage,
+  nickname,
+}: {
+  userImage: string | undefined;
+  nickname: string | undefined;
+}) {
   const [postText, setPostText] = useState('');
   const [isUploading, setIsUploading] = useState(false);
 
@@ -47,8 +53,8 @@ export default function Upload() {
       <FlexBox justify="between" className="w-full gap-[24px]">
         <Avatar
           size="xxl"
-          image="/Feed/desktop/tempUserProfilePic.svg"
-          name="수박이"
+          image={userImage}
+          name={nickname ?? '로그인하세요'}
         />
         <div className="relative w-full">
           <textarea

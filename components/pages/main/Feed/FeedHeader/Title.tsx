@@ -1,7 +1,7 @@
-export default function Title() {
+export default function Title({ nickname }: { nickname: string | undefined }) {
   return (
     <div className="header1">
-      <span className="text-primary-300">수박이</span>와 좋은 하루 되세요!
+      <span className="text-primary-300">{nickname}</span>님 좋은 하루 되세요!
     </div>
   );
 }
