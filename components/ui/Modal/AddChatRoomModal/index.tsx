@@ -84,7 +84,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
       >
         <div className="self-end hidden tablet:block">
           <button type="button" onClick={onClose}>
-            <XIcon className="w-8 h-8" />
+            <XIcon className="w-8 h-8 fill-white" />
           </button>
         </div>
         <div className="flex flex-col h-full gap-3 bg-white p-9 tablet:rounded-[10px] overflow-y-auto">

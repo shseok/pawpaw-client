@@ -2,8 +2,8 @@ import { LocationInfoType, LocationName } from '@/types/types';
 
 const BASE_URL =
   process.env.NODE_ENV === 'development'
-    ? process.env.NEXT_PUBLIC_LOCAL_API_BASE_URL
-    : process.env.NEXT_PUBLIC_CLIENT_BASE_URL;
+    ? process.env.NEXT_PUBLIC_LOCAL_API_URL
+    : process.env.NEXT_PUBLIC_CLIENT_URL;
 
 export async function getLocationList(
   value: string,

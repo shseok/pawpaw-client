@@ -30,12 +30,6 @@ const socialMap = {
   google: Google,
 } as const;
 
-const REDIRECT_URI = `${
-  process.env.NODE_ENV === 'development'
-    ? process.env.NEXT_PUBLIC_LOCAL_API_BASE_URL
-    : process.env.NEXT_PUBLIC_CLIENT_BASE_URL
-}/term`;
-
 export default function SocialButton({
   hasBorder = 'border',
   socialProvider,
@@ -44,7 +38,7 @@ export default function SocialButton({
   const ButtonIcon = socialMap[socialProvider];
   const buttonStyle = `${sizes[size].btn} rounded-full ${bgColor[socialProvider]} flex items-center justify-center ${hasBorder}`;
   const handleLogin = (provider: string) => {
-    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorize/${provider}?redirect_uri=${REDIRECT_URI}`;
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorize/${provider}?redirect_uri=${process.env.NEXT_PUBLIC_CLIENT_URL}/term`;
   };
   return (
     <button
