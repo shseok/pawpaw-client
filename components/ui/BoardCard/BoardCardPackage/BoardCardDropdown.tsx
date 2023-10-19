@@ -2,17 +2,21 @@ import DotsIcon from 'public/DotsIcon.svg';
 import copyToClipBoard from '@/utils/copyToClipBoard';
 import useAddBookmark from '@/hooks/mutations/useAddBookmark';
 import useDeleteBookmark from '@/hooks/mutations/useDeleteBookmark';
+import useDeleteBoard from '@/hooks/mutations/useDeleteBoard';
 import { Dropdown } from '../../ui';
 
 export default function PostCardDropdown({
   boardId, // TODO : 북마크 되어있는지 확인
-  // isBookmarked,
+  isMyBoard, // isBookmarked,
 }: {
   boardId: number;
+  isMyBoard: boolean;
   // isBookmarked: boolean;
 }) {
   const { mutate: addBookmark } = useAddBookmark();
   const { mutate: deleteBookmark } = useDeleteBookmark();
+  const { mutate: deleteBoard } = useDeleteBoard(boardId);
+
   const handleBookmark = () => {
     // if (isBookmarked) {
     deleteBookmark(boardId);
@@ -20,6 +24,7 @@ export default function PostCardDropdown({
     // addBookmark(boardId);
     // }
   };
+
   return (
     <Dropdown>
       <Dropdown.Trigger>
@@ -30,6 +35,9 @@ export default function PostCardDropdown({
         <Dropdown.Item event={() => copyToClipBoard(window.location.href)}>
           공유하기
         </Dropdown.Item>
+        {isMyBoard ? (
+          <Dropdown.Item event={() => deleteBoard()}>삭제하기</Dropdown.Item>
+        ) : null}
       </Dropdown.Menu>
     </Dropdown>
   );

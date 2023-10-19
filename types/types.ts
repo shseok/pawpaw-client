@@ -12,6 +12,7 @@ export interface SidebarProps {
 }
 
 export interface Board {
+  userId: string;
   id: number;
   title: string;
   content: string;

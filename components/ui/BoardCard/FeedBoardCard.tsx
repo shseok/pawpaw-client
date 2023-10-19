@@ -16,12 +16,7 @@ export default function FeedBoardCard({
       justify="between"
       className="max-h-[500px] p-9 rounded-[10px] border-[1px] border-grey-200 gap-4"
     >
-      <BoardCard.Header
-        userName={board.writer}
-        createdDate={board.createdDate}
-        userImage={board.userImageUrl}
-        boardId={board.id}
-      />
+      <BoardCard.Header board={board} />
       <BoardCard.Content
         type="mainPC"
         content={board.content}
