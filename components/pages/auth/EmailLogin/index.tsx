@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { loginWithEmailAndPassword } from '@/service/auth';
 import BottomButton from '../BottomButton';
 
@@ -13,13 +12,12 @@ export default function EmailLogin({ title }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const router = useRouter();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       await loginWithEmailAndPassword({ email, password });
-      router.push('/');
+      window.location.href = '/';
     } catch (e) {
       setError('"아이디 또는 비밀번호가 일치하지 않습니다. 다시 입력해주세요"');
       console.error('Error logging in:', e);
