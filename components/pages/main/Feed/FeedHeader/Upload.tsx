@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Toast from '@/utils/notification';
-import { postBoard } from '@/service/board';
+import usePostBoard from '@/hooks/mutations/usePostBoard';
 import Avatar from '../../../../ui/Avatar';
 import Button from '../../../../ui/Button';
 import FlexBox from '../../../../ui/FlexBox';
@@ -15,7 +15,7 @@ export default function Upload({
   nickname: string | undefined;
 }) {
   const [postText, setPostText] = useState('');
-  const [isUploading, setIsUploading] = useState(false);
+  const { mutate: postBoard, isLoading, isSuccess } = usePostBoard(postText);
 
   const maxCharacters = 100;
   const isOverMaxChar = postText.length > maxCharacters;
@@ -23,30 +23,9 @@ export default function Upload({
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostText(event.target.value);
   };
-
-  // 데이터 전송을 위한 함수
-  const onUploadBoard = async () => {
-    if (!postText || isOverMaxChar) {
-      return;
-    }
-    setIsUploading(true);
-    try {
-      const response = await postBoard({
-        title: 'title',
-        content: postText,
-      });
-      if (response.content) {
-        Toast.success('게시물이 성공적으로 업로드되었습니다.');
-        setPostText('');
-      } else {
-        Toast.error('업로드에 실패했습니다. 잠시 후 다시 시도해주세요.');
-      }
-    } catch (error) {
-      Toast.error('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-    } finally {
-      setIsUploading(false);
-    }
-  };
+  useEffect(() => {
+    if (isSuccess) setPostText('');
+  }, [isSuccess]);
 
   return (
     <form className="flex flex-col bg-primary-50 p-5 border-[1px] border-primary-300 rounded-[10px] w-full">
@@ -82,18 +61,14 @@ export default function Upload({
         >
           파일
         </Button>
-        {isUploading ? (
-          <div>업로드 중입니다</div>
-        ) : (
-          <Button
-            size="lg"
-            disabled={isOverMaxChar}
-            className="w-40"
-            onClickAction={() => onUploadBoard()}
-          >
-            업로드
-          </Button>
-        )}
+        <Button
+          size="lg"
+          disabled={postText.length === 0 || isOverMaxChar || isLoading}
+          className="w-40"
+          onClickAction={() => postBoard()}
+        >
+          {isLoading ? '업로드 중입니다' : '업로드'}
+        </Button>
         <div className="mt-4" id="renderedText" />
       </FlexBox>
     </form>
