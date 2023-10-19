@@ -74,6 +74,58 @@ export async function getCommentList(
   }
 }
 
+export async function addBookmarkBoard(boardId: number) {
+  const url = `endpoint/api/bookmark/add?boardId=${boardId}`;
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (response.status === 401) {
+      throw new AuthError('로그인이 필요한 서비스입니다.');
+    }
+    if (!response.ok) {
+      throw new Error(`서버오류:${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    if (error instanceof AuthError) {
+      window.location.replace('/auth/login');
+      alert(error.message);
+    }
+    throw error;
+  }
+}
+
+export async function deleteBookmarkBoard(boardId: number) {
+  const url = `endpoint/api/bookmark/delete?boardId=${boardId}`;
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (response.status === 401) {
+      throw new AuthError('로그인이 필요한 서비스입니다.');
+    }
+    if (!response.ok) {
+      throw new Error(`서버오류:${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    if (error instanceof AuthError) {
+      window.location.replace('/auth/login');
+      alert(error.message);
+    }
+    throw error;
+  }
+}
+
 export async function updateBoardLike(boardId: number) {
   const url = `endpoint/api/boardLike/like?boardId=${boardId}`;
   try {

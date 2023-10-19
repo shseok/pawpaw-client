@@ -1,4 +1,4 @@
-import getMyBoardList from '@/service/myPage';
+import { getMyBoardList } from '@/service/myPage';
 import { MyBoardList } from '@/types/types';
 import useInfiniteScroll from '../common/useInfiniteScroll';
 

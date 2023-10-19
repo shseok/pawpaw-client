@@ -7,10 +7,12 @@ export default function BoardCardHeader({
   userName,
   userImage,
   createdDate,
+  boardId,
 }: {
   userName: string;
   userImage: string;
   createdDate: string;
+  boardId: number;
 }) {
   return (
     <FlexBox justify="between" className="w-full">
@@ -25,7 +27,7 @@ export default function BoardCardHeader({
           </div>
         </FlexBox>
       </FlexBox>
-      <BoardCardDropdown />
+      <BoardCardDropdown boardId={boardId} />
     </FlexBox>
   );
 }

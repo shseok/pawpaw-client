@@ -35,15 +35,7 @@ export default function MyBoardsList() {
                 }}
                 className="w-full"
               >
-                <MyBoardCard
-                  userName={board.writer}
-                  content={board.content}
-                  imgs={board.fileNames}
-                  setShowModal={setShowModal}
-                  commentsCount={board.replyCount}
-                  likedCount={board.likedCount}
-                  createdDate={board.createdDate}
-                />
+                <MyBoardCard board={board} setShowModal={setShowModal} />
               </div>
             )),
           )}

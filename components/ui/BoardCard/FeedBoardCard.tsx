@@ -20,6 +20,7 @@ export default function FeedBoardCard({
         userName={board.writer}
         createdDate={board.createdDate}
         userImage={board.userImageUrl}
+        boardId={board.id}
       />
       <BoardCard.Content
         type="mainPC"
