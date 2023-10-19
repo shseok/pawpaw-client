@@ -3,6 +3,7 @@ import { ChatType } from '@/types/types';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import Image from 'next/image';
+import { CHAT_EVENT } from '@/constant/chat';
 
 export default function ChatItem({ ...chat }: ChatType) {
   const {
@@ -42,7 +43,7 @@ export default function ChatItem({ ...chat }: ChatType) {
       </div>
     );
   }
-  if (chatType === 'JOIN' || chatType === 'LEAVE') {
+  if (CHAT_EVENT.includes(chatType)) {
     return <div className="self-center mb-5 text-grey-500 body4">{data}</div>;
   }
   if (chatType === 'IMAGE') {

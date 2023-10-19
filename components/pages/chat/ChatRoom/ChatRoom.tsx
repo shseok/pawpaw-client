@@ -7,6 +7,7 @@ import { ChatType } from '@/types/types';
 import useSocket from '@/hooks/common/useSocket';
 import { useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '@/constant/query-keys';
+import { CHAT_EVENT } from '@/constant/chat';
 import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
 import ChatInput from './ChatInput';
@@ -55,7 +56,7 @@ export default function ChatRoom({
         `/sub/chatroom/${roomId}/message`,
         (chat) => {
           const newChat = JSON.parse(chat.body);
-          if (newChat.chatType === 'LEAVE' && 'JOIN') {
+          if (CHAT_EVENT.includes(newChat.chatType)) {
             queryClient.invalidateQueries([queryKeys.CHATROOM_USER_LIST]);
           }
           setCurrentChatList((prevChatList) => [...prevChatList, newChat]);
