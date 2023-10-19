@@ -2,7 +2,6 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import { useJsApiLoader, GoogleMap } from '@react-google-maps/api';
-import Link from 'next/link';
 import Image from 'next/image';
 import FlexBox from '@/components/ui/FlexBox';
 import ArrowClockIcon from '@/public/ArrowClockwise.svg';
@@ -97,13 +96,14 @@ export default function RecommendPlace() {
           <ArrowClockIcon />
         </button>
       </h3>
-      <Link
-        href={`/${placeDetail?.place_id}`}
-        className="w-full rounded-[10px] shadow-chatCard p-5 h-64 gap-5 flex flex-col"
-      >
+      <div className="w-full rounded-[10px] shadow-chatCard p-5 h-64 gap-5 flex flex-col">
         <Image
-          src="/default.png"
-          alt="d"
+          src={
+            placeDetail?.photos
+              ? placeDetail.photos[0].getUrl()
+              : '/default.png'
+          }
+          alt={placeDetail?.name ?? '매장 사진'}
           width={300}
           height={100}
           priority
@@ -123,7 +123,7 @@ export default function RecommendPlace() {
             {placeDetail && placeDetail.formatted_address}
           </p>
         </FlexBox>
-      </Link>
+      </div>
     </FlexBox>
   );
 }

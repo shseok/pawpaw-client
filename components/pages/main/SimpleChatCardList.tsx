@@ -6,7 +6,7 @@ import useGetTrendingChatList from '@/hooks/queries/useGetTrendingChatList';
 import SimpleChatListLoading from '@/components/ui/Loading/SimpleChatListLoading';
 
 export default function SimpleChatCardList() {
-  const { data, isLoading } = useGetTrendingChatList({ size: 3 });
+  const { data, isLoading } = useGetTrendingChatList({ size: 9 });
   return (
     <FlexBox
       direction="column"
@@ -16,7 +16,7 @@ export default function SimpleChatCardList() {
       <FlexBox justify="between" className="w-full">
         <h3 className="header3">지금 뜨고있는 채팅방 🔥</h3>
       </FlexBox>
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-2 p-2 overflow-y-scroll h-72 2xl:h-96 scrollbar-hide">
         {isLoading ? (
           <SimpleChatListLoading />
         ) : (

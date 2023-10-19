@@ -19,7 +19,7 @@ export default function ChatCardWrapper({
   className,
 }: {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 }) {
   return (
     <FlexBox
