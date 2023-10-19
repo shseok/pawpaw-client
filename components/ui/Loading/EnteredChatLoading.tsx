@@ -24,10 +24,7 @@ export default function EnteredChatLoading() {
                   <Skeleton className="w-10 h-10 rounded-full" />
                   <Skeleton className="w-24 h-8 rounded-lg" />
                 </div>
-                <div className="flex gap-2">
-                  <Skeleton className="w-10 h-10 rounded-full" />
-                  <Skeleton className="w-10 h-10 rounded-full" />
-                </div>
+                <Skeleton className="w-10 h-10 rounded-full" />
               </div>
             </div>
           </div>

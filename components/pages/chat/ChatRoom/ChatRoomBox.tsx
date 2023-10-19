@@ -34,7 +34,6 @@ export default function ChatRoomBox({
   const chatListWithDateSection = makeDateSection(
     mergedChatList && mergedChatList,
   );
-
   return (
     <div className="flex flex-col flex-1 p-4 overflow-y-scroll " ref={chatRef}>
       {Object.entries(chatListWithDateSection).map(

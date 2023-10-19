@@ -58,7 +58,7 @@ export default function ChatItem({ ...chat }: ChatType) {
               width={200}
               height={200}
               priority
-              className="rounded-md"
+              className="w-40 h-40 rounded-md"
             />
             <span className="self-end w-fit caption2 text-grey-500">
               {format(new Date(createdDate), 'aa h:mm', { locale: ko })}

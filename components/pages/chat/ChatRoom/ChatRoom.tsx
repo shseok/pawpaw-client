@@ -50,9 +50,6 @@ export default function ChatRoom({
     stompClient.current = createClient(
       process.env.NEXT_PUBLIC_SOCKET_URL as string,
     );
-    stompClient.current.debug = (debug) => {
-      console.log('debug', debug);
-    };
     stompClient.current.connect({}, () => {
       stompClient.current?.subscribe(
         `/sub/chatroom/${roomId}/message`,
