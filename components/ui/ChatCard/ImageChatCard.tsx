@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import NoticeIcon from '@/public/ChatCard/notice.svg';
 import ScheduleIcon from '@/public/ChatCard/schedule.svg';
 import { EnteredChatList } from '@/types/types';
 import { FlexBox, Divider, TagList } from '@/components/ui/ui';
