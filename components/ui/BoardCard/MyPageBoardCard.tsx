@@ -13,12 +13,7 @@ export default function MyPageBoardCard({
 }: MyBoardCardProps) {
   return (
     <BoardCard>
-      <BoardCard.Header
-        userName={board.writer}
-        createdDate={board.createdDate}
-        userImage={board.userImageUrl}
-        boardId={board.id}
-      />
+      <BoardCard.Header board={board} />
       <BoardCard.Content
         type="myPage"
         content={board.content}

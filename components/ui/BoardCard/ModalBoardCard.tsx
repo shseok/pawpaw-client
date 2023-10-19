@@ -7,12 +7,7 @@ export default function ModalBoardCard({ board }: { board: Board }) {
 
   return (
     <BoardCardModal imgs={board.fileNames}>
-      <BoardCardModal.Header
-        userName={board.writer}
-        userImage={board.userImageUrl}
-        createdDate={board.createdDate}
-        boardId={board.id}
-      />
+      <BoardCardModal.Header board={board} />
       <BoardCardModal.Content
         type="modal"
         content={board.content}
