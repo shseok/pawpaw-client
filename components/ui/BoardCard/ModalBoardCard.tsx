@@ -11,6 +11,7 @@ export default function ModalBoardCard({ board }: { board: Board }) {
         userName={board.writer}
         userImage={board.userImageUrl}
         createdDate={board.createdDate}
+        boardId={board.id}
       />
       <BoardCardModal.Content
         type="modal"

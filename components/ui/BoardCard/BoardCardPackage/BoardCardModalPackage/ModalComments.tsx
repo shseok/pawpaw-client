@@ -52,14 +52,14 @@ export default function BoardCardModalComments({
               >
                 <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
                   <button className="w-full p-3 body1" type="button">
-                    차단하기
+                    삭제하기
                   </button>
                 </li>
-                <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
+                {/* <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
                   <button className="w-full p-3 body1" type="button">
                     신고하기
                   </button>
-                </li>
+                </li> */}
                 <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
                   <button
                     className="w-full p-3 body1"

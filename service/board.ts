@@ -74,6 +74,26 @@ export async function getCommentList(
   }
 }
 
+export async function deleteComment(boardId: number, replyId: number) {
+  const url = `/endpoint/api/reply/remove/${boardId}/${replyId}`;
+  try {
+    const response = await fetch(url);
+    if (response.status === 401) {
+      throw new AuthError('로그인이 필요한 서비스입니다.');
+    }
+    if (!response.ok) {
+      throw new Error(`서버오류:${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    if (error instanceof AuthError) {
+      window.location.replace('/auth/login');
+      alert(error.message);
+    }
+    throw error;
+  }
+}
+
 export async function addBookmarkBoard(boardId: number) {
   const url = `endpoint/api/bookmark/add?boardId=${boardId}`;
   try {
