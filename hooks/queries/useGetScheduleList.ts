@@ -7,6 +7,7 @@ export default function useGetScheduleList(roomId: string) {
     queryKey: [queryKeys.SCHEDULE_LIST, roomId],
     queryFn: () => getScheduleList(roomId),
     staleTime: 60 * 1000 * 5,
+    refetchInterval: 10000,
   });
   return { data, isLoading };
 }

@@ -19,10 +19,8 @@ export default function useCreateSchedule(closeModal: () => void) {
       closeModal();
       return queryClient.invalidateQueries([queryKeys.SCHEDULE_LIST]);
     },
-    onError: () => {
-      Toast.error(
-        '스케줄을 생성하지 못하였습니다. 잠시후 다시 시도해주세요.🥲',
-      );
+    onError: (error: Error) => {
+      Toast.error(error.message);
     },
   });
   return { mutate, isLoading };

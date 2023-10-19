@@ -3,20 +3,10 @@ import {
   ChatRoomUserList,
   Schedule,
   ScheduleList,
+  ChatRoomType,
 } from '@/types/types';
 import Toast from '@/utils/notification';
 import { AuthError, ImageSizeError } from '@/lib/error';
-
-interface ChatRoomType {
-  image: File;
-  body: {
-    name: string;
-    description: string;
-    hashTagList: string[];
-    searchable: boolean;
-    locationLimit: boolean;
-  };
-}
 
 // 채팅방 생성 API
 export async function postChatRoom(chatRoomData: ChatRoomType) {
@@ -125,7 +115,9 @@ export async function postSchedule(
       },
     });
     if (!response.ok) {
-      throw new Error(`서버오류:${response.status}`);
+      throw new Error(
+        '스케줄을 생성하지 못하였습니다. 잠시후 다시 시도해주세요.🥲',
+      );
     }
     return await response.json();
   } catch (error) {
@@ -182,8 +174,15 @@ export async function joinSchedule(roomId: string, scheduleId: number) {
     if (response.status === 401) {
       throw new AuthError('로그인이 필요합니다.');
     }
+    if (response.status === 404) {
+      throw new Error('삭제된 일정이어서 참여할 수 없어요.');
+    }
+    if (!response.ok) {
+      throw new Error('잠시후 다시 시도해주세요.');
+    }
   } catch (error) {
     console.error(error);
+    throw error;
   }
 }
 

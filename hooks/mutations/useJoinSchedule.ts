@@ -11,11 +11,11 @@ export default function useJoinSchedule() {
       joinSchedule(roomId, scheduleId),
     onSuccess: () => {
       Toast.success('스케줄에 참여하였습니다.🐾');
-      return queryClient.invalidateQueries([queryKeys.SCHEDULE_LIST]);
     },
-    onError: () => {
-      Toast.error('잠시후 다시 시도해주세요.');
+    onError: (error: Error) => {
+      Toast.error(error.message);
     },
+    onSettled: () => queryClient.invalidateQueries([queryKeys.SCHEDULE_LIST]),
   });
   return { mutate, isLoading };
 }
