@@ -3,12 +3,12 @@ import { Divider, Skeleton } from '../ui';
 
 export default function FeedBoardLoading() {
   return (
-    <FlexBox direction="column" className="gap-10">
+    <FlexBox direction="column" className="w-full gap-10 ">
       {new Array(10).fill('').map((_, index) => (
         <div
           // eslint-disable-next-line react/no-array-index-key
           key={`board-${index}`}
-          className=" w-[920px] tablet:min-w-[700px]"
+          className="w-full "
         >
           <FlexBox
             direction="column"
