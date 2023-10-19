@@ -175,3 +175,8 @@ export interface ChatRoomInfo {
   participantNumber: number;
   coverUrl: string;
 }
+
+export interface SearchEmailResult {
+  email: string;
+  registrationDate: string;
+}

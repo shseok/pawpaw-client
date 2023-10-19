@@ -24,7 +24,7 @@ export interface GeneralRegisterStore {
   setSearchHistory: (searchHistory: string) => void;
   setNickname: (nickname: string) => void;
   setPetInfo: (info: { name: string; species: Species }) => void;
-  setImageFile: (imageFile: File) => void;
+  setImageFile: (imageFile: File | null) => void;
 }
 
 export const useGeneralRegisterStore =
@@ -67,7 +67,7 @@ export const useGeneralRegisterStore =
         set((store) => ({ ...store, nickname })),
       setPetInfo: (petInfo: { name: string; species: Species }) =>
         set((store) => ({ ...store, petInfo })),
-      setImageFile: (imageFile: File) =>
+      setImageFile: (imageFile: File | null) =>
         set((store) => ({ ...store, imageFile })),
     })),
     Object.is,

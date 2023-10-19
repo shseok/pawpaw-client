@@ -48,7 +48,7 @@ export default function UserAddModal({
       >
         <div className="self-end hidden tablet:block">
           <button type="button" onClick={onClose}>
-            <XIcon className="w-8 h-8" />
+            <XIcon className="w-8 h-8 fill-white" />
           </button>
         </div>
         <FlexBox
