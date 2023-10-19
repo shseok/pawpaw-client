@@ -30,7 +30,6 @@ export default function PostCardDropdown({
         <Dropdown.Item event={() => copyToClipBoard(window.location.href)}>
           공유하기
         </Dropdown.Item>
-        <Dropdown.Item>신고하기</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
