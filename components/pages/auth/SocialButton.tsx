@@ -40,7 +40,8 @@ export default function SocialButton({
   const ButtonIcon = socialMap[socialProvider];
   const buttonStyle = `${sizes[size].btn} rounded-full ${bgColor[socialProvider]} flex items-center justify-center ${hasBorder}`;
   const handleLogin = (provider: string) => {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorize/${provider}?redirect_uri=${process.env.NEXT_PUBLIC_CLIENT_URL}/auth/policy`;
+    // Redirect URI는 백에서 정의되고 있습니다. > ?redirect_uri=${process.env.NEXT_PUBLIC_CLIENT_URL}/auth/policy
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorize/${provider}`;
     console.log(url);
     router.push(url);
   };
