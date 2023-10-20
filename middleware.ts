@@ -4,9 +4,13 @@ export default function middleware(req: NextRequest) {
   const hasToken = req.cookies.has('REFRESH');
   const pathname = req.nextUrl.pathname;
   const query = pathname === '/' ? '' : `?next=${pathname}`;
-  const isAuthPath = req.nextUrl.pathname.startsWith('/auth');
+  const isAuthPath = pathname.startsWith('/auth');
   if (isAuthPath && hasToken) {
     // 유저가 토큰을 가지고 auth 페이지에 접근하면 홈으로 리디렉션
+    if (pathname.startsWith('/auth/complete')) {
+      // 회원가입 후 완료 페이지 접근
+      return NextResponse.next();
+    }
     return NextResponse.redirect(new URL('/', req.nextUrl));
   }
   if (!isAuthPath && !hasToken) {

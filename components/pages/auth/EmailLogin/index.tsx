@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { loginWithEmailAndPassword } from '@/service/auth';
+import Toast from '@/utils/notification';
 import BottomButton from '../BottomButton';
 
 interface Props {
@@ -20,7 +21,9 @@ export default function EmailLogin({ title }: Props) {
       window.location.href = '/';
     } catch (e) {
       setError('"아이디 또는 비밀번호가 일치하지 않습니다. 다시 입력해주세요"');
-      console.error('Error logging in:', e);
+      if (e instanceof Error) {
+        Toast.error(e.message);
+      }
     }
   };
 

@@ -24,7 +24,13 @@ export async function createUserWithSocialLogin(params: AuthParams) {
   });
 
   if (!response.ok) {
-    throw new Error('소셜 회원가입에 실패하였습니다.');
+    if (response.status === 400) {
+      throw new Error('모든 필수 약관에 동의가 필요합니다.');
+    } else if (response.status === 413) {
+      throw new Error('파일 크기 제한을 초과하였습니다.');
+    } else {
+      throw new Error('소셜 회원가입에 실패하였습니다.');
+    }
   }
 }
 
@@ -42,7 +48,15 @@ export async function createUserWithEmailAndPassword(params: EmailAuthParams) {
     body: formData,
   });
   if (!response.ok) {
-    throw new Error('간편 회원가입에 실패하였습니다.');
+    if (response.status === 400) {
+      throw new Error('모든 필수 약관에 동의가 필요합니다.');
+    } else if (response.status === 409) {
+      throw new Error('중복된 아이디 입니다.');
+    } else if (response.status === 413) {
+      throw new Error('파일 크기 제한을 초과하였습니다.');
+    } else {
+      throw new Error('간편 회원가입에 실패하였습니다.');
+    }
   }
 }
 
@@ -63,7 +77,13 @@ export async function loginWithEmailAndPassword({
   });
 
   if (!response.ok) {
-    throw new Error('로그인에 실패하였습니다.');
+    if (response.status === 401) {
+      throw new Error('잘못된 계정정보입니다.');
+    } else if (response.status === 404) {
+      throw new Error('존재하지 않는 유저입니다.');
+    } else {
+      throw new Error('로그인에 실패하였습니다.');
+    }
   }
 
   return response;
@@ -73,11 +93,14 @@ export async function isDuplicatedEmail(email: string) {
   const url = `/endpoint/api/auth/sign-up/check/duplicate/email`;
   const response = await fetch(url.concat(`?email=${email}`));
   const data = await response.json();
+  if (!response.ok) {
+    throw new Error('이미 존재하는 이메일입니다.');
+  }
   return data;
 }
 
 export async function requestVerification(params: VerificationParams) {
-  await fetch('/endpoint/api/auth/sign-up/verification', {
+  const response = await fetch('/endpoint/api/auth/sign-up/verification', {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -85,6 +108,10 @@ export async function requestVerification(params: VerificationParams) {
     },
     body: JSON.stringify(params),
   });
+
+  if (!response.ok) {
+    throw new Error('인증번호 발송에 실패하였습니다.');
+  }
 }
 
 export async function checkVerification({
@@ -105,6 +132,13 @@ export async function checkVerification({
       body: JSON.stringify({ phoneNumber, code }),
     },
   );
+  if (!response.ok) {
+    if (response.status === 400) {
+      throw new Error('유효하지 않은 인증 코드입니다.');
+    } else {
+      throw new Error('인증번호 확인에 실패하였습니다.');
+    }
+  }
   const data = (await response.json()) as { success: boolean };
   return data;
 }
@@ -114,7 +148,11 @@ export async function logout() {
     credentials: 'include',
   });
   if (!response.ok) {
-    throw new Error('로그아웃에 실패하였습니다.');
+    if (response.status === 400) {
+      throw new Error('로그인 상태가 아닙니다.');
+    } else {
+      throw new Error('로그아웃에 실패하였습니다.');
+    }
   }
 }
 

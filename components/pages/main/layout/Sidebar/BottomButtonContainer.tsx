@@ -2,6 +2,7 @@ import Logout from '@/public/sidebar/logout.svg';
 import ArrowRightIcon from '@/public/arrow-right.svg';
 import { cn } from '@/utils/common';
 import { logout } from '@/service/auth';
+import Toast from '@/utils/notification';
 
 export default function BottomButtonContainer({
   isSidebarOpen,
@@ -11,8 +12,14 @@ export default function BottomButtonContainer({
   handleClick: () => void;
 }) {
   const handleLogout = async () => {
-    await logout();
-    window.location.href = '/';
+    try {
+      await logout();
+      window.location.href = '/';
+    } catch (e) {
+      if (e instanceof Error) {
+        Toast.error(e.message);
+      }
+    }
   };
 
   return (

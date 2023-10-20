@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import KakaoTalk from '@/public/Auth/kakao.svg';
 import Naver from '@/public/Auth/naver.svg';
 import Google from '@/public/Auth/google.svg';
@@ -35,10 +36,14 @@ export default function SocialButton({
   socialProvider,
   size = 'medium',
 }: Props) {
+  const router = useRouter();
   const ButtonIcon = socialMap[socialProvider];
   const buttonStyle = `${sizes[size].btn} rounded-full ${bgColor[socialProvider]} flex items-center justify-center ${hasBorder}`;
   const handleLogin = (provider: string) => {
-    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorize/${provider}?redirect_uri=${process.env.NEXT_PUBLIC_CLIENT_URL}/term`;
+    // Redirect URI는 백에서 정의되고 있습니다. > ?redirect_uri=${process.env.NEXT_PUBLIC_CLIENT_URL}/auth/policy
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorize/${provider}`;
+    console.log(url);
+    router.push(url);
   };
   return (
     <button
