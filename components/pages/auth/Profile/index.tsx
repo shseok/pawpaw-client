@@ -110,6 +110,7 @@ export default function Profile({ title }: { title: string }) {
                 petType: petInfo.species,
               },
             ],
+            briefIntroduction: `${petInfo.name}(${petInfo.species})`,
           },
         });
       } else {
@@ -134,6 +135,7 @@ export default function Profile({ title }: { title: string }) {
                 petType: petInfo.species,
               },
             ],
+            briefIntroduction: `${petInfo.name}(${petInfo.species})`,
           },
         });
         // for getting token
