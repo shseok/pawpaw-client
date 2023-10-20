@@ -7,8 +7,9 @@ import { useInView } from 'react-intersection-observer';
 interface InfiniteScrollProps<T> {
   queryKey: string;
   firstPageParam: number;
-  queryFn: (pageNumber: number) => Promise<T>;
+  queryFn: (pageNumber: number, ...params: number[]) => Promise<T>;
   getNextPageParamFn: (page: T) => void;
+  params: number[];
 }
 
 export default function useInfiniteScroll<T>({
@@ -16,12 +17,13 @@ export default function useInfiniteScroll<T>({
   firstPageParam,
   queryFn,
   getNextPageParamFn,
+  params,
 }: InfiniteScrollProps<T>) {
   const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: [queryKey],
       queryFn: ({ pageParam = firstPageParam }): Promise<T> =>
-        queryFn(pageParam),
+        queryFn(pageParam, ...params),
       getNextPageParam: getNextPageParamFn,
     });
 

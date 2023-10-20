@@ -12,6 +12,7 @@ export default function useGetBoardList() {
       queryFn: getBoardList,
       getNextPageParamFn: (boardList) =>
         boardList.last ? undefined : boardList.number + 1,
+      params: [],
     });
 
   return {

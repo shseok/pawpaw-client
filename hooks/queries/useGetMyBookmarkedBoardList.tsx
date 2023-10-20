@@ -9,6 +9,7 @@ export default function useGetBookmarkedBoardList() {
     queryFn: getBookmarkedBoardList,
     getNextPageParamFn: (boardlist) =>
       boardlist.last ? undefined : boardlist.number + 1,
+    params: [],
   });
 
   return {
