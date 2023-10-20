@@ -66,7 +66,7 @@ export default function useChatScroll({
       });
     };
     const Observer = new ResizeObserver(callback);
-    Observer.observe(chatListRef.current!);
+    Observer.observe(chatListRef.current!, { box: 'border-box' });
     return () => {
       Observer.disconnect();
     };
