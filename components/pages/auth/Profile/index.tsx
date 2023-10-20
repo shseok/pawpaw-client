@@ -57,7 +57,7 @@ export default function Profile({ title }: { title: string }) {
   const [profileName, setProfileName] = useInput(nickname);
   const [petName, setPetName] = useInput(petInfo.name);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPet, setSelectedPet] = useState(petInfo.species);
   const fileInputRef = useRef<HTMLInputElement>(null);
