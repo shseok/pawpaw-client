@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { sendEmailChangeVerificationLink, findUserEmail } from '@/service/auth';
 import Toast from '@/utils/notification';
-import BottomButton from '../BottomButton';
-import TabButton from './TabButton';
 import LoadingIcon from '@/public/loading.svg';
+import TabButton from './TabButton';
+import BottomButton from '../BottomButton';
 
 export type TabType = 'findId' | 'changePwd';
 const tabInfo = {

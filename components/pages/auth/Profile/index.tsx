@@ -9,6 +9,7 @@ import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore'
 import { useIdentityStore } from '@/hooks/stores/useIdentityStore';
 import DefaultImg from '@/public/Auth/dog.svg';
 import Pencil from '@/public/Auth/pencil.svg';
+import LoadingIcon from '@/public/loading.svg';
 import Cancel from '@/public/X.svg';
 import {
   createUserWithEmailAndPassword,
@@ -20,7 +21,6 @@ import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { shallow } from 'zustand/shallow';
-import LoadingIcon from '@/public/loading.svg';
 
 export default function Profile({ title }: { title: string }) {
   const {
