@@ -20,6 +20,7 @@ import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { shallow } from 'zustand/shallow';
+import LoadingIcon from '@/public/loading.svg';
 
 export default function Profile({ title }: { title: string }) {
   const {
@@ -55,7 +56,7 @@ export default function Profile({ title }: { title: string }) {
   const [profileName, setProfileName] = useInput(nickname);
   const [petName, setPetName] = useInput(petInfo.name);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPet, setSelectedPet] = useState(petInfo.species);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -87,6 +88,7 @@ export default function Profile({ title }: { title: string }) {
       return;
     }
     try {
+      setIsLoading(true);
       if (key) {
         await createUserWithSocialLogin({
           image: imageFile ?? '',
@@ -140,6 +142,7 @@ export default function Profile({ title }: { title: string }) {
           password,
         });
       }
+      setIsLoading(false);
       router.push(`/auth/complete`);
     } catch (e) {
       console.error('fail');
@@ -176,7 +179,13 @@ export default function Profile({ title }: { title: string }) {
     setImageFile(null);
   };
 
-  console.log(imageFile);
+  const buttonChild = isLoading ? (
+    <div className="flex items-center justify-center h-auto">
+      <LoadingIcon className="w-7 h-7 animate-spin" />
+    </div>
+  ) : (
+    '완료'
+  );
 
   return (
     <>
@@ -272,7 +281,7 @@ export default function Profile({ title }: { title: string }) {
         </p>
       </div>
       <BottomButton
-        text="완료"
+        text={buttonChild}
         isFullWidth
         variant="primary"
         isDisabled={!profileName || !petName || !selectedPet}
