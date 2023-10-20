@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Toast from '@/utils/notification';
 import usePostBoard from '@/hooks/mutations/usePostBoard';
+import useImageUpload from '@/hooks/common/useImageUpload';
 import Avatar from '../../../../ui/Avatar';
 import Button from '../../../../ui/Button';
 import FlexBox from '../../../../ui/FlexBox';
@@ -16,6 +16,7 @@ export default function Upload({
 }) {
   const [postText, setPostText] = useState('');
   const { mutate: postBoard, isLoading, isSuccess } = usePostBoard(postText);
+  const { handleImageUpload, imageFile, imagePreview } = useImageUpload();
 
   const maxCharacters = 100;
   const isOverMaxChar = postText.length > maxCharacters;
@@ -52,15 +53,21 @@ export default function Upload({
         </div>
       </FlexBox>
       <FlexBox justify="end" className="gap-[10px] w-full">
-        <Button
-          size="lg"
-          variant="secondary"
-          disabled={isOverMaxChar}
-          className="w-40"
-          onClickAction={() => Toast.error('실패')}
+        <label
+          htmlFor="image"
+          className="rounded-[10px] h-[54px] w-40 p-2.5 bg-white border border-primary-200 text-primary-200 hover:border-primary-300 hover:text-primary-300 cursor-pointer text-center"
         >
-          파일
-        </Button>
+          <div className="flex flex-col items-center justify-center w-full h-full">
+            파일
+          </div>
+          <input
+            type="file"
+            id="image"
+            onChange={handleImageUpload}
+            className="hidden"
+            accept="image/*"
+          />
+        </label>
         <Button
           size="lg"
           disabled={postText.length === 0 || isOverMaxChar || isLoading}
@@ -69,7 +76,6 @@ export default function Upload({
         >
           {isLoading ? '업로드 중입니다' : '업로드'}
         </Button>
-        <div className="mt-4" id="renderedText" />
       </FlexBox>
     </form>
   );
