@@ -17,6 +17,7 @@ import {
   loginWithEmailAndPassword,
 } from '@/service/auth';
 import { Species } from '@/types/types';
+import Toast from '@/utils/notification';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
@@ -147,7 +148,9 @@ export default function Profile({ title }: { title: string }) {
       setIsLoading(false);
       router.push(`/auth/complete`);
     } catch (e) {
-      console.error('fail');
+      if (e instanceof Error) {
+        Toast.error(e.message);
+      }
     }
   };
 

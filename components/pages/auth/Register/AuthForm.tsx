@@ -1,6 +1,7 @@
 import { ValidateInput } from '@/components/ui/Input/ValidateInput';
 import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore';
 import { isDuplicatedEmail } from '@/service/auth';
+import Toast from '@/utils/notification';
 import { validate } from '@/utils/validate';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -56,7 +57,9 @@ export default function AuthForm({ setIsActive }: Props) {
       const response = await isDuplicatedEmail(emailAddress);
       return !response.duplicate; // 중복되지 않은 경우 true 반환
     } catch (error) {
-      console.error('Error checking duplicate email:', error);
+      if (error instanceof Error) {
+        Toast.error(error.message);
+      }
       return false; // 오류 발생 시 false 반환
     }
   }, []);
