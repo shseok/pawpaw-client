@@ -5,7 +5,7 @@ interface Props {
   variant?: 'primary' | 'secondary' | 'ghost' | 'light';
   isFullWidth?: boolean;
   to?: string;
-  text: string;
+  text: React.ReactNode;
   children?: React.ReactNode;
   isDisabled?: boolean;
   type?: 'button' | 'submit' | 'reset';

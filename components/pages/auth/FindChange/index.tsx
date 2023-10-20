@@ -4,20 +4,17 @@ import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { sendEmailChangeVerificationLink, findUserEmail } from '@/service/auth';
 import Toast from '@/utils/notification';
-import BottomButton from '../BottomButton';
+import LoadingIcon from '@/public/loading.svg';
 import TabButton from './TabButton';
+import BottomButton from '../BottomButton';
 
 export type TabType = 'findId' | 'changePwd';
 const tabInfo = {
   findId: {
-    nameText: '닉네임',
-    namePlaceholder: '닉네임을 기입해주세요',
     confirmText: '가입한 휴대폰으로 찾기',
     confirmPlaceholder: '(-)를 제외한 숫자만 입력',
   },
   changePwd: {
-    nameText: '이름',
-    namePlaceholder: '이름(실명)을 기입해주세요',
     confirmText: '아이디(이메일)',
     confirmPlaceholder: '가입한 아이디를 기입해주세요',
   },
@@ -31,6 +28,7 @@ export default function FindChange() {
   const [name, setName] = useState('');
   const [confirmContent, setConfirmContent] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState({
     email: '',
     registrationDate: '',
@@ -52,8 +50,10 @@ export default function FindChange() {
       }
     } else {
       try {
+        setIsLoading(true);
         await sendEmailChangeVerificationLink({ name, email: confirmContent });
         setResult((prev) => ({ ...prev, email: confirmContent }));
+        setIsLoading(false);
         setIsSuccess(true);
       } catch (e) {
         if (e instanceof Error) {
@@ -69,6 +69,15 @@ export default function FindChange() {
     setConfirmContent('');
     setIsSuccess(false);
   };
+
+  const buttonChild =
+    activeTab === 'changePwd' && isLoading ? (
+      <div className="flex items-center justify-center h-auto">
+        <LoadingIcon className="w-7 h-7 animate-spin" />
+      </div>
+    ) : (
+      '확인'
+    );
 
   const renderBody = {
     result: (
@@ -120,14 +129,14 @@ export default function FindChange() {
           {/* eslint-disable jsx-a11y/label-has-associated-control */}
           <div className="flex flex-col gap-2">
             <label htmlFor="name" className="body1 text-grey-800">
-              {tabInfo[activeTab].nameText}
+              이름
             </label>
             <input
               id="name"
               value={name}
               className="h-[58px] rounded-[10px] text-xs 2xs:body1 placeholder-grey-400 py-4 px-5 border-none ring-1 focus:ring-1 focus:ring-grey-200 ring-grey-200"
               type="text"
-              placeholder={tabInfo[activeTab].namePlaceholder}
+              placeholder="이름(실명)을 기입해주세요"
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -151,7 +160,7 @@ export default function FindChange() {
           <BottomButton
             isDisabled={!name || !confirmContent}
             type="submit"
-            text="확인"
+            text={buttonChild}
             isFullWidth
             variant="primary"
             handleClick={handleFindChange}

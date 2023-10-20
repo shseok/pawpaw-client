@@ -9,6 +9,7 @@ import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore'
 import { useIdentityStore } from '@/hooks/stores/useIdentityStore';
 import DefaultImg from '@/public/Auth/dog.svg';
 import Pencil from '@/public/Auth/pencil.svg';
+import LoadingIcon from '@/public/loading.svg';
 import Cancel from '@/public/X.svg';
 import {
   createUserWithEmailAndPassword,
@@ -16,6 +17,7 @@ import {
   loginWithEmailAndPassword,
 } from '@/service/auth';
 import { Species } from '@/types/types';
+import Toast from '@/utils/notification';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
@@ -55,8 +57,7 @@ export default function Profile({ title }: { title: string }) {
   const [profileName, setProfileName] = useInput(nickname);
   const [petName, setPetName] = useInput(petInfo.name);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-  const [initImage, setInitImage] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPet, setSelectedPet] = useState(petInfo.species);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -88,6 +89,7 @@ export default function Profile({ title }: { title: string }) {
       return;
     }
     try {
+      setIsLoading(true);
       if (key) {
         await createUserWithSocialLogin({
           image: imageFile ?? '',
@@ -109,6 +111,7 @@ export default function Profile({ title }: { title: string }) {
                 petType: petInfo.species,
               },
             ],
+            briefIntroduction: `${petInfo.name}(${petInfo.species})`,
           },
         });
       } else {
@@ -133,6 +136,7 @@ export default function Profile({ title }: { title: string }) {
                 petType: petInfo.species,
               },
             ],
+            briefIntroduction: `${petInfo.name}(${petInfo.species})`,
           },
         });
         // for getting token
@@ -141,13 +145,20 @@ export default function Profile({ title }: { title: string }) {
           password,
         });
       }
+      setIsLoading(false);
       router.push(`/auth/complete`);
     } catch (e) {
-      console.error('fail');
+      if (e instanceof Error) {
+        Toast.error(e.message);
+      }
     }
   };
 
   const handleImageUploadButtonClick = () => {
+    // 클릭 시 파일 입력 필드 초기화
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
     fileInputRef.current?.click();
   };
   // TODO: 기본이미지 선택시, 기본이미지로 설정되도록 수정
@@ -162,7 +173,6 @@ export default function Profile({ title }: { title: string }) {
           setUploadedImage(event.target?.result as string);
         };
         reader.readAsDataURL(file);
-        // console.log(file);
         setImageFile(file);
       }
     } catch (error) {
@@ -170,10 +180,17 @@ export default function Profile({ title }: { title: string }) {
     }
   };
   const CancelImageSelect = () => {
-    setInitImage(true);
     setUploadedImage(null);
     setImageFile(null);
   };
+
+  const buttonChild = isLoading ? (
+    <div className="flex items-center justify-center h-auto">
+      <LoadingIcon className="w-7 h-7 animate-spin" />
+    </div>
+  ) : (
+    '완료'
+  );
 
   return (
     <>
@@ -185,7 +202,7 @@ export default function Profile({ title }: { title: string }) {
         <div className="flex flex-col items-center w-full gap-[12px]">
           <div className="rounded-full border border-grey-200 w-[100px] h-[100px] bg-white relative">
             <div className="rounded-full w-[94px] h-[94px] bg-grey-200 relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              {uploadedImage && !initImage ? (
+              {uploadedImage ? (
                 <>
                   <Image
                     src={uploadedImage}
@@ -269,7 +286,7 @@ export default function Profile({ title }: { title: string }) {
         </p>
       </div>
       <BottomButton
-        text="완료"
+        text={buttonChild}
         isFullWidth
         variant="primary"
         isDisabled={!profileName || !petName || !selectedPet}

@@ -58,6 +58,7 @@ export interface Body {
   nickname: string;
   noImage: boolean;
   petInfos: PetInfo[];
+  briefIntroduction: string;
 }
 
 export interface PetInfo {
