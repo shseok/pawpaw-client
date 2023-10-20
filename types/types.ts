@@ -96,6 +96,10 @@ export interface PostBoardType {
   content: string;
 }
 
+export interface PostImageType {
+  files: string[];
+}
+
 export interface PostCommentType {
   boardId: number;
   parentId: number;

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import usePostBoard from '@/hooks/mutations/usePostBoard';
 import useImageUpload from '@/hooks/common/useImageUpload';
+import Image from 'next/image';
 import Avatar from '../../../../ui/Avatar';
 import Button from '../../../../ui/Button';
 import FlexBox from '../../../../ui/FlexBox';
@@ -52,6 +53,17 @@ export default function Upload({
           ) : null}
         </div>
       </FlexBox>
+      {imagePreview && (
+        <div className="relative w-full m-5 h-60 ">
+          <Image
+            fill
+            priority
+            alt="image"
+            src={imagePreview}
+            className="rounded-[10px] object-contain"
+          />
+        </div>
+      )}
       <FlexBox justify="end" className="gap-[10px] w-full">
         <label
           htmlFor="image"

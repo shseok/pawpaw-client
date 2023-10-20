@@ -1,5 +1,10 @@
 import { AuthError } from '@/lib/error';
-import { CommentList, PostBoardType, PostCommentType } from '@/types/types';
+import {
+  CommentList,
+  PostBoardType,
+  PostCommentType,
+  PostImageType,
+} from '@/types/types';
 
 export async function postBoard(postBoardData: PostBoardType) {
   const url = `endpoint/api/board/register`;
@@ -11,6 +16,22 @@ export async function postBoard(postBoardData: PostBoardType) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(postBoardData),
+  });
+  return response.json();
+}
+
+export async function postImageBoard(
+  boardId: number,
+  postImageData: PostImageType,
+) {
+  const url = `endpoint/api/file/upload?boardId=${boardId}`;
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(postImageData),
   });
   return response.json();
 }
