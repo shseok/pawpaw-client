@@ -11,7 +11,7 @@ export default function useGetTrendingChatList({ size }: { size: number }) {
       queryKey: [queryKeys.TRENDING_CHAT_LIST],
       queryFn: ({ pageParam = 0 }): Promise<TrendingChatList> =>
         getTrendingChatList(pageParam, size),
-      refetchOnWindowFocus: false,
+      staleTime: 1000 * 60,
       getNextPageParam: (chatList) => {
         const lowestTrendingId = chatList.content
           .sort((a, b) => a.trendingId - b.trendingId)

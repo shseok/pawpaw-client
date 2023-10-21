@@ -6,7 +6,7 @@ export default function useGetRecommendChatList() {
   const { data, isLoading } = useQuery({
     queryKey: [queryKeys.RECOMMEND_CHAT_LIST],
     queryFn: getRecommendedChatList,
-    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60,
   });
   return { data, isLoading };
 }
