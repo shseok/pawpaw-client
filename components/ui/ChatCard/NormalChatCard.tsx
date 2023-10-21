@@ -37,7 +37,9 @@ export default function NormalChatCard({ ...list }: RecommendedChatList) {
         </div>
         <button
           type="button"
-          onClick={() => copyToClipBoard(`https://www.paw-paw.xyz/chat/${id}`)}
+          onClick={() =>
+            copyToClipBoard(`${process.env.NEXT_PUBLIC_CLIENT_URL}/chat/${id}`)
+          }
         >
           <ShareIcon className="w-6 h-6" />
         </button>
