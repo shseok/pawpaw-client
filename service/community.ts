@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 
 import { RecommendedChatList, EnteredChatList } from '@/types/types';
+import Toast from '@/utils/notification';
 import { AuthError } from '../lib/error';
 
 export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
@@ -39,7 +40,7 @@ export async function getEnteredChatList(): Promise<EnteredChatList[]> {
   } catch (error) {
     if (error instanceof AuthError) {
       window.location.replace('/auth/login');
-      alert(error.message);
+      Toast.error(error.message);
     }
     console.error(error);
     throw error;
