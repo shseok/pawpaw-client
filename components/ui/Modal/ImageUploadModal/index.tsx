@@ -22,9 +22,14 @@ export default function ImageUploadModal({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleUploadImage = async () => {
+    const LIMIT_IMAGE_SIZE = 2097152;
+
     try {
       if (imageFile) {
         setIsLoading(true);
+        if (imageFile.size > LIMIT_IMAGE_SIZE) {
+          throw new Error('2MB 이상 이미지는 업로드할 수 없어요.');
+        }
         await uploadChatImage(roomId, imageFile);
       }
     } catch (error) {
