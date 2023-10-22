@@ -200,3 +200,8 @@ export interface SearchEmailResult {
   email: string;
   registrationDate: string;
 }
+
+export interface SocialInfo {
+  name: string;
+  profileImageUrl: string;
+}

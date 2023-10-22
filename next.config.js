@@ -22,7 +22,7 @@ const nextConfig = {
       },
     ],
     formats: ['image/avif', 'image/webp'],
-    domains: ['via.placeholder.com'],
+    domains: ['via.placeholder.com', 'k.kakaocdn.net'],
   },
   webpack: (config) => {
     config.resolve.fallback = { fs: false, net: false, tls: false };

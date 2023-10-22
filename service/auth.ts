@@ -2,6 +2,7 @@ import {
   AuthParams,
   EmailAuthParams,
   SearchEmailResult,
+  SocialInfo,
   VerificationParams,
 } from '@/types/types';
 import { stringify } from 'qs';
@@ -231,4 +232,26 @@ export async function changePassword({
       throw new Error('비밀번호 변경에 실패하였습니다.');
     }
   }
+}
+
+export async function getSocialInfo(key: string) {
+  const query = stringify({ key }, { addQueryPrefix: true });
+  const response = await fetch(
+    '/endpoint/api/auth/sign-up/social/info'.concat(query),
+    {
+      method: 'GET',
+      credentials: 'include',
+    },
+  );
+  if (!response.ok) {
+    if (response.status === 400) {
+      throw new Error(
+        '유효하지 않은 소셜 회원가입 임시 키입니다. 회원가입을 재시도해주세요.',
+      );
+    } else {
+      throw new Error('소셜 정보를 가져오는데 실패하였습니다.');
+    }
+  }
+  const data = (await response.json()) as SocialInfo;
+  return data;
 }

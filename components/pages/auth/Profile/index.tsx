@@ -54,10 +54,14 @@ export default function Profile({ title }: { title: string }) {
     (state) => ({ phoneNumber: state.phoneNum }),
     shallow,
   );
+
+  const initImageFile = typeof imageFile === 'string' ? imageFile : null;
   const [profileName, setProfileName] = useInput(nickname);
   const [petName, setPetName] = useInput(petInfo.name);
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(
+    initImageFile,
+  );
+  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPet, setSelectedPet] = useState(petInfo.species);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -181,7 +185,7 @@ export default function Profile({ title }: { title: string }) {
   };
   const CancelImageSelect = () => {
     setUploadedImage(null);
-    setImageFile(null);
+    setImageFile('');
   };
 
   const buttonChild = isLoading ? (
