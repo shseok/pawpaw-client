@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import NoticeIcon from '@/public/ChatCard/notice.svg';
 import ScheduleIcon from '@/public/ChatCard/schedule.svg';
 import { EnteredChatList } from '@/types/types';
 import { FlexBox, Divider, TagList } from '@/components/ui/ui';
@@ -16,6 +15,7 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
     managerName,
     name,
     participantNumber,
+    hasSchedule,
   } = list;
   return (
     <Link href={`/chat/${id}`} className="w-fit">
@@ -44,10 +44,7 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
             name={managerName}
             participants={participantNumber}
           />
-          <div className="flex items-center gap-3">
-            <NoticeIcon className="w-10 h-10 " />
-            <ScheduleIcon className="w-10 h-10" />
-          </div>
+          {hasSchedule && <ScheduleIcon className="w-10 h-10" />}
         </FlexBox>
       </ChatCard>
     </Link>

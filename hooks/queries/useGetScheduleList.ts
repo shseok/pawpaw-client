@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { getScheduleList } from '@/service/chatRoom';
+import { queryKeys } from '@/constant/query-keys';
 
 export default function useGetScheduleList(roomId: string) {
   const { data, isLoading } = useQuery({
-    queryKey: ['scheduleList', roomId],
+    queryKey: [queryKeys.SCHEDULE_LIST, roomId],
     queryFn: () => getScheduleList(roomId),
     staleTime: 60 * 1000 * 5,
+    refetchInterval: 10000,
   });
   return { data, isLoading };
 }

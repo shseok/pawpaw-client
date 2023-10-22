@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { joinSchedule } from '@/service/chatRoom';
 import Toast from '@/utils/notification';
 import { ScheduleEventArgType } from '@/types/types';
+import { queryKeys } from '@/constant/query-keys';
 
 export default function useJoinSchedule() {
   const queryClient = useQueryClient();
@@ -10,11 +11,11 @@ export default function useJoinSchedule() {
       joinSchedule(roomId, scheduleId),
     onSuccess: () => {
       Toast.success('스케줄에 참여하였습니다.🐾');
-      return queryClient.invalidateQueries(['scheduleList']);
     },
-    onError: () => {
-      Toast.error('잠시후 다시 시도해주세요.');
+    onError: (error: Error) => {
+      Toast.error(error.message);
     },
+    onSettled: () => queryClient.invalidateQueries([queryKeys.SCHEDULE_LIST]),
   });
   return { mutate, isLoading };
 }

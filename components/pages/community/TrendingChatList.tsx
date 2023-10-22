@@ -6,7 +6,7 @@ import useGetTrendingChatList from '@/hooks/queries/useGetTrendingChatList';
 import TrendingChatListLoading from '@/components/ui/Loading/TrendingChatListLoading';
 
 export default function TrendingChatList() {
-  const { data, Observer } = useGetTrendingChatList();
+  const { data, Observer } = useGetTrendingChatList({ size: 9 });
   return (
     <>
       <FlexBox direction="column" className="gap-3 tablet:gap-5">

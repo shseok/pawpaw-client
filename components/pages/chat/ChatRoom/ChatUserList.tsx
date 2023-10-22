@@ -49,7 +49,7 @@ export default function ChatUserList({ roomId }: { roomId: string }) {
                 image={user.imageUrl}
                 name={user.nickname}
                 petName={
-                  user.briefIntroduction ?? '나의 반려견을 등록해주세요.🐶'
+                  user.briefIntroduction ?? '한줄소개를 아직 안정했어요.🐾'
                 }
               />
             </li>

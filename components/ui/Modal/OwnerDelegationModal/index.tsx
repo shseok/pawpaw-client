@@ -35,9 +35,9 @@ export default function OwnerDelegationModal({ onClose, open }: ModalProps) {
   };
   return (
     <Modal onClose={onClose} open={open}>
-      <div className="flex flex-col justify-between bg-white rounded-[10px] w-screen sm:w-96 h-screen sm:h-[500px]">
+      <div className="flex  flex-col bg-white rounded-[10px] w-screen sm:w-96 h-screen sm:h-[500px]">
         <span className="p-2 text-center border-b-2 header3">방장 넘기기</span>
-        <ul className="flex flex-col gap-2 p-2 overflow-y-scroll">
+        <ul className="flex flex-col flex-1 gap-2 p-2 overflow-y-scroll">
           {userList?.map((user) => (
             <li
               key={user.userId}

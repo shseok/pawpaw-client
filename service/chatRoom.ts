@@ -3,20 +3,10 @@ import {
   ChatRoomUserList,
   Schedule,
   ScheduleList,
+  ChatRoomType,
 } from '@/types/types';
 import Toast from '@/utils/notification';
 import { AuthError, ImageSizeError } from '@/lib/error';
-
-interface ChatRoomType {
-  image: File;
-  body: {
-    name: string;
-    description: string;
-    hashTagList: string[];
-    searchable: boolean;
-    locationLimit: boolean;
-  };
-}
 
 // 채팅방 생성 API
 export async function postChatRoom(chatRoomData: ChatRoomType) {
@@ -85,18 +75,15 @@ export async function leaveChatRoom(roomId: string) {
 export async function getChatroomUserList(
   chatRoomId: string,
 ): Promise<ChatRoomUserList[]> {
-  try {
-    const url = `/endpoint/api/chatroom/${chatRoomId}/participants`;
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('채팅룸 참가 유저리스트를 불러오지 못하였습니다.');
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw error;
+  const url = `/endpoint/api/chatroom/${chatRoomId}/participants`;
+  const response = await fetch(url);
+  if (response.status === 400) {
+    window.location.replace('/community');
   }
+  if (!response.ok) {
+    throw new Error('채팅룸 참가 유저리스트를 불러오지 못하였습니다.');
+  }
+  return response.json();
 }
 // 채팅룸에 등록되어있는 종료되지않은 스케줄 리스트 조회 API
 export async function getScheduleList(roomId: string): Promise<ScheduleList[]> {
@@ -128,7 +115,9 @@ export async function postSchedule(
       },
     });
     if (!response.ok) {
-      throw new Error(`서버오류:${response.status}`);
+      throw new Error(
+        '스케줄을 생성하지 못하였습니다. 잠시후 다시 시도해주세요.🥲',
+      );
     }
     return await response.json();
   } catch (error) {
@@ -139,7 +128,6 @@ export async function postSchedule(
 
 // 채팅룸 스케줄 삭제 API
 export async function deleteSchedule(roomId: string, scheduleId: number) {
-  console.log(scheduleId);
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}`;
     const response = await fetch(url, { method: 'DELETE' });
@@ -183,12 +171,18 @@ export async function joinSchedule(roomId: string, scheduleId: number) {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
     const response = await fetch(url, { method: 'POST' });
-    console.log(response);
     if (response.status === 401) {
       throw new AuthError('로그인이 필요합니다.');
     }
+    if (response.status === 404) {
+      throw new Error('삭제된 일정이어서 참여할 수 없어요.');
+    }
+    if (!response.ok) {
+      throw new Error('잠시후 다시 시도해주세요.');
+    }
   } catch (error) {
     console.error(error);
+    throw error;
   }
 }
 
@@ -196,8 +190,7 @@ export async function joinSchedule(roomId: string, scheduleId: number) {
 export async function withdrawSchedule(roomId: string, scheduleId: number) {
   try {
     const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
-    const response = await fetch(url, { method: 'DELETE' });
-    console.log(response);
+    await fetch(url, { method: 'DELETE' });
   } catch (error) {
     console.error(error);
   }
@@ -263,6 +256,9 @@ export async function deleteChatRoom(roomId: string) {
   const url = `/endpoint/api/chatroom/${roomId}`;
   const response = await fetch(url, { method: 'DELETE' });
   if (response.status === 400) {
-    Toast.error('채팅방 삭제는 채팅방 참여자가 없어야 가능해요.🐶');
+    throw new Error('채팅방 삭제는 채팅방 참여자가 없어야 가능해요.🐶');
+  }
+  if (!response.ok) {
+    throw new Error('채팅방을 삭제하지 못했어요.🧐 잠시후 다시 시도해주세요.');
   }
 }

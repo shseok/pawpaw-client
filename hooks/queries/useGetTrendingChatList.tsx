@@ -3,15 +3,15 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 import { getTrendingChatList } from '@/service/community';
 import { TrendingChatList } from '@/types/types';
+import { queryKeys } from '@/constant/query-keys';
 
-const QUERY_KEY = ['trendingChatList'];
-export default function useGetTrendingChatList() {
+export default function useGetTrendingChatList({ size }: { size: number }) {
   const { data, hasNextPage, isLoading, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery({
-      queryKey: QUERY_KEY,
+      queryKey: [queryKeys.TRENDING_CHAT_LIST],
       queryFn: ({ pageParam = 0 }): Promise<TrendingChatList> =>
-        getTrendingChatList(pageParam),
-      refetchOnWindowFocus: false,
+        getTrendingChatList(pageParam, size),
+      staleTime: 1000 * 60,
       getNextPageParam: (chatList) => {
         const lowestTrendingId = chatList.content
           .sort((a, b) => a.trendingId - b.trendingId)
@@ -30,5 +30,5 @@ export default function useGetTrendingChatList() {
       <div ref={ref}>{isFetchingNextPage || isLoading ? children : null}</div>
     );
   }
-  return { data, Observer };
+  return { data, Observer, isLoading };
 }

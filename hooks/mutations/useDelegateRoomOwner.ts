@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { delegateRoomOwner } from '@/service/chatRoom';
 import Toast from '@/utils/notification';
+import { queryKeys } from '@/constant/query-keys';
 
 interface MutateProps {
   user: string;
@@ -18,7 +19,7 @@ export default function useDelegateRoomOwner({
     onSuccess: () => {
       Toast.success(`${user}님에게 방장을 넘겨주었어요.🐶`);
       modalClose();
-      queryClient.invalidateQueries(['chatRoomUserList']);
+      queryClient.invalidateQueries([queryKeys.CHATROOM_USER_LIST]);
     },
     onError: (error: Error) => {
       Toast.error(error.message);
