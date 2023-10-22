@@ -63,8 +63,13 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
     }
   };
   const onSubmit: SubmitHandler<FormData> = (data) => {
+    const LIMIT_IMAGE_SIZE = 2097152;
     if (!imageFile) {
       Toast.error('커버이미지를 업로드 해주세요. 🐈');
+      return;
+    }
+    if (imageFile.size > LIMIT_IMAGE_SIZE) {
+      Toast.error('2MB 이상 이미지는 업로드할 수 없어요.');
       return;
     }
     onCreateChatRoom(data);
