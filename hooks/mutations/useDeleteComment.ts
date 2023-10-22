@@ -1,3 +1,4 @@
+import { queryKeys } from '@/constant/query-keys';
 import { deleteComment } from '@/service/board';
 import Toast from '@/utils/notification';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -10,7 +11,7 @@ export default function useDeleteComment() {
       deleteComment(boardId, replyId),
     onSuccess: () => {
       Toast.success('댓글이 성공적으로 삭제 되었습니다.');
-      queryClient.invalidateQueries(['boardList']);
+      queryClient.invalidateQueries([queryKeys.BOARD_LIST]);
     },
     onError: () => {
       Toast.error('댓글을 삭제하지 못했습니다. 잠시후 다시 시도해주세요.🥲');

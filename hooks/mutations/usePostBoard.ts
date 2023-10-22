@@ -1,3 +1,4 @@
+import { queryKeys } from '@/constant/query-keys';
 import { postBoard } from '@/service/board';
 import Toast from '@/utils/notification';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -8,7 +9,7 @@ export default function usePostBoard(postText: string) {
     mutationFn: () => postBoard({ title: 'title', content: postText }),
     onSuccess: () => {
       Toast.success('게시글이 성공적으로 업로드 되었습니다.');
-      queryClient.invalidateQueries(['boardList']);
+      queryClient.invalidateQueries([queryKeys.BOARD_LIST]);
     },
     onError: () => {
       Toast.error(

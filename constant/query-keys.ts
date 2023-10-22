@@ -1,6 +1,7 @@
 export const queryKeys = {
   BOARD_LIST: 'boardList',
   BOARD: 'board',
+  COMMENT_LIST: 'commentList',
   ENTERED_CHAT_LIST: 'enteredChatList',
   RECOMMEND_CHAT_LIST: 'recommendChatlist',
   TRENDING_CHAT_LIST: 'trendingChatList',
@@ -8,5 +9,7 @@ export const queryKeys = {
   CHAT_HISTORY_LIST: 'chatHistory',
   SCHEDULE_LIST: 'scheduleList',
   SEARCHED_USER_LIST: 'searchedUserList',
+  MY_BOARD_LIST: 'myBoards',
+  MY_BOOKMARKED_LIST: 'myBookmarkedBoards',
   USER_INFO: 'userInfo',
 };
