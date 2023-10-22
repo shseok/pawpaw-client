@@ -5,6 +5,7 @@ import { uploadChatImage } from '@/service/chatRoom';
 import { useState } from 'react';
 import LoadingIcon from '@/public/loading.svg';
 import prettyBytes from 'pretty-bytes';
+import Toast from '@/utils/notification';
 import Modal from '..';
 import Button from '../../Button';
 
@@ -27,7 +28,7 @@ export default function ImageUploadModal({
         await uploadChatImage(roomId, imageFile);
       }
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) Toast.error(error.message);
     } finally {
       setIsLoading(false);
       onClose();

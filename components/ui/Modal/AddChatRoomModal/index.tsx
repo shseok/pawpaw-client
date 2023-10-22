@@ -42,7 +42,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
     const { name, description } = data;
     setIsLoading(true);
     try {
-      const response = await postChatRoom({
+      const { chatroomId } = await postChatRoom({
         image: imageFile as File,
         body: {
           name,
@@ -52,14 +52,12 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
           locationLimit: true,
         },
       });
-      if (response.chatroomId) {
+      if (chatroomId) {
         Toast.success('채팅룸 오픈! 🦊');
-        router.push(`/chat/${response.chatroomId}`);
-      } else {
-        throw new Error(response.message);
+        router.push(`/chat/${chatroomId}`);
       }
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) Toast.error(error.message);
     } finally {
       setIsLoading(false);
     }

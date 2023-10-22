@@ -19,9 +19,6 @@ export default function useCreateSchedule(closeModal: () => void) {
       closeModal();
       return queryClient.invalidateQueries([queryKeys.SCHEDULE_LIST]);
     },
-    onError: (error: Error) => {
-      Toast.error(error.message);
-    },
   });
   return { mutate, isLoading };
 }

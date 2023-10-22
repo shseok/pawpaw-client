@@ -22,7 +22,6 @@ export default function useInviteUserToChatroom(successCb: () => void) {
         refetchType: 'all',
       });
     },
-    onError: () => Toast.error('잠시후 다시 시도해주세요.'),
   });
   return { mutate };
 }
