@@ -19,7 +19,7 @@ export default function BoardCardContent({
   onClickModal,
 }: {
   children: React.ReactNode;
-  type: 'mainPC' | 'modal' | 'myPage';
+  type: 'mainPC' | 'modal' | 'myPage' | 'id';
   content: string;
   imgs: string[];
   onClickModal?: () => void;
@@ -44,9 +44,9 @@ export default function BoardCardContent({
     <FlexBox
       direction="column"
       align="start"
-      className={`${(type === 'mainPC' || type === 'myPage') && 'w-full'} ${
-        type === 'modal' && 'w-[375px] h-full'
-      } gap-3`}
+      className={`${
+        (type === 'mainPC' || type === 'myPage' || type === 'id') && 'w-full'
+      } ${type === 'modal' && 'w-[375px] h-full'} gap-3`}
     >
       <div
         className={`body3 text-grey-800 ${
@@ -73,9 +73,9 @@ export default function BoardCardContent({
           </div>
         )}
 
-        {type === 'modal' && (
-          <FlexBox className="gap-9">
-            <div className="relative w-[545px] h-[574px]">
+        {(type === 'modal' || type === 'id') && (
+          <FlexBox className="w-full gap-9">
+            <div className="relative w-full h-[574px]">
               <Image
                 src={imgs[imgNum]}
                 alt="게시글 사진"

@@ -1,5 +1,6 @@
 import { AuthError } from '@/lib/error';
 import {
+  Board,
   CommentList,
   PostBoardType,
   PostCommentType,
@@ -7,7 +8,7 @@ import {
 } from '@/types/types';
 
 export async function postBoard(postBoardData: PostBoardType) {
-  const url = `endpoint/api/board/register`;
+  const url = `/endpoint/api/board/register`;
 
   const response = await fetch(url, {
     method: 'POST',
@@ -24,7 +25,7 @@ export async function postImageBoard(
   boardId: number,
   postImageData: PostImageType,
 ) {
-  const url = `endpoint/api/file/upload?boardId=${boardId}`;
+  const url = `/endpoint/api/file/upload?boardId=${boardId}`;
   const response = await fetch(url, {
     method: 'POST',
     credentials: 'include',
@@ -38,6 +39,26 @@ export async function postImageBoard(
 
 export async function getBoardList(pageParam: number) {
   const url = `/endpoint/api/board/list?pageSize=5&pageNumber=${pageParam}`;
+  try {
+    const response = await fetch(url);
+    if (response.status === 401) {
+      throw new AuthError('로그인이 필요한 서비스입니다.');
+    }
+    if (!response.ok) {
+      throw new Error(`서버오류:${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    if (error instanceof AuthError) {
+      window.location.replace('/auth/login');
+      alert(error.message);
+    }
+    throw error;
+  }
+}
+
+export async function getBoard(boardId: number): Promise<Board> {
+  const url = `/endpoint/api/board/${boardId}`;
   try {
     const response = await fetch(url);
     if (response.status === 401) {
@@ -83,7 +104,7 @@ export async function deleteBoard(boardId: number) {
 }
 
 export async function postComment(postCommentData: PostCommentType) {
-  const url = `endpoint/api/reply/register`;
+  const url = `/endpoint/api/reply/register`;
   const response = await fetch(url, {
     method: 'POST',
     credentials: 'include',
@@ -148,7 +169,7 @@ export async function deleteComment(boardId: number, replyId: number) {
 }
 
 export async function addBookmarkBoard(boardId: number) {
-  const url = `endpoint/api/bookmark/add?boardId=${boardId}`;
+  const url = `/endpoint/api/bookmark/add?boardId=${boardId}`;
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -174,7 +195,7 @@ export async function addBookmarkBoard(boardId: number) {
 }
 
 export async function deleteBookmarkBoard(boardId: number) {
-  const url = `endpoint/api/bookmark/delete?boardId=${boardId}`;
+  const url = `/endpoint/api/bookmark/delete?boardId=${boardId}`;
   try {
     const response = await fetch(url, {
       method: 'DELETE',
@@ -200,7 +221,7 @@ export async function deleteBookmarkBoard(boardId: number) {
 }
 
 export async function updateBoardLike(boardId: number) {
-  const url = `endpoint/api/boardLike/like?boardId=${boardId}`;
+  const url = `/endpoint/api/boardLike/like?boardId=${boardId}`;
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -226,7 +247,7 @@ export async function updateBoardLike(boardId: number) {
 }
 
 export async function deleteBoardLike(boardId: number) {
-  const url = `endpoint/api/boardLike/deleteLike?boardId=${boardId}`;
+  const url = `/endpoint/api/boardLike/deleteLike?boardId=${boardId}`;
   try {
     const response = await fetch(url, {
       method: 'DELETE',

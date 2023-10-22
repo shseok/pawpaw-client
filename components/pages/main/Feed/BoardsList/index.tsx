@@ -48,7 +48,7 @@ export default function BoardsList({
       )}
       {hasNextPage ? null : <div>🐾 더이상 게시물이 없어요 🐾</div>}
       <Observer>
-        <div>로딩스피너...</div>
+        <div>로딩중...🐾</div>
       </Observer>
     </FlexBox>
   );
