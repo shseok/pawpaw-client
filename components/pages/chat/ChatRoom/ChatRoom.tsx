@@ -5,6 +5,9 @@ import { CompatClient } from '@stomp/stompjs';
 import { useEffect, useRef, useState } from 'react';
 import { ChatType } from '@/types/types';
 import useSocket from '@/hooks/common/useSocket';
+import { useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '@/constant/query-keys';
+import { CHAT_EVENT } from '@/constant/chat';
 import ChatRoomBox from './ChatRoomBox';
 import ChatRoomHeader from './ChatRoomHeader';
 import ChatInput from './ChatInput';
@@ -20,7 +23,7 @@ export default function ChatRoom({
   const [chatText, onChangeValue, resetValue] = useInput('');
   const stompClient = useRef<CompatClient>();
   const { createClient } = useSocket();
-
+  const queryClient = useQueryClient();
   const sendChat = () => {
     if (chatText.trim().length !== 0) {
       const isConnected = stompClient.current?.connected;
@@ -48,14 +51,14 @@ export default function ChatRoom({
     stompClient.current = createClient(
       process.env.NEXT_PUBLIC_SOCKET_URL as string,
     );
-    stompClient.current.debug = (debug) => {
-      console.log('debug', debug);
-    };
     stompClient.current.connect({}, () => {
       stompClient.current?.subscribe(
         `/sub/chatroom/${roomId}/message`,
-        ({ body }) => {
-          const newChat = JSON.parse(body);
+        (chat) => {
+          const newChat = JSON.parse(chat.body);
+          if (CHAT_EVENT.includes(newChat.chatType)) {
+            queryClient.invalidateQueries([queryKeys.CHATROOM_USER_LIST]);
+          }
           setCurrentChatList((prevChatList) => [...prevChatList, newChat]);
         },
       );

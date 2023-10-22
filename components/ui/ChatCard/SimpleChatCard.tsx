@@ -1,25 +1,44 @@
 import ShareIcon from '@/public/share.svg';
-import NoticeIcon from '@/public/ChatCard/notice.svg';
 import BadgeIcon from '@/public/Badge.svg';
+import { ChatList } from '@/types/types';
+import copyToClipBoard from '@/utils/copyToClipBoard';
+import { joinChatRoom } from '@/service/chatRoom';
+import { useRouter } from 'next/navigation';
 import { ChatCard } from '.';
+import Button from '../Button';
 
-export default function SimpleChatCard() {
+export default function SimpleChatCard({ ...info }: ChatList) {
+  const { description, id, name } = info;
+  const router = useRouter();
+  const onEnterChatRoom = async () => {
+    if (window.confirm(`${name}방에 입장하시겠습니까?`)) {
+      try {
+        await joinChatRoom(id);
+        router.push(`/chat/${id}`);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
   return (
-    <ChatCard>
+    <ChatCard className="w-96">
       <ChatCard.Header justify="between">
         <div className="flex items-center w-full gap-1">
-          <ChatCard.Title title="강아지 방광암 TCC 정보 공유해요" />
+          <ChatCard.Title title={name} />
           <BadgeIcon />
         </div>
-        <button type="button" onClick={() => alert('d')}>
+        <button
+          type="button"
+          onClick={() => copyToClipBoard(`https://www.paw-paw.xyz/chat/${id}`)}
+        >
           <ShareIcon className="w-6 h-6" />
         </button>
       </ChatCard.Header>
-      <div className="flex justify-between w-full">
-        <ChatCard.Description description="병을 앓고있는 노견  보호자님들 이야기 나눠요" />
-        <div>
-          <NoticeIcon className="w-7 h-7" />
-        </div>
+      <div className="flex items-center justify-between w-full">
+        <ChatCard.Description description={description} />
+        <Button size="xs" className="w-14" onClickAction={onEnterChatRoom}>
+          입장
+        </Button>
       </div>
     </ChatCard>
   );

@@ -1,6 +1,7 @@
 import Button from '@/components/ui/Button';
 import { useIdentityStore } from '@/hooks/stores/useIdentityStore';
 import { checkVerification, requestVerification } from '@/service/auth';
+import Toast from '@/utils/notification';
 import React, { useEffect, useRef, useState } from 'react';
 import { shallow } from 'zustand/shallow';
 
@@ -41,7 +42,9 @@ export default function ConfirmForm({ setIsActive }: Props) {
       setIsLoading(true);
       setTimer(180);
     } catch (e) {
-      console.error('인증 요청 실패', e);
+      if (e instanceof Error) {
+        Toast.error(e.message);
+      }
     }
   };
 
@@ -58,7 +61,9 @@ export default function ConfirmForm({ setIsActive }: Props) {
         setIsDuplicatedRequest(false);
         inputRef.current?.focus();
       } catch (e) {
-        console.error('재인증 요청 실패', e);
+        if (e instanceof Error) {
+          Toast.error(e.message);
+        }
       }
       return;
     }
@@ -72,11 +77,13 @@ export default function ConfirmForm({ setIsActive }: Props) {
         setPhoneNum(phoneNumber);
         setTimer(0); // 타이머 값 리셋
       } else {
-        alert('인증번호가 일치하지 않습니다.');
+        Toast.error('인증번호가 일치하지 않습니다.');
         setIsDuplicatedRequest(true);
       }
     } catch (e) {
-      console.error('인증 요청 실패', e);
+      if (e instanceof Error) {
+        Toast.error(e.message);
+      }
     }
   };
 

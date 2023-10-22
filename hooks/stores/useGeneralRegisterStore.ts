@@ -13,7 +13,7 @@ export interface GeneralRegisterStore {
     name: string;
     species: Species;
   };
-  imageFile: File | null;
+  imageFile: File | string;
   email: string;
   password: string;
   setEmail: (email: string) => void;
@@ -24,7 +24,7 @@ export interface GeneralRegisterStore {
   setSearchHistory: (searchHistory: string) => void;
   setNickname: (nickname: string) => void;
   setPetInfo: (info: { name: string; species: Species }) => void;
-  setImageFile: (imageFile: File) => void;
+  setImageFile: (imageFile: File | string) => void;
 }
 
 export const useGeneralRegisterStore =
@@ -39,7 +39,7 @@ export const useGeneralRegisterStore =
         name: '',
         species: '강아지',
       },
-      imageFile: null,
+      imageFile: '',
       email: '',
       password: '',
       setEmail: (email: string) => set((store) => ({ ...store, email })),
@@ -67,7 +67,7 @@ export const useGeneralRegisterStore =
         set((store) => ({ ...store, nickname })),
       setPetInfo: (petInfo: { name: string; species: Species }) =>
         set((store) => ({ ...store, petInfo })),
-      setImageFile: (imageFile: File) =>
+      setImageFile: (imageFile: File | string) =>
         set((store) => ({ ...store, imageFile })),
     })),
     Object.is,

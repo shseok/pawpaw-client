@@ -3,12 +3,10 @@
 import React from 'react';
 import Congratulation from '@/public/Auth/congratulation.svg';
 import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore';
-import { useRouter } from 'next/navigation';
 import BottomButton from '@/components/pages/auth/BottomButton';
 
 export default function Complete() {
   const nickName = useGeneralRegisterStore((state) => state.nickname);
-  const router = useRouter();
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-[24px] mb-[184px]">
@@ -26,7 +24,7 @@ export default function Complete() {
         variant="primary"
         isFullWidth
         handleClick={() => {
-          router.push('/');
+          window.location.href = '/';
         }}
       />
     </>

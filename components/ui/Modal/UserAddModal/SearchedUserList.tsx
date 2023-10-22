@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import ChatUser from '../../../pages/chat/ChatRoom/ChatUser';
 
 interface SearchedUserListType {
@@ -8,17 +7,14 @@ interface SearchedUserListType {
     nickname: string;
     briefIntroduction: string;
   }[];
-  checkedList: string[];
-  handleCheckboxChange: (
-    value: string,
-    e: ChangeEvent<HTMLInputElement>,
-  ) => void;
+  selectedUser: string;
+  handleSelectUser: (userId: string) => void;
 }
 
 export default function SearchedUserList({
   userList,
-  checkedList,
-  handleCheckboxChange,
+  handleSelectUser,
+  selectedUser,
 }: SearchedUserListType) {
   if (!userList) return null;
   return (
@@ -35,15 +31,13 @@ export default function SearchedUserList({
         {userList &&
           userList.map((user) => (
             <li
-              className={`${
-                checkedList.includes(user.userId)
-                  ? 'ring-2 ring-primary-200'
-                  : ''
-              } rounded-[10px] duration-200`}
               key={user.userId}
+              className={`rounded-[10px] duration-200 hover:shadow-chatCard ${
+                user.userId === selectedUser ? 'ring-2 ring-primary-200' : ''
+              }`}
             >
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-              <label className="cursor-pointer">
+              <label className="cursor-pointer" htmlFor={user.userId}>
                 <ChatUser
                   shadow
                   image={user.imageUrl}
@@ -51,10 +45,11 @@ export default function SearchedUserList({
                   petName={user.briefIntroduction ?? '반려펫을 입력해주세요.🐶'}
                 />
                 <input
-                  type="checkbox"
-                  checked={checkedList.includes(user.userId)}
-                  onChange={(event) => handleCheckboxChange(user.userId, event)}
-                  className="hidden appearance-none"
+                  id={user.userId}
+                  type="radio"
+                  checked={user.userId === selectedUser}
+                  onChange={() => handleSelectUser(user.userId)}
+                  className="hidden"
                 />
               </label>
             </li>

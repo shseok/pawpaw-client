@@ -132,6 +132,7 @@ export interface Body {
   nickname: string;
   noImage: boolean;
   petInfos: PetInfo[];
+  briefIntroduction: string;
 }
 
 export interface PetInfo {
@@ -163,7 +164,7 @@ export interface VerificationParams {
   recipient: string;
   birthday: string;
 }
-interface ChatList {
+export interface ChatList {
   id: number;
   name: string;
   description: string;
@@ -229,11 +230,30 @@ export interface ScheduleList extends Schedule {
   participantList: { nickname: string; imageUrl: string }[];
 }
 
+export interface ChatRoomType {
+  image: File;
+  body: {
+    name: string;
+    description: string;
+    hashTagList: string[];
+    searchable: boolean;
+    locationLimit: boolean;
+  };
+}
+
+export type ChatEventType =
+  | 'MESSAGE'
+  | 'IMAGE'
+  | 'JOIN'
+  | 'LEAVE'
+  | 'INVITE'
+  | 'CHANGE_MANAGER';
+
 export interface ChatType {
   userId: string;
   id: number;
   chatroomId: number;
-  chatType: 'MESSAGE' | 'IMAGE' | 'JOIN' | 'LEAVE';
+  chatType: ChatEventType;
   data: string;
   senderId: string;
   sender: string;
@@ -248,4 +268,14 @@ export interface ChatRoomInfo {
   description: string;
   participantNumber: number;
   coverUrl: string;
+}
+
+export interface SearchEmailResult {
+  email: string;
+  registrationDate: string;
+}
+
+export interface SocialInfo {
+  name: string;
+  profileImageUrl: string;
 }

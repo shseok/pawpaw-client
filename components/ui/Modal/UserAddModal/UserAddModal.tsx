@@ -1,4 +1,3 @@
-import useCheckbox from '@/hooks/common/useCheckbox';
 import useInput from '@/hooks/common/useInput';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
@@ -8,6 +7,7 @@ import ArrowLeftIcon from '@/public/arrow-left.svg';
 import useGetSearchedUserList from '@/hooks/queries/useGetSearchedUserList';
 import { usePathname } from 'next/navigation';
 import useInviteUserToChatroom from '@/hooks/mutations/useInviteUserToChatroom';
+import { useState } from 'react';
 import SearchedUserList from './SearchedUserList';
 import Modal from '..';
 
@@ -19,7 +19,7 @@ export default function UserAddModal({
   onClose: () => void;
 }) {
   const [nickname, onChangeNickname, resetValue] = useInput('');
-  const { checkedList, handleCheckboxChange } = useCheckbox();
+  const [selectedUser, setSelectedUser] = useState('');
   const roomId = usePathname().split('/')[2];
   const { data: searchedList, refetch } = useGetSearchedUserList(
     roomId,
@@ -34,7 +34,12 @@ export default function UserAddModal({
   function inviteUserSuccessCb() {
     onClose();
     resetValue();
+    setSelectedUser('');
   }
+  const handleSelectUser = (userId: string) => {
+    setSelectedUser(userId);
+  };
+
   return (
     <Modal open={open} onClose={onClose}>
       <FlexBox
@@ -43,7 +48,7 @@ export default function UserAddModal({
       >
         <div className="self-end hidden tablet:block">
           <button type="button" onClick={onClose}>
-            <XIcon className="w-8 h-8" />
+            <XIcon className="w-8 h-8 fill-white" />
           </button>
         </div>
         <FlexBox
@@ -70,15 +75,15 @@ export default function UserAddModal({
           />
           <SearchedUserList
             userList={searchedList}
-            checkedList={checkedList}
-            handleCheckboxChange={handleCheckboxChange}
+            handleSelectUser={handleSelectUser}
+            selectedUser={selectedUser}
           />
           <Button
             className="w-full header3"
             size="lg"
-            disabled={checkedList.length === 0}
+            disabled={selectedUser === ''}
             onClickAction={() =>
-              mutate({ roomId, userId: { userId: checkedList[0] } })
+              mutate({ roomId, userId: { userId: selectedUser } })
             }
           >
             추가하기

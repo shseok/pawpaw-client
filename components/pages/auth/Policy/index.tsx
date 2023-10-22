@@ -1,16 +1,47 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { getSocialInfo } from '@/service/auth';
+import { shallow } from 'zustand/shallow';
+import Toast from '@/utils/notification';
 import ProgressBar from '../ProgressBar';
 import CheckListOfTerm from '../CheckListOfTerm';
 import BottomButton from '../BottomButton';
 
 export default function Policy({ title }: { title: string }) {
   const checkList = useGeneralRegisterStore((state) => state.checkList);
+  const { setNickname, setImageFile } = useGeneralRegisterStore(
+    (state) => ({
+      setNickname: state.setNickname,
+      setImageFile: state.setImageFile,
+    }),
+    shallow,
+  );
   const router = useRouter();
   const searchParams = useSearchParams();
   const key = searchParams.get('key');
+
+  useEffect(() => {
+    async function fetchSocialInfo(socialKey: string) {
+      try {
+        const { name, profileImageUrl } = await getSocialInfo(socialKey);
+        if (name !== 'null') {
+          setNickname(name);
+        }
+        // 이미지 파일을 상태에 설정
+        setImageFile(profileImageUrl);
+      } catch (e) {
+        if (e instanceof Error) {
+          Toast.error(e.message);
+        }
+      }
+    }
+    if (key) {
+      fetchSocialInfo(key);
+    }
+  }, []);
 
   return (
     <>

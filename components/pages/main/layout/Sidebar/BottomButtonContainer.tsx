@@ -1,6 +1,8 @@
 import Logout from '@/public/sidebar/logout.svg';
 import ArrowRightIcon from '@/public/arrow-right.svg';
 import { cn } from '@/utils/common';
+import { logout } from '@/service/auth';
+import Toast from '@/utils/notification';
 
 export default function BottomButtonContainer({
   isSidebarOpen,
@@ -9,6 +11,17 @@ export default function BottomButtonContainer({
   isSidebarOpen: boolean;
   handleClick: () => void;
 }) {
+  const handleLogout = async () => {
+    try {
+      await logout();
+      window.location.href = '/';
+    } catch (e) {
+      if (e instanceof Error) {
+        Toast.error(e.message);
+      }
+    }
+  };
+
   return (
     <div>
       <button
@@ -17,6 +30,7 @@ export default function BottomButtonContainer({
           'w-full h-16 flex flex-row items-center justify-center desktop:justify-start desktop:pl-6 hover:bg-grey-120 transition-all duration-300',
           isSidebarOpen ? null : 'desktop:justify-center desktop:pl-0',
         )}
+        onClick={handleLogout}
       >
         <Logout />
         <span
