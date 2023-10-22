@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import usePostBoard from '@/hooks/mutations/usePostBoard';
-import useImageUpload from '@/hooks/common/useImageUpload';
-import Image from 'next/image';
+// import useImageUpload from '@/hooks/common/useImageUpload';
+// import Image from 'next/image';
+// import usePostImageBoard from '@/hooks/mutations/usePostImageBoard';
 import Avatar from '../../../../ui/Avatar';
 import Button from '../../../../ui/Button';
 import FlexBox from '../../../../ui/FlexBox';
@@ -17,7 +18,7 @@ export default function Upload({
 }) {
   const [postText, setPostText] = useState('');
   const { mutate: postBoard, isLoading, isSuccess } = usePostBoard(postText);
-  const { handleImageUpload, imageFile, imagePreview } = useImageUpload();
+  // const { handleImageUpload, imageFile, imagePreview } = useImageUpload();
 
   const maxCharacters = 100;
   const isOverMaxChar = postText.length > maxCharacters;
@@ -26,7 +27,12 @@ export default function Upload({
     setPostText(event.target.value);
   };
   useEffect(() => {
-    if (isSuccess) setPostText('');
+    if (isSuccess) {
+      setPostText('');
+    }
+    // if (isSuccess && imageFile) {
+    // const { mutate: postImage, isLoading } = usePostImageBoard();
+    // }
   }, [isSuccess]);
 
   return (
@@ -53,7 +59,7 @@ export default function Upload({
           ) : null}
         </div>
       </FlexBox>
-      {imagePreview && (
+      {/* {imagePreview && (
         <div className="relative w-full m-5 h-60 ">
           <Image
             fill
@@ -63,9 +69,9 @@ export default function Upload({
             className="rounded-[10px] object-contain"
           />
         </div>
-      )}
+      )} */}
       <FlexBox justify="end" className="gap-[10px] w-full">
-        <label
+        {/* <label
           htmlFor="image"
           className="rounded-[10px] h-[54px] w-40 p-2.5 bg-white border border-primary-200 text-primary-200 hover:border-primary-300 hover:text-primary-300 cursor-pointer text-center"
         >
@@ -79,7 +85,7 @@ export default function Upload({
             className="hidden"
             accept="image/*"
           />
-        </label>
+        </label> */}
         <Button
           size="lg"
           disabled={postText.length === 0 || isOverMaxChar || isLoading}
