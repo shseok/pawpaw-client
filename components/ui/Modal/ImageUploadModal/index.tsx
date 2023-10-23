@@ -5,6 +5,7 @@ import { uploadChatImage } from '@/service/chatRoom';
 import { useState } from 'react';
 import LoadingIcon from '@/public/loading.svg';
 import prettyBytes from 'pretty-bytes';
+import Toast from '@/utils/notification';
 import Modal from '..';
 import Button from '../../Button';
 
@@ -21,13 +22,18 @@ export default function ImageUploadModal({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleUploadImage = async () => {
+    const LIMIT_IMAGE_SIZE = 2097152;
+
     try {
       if (imageFile) {
         setIsLoading(true);
+        if (imageFile.size > LIMIT_IMAGE_SIZE) {
+          throw new Error('2MB 이상 이미지는 업로드할 수 없어요.');
+        }
         await uploadChatImage(roomId, imageFile);
       }
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) Toast.error(error.message);
     } finally {
       setIsLoading(false);
       onClose();

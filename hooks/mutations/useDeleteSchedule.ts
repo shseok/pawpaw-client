@@ -13,9 +13,6 @@ export default function useDeleteSchedule() {
       Toast.success('스케줄을 삭제했어요. 🐹');
       return queryClient.invalidateQueries([queryKeys.SCHEDULE_LIST]);
     },
-    onError: (error: Error) => {
-      Toast.error(error.message);
-    },
   });
   return { mutate };
 }

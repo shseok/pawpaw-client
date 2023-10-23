@@ -12,9 +12,6 @@ export default function useJoinSchedule() {
     onSuccess: () => {
       Toast.success('스케줄에 참여하였습니다.🐾');
     },
-    onError: (error: Error) => {
-      Toast.error(error.message);
-    },
     onSettled: () => queryClient.invalidateQueries([queryKeys.SCHEDULE_LIST]),
   });
   return { mutate, isLoading };

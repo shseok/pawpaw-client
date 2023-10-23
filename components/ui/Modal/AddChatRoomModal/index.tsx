@@ -42,7 +42,7 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
     const { name, description } = data;
     setIsLoading(true);
     try {
-      const response = await postChatRoom({
+      const { chatroomId } = await postChatRoom({
         image: imageFile as File,
         body: {
           name,
@@ -52,21 +52,24 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
           locationLimit: true,
         },
       });
-      if (response.chatroomId) {
+      if (chatroomId) {
         Toast.success('채팅룸 오픈! 🦊');
-        router.push(`/chat/${response.chatroomId}`);
-      } else {
-        throw new Error(response.message);
+        router.push(`/chat/${chatroomId}`);
       }
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) Toast.error(error.message);
     } finally {
       setIsLoading(false);
     }
   };
   const onSubmit: SubmitHandler<FormData> = (data) => {
+    const LIMIT_IMAGE_SIZE = 2097152;
     if (!imageFile) {
       Toast.error('커버이미지를 업로드 해주세요. 🐈');
+      return;
+    }
+    if (imageFile.size > LIMIT_IMAGE_SIZE) {
+      Toast.error('2MB 이상 이미지는 업로드할 수 없어요.');
       return;
     }
     onCreateChatRoom(data);

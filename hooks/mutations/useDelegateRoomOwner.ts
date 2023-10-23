@@ -18,11 +18,9 @@ export default function useDelegateRoomOwner({
       delegateRoomOwner(roomId, userId),
     onSuccess: () => {
       Toast.success(`${user}님에게 방장을 넘겨주었어요.🐶`);
-      modalClose();
       queryClient.invalidateQueries([queryKeys.CHATROOM_USER_LIST]);
     },
-    onError: (error: Error) => {
-      Toast.error(error.message);
+    onSettled: () => {
       modalClose();
     },
   });
