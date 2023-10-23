@@ -14,10 +14,12 @@ export default function BoardModal({ boardId }: { boardId: number }) {
   const wrapper = useRef(null);
   const router = useRouter();
 
+  // 모달 닫는 (이전 url로 돌아가는) 콜백함수
   const onDismiss = useCallback(() => {
     router.back();
   }, [router]);
 
+  // overlay(모달 바깥쪽)에 마우스 클릭시 dismiss
   const onClick: MouseEventHandler = useCallback(
     (e) => {
       if (e.target === overlay.current || e.target === wrapper.current) {
@@ -27,6 +29,7 @@ export default function BoardModal({ boardId }: { boardId: number }) {
     [onDismiss, overlay, wrapper],
   );
 
+  // 키보드 esc 눌렀을 때 dismiss
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') onDismiss();
