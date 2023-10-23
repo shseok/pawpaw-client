@@ -1,11 +1,13 @@
 import { BoardCardModal } from '@/components/ui/BoardCard/BoardCardPackage/BoardCardModalPackage';
 import useGetBoard from '@/hooks/queries/useGetBoard';
 import useGetCommentList from '@/hooks/queries/useGetCommentList';
+import ModalBoardLoading from '../Loading/ModalBoardLoading';
 
 export default function ModalBoardCard({ boardId }: { boardId: number }) {
-  const { data: board } = useGetBoard(boardId);
+  const { data: board, isLoading } = useGetBoard(boardId);
   const { data: commentList, Observer } = useGetCommentList(boardId);
 
+  if (isLoading) return <ModalBoardLoading />;
   if (board) {
     return (
       <BoardCardModal imgs={board.fileNames}>

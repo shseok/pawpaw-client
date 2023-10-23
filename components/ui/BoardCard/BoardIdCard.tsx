@@ -1,11 +1,13 @@
 import useGetBoard from '@/hooks/queries/useGetBoard';
 import useGetCommentList from '@/hooks/queries/useGetCommentList';
 import { BoardCardId } from './BoardCardPackage/BoardCardIdPackage';
+import BoardIdLoading from '../Loading/BoardIdLoading';
 
 export default function BoardIdCard({ boardId }: { boardId: number }) {
-  const { data: board } = useGetBoard(boardId);
+  const { data: board, isLoading } = useGetBoard(boardId);
   const { data: commentList, Observer } = useGetCommentList(boardId);
 
+  if (isLoading) return <BoardIdLoading />;
   if (board) {
     return (
       <BoardCardId>
