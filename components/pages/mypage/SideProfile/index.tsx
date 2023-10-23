@@ -1,5 +1,6 @@
 import FlexBox from '@/components/ui/FlexBox';
 import ProfileCard from './ProfileCard';
+// TODO: 팔로우 구현 (백엔드 완료 이후)
 // import FollowingFollowerCard from './FollowingFollowerCard';
 
 export default function SideProfile() {

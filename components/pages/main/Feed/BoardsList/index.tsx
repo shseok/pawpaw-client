@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import useGetBoardList from '@/hooks/queries/useGetBoardList';
 import FeedBoardLoading from '@/components/ui/Loading/FeedBoardLoading';
 import FlexBox from '../../../../ui/FlexBox';
