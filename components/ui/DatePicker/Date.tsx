@@ -26,7 +26,7 @@ export default function Date({
         <div className="flex gap-1 caption1">
           <span>{format(selectedDate, 'MMM yyyy')}</span>
           <button type="button" onClick={onChangePickerType}>
-            <CaretDownIcon />
+            <CaretDownIcon className="w-4 h-4" />
           </button>
         </div>
         <div className="flex gap-2">
