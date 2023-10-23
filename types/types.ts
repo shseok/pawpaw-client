@@ -23,6 +23,7 @@ export interface Board {
   replyCount: number;
   userImageUrl: string;
   boardLiked: boolean;
+  bookmarked: boolean;
   createdDate: string;
   modifiedDate: string;
 }

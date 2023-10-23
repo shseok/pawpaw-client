@@ -27,6 +27,7 @@ export default function BoardCardHeader({ board }: { board: Board }) {
       <BoardCardDropdown
         boardId={board.id}
         isMyBoard={board.userId === user?.userId}
+        isBookmarked={board.bookmarked}
       />
     </FlexBox>
   );
