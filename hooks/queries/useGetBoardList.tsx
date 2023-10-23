@@ -1,21 +1,21 @@
 'use client';
 
-import { getCommentList } from '@/service/board';
-import { CommentList, Comment } from '@/types/types';
+import { getBoardList } from '@/service/board';
+import { Board, BoardList } from '@/types/types';
 import { queryKeys } from '@/constant/query-keys';
 import useInfiniteScroll from '../common/useInfiniteScroll';
 
-export default function useGetCommentList(boardId: number) {
+export default function useGetBoardList() {
   const { data, isLoading, Observer, hasNextPage } = useInfiniteScroll<
-    CommentList,
-    Comment
+    BoardList,
+    Board
   >({
-    queryKey: [queryKeys.COMMENT_LIST],
+    queryKey: [queryKeys.BOARD_LIST],
     firstPageParam: 0,
-    queryFn: getCommentList,
+    queryFn: getBoardList,
     getNextPageParamFn: (boardList) =>
       boardList.last ? undefined : boardList.number + 1,
-    params: [boardId],
+    params: [],
     selectFn: (d) => ({
       pages: d.pages.flatMap((page) => page.content),
       pageParams: d.pageParams,

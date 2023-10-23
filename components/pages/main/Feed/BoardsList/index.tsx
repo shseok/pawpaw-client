@@ -16,18 +16,11 @@ export default function BoardsList() {
       {isLoading ? (
         <FeedBoardLoading />
       ) : (
-        boardList?.pages &&
-        boardList?.pages?.map((page) =>
-          page.content.length > 0 ? (
-            page.content.map((board) => (
-              <div key={board.id} className="w-full">
-                <FeedBoardCard board={board} />
-              </div>
-            ))
-          ) : (
-            <div>아직 게시물이 없어요ㅠㅠ</div>
-          ),
-        )
+        boardList?.pages?.map((board) => (
+          <div key={board.id} className="w-full">
+            <FeedBoardCard board={board} />
+          </div>
+        ))
       )}
       {hasNextPage ? null : <div>🐾 더이상 게시물이 없어요 🐾</div>}
       <Observer>

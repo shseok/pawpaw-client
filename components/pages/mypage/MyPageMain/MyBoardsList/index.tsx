@@ -14,15 +14,13 @@ export default function MyBoardsList() {
   return (
     <div className="grid w-full gap-5 tablet:grid-cols-2 tablet:mt-4">
       {myBoards &&
-        myBoards?.pages?.map((page) =>
-          page.content.map((board) => (
-            <div key={board.id} className="w-full">
-              <Link key={board.id} href={`/board/${board.id}`}>
-                <MyBoardCard board={board} />
-              </Link>
-            </div>
-          )),
-        )}
+        myBoards?.pages?.map((board) => (
+          <div key={board.id} className="w-full">
+            <Link key={board.id} href={`/board/${board.id}`}>
+              <MyBoardCard board={board} />
+            </Link>
+          </div>
+        ))}
       <Observer>
         <div>로딩중...</div>
       </Observer>

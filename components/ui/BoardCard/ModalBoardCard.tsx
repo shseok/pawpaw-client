@@ -25,18 +25,16 @@ export default function ModalBoardCard({ boardId }: { boardId: number }) {
             likedCount={board.likedCount}
             isLiked={board.boardLiked}
           >
-            {commentList?.pages.map((page) =>
-              page.content.map((comment) => (
-                <BoardCardModal.ModalComments
-                  boardId={board.id}
-                  id={comment.id}
-                  userName={comment.nickname}
-                  content={comment.content}
-                  isUser={comment.replyWriter}
-                  userImage={comment.userImageUrl}
-                />
-              )),
-            )}
+            {commentList?.pages.map((comment) => (
+              <BoardCardModal.ModalComments
+                boardId={board.id}
+                id={comment.id}
+                userName={comment.nickname}
+                content={comment.content}
+                isUser={comment.replyWriter}
+                userImage={comment.userImageUrl}
+              />
+            ))}
             <Observer>로딩중...</Observer>
           </BoardCardModal.BoardCardCommentWrapper>
         </BoardCardModal.Content>
