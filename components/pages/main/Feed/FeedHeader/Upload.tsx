@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import usePostBoard from '@/hooks/mutations/usePostBoard';
+// TODO: 이미지 업로드 (백엔드 완료 이후)
 // import useImageUpload from '@/hooks/common/useImageUpload';
 // import Image from 'next/image';
 // import usePostImageBoard from '@/hooks/mutations/usePostImageBoard';
