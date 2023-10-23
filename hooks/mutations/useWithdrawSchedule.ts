@@ -13,9 +13,6 @@ export default function useWithdrawSchedule() {
       Toast.success('일정을 취소했어요. 🐾');
       return queryClient.invalidateQueries([queryKeys.SCHEDULE_LIST]);
     },
-    onError: () => {
-      Toast.error('일정취소를 실패했어요. 🥲 잠시후 다시 시도해주세요.');
-    },
   });
   return { mutate };
 }
