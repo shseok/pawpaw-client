@@ -8,14 +8,12 @@ import Link from 'next/link';
 
 export default function BookmarkedBoardsList() {
   const { Observer, data, isLoading } = useGetBookmarkedBoardList();
-
-  // 모달을 위한 상태
-
   if (isLoading) {
     return <MyBoardListLoading />;
   }
-
-  // TODO: 게시물 없을 경우 없다고 띄우기
+  if (!data) {
+    return <div>아직 북마크한 게시물이 없어요ㅠㅠ</div>;
+  }
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
@@ -31,7 +29,7 @@ export default function BookmarkedBoardsList() {
             )),
           )}
         <Observer>
-          <div>로딩스피너...</div>
+          <div>로딩중...</div>
         </Observer>
       </div>
     </>
