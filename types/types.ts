@@ -11,25 +11,102 @@ export interface SidebarProps {
   pathname: string;
 }
 
-export interface Post {
-  albumId: number;
+export interface Board {
+  userId: string;
   id: number;
   title: string;
-  url: string;
+  content: string;
+  writer: string;
+  replyListDto: Comment[];
+  fileNames: string[];
+  likedCount: number;
+  replyCount: number;
+  userImageUrl: string;
+  boardLiked: boolean;
+  bookmarked: boolean;
+  createdDate: string;
+  modifiedDate: string;
+}
+export interface BoardList {
+  content: Board[];
+  pageable: {
+    sort: {
+      empty: boolean;
+      unsorted: boolean;
+      sorted: boolean;
+    };
+    offset: number;
+    pageSize: number;
+    pageNumber: number;
+    paged: boolean;
+    unpaged: boolean;
+  };
+  size: number;
+  number: number;
+  sort: {
+    empty: true;
+    unsorted: true;
+    sorted: false;
+  };
+  numberOfElements: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
 }
 
-export interface TempPostListApiProps {
-  pageParam: number;
-  pageSize: number;
-}
+export interface MyBoardList extends BoardList {}
+
+export interface BookmarkedBoardList extends BoardList {}
 
 export interface Comment {
   id: number;
   content: string;
-  PostId: number;
-  User: {
-    name: string;
+  nickname: string;
+  replyWriter: boolean;
+  userImageUrl: string;
+  // children: string[];
+}
+
+export interface CommentList {
+  content: Comment[];
+  pageable: {
+    sort: {
+      empty: boolean;
+      unsorted: boolean;
+      sorted: boolean;
+    };
+    offset: 0;
+    pageSize: 3;
+    pageNumber: 0;
+    paged: boolean;
+    unpaged: boolean;
   };
+  size: 3;
+  number: 0;
+  sort: {
+    empty: boolean;
+    unsorted: boolean;
+    sorted: boolean;
+  };
+  numberOfElements: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
+
+export interface PostBoardType {
+  title: string;
+  content: string;
+}
+
+export interface PostImageType {
+  files: string[];
+}
+
+export interface PostCommentType {
+  boardId: number;
+  parentId: number;
+  content: string;
 }
 
 export interface LocationInfoType {

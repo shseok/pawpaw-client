@@ -1,13 +1,25 @@
 'use client';
 
-import { useState } from 'react';
-import Toast from '@/utils/notification';
+import { useEffect, useState } from 'react';
+import usePostBoard from '@/hooks/mutations/usePostBoard';
+// TODO: 이미지 업로드 (백엔드 완료 이후)
+// import useImageUpload from '@/hooks/common/useImageUpload';
+// import Image from 'next/image';
+// import usePostImageBoard from '@/hooks/mutations/usePostImageBoard';
 import Avatar from '../../../../ui/Avatar';
 import Button from '../../../../ui/Button';
 import FlexBox from '../../../../ui/FlexBox';
 
-export default function Upload() {
+export default function Upload({
+  userImage,
+  nickname,
+}: {
+  userImage: string;
+  nickname: string;
+}) {
   const [postText, setPostText] = useState('');
+  const { mutate: postBoard, isLoading, isSuccess } = usePostBoard(postText);
+  // const { handleImageUpload, imageFile, imagePreview } = useImageUpload();
 
   const maxCharacters = 100;
   const isOverMaxChar = postText.length > maxCharacters;
@@ -15,17 +27,22 @@ export default function Upload() {
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostText(event.target.value);
   };
+  useEffect(() => {
+    if (isSuccess) {
+      setPostText('');
+    }
+    // if (isSuccess && imageFile) {
+    // const { mutate: postImage, isLoading } = usePostImageBoard();
+    // }
+  }, [isSuccess]);
 
   return (
-    <FlexBox
-      direction="column"
-      className="bg-primary-50 p-5 border-[1px] border-primary-300 rounded-[10px] w-full"
-    >
+    <form className="flex flex-col bg-primary-50 p-5 border-[1px] border-primary-300 rounded-[10px] w-full">
       <FlexBox justify="between" className="w-full gap-[24px]">
         <Avatar
           size="xxl"
-          image="/Feed/desktop/tempUserProfilePic.svg"
-          name="수박이"
+          image={userImage}
+          name={nickname ?? '로그인하세요'}
         />
         <div className="relative w-full">
           <textarea
@@ -43,26 +60,42 @@ export default function Upload() {
           ) : null}
         </div>
       </FlexBox>
+      {/* {imagePreview && (
+        <div className="relative w-full m-5 h-60 ">
+          <Image
+            fill
+            priority
+            alt="image"
+            src={imagePreview}
+            className="rounded-[10px] object-contain"
+          />
+        </div>
+      )} */}
       <FlexBox justify="end" className="gap-[10px] w-full">
+        {/* <label
+          htmlFor="image"
+          className="rounded-[10px] h-[54px] w-40 p-2.5 bg-white border border-primary-200 text-primary-200 hover:border-primary-300 hover:text-primary-300 cursor-pointer text-center"
+        >
+          <div className="flex flex-col items-center justify-center w-full h-full">
+            파일
+          </div>
+          <input
+            type="file"
+            id="image"
+            onChange={handleImageUpload}
+            className="hidden"
+            accept="image/*"
+          />
+        </label> */}
         <Button
           size="lg"
-          variant="secondary"
-          disabled={isOverMaxChar}
+          disabled={postText.length === 0 || isOverMaxChar || isLoading}
           className="w-40"
-          onClickAction={() => Toast.error('실패')}
+          onClickAction={() => postBoard()}
         >
-          파일
+          {isLoading ? '업로드 중입니다' : '업로드'}
         </Button>
-        <Button
-          size="lg"
-          disabled={isOverMaxChar}
-          className="w-40"
-          onClickAction={() => Toast.success('성공')}
-        >
-          업로드
-        </Button>
-        <div className="mt-4" id="renderedText" />
       </FlexBox>
-    </FlexBox>
+    </form>
   );
 }

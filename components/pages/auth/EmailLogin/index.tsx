@@ -28,7 +28,7 @@ export default function EmailLogin({ title }: Props) {
   };
 
   return (
-    <form className="w-full flex flex-col xs:gap-5" onSubmit={handleLogin}>
+    <form className="flex flex-col w-full xs:gap-5" onSubmit={handleLogin}>
       <div className="flex flex-col item-center mb-[140px] xs:mb-[178px]">
         <div className="mb-10">
           <h1 className="header1 text-center w-full gap-[40px]">{title}</h1>

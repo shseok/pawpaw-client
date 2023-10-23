@@ -10,8 +10,10 @@ export const metadata: Metadata = {
 
 export default function MainLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col flex-wrap h-full tablet:flex-row">
@@ -19,6 +21,7 @@ export default function MainLayout({
       <Sidebar />
       <div id="modal-root" />
       {children}
+      {modal}
       <Footer />
     </div>
   );

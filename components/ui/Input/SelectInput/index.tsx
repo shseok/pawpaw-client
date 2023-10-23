@@ -80,7 +80,7 @@ export default function SelectInput({
               <button
                 type="button"
                 onClick={() => handleSelect(item)}
-                className="w-full text-start cursor-pointer px-5 py-4 hover:bg-grey-100 body1 text-grey-400 border-b border-grey-200"
+                className="w-full px-5 py-4 border-b cursor-pointer text-start hover:bg-grey-100 body1 text-grey-400 border-grey-200"
               >
                 {item}
               </button>
@@ -93,7 +93,7 @@ export default function SelectInput({
                 setIsCustomInputOpen(true);
                 inputRef.current?.focus();
               }}
-              className="w-full text-start cursor-pointer px-5 py-4 hover:bg-grey-100 body1 text-grey-400"
+              className="w-full px-5 py-4 cursor-pointer text-start hover:bg-grey-100 body1 text-grey-400"
             >
               +직접입력
             </button>
@@ -103,7 +103,7 @@ export default function SelectInput({
       {isCustomInputOpen && (
         <div className="absolute z-[10] px-5 py-4 bg-white border border-grey-200 rounded-b-[10px] shadow-sm flex gap-1.5 w-full">
           <input
-            className="w-full flex-1 border-0 focus-none p-0"
+            className="flex-1 w-full p-0 border-0 focus-none"
             type="text"
             value={customValue}
             onChange={handleInputChange}

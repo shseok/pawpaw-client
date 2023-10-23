@@ -30,10 +30,10 @@ const ValidateInput = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {error && (
-          <Alert className="absolute top-1/2 right-5 transform -translate-x-1/2 -translate-y-1/2 fill-red" />
+          <Alert className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 right-5 fill-red" />
         )}
         {success && (
-          <Check className="absolute top-1/2 right-5 transform -translate-x-1/2 -translate-y-1/2 fill-primary-300" />
+          <Check className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 right-5 fill-primary-300" />
         )}
       </div>
     );

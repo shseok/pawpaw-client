@@ -34,7 +34,6 @@ export async function createUserWithSocialLogin(params: AuthParams) {
     }
   }
 }
-
 export async function createUserWithEmailAndPassword(params: EmailAuthParams) {
   const formData = new FormData();
   const { body, image } = params;
