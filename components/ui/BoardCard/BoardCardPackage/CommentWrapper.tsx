@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import usePostComment from '@/hooks/mutations/usePostComment';
-import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
-import LikeButton from '@/public/like.svg';
 import useLikeBoard from '@/hooks/mutations/useLikeBoard';
 import useUnlikeBoard from '@/hooks/mutations/useUnlikeBoard';
-import CommentLine from 'public/Feed/desktop/CommentLine.svg';
+import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
+import LikeButton from '@/public/like.svg';
+import CommentLine from '@/public/Feed/desktop/CommentLine.svg';
 import FlexBox from '../../FlexBox';
 
 export function BoardCardCommentWrapper({
