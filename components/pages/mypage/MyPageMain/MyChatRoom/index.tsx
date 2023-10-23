@@ -12,7 +12,9 @@ export default function MyChatRoom() {
   }
   return (
     <div className="grid w-full gap-5 tablet:grid-cols-2 tablet:mt-4 place-items-center">
-      {data && data.map((list) => <ImageChatCard {...list} />)}
+      {data.map((list) => (
+        <ImageChatCard {...list} />
+      ))}
     </div>
   );
 }

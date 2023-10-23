@@ -13,16 +13,13 @@ export default function BookmarkedBoardsList() {
   }
   return (
     <div className="grid w-full gap-5 tablet:grid-cols-2 tablet:mt-4">
-      {data &&
-        data?.pages?.map((page) =>
-          page.content.map((board) => (
-            <div key={board.id} className="w-full">
-              <Link key={board.id} href={`/board/${board.id}`}>
-                <MyBoardCard board={board} />
-              </Link>
-            </div>
-          )),
-        )}
+      {data?.pages?.map((board) => (
+        <div key={board.id} className="w-full">
+          <Link key={board.id} href={`/board/${board.id}`}>
+            <MyBoardCard board={board} />
+          </Link>
+        </div>
+      ))}
       <Observer>
         <div>로딩중...</div>
       </Observer>
