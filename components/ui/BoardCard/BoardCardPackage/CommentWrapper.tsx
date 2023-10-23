@@ -6,7 +6,7 @@ import useLikeBoard from '@/hooks/mutations/useLikeBoard';
 import useUnlikeBoard from '@/hooks/mutations/useUnlikeBoard';
 import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
 import LikeButton from '@/public/like.svg';
-import CommentLine from '@/public/Feed/desktop/CommentLine.svg';
+import CommentLine from '@/public/Feed/desktop/commentLine.svg';
 import FlexBox from '../../FlexBox';
 
 export function BoardCardCommentWrapper({
