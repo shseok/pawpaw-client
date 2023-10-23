@@ -20,14 +20,12 @@ export default function useLikeBoard() {
           [queryKeys.BOARD_LIST],
           (oldData) => {
             if (oldData) {
-              const updatedData = { ...oldData };
-              const updatedBoard = updatedData.content?.find(
+              const updatedBoard = oldData.content?.find(
                 (board) => board.id === boardId,
               );
               if (updatedBoard) {
                 updatedBoard.boardLiked = true;
               }
-              return updatedData;
             }
             return oldData;
           },
