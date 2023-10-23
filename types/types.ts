@@ -61,6 +61,8 @@ export interface Comment {
   id: number;
   content: string;
   nickname: string;
+  replyWriter: boolean;
+  userImageUrl: string;
   // children: string[];
 }
 

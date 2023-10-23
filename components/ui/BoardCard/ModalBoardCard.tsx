@@ -29,8 +29,7 @@ export default function ModalBoardCard({ boardId }: { boardId: number }) {
                   id={comment.id}
                   userName={comment.nickname}
                   content={comment.content}
-                  // TODO: 유저 프로필 사진 연결!
-                  userImage="/Feed/desktop/tempProfilePic.svg"
+                  userImage={comment.userImageUrl}
                 />
               )),
             )}
