@@ -22,8 +22,10 @@ export default function BoardModal({ boardId }: { boardId: number }) {
   // overlay(모달 바깥쪽)에 마우스 클릭시 dismiss
   const onOutsideClick: MouseEventHandler = useCallback(
     (e) => {
-      if (e.target === overlay.current || e.target === wrapper.current) {
-        if (onDismiss) onDismiss();
+      const isOverlayOrWrapper =
+        e.target === overlay.current || e.target === wrapper.current;
+      if (isOverlayOrWrapper && onDismiss) {
+        onDismiss();
       }
     },
     [onDismiss, overlay, wrapper],
