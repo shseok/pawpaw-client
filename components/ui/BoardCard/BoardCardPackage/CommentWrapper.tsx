@@ -73,7 +73,11 @@ export function BoardCardCommentWrapper({
             {children}
           </FlexBox>
         ) : (
-          <FlexBox direction="row" className="gap-[19px] pl-[15px]">
+          <FlexBox
+            direction="row"
+            justify="start"
+            className="w-full gap-[19px] pl-[15px]"
+          >
             <Image
               src="/Feed/desktop/commentLine.svg"
               alt="댓글선"
