@@ -20,7 +20,7 @@ export default function BoardModal({ boardId }: { boardId: number }) {
   }, [router]);
 
   // overlay(모달 바깥쪽)에 마우스 클릭시 dismiss
-  const onClick: MouseEventHandler = useCallback(
+  const onOutsideClick: MouseEventHandler = useCallback(
     (e) => {
       if (e.target === overlay.current || e.target === wrapper.current) {
         if (onDismiss) onDismiss();
@@ -46,7 +46,7 @@ export default function BoardModal({ boardId }: { boardId: number }) {
     <div
       ref={overlay}
       className="fixed inset-0 flex items-center justify-center flex-1 w-screen bg-black bg-opacity-70"
-      onClick={onClick}
+      onClick={onOutsideClick}
     >
       <FlexBox direction="column" className="gap-4">
         <FlexBox justify="end" className="w-full">
