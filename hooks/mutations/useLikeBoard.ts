@@ -1,5 +1,4 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import Toast from '@/utils/notification';
 import { BoardList } from '@/types/types';
 import { updateBoardLike } from '@/service/board';
 import { queryKeys } from '@/constant/query-keys';
@@ -35,13 +34,6 @@ export default function useLikeBoard() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.BOARD_LIST]);
-    },
-    onError: (_err, _, context) => {
-      // 캐시를 저장된 값으로 롤백
-      queryClient.setQueryData([queryKeys.BOARD_LIST], context?.previousBoards);
-      Toast.error(
-        '좋아요를 누르는데 실패했습니다. 잠시후 다시 시도해주세요.🥲',
-      );
     },
   });
   return { mutate, isLoading };

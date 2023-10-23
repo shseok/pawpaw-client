@@ -14,9 +14,6 @@ export default function usePostComment() {
       queryClient.invalidateQueries([queryKeys.BOARD_LIST]);
       return queryClient.invalidateQueries([queryKeys.COMMENT_LIST]);
     },
-    onError: () => {
-      Toast.error('댓글을 업로드하지 못했습니다. 잠시후 다시 시도해주세요.🥲');
-    },
   });
   return { mutate, isLoading };
 }

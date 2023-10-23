@@ -1,5 +1,4 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import Toast from '@/utils/notification';
 import { BoardList } from '@/types/types';
 import { deleteBoardLike } from '@/service/board';
 import { queryKeys } from '@/constant/query-keys';
@@ -39,9 +38,6 @@ export default function useUnlikeBoard() {
     onError: (_err, _, context) => {
       // 캐시를 저장된 값으로 롤백
       queryClient.setQueryData([queryKeys.BOARD_LIST], context?.previousBoards);
-      Toast.error(
-        '좋아요를 취소하는데 실패했습니다. 잠시후 다시 시도해주세요.🥲',
-      );
     },
   });
   return { mutate, isLoading };
