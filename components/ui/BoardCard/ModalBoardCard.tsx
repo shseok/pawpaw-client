@@ -12,6 +12,7 @@ export default function ModalBoardCard({ boardId }: { boardId: number }) {
         <BoardCardModal.Header board={board} />
         <BoardCardModal.Content
           type="modal"
+          boardId={board.id}
           content={board.content}
           imgs={board.fileNames}
         >

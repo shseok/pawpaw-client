@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import CaretLeft from 'public/CaretLeft.svg';
 import CaretRight from 'public/CaretRight.svg';
+import { useRouter } from 'next/navigation';
 import FlexBox from '../../FlexBox';
 import Divider from '../../Divider';
 import Images from './Images';
@@ -14,16 +15,18 @@ import Images from './Images';
 export default function BoardCardContent({
   children,
   type,
+  boardId,
   content,
   imgs,
-  onClickModal,
 }: {
   children: React.ReactNode;
   type: 'mainPC' | 'modal' | 'myPage' | 'id';
+  boardId: number;
   content: string;
   imgs: string[];
-  onClickModal?: () => void;
 }) {
+  const router = useRouter();
+
   const [imgNum, setImgNum] = useState(0);
   const downImgNum = () => {
     if (imgNum - 1 >= 0) {
@@ -49,10 +52,16 @@ export default function BoardCardContent({
       } ${type === 'modal' && 'w-[375px] h-full'} gap-3`}
     >
       <div
-        className={`body3 text-grey-800 ${
+        className={`body3 text-grey-800 w-full ${
           type === 'mainPC' ? 'max-h-40' : null
+        } ${
+          type === 'mainPC' || type === 'myPage' ? 'hover:cursor-pointer' : null
         }`}
-        onClick={onClickModal}
+        onClick={() =>
+          type === 'mainPC' || type === 'myPage'
+            ? router.push(`board/${boardId}`)
+            : null
+        }
       >
         {content}
       </div>
@@ -68,7 +77,7 @@ export default function BoardCardContent({
       <>
         {type === 'mainPC' && (
           <div className="grid w-full h-full grid-cols-2 gap-9">
-            <Images imgs={imgs} onClickModal={onClickModal} />
+            <Images boardId={boardId} imgs={imgs} />
             {renderBoardContent()}
           </div>
         )}
@@ -99,8 +108,11 @@ export default function BoardCardContent({
         )}
 
         {type === 'myPage' && (
-          <div className="grid w-full h-full grid-rows-2 gap-9">
-            <Images imgs={imgs} onClickModal={onClickModal} />
+          <div
+            className="grid w-full h-full grid-rows-2 gap-9"
+            onClick={() => router.push(`/board/${boardId}`)}
+          >
+            <Images boardId={boardId} imgs={imgs} />
             {renderBoardContent()}
           </div>
         )}

@@ -1,19 +1,22 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function PostCardImages({
+  boardId,
   imgs,
-  onClickModal,
 }: {
+  boardId: number;
   imgs: string[];
-  onClickModal?: () => void;
 }) {
+  const router = useRouter();
+
   if (imgs) {
     return (
       <div
-        className="grid w-full grid-cols-2 place-content-stretch"
-        onClick={onClickModal}
+        className="grid w-full grid-cols-2 place-content-stretch hover:cursor-pointer"
+        onClick={() => router.push(`/board/${boardId}`)}
       >
         <div className="relative row-span-2 -z-10">
           <Image

@@ -7,6 +7,7 @@ export default function MyPageBoardCard({ board }: { board: Board }) {
       <BoardCard.Header board={board} />
       <BoardCard.Content
         type="myPage"
+        boardId={board.id}
         content={board.content}
         imgs={board.fileNames}
       >

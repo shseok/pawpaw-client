@@ -1,11 +1,6 @@
-// import { Board } from '@/types/types';
 import useGetBoard from '@/hooks/queries/useGetBoard';
 import useGetCommentList from '@/hooks/queries/useGetCommentList';
 import { BoardCardId } from './BoardCardPackage/BoardCardIdPackage';
-
-// interface MyBoardCardProps {
-//   board: Board;
-// }
 
 export default function BoardIdCard({ boardId }: { boardId: number }) {
   const { data: board } = useGetBoard(boardId);
@@ -17,6 +12,7 @@ export default function BoardIdCard({ boardId }: { boardId: number }) {
         <BoardCardId.Header board={board} />
         <BoardCardId.Content
           type="id"
+          boardId={board.id}
           content={board.content}
           imgs={board.fileNames}
         >
@@ -44,4 +40,5 @@ export default function BoardIdCard({ boardId }: { boardId: number }) {
       </BoardCardId>
     );
   }
+  return <div>내용이 없습니다</div>;
 }

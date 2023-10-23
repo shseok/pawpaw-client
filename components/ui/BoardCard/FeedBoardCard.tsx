@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Board } from '@/types/types';
 import { BoardCard } from '@/components/ui/BoardCard/BoardCardPackage';
 import FlexBox from '../FlexBox';
@@ -12,6 +14,7 @@ export default function FeedBoardCard({ board }: { board: Board }) {
       <BoardCard.Header board={board} />
       <BoardCard.Content
         type="mainPC"
+        boardId={board.id}
         content={board.content}
         imgs={board.fileNames}
       >
@@ -30,6 +33,7 @@ export default function FeedBoardCard({ board }: { board: Board }) {
             {board.replyListDto?.map((comment) => (
               <BoardCard.Comments
                 key={comment.id}
+                boardId={board.id}
                 userName={comment.nickname}
                 content={comment.content}
               />
