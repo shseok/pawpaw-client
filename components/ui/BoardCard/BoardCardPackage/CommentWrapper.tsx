@@ -111,10 +111,8 @@ export function BoardCardCommentWrapper({
         >
           <PaperPlaneIcon
             className={`w-8 h-8 ${
-              isLoading || commentText.length === 0
-                ? 'fill-grey-300'
-                : 'fill-primary-300'
-            }`}
+              commentText.length === 0 ? 'fill-grey-300' : 'fill-primary-300'
+            } ${isLoading ? 'animate-bounce' : null}`}
           />
         </button>
       </FlexBox>
