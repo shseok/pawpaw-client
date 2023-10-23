@@ -143,27 +143,14 @@ export async function getCommentList(
 }
 
 export async function deleteComment(boardId: number, replyId: number) {
-  const url = `/endpoint/api/reply/remove/${boardId}/${replyId}`;
   try {
-    const response = await fetch(url, {
-      method: 'DELETE',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (response.status === 401) {
-      throw new AuthError('로그인이 필요한 서비스입니다.');
-    }
+    const url = `/endpoint/api/reply/remove/${boardId}/${replyId}`;
+    const response = await fetch(url, { method: 'DELETE' });
     if (!response.ok) {
-      throw new Error(`서버오류:${response.status}`);
+      throw new Error('댓글 삭제에 실패했어요.🥲 잠시후 다시 시도해주세요.');
     }
-    return await response.json();
   } catch (error) {
-    if (error instanceof AuthError) {
-      window.location.replace('/auth/login');
-      alert(error.message);
-    }
+    console.error(error);
     throw error;
   }
 }

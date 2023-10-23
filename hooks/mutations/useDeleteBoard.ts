@@ -3,7 +3,7 @@ import { deleteBoard } from '@/service/board';
 import Toast from '@/utils/notification';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export default function useDeleteComment(boardId: number) {
+export default function useDeleteBoard(boardId: number) {
   const queryClient = useQueryClient();
   const { mutate, isLoading } = useMutation({
     mutationFn: () => deleteBoard(boardId),

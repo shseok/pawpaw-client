@@ -26,9 +26,11 @@ export default function ModalBoardCard({ boardId }: { boardId: number }) {
             {commentList?.pages.map((page) =>
               page.content.map((comment) => (
                 <BoardCardModal.ModalComments
+                  boardId={board.id}
                   id={comment.id}
                   userName={comment.nickname}
                   content={comment.content}
+                  isUser={comment.replyWriter}
                   userImage={comment.userImageUrl}
                 />
               )),

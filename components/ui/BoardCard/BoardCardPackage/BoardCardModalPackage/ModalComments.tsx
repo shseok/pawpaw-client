@@ -3,21 +3,35 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import Avatar from '@/components/ui/Avatar';
+import useDeleteComment from '@/hooks/mutations/useDeleteComment';
 import FlexBox from '../../../FlexBox';
 import Modal from '../../../Modal';
 
 export default function BoardCardModalComments({
+  boardId,
   id,
   userName,
   content,
+  isUser,
   userImage,
 }: {
+  boardId: number;
   id: number;
   userName: string;
   content: string;
+  isUser: boolean;
   userImage: string;
 }) {
   const [showSmallModal, setShowSmallModal] = useState(false);
+  const { mutate: deleteComment } = useDeleteComment();
+
+  const onDeleteComment = () => {
+    if (window.confirm('댓글을 삭제하시겠습니까?')) {
+      deleteComment({ boardId, replyId: id });
+    }
+  };
+
+  // TODO: 댓글 시간 연결!
 
   return (
     <div key={id}>
@@ -51,15 +65,26 @@ export default function BoardCardModalComments({
                 className={`gap-2 p-4 w-[324px] bg-white shadow-dropdown rounded-[10px] `}
               >
                 <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
-                  <button className="w-full p-3 body1" type="button">
-                    삭제하기
-                  </button>
+                  {userName ? (
+                    isUser && (
+                      <button
+                        className="w-full p-3 body1"
+                        type="button"
+                        onClick={onDeleteComment}
+                      >
+                        삭제하기
+                      </button>
+                    )
+                  ) : (
+                    <button
+                      type="button"
+                      className="w-full p-3 cursor-not-allowed body1"
+                      disabled
+                    >
+                      이미 삭제된 댓글입니다.
+                    </button>
+                  )}
                 </li>
-                {/* <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
-                  <button className="w-full p-3 body1" type="button">
-                    신고하기
-                  </button>
-                </li> */}
                 <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
                   <button
                     className="w-full p-3 body1"
