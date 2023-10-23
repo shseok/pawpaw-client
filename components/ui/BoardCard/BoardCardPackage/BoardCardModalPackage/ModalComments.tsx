@@ -1,9 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 import Avatar from '@/components/ui/Avatar';
 import useDeleteComment from '@/hooks/mutations/useDeleteComment';
+import DotsIcon from 'public/DotsIcon.svg';
 import FlexBox from '../../../FlexBox';
 import Modal from '../../../Modal';
 
@@ -47,13 +47,7 @@ export default function BoardCardModalComments({
           <FlexBox className="gap-1" align="start">
             <div className="caption2 text-grey-500">1일전</div>
             <button type="button" onClick={() => setShowSmallModal(true)}>
-              <Image
-                src="/Feed/desktop/seeMore.svg"
-                alt="더보기"
-                width={16}
-                height={16}
-                className="hidden group-hover:block"
-              />
+              <DotsIcon className="hidden w-4 h-4 group-hover:block" />
             </button>
             <Modal
               open={showSmallModal}

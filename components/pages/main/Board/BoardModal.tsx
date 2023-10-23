@@ -3,10 +3,10 @@
 
 'use client';
 
-import Image from 'next/image';
 import ModalBoardCard from '@/components/ui/BoardCard/ModalBoardCard';
 import { useRouter } from 'next/navigation';
 import { MouseEventHandler, useCallback, useEffect, useRef } from 'react';
+import XIcon from 'public/X.svg';
 import FlexBox from '../../../ui/FlexBox';
 
 export default function BoardModal({ boardId }: { boardId: number }) {
@@ -51,12 +51,7 @@ export default function BoardModal({ boardId }: { boardId: number }) {
       <FlexBox direction="column" className="gap-4">
         <FlexBox justify="end" className="w-full">
           <button type="button" onClick={() => router.back()}>
-            <Image
-              src="/Feed/desktop/ModalOut.svg"
-              alt="나가기"
-              width={32}
-              height={32}
-            />
+            <XIcon className="w-8 h-8" />
           </button>
         </FlexBox>
         <div ref={wrapper}>

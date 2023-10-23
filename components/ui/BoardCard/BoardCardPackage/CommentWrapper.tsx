@@ -1,12 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 import usePostComment from '@/hooks/mutations/usePostComment';
 import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
 import LikeButton from '@/public/like.svg';
 import useLikeBoard from '@/hooks/mutations/useLikeBoard';
 import useUnlikeBoard from '@/hooks/mutations/useUnlikeBoard';
+import CommentLine from 'public/Feed/desktop/CommentLine.svg';
 import FlexBox from '../../FlexBox';
 
 export function BoardCardCommentWrapper({
@@ -78,12 +78,7 @@ export function BoardCardCommentWrapper({
             justify="start"
             className="w-full gap-[19px] pl-[15px]"
           >
-            <Image
-              src="/Feed/desktop/commentLine.svg"
-              alt="댓글선"
-              width={1}
-              height={53}
-            />
+            <CommentLine className="w-[1px] h-[53px]" />
             {children}
           </FlexBox>
         )}
