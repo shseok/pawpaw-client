@@ -1,4 +1,4 @@
-import Board from '@/components/pages/board';
+import Board from '@/components/pages/main/Board';
 
 export default async function BoardPage({
   params: { boardId },

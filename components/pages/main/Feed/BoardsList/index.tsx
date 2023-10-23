@@ -1,20 +1,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-
-import { Dispatch, SetStateAction } from 'react';
 import useGetBoardList from '@/hooks/queries/useGetBoardList';
-import { Board } from '@/types/types';
 import FeedBoardLoading from '@/components/ui/Loading/FeedBoardLoading';
+import Link from 'next/link';
 import FlexBox from '../../../../ui/FlexBox';
 import FeedBoardCard from '../../../../ui/BoardCard/FeedBoardCard';
 
-export default function BoardsList({
-  setSelectedBoard,
-  setShowModal,
-}: {
-  setSelectedBoard: Dispatch<SetStateAction<Board | null>>;
-  setShowModal: Dispatch<SetStateAction<boolean>>;
-}) {
+export default function BoardsList() {
   const {
     Observer,
     data: boardList,
@@ -31,14 +23,10 @@ export default function BoardsList({
         boardList?.pages?.map((page) =>
           page.content.length > 0 ? (
             page.content.map((board) => (
-              <div
-                key={board.id}
-                onClick={() => {
-                  setSelectedBoard(board);
-                }}
-                className="w-full"
-              >
-                <FeedBoardCard board={board} setShowModal={setShowModal} />
+              <div key={board.id} className="w-full">
+                <Link key={board.id} href={`/board/${board.id}`}>
+                  <FeedBoardCard board={board} />
+                </Link>
               </div>
             ))
           ) : (

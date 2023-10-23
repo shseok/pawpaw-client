@@ -1,19 +1,15 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
-import { useState } from 'react';
-import { Board } from '@/types/types';
 import MyBoardCard from '@/components/ui/BoardCard/MyPageBoardCard';
-import BoardModal from '@/components/ui/BoardModal';
 import MyBoardListLoading from '@/components/ui/Loading/MyBoardListLoading';
 import useGetBookmarkedBoardList from '@/hooks/queries/useGetMyBookmarkedBoardList';
+import Link from 'next/link';
 
 export default function BookmarkedBoardsList() {
   const { Observer, data, isLoading } = useGetBookmarkedBoardList();
 
   // 모달을 위한 상태
-  const [showModal, setShowModal] = useState(false);
-  const [selectedBoard, setSelectedBoard] = useState<Board | null>(null);
 
   if (isLoading) {
     return <MyBoardListLoading />;
@@ -27,14 +23,10 @@ export default function BookmarkedBoardsList() {
         {data &&
           data?.pages?.map((page) =>
             page.content.map((board) => (
-              <div
-                key={board.id}
-                onClick={() => {
-                  setSelectedBoard(board);
-                }}
-                className="w-full"
-              >
-                <MyBoardCard board={board} setShowModal={setShowModal} />
+              <div key={board.id} className="w-full">
+                <Link key={board.id} href={`/board/${board.id}`}>
+                  <MyBoardCard board={board} />
+                </Link>
               </div>
             )),
           )}
@@ -42,11 +34,6 @@ export default function BookmarkedBoardsList() {
           <div>로딩스피너...</div>
         </Observer>
       </div>
-      <BoardModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        board={selectedBoard}
-      />
     </>
   );
 }

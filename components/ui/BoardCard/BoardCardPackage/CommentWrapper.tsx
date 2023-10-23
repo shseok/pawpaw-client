@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { useState } from 'react';
 import usePostComment from '@/hooks/mutations/usePostComment';
@@ -117,36 +119,31 @@ export function BoardCardCommentWrapper({
 }
 
 export function MyPageBoardCardCommentWrapper({
-  onClickModal,
   commentsCount,
   likedCount,
 }: {
-  onClickModal: () => void;
   commentsCount: number;
   likedCount: number;
 }) {
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div onClick={onClickModal}>
-      <FlexBox
-        direction="column"
-        align="stretch"
-        justify="between"
-        className="w-full h-full"
-      >
-        <FlexBox direction="column" align="start" className="w-full gap-3">
-          <FlexBox className="gap-5">
-            <FlexBox className="gap-2 body3 text-grey-500">
-              <div>댓글</div>
-              <div>{commentsCount}</div>
-            </FlexBox>
-            <FlexBox className="gap-2 body3 text-grey-500">
-              <div>좋아요</div>
-              <div>{likedCount}</div>
-            </FlexBox>
+    <FlexBox
+      direction="column"
+      align="stretch"
+      justify="between"
+      className="w-full h-full"
+    >
+      <FlexBox direction="column" align="start" className="w-full gap-3">
+        <FlexBox className="gap-5">
+          <FlexBox className="gap-2 body3 text-grey-500">
+            <div>댓글</div>
+            <div>{commentsCount}</div>
+          </FlexBox>
+          <FlexBox className="gap-2 body3 text-grey-500">
+            <div>좋아요</div>
+            <div>{likedCount}</div>
           </FlexBox>
         </FlexBox>
       </FlexBox>
-    </div>
+    </FlexBox>
   );
 }

@@ -1,15 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
 import { Board } from '@/types/types';
 import { BoardCard } from '@/components/ui/BoardCard/BoardCardPackage';
 import FlexBox from '../FlexBox';
 
-export default function FeedBoardCard({
-  board,
-  setShowModal,
-}: {
-  board: Board;
-  setShowModal: Dispatch<SetStateAction<boolean>>;
-}) {
+export default function FeedBoardCard({ board }: { board: Board }) {
   return (
     <FlexBox
       direction="column"
@@ -21,7 +14,6 @@ export default function FeedBoardCard({
         type="mainPC"
         content={board.content}
         imgs={board.fileNames}
-        onClickModal={() => setShowModal(true)}
       >
         <BoardCard.BoardCardCommentWrapper
           boardId={board.id}
@@ -40,7 +32,6 @@ export default function FeedBoardCard({
                 key={comment.id}
                 userName={comment.nickname}
                 content={comment.content}
-                onClickModal={() => setShowModal(true)}
               />
             ))}
           </FlexBox>
