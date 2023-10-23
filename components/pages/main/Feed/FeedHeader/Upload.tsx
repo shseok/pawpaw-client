@@ -14,8 +14,8 @@ export default function Upload({
   userImage,
   nickname,
 }: {
-  userImage: string | undefined;
-  nickname: string | undefined;
+  userImage: string;
+  nickname: string;
 }) {
   const [postText, setPostText] = useState('');
   const { mutate: postBoard, isLoading, isSuccess } = usePostBoard(postText);
