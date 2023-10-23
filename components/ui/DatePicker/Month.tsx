@@ -27,7 +27,7 @@ export default function Month({
         <span className="flex gap-1 caption1">
           {format(selectedDate, 'yyyy')}
           <button type="button" onClick={onChangePickerType}>
-            <CaretDownIcon />
+            <CaretDownIcon className="w-4 h-4" />
           </button>
         </span>
         <div>
