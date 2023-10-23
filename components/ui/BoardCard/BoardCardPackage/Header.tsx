@@ -1,4 +1,4 @@
-import useRelativeTime from '@/hooks/common/useRelativeTime';
+import getRelativeTime from '@/utils/getRelativeTime';
 import { Board } from '@/types/types';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 import Link from 'next/link';
@@ -19,7 +19,7 @@ export default function BoardCardHeader({ board }: { board: Board }) {
               <div className="header4 text-grey-800">{board.writer}</div>
             </FlexBox>
             <div className="caption2 text-grey-400">
-              {useRelativeTime(board.createdDate)}
+              {getRelativeTime(board.createdDate)}
             </div>
           </FlexBox>
         </FlexBox>
