@@ -36,6 +36,7 @@ export async function joinChatRoom(id: number) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${id}/participants`;
   const response = await fetch(url, {
     method: 'POST',
+    credentials: 'include',
   });
   if (response.status === 401) {
     throw new Error('로그인이 필요한 서비스입니다.');
@@ -48,7 +49,10 @@ export async function joinChatRoom(id: number) {
 // 채팅룸 나가기 API
 export async function leaveChatRoom(roomId: string) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/participants`;
-  const response = await fetch(url, { method: 'DELETE' });
+  const response = await fetch(url, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
   if (response.status === 400) {
     Toast.error('방장은 채팅방 삭제만 가능해요.');
   }
@@ -65,7 +69,7 @@ export async function getChatroomUserList(
   chatRoomId: string,
 ): Promise<ChatRoomUserList[]> {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${chatRoomId}/participants`;
-  const response = await fetch(url);
+  const response = await fetch(url, { credentials: 'include' });
   if (response.status === 400) {
     throw new Error('현재 참여하고 있지 않은 채팅룸 입니다.');
   }
@@ -78,7 +82,7 @@ export async function getChatroomUserList(
 // 채팅룸에 등록되어있는 종료되지않은 스케줄 리스트 조회 API
 export async function getScheduleList(roomId: string): Promise<ScheduleList[]> {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/schedule`;
-  const response = await fetch(url);
+  const response = await fetch(url, { credentials: 'include' });
   if (!response.ok) {
     throw new Error('스케줄 리스트를 불러오지 못하였습니다.');
   }
@@ -93,6 +97,7 @@ export async function postSchedule(
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/schedule`;
   const response = await fetch(url, {
     method: 'POST',
+    credentials: 'include',
     body: JSON.stringify(scheduleInfo),
     headers: {
       'Content-Type': 'application/json',
@@ -109,7 +114,10 @@ export async function postSchedule(
 // 채팅룸 스케줄 삭제 API
 export async function deleteSchedule(roomId: string, scheduleId: number) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/schedule/${scheduleId}`;
-  const response = await fetch(url, { method: 'DELETE' });
+  const response = await fetch(url, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
   if (!response.ok) {
     throw new Error('스케줄 삭제에 실패했어요.🥲 잠시후 다시 시도해주세요.');
   }
@@ -118,7 +126,7 @@ export async function deleteSchedule(roomId: string, scheduleId: number) {
 // 현재 채팅에 참여중인 유저를 제외한 전체유저 검색 API
 export async function getSearchedUserList(roomId: string, nickname: string) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/non-participants?nickname=${nickname}`;
-  const response = await fetch(url);
+  const response = await fetch(url, { credentials: 'include' });
   return response.json();
 }
 // 현재 채팅에 참여중인 유저를 제외한 유저 초대 API
@@ -129,6 +137,7 @@ export async function inviteUserToChatRoom(
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/invite`;
   const response = await fetch(url, {
     method: 'POST',
+    credentials: 'include',
     body: JSON.stringify(userId),
     headers: {
       'Content-Type': 'application/json',
@@ -142,7 +151,7 @@ export async function inviteUserToChatRoom(
 // 스케줄 참여 API
 export async function joinSchedule(roomId: string, scheduleId: number) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
-  const response = await fetch(url, { method: 'POST' });
+  const response = await fetch(url, { method: 'POST', credentials: 'include' });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요합니다.');
   }
@@ -158,7 +167,7 @@ export async function joinSchedule(roomId: string, scheduleId: number) {
 export async function withdrawSchedule(roomId: string, scheduleId: number) {
   try {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
-    await fetch(url, { method: 'DELETE' });
+    await fetch(url, { method: 'DELETE', credentials: 'include' });
   } catch (error) {
     console.error(error);
   }
@@ -173,7 +182,7 @@ export async function getChatHistory(
   if (targetId !== 0) {
     url += `&targetId=${targetId}`;
   }
-  const response = await fetch(url);
+  const response = await fetch(url, { credentials: 'include' });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요합니다.');
   }
@@ -193,6 +202,7 @@ export async function uploadChatImage(roomId: string, image: File) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/message/image`;
   const response = await fetch(url, {
     method: 'POST',
+    credentials: 'include',
     body: formData,
   });
   if (response.status === 413) {
@@ -205,6 +215,7 @@ export async function delegateRoomOwner(roomId: string, userId: string) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/manager`;
   const response = await fetch(url, {
     method: 'PUT',
+    credentials: 'include',
     body: JSON.stringify({
       nextManagerId: userId,
     }),
@@ -223,7 +234,10 @@ export async function delegateRoomOwner(roomId: string, userId: string) {
 // 채팅룸 삭제 API
 export async function deleteChatRoom(roomId: string) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}`;
-  const response = await fetch(url, { method: 'DELETE' });
+  const response = await fetch(url, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
   if (response.status === 400) {
     throw new Error('채팅방 삭제는 채팅방 참여자가 없어야 가능해요.🐶');
   }
