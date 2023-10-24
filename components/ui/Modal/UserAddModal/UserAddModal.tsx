@@ -1,9 +1,9 @@
 import useInput from '@/hooks/common/useInput';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
-import XIcon from '@/public/X.svg';
+import XIcon from '@/public/svgs/X.svg';
 import SearchInput from '@/components/ui/Input/SearchInput';
-import ArrowLeftIcon from '@/public/arrow-left.svg';
+import ArrowLeftIcon from '@/public/svgs/arrow-left.svg';
 import useGetSearchedUserList from '@/hooks/queries/useGetSearchedUserList';
 import { usePathname } from 'next/navigation';
 import useInviteUserToChatroom from '@/hooks/mutations/useInviteUserToChatroom';

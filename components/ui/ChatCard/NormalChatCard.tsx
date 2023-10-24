@@ -2,8 +2,8 @@
 
 /* eslint-disable no-alert */
 import { useRouter } from 'next/navigation';
-import ShareIcon from '@/public/share.svg';
-import BadgeIcon from '@/public/Badge.svg';
+import ShareIcon from '@/public/svgs/share.svg';
+import BadgeIcon from '@/public/svgs/Badge.svg';
 import { RecommendedChatList } from '@/types/types';
 import { joinChatRoom } from '@/service/chatRoom';
 import copyToClipBoard from '@/utils/copyToClipBoard';

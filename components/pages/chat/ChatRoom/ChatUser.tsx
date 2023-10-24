@@ -1,6 +1,6 @@
 import Avatar from '@/components/ui/Avatar';
 import FlexBox from '@/components/ui/FlexBox';
-import CrownIcon from '@/public/CrownSimple.svg';
+import CrownIcon from '@/public/svgs/CrownSimple.svg';
 
 interface ChatUserPropsType {
   shadow?: boolean;

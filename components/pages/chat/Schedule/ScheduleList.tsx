@@ -4,7 +4,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import useGetScheduleList from '@/hooks/queries/useGetScheduleList';
 import useGetChatRoomUserList from '@/hooks/queries/useGetChatRoomUserList';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
-import LoadingIcon from '@/public/loading.svg';
+import LoadingIcon from '@/public/svgs/loading.svg';
 import ScheduleCard from './ScheduleCard';
 import ScheduleDropdownButton from './ScheduleDropdownButton';
 

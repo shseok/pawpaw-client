@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { ReactNode } from 'react';
 import { toast, ToastOptions, CloseButtonProps } from 'react-toastify';
-import Alert from 'public/Alert.svg';
-import Check from 'public/Check.svg';
+import Alert from '@/public/svgs/Alert.svg';
+import Check from '@/public/svgs/Check.svg';
 
 const defaultToastOptions: ToastOptions = {
   position: toast.POSITION.BOTTOM_CENTER,

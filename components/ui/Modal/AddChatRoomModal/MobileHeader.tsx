@@ -1,4 +1,4 @@
-import ArrowLeftIcon from '@/public/arrow-left.svg';
+import ArrowLeftIcon from '@/public/svgs/arrow-left.svg';
 
 export default function MobileHeader({ onClose }: { onClose: () => void }) {
   return (

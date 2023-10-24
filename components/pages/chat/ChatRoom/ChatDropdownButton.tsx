@@ -1,9 +1,9 @@
 import { Dispatch, Fragment, SetStateAction, useState } from 'react';
 import Dropdown from '@/components/ui/Dropdown/Dropdown';
-import DotsIcon from '@/public/tabler_dots.svg';
+import DotsIcon from '@/public/svgs/tabler_dots.svg';
 import FlexBox from '@/components/ui/FlexBox';
 import Divider from '@/components/ui/Divider';
-import ArrowRightIcon from '@/public/arrow-right.svg';
+import ArrowRightIcon from '@/public/svgs/arrow-right.svg';
 import Modal from '@/components/ui/Modal';
 import LeaveChatRoomModal from '@/components/ui/Modal/LeaveChatRoomModal';
 import copyToClipBoard from '@/utils/copyToClipBoard';

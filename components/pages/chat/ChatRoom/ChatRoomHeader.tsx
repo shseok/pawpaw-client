@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import ArrowLeftIcon from '@/public/arrow-left.svg';
+import ArrowLeftIcon from '@/public/svgs/arrow-left.svg';
 import FlexBox from '@/components/ui/FlexBox';
 import ChatDropdownButton from './ChatDropdownButton';
 

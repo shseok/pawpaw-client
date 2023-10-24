@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Congratulation from '@/public/Auth/congratulation.svg';
+import Congratulation from '@/public/svgs/Auth/congratulation.svg';
 import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore';
 import BottomButton from '@/components/pages/auth/BottomButton';
 

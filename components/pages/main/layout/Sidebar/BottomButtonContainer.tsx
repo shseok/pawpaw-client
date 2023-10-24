@@ -1,5 +1,5 @@
-import Logout from '@/public/sidebar/logout.svg';
-import ArrowRightIcon from '@/public/arrow-right.svg';
+import Logout from '@/public/svgs/sidebar/logout.svg';
+import ArrowRightIcon from '@/public/svgs/arrow-right.svg';
 import { cn } from '@/utils/common';
 import { logout } from '@/service/auth';
 import Toast from '@/utils/notification';

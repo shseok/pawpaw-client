@@ -6,7 +6,7 @@
 import ModalBoardCard from '@/components/ui/BoardCard/ModalBoardCard';
 import { useRouter } from 'next/navigation';
 import { MouseEventHandler, useCallback, useEffect, useRef } from 'react';
-import XIcon from 'public/X.svg';
+import XIcon from '@/public/svgs/X.svg';
 import FlexBox from '../../../ui/FlexBox';
 
 export default function BoardModal({ boardId }: { boardId: number }) {

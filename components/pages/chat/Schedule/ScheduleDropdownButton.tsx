@@ -2,7 +2,7 @@
 
 import { Dispatch, Fragment, SetStateAction, useState } from 'react';
 import Dropdown from '@/components/ui/Dropdown/Dropdown';
-import DotsIcon from '@/public/tabler_dots.svg';
+import DotsIcon from '@/public/svgs/tabler_dots.svg';
 import Modal from '@/components/ui/Modal';
 import ScheduleAddModal from '../../../ui/Modal/ScheduleAddModal/ScheduleAddModal';
 

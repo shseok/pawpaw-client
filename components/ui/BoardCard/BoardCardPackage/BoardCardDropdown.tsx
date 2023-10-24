@@ -1,4 +1,4 @@
-import DotsIcon from 'public/DotsIcon.svg';
+import DotsIcon from '@/public/svgs/DotsIcon.svg';
 import copyToClipBoard from '@/utils/copyToClipBoard';
 import useAddBookmark from '@/hooks/mutations/useAddBookmark';
 import useDeleteBookmark from '@/hooks/mutations/useDeleteBookmark';

@@ -1,4 +1,4 @@
-import ComboboxArrowIcon from '@/public/combobox-arrow.svg';
+import ComboboxArrowIcon from '@/public/svgs/combobox-arrow.svg';
 import { useSelectContext } from '.';
 
 interface SelectValueProps {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Check from '@/public/Auth/check.svg';
+import Check from '@/public/svgs/Auth/check.svg';
 import Link from 'next/link';
 
 interface Props {
