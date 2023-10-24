@@ -95,8 +95,10 @@ export interface CommentList {
 }
 
 export interface PostBoardType {
-  title: string;
-  content: string;
+  registerDto: {
+    content: string;
+  };
+  // files: File[];
 }
 
 export interface PostImageType {

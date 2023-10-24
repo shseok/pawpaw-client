@@ -18,7 +18,7 @@ export default function Upload({
   nickname: string;
 }) {
   const [postText, setPostText] = useState('');
-  const { mutate: postBoard, isLoading, isSuccess } = usePostBoard(postText);
+  const { mutate: postBoard, isLoading, isSuccess } = usePostBoard();
   // const { handleImageUpload, imageFile, imagePreview } = useImageUpload();
 
   const maxCharacters = 100;
@@ -91,7 +91,7 @@ export default function Upload({
           size="lg"
           disabled={postText.length === 0 || isOverMaxChar || isLoading}
           className="w-40"
-          onClickAction={() => postBoard()}
+          onClickAction={() => postBoard(postText)}
         >
           {isLoading ? '업로드 중입니다' : '업로드'}
         </Button>
