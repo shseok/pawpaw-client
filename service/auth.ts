@@ -15,14 +15,17 @@ export async function createUserWithSocialLogin(params: AuthParams) {
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
   );
   formData.append('image', image);
-  const response = await fetch('/endpoint/api/auth/sign-up/social', {
-    method: 'POST',
-    credentials: 'include',
-    // headers: {
-    //   'Content-Type': 'application/json',
-    // },
-    body: formData,
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/social`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      // headers: {
+      //   'Content-Type': 'application/json',
+      // },
+      body: formData,
+    },
+  );
 
   if (!response.ok) {
     if (response.status === 400) {
@@ -42,11 +45,14 @@ export async function createUserWithEmailAndPassword(params: EmailAuthParams) {
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
   );
   formData.append('image', image);
-  const response = await fetch('/endpoint/api/auth/sign-up', {
-    method: 'POST',
-    credentials: 'include',
-    body: formData,
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      body: formData,
+    },
+  );
   if (!response.ok) {
     if (response.status === 400) {
       throw new Error('모든 필수 약관에 동의가 필요합니다.');
@@ -67,7 +73,7 @@ export async function loginWithEmailAndPassword({
   email: string;
   password: string;
 }) {
-  const response = await fetch('/endpoint/api/auth', {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -90,7 +96,7 @@ export async function loginWithEmailAndPassword({
 }
 
 export async function isDuplicatedEmail(email: string) {
-  const url = `/endpoint/api/auth/sign-up/check/duplicate/email`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/check/duplicate/email`;
   const response = await fetch(url.concat(`?email=${email}`));
   const data = await response.json();
   if (!response.ok) {
@@ -100,14 +106,17 @@ export async function isDuplicatedEmail(email: string) {
 }
 
 export async function requestVerification(params: VerificationParams) {
-  const response = await fetch('/endpoint/api/auth/sign-up/verification', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/verification`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
     },
-    body: JSON.stringify(params),
-  });
+  );
 
   if (!response.ok) {
     throw new Error('인증번호 발송에 실패하였습니다.');
@@ -122,7 +131,7 @@ export async function checkVerification({
   code: string;
 }) {
   const response = await fetch(
-    '/endpoint/api/auth/sign-up/verification/check',
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/verification/check`,
     {
       method: 'POST',
       credentials: 'include',
@@ -143,7 +152,7 @@ export async function checkVerification({
   return data;
 }
 export async function logout() {
-  const response = await fetch('/endpoint/api/auth', {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth`, {
     method: 'DELETE',
     credentials: 'include',
   });
@@ -164,13 +173,16 @@ export async function findUserEmail({
   phoneNumber: string;
 }): Promise<SearchEmailResult> {
   const query = stringify({ name, phoneNumber }, { addQueryPrefix: true });
-  const response = await fetch('/endpoint/api/auth/email'.concat(query), {
-    method: 'GET',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/email`.concat(query),
+    {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+  );
 
   if (!response.ok) {
     if (response.status === 404) {
@@ -191,14 +203,17 @@ export async function sendEmailChangeVerificationLink({
   name: string;
   email: string;
 }) {
-  const response = await fetch('/endpoint/api/auth/password/reset/mail', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/password/reset/mail`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email }),
     },
-    body: JSON.stringify({ name, email }),
-  });
+  );
 
   if (!response.ok) {
     if (response.status === 404) {
@@ -216,14 +231,17 @@ export async function changePassword({
   key: string;
   password: string;
 }) {
-  const response = await fetch('/endpoint/api/auth/password', {
-    method: 'PATCH',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/password`,
+    {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ key, password }),
     },
-    body: JSON.stringify({ key, password }),
-  });
+  );
   if (!response.ok) {
     if (response.status === 404) {
       throw new Error('존재하지 않는 비밀번호 변경 임시키입니다.');
@@ -236,7 +254,9 @@ export async function changePassword({
 export async function getSocialInfo(key: string) {
   const query = stringify({ key }, { addQueryPrefix: true });
   const response = await fetch(
-    '/endpoint/api/auth/sign-up/social/info'.concat(query),
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up/social/info`.concat(
+      query,
+    ),
     {
       method: 'GET',
       credentials: 'include',

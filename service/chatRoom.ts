@@ -10,7 +10,7 @@ import { AuthError, ImageSizeError } from '@/lib/error';
 
 // 채팅방 생성 API
 export async function postChatRoom(chatRoomData: ChatRoomType) {
-  const url = `/endpoint/api/chatroom`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom`;
   const formData = new FormData();
   const { body, image } = chatRoomData;
   formData.append(
@@ -33,7 +33,7 @@ export async function postChatRoom(chatRoomData: ChatRoomType) {
 }
 // 채팅룸 입장 API
 export async function joinChatRoom(id: number) {
-  const url = `/endpoint/api/chatroom/${id}/participants`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${id}/participants`;
   const response = await fetch(url, {
     method: 'POST',
   });
@@ -47,7 +47,7 @@ export async function joinChatRoom(id: number) {
 }
 // 채팅룸 나가기 API
 export async function leaveChatRoom(roomId: string) {
-  const url = `/endpoint/api/chatroom/${roomId}/participants`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/participants`;
   const response = await fetch(url, { method: 'DELETE' });
   if (response.status === 400) {
     Toast.error('방장은 채팅방 삭제만 가능해요.');
@@ -64,7 +64,7 @@ export async function leaveChatRoom(roomId: string) {
 export async function getChatroomUserList(
   chatRoomId: string,
 ): Promise<ChatRoomUserList[]> {
-  const url = `/endpoint/api/chatroom/${chatRoomId}/participants`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${chatRoomId}/participants`;
   const response = await fetch(url);
   if (response.status === 400) {
     throw new Error('현재 참여하고 있지 않은 채팅룸 입니다.');
@@ -77,7 +77,7 @@ export async function getChatroomUserList(
 
 // 채팅룸에 등록되어있는 종료되지않은 스케줄 리스트 조회 API
 export async function getScheduleList(roomId: string): Promise<ScheduleList[]> {
-  const url = `/endpoint/api/chatroom/${roomId}/schedule`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/schedule`;
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('스케줄 리스트를 불러오지 못하였습니다.');
@@ -90,7 +90,7 @@ export async function postSchedule(
   roomId: string,
   scheduleInfo: Omit<Schedule, 'id'>,
 ) {
-  const url = `/endpoint/api/chatroom/${roomId}/schedule`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/schedule`;
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(scheduleInfo),
@@ -108,7 +108,7 @@ export async function postSchedule(
 
 // 채팅룸 스케줄 삭제 API
 export async function deleteSchedule(roomId: string, scheduleId: number) {
-  const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/schedule/${scheduleId}`;
   const response = await fetch(url, { method: 'DELETE' });
   if (!response.ok) {
     throw new Error('스케줄 삭제에 실패했어요.🥲 잠시후 다시 시도해주세요.');
@@ -117,7 +117,7 @@ export async function deleteSchedule(roomId: string, scheduleId: number) {
 
 // 현재 채팅에 참여중인 유저를 제외한 전체유저 검색 API
 export async function getSearchedUserList(roomId: string, nickname: string) {
-  const url = `/endpoint/api/chatroom/${roomId}/non-participants?nickname=${nickname}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/non-participants?nickname=${nickname}`;
   const response = await fetch(url);
   return response.json();
 }
@@ -126,7 +126,7 @@ export async function inviteUserToChatRoom(
   roomId: string,
   userId: { userId: string },
 ) {
-  const url = `/endpoint/api/chatroom/${roomId}/invite`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/invite`;
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(userId),
@@ -141,7 +141,7 @@ export async function inviteUserToChatRoom(
 
 // 스케줄 참여 API
 export async function joinSchedule(roomId: string, scheduleId: number) {
-  const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
   const response = await fetch(url, { method: 'POST' });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요합니다.');
@@ -157,7 +157,7 @@ export async function joinSchedule(roomId: string, scheduleId: number) {
 // 스케줄 철회 API
 export async function withdrawSchedule(roomId: string, scheduleId: number) {
   try {
-    const url = `/endpoint/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/schedule/${scheduleId}/participant`;
     await fetch(url, { method: 'DELETE' });
   } catch (error) {
     console.error(error);
@@ -169,7 +169,7 @@ export async function getChatHistory(
   roomId: string,
   targetId: number,
 ): Promise<ChatHistory> {
-  let url = `/endpoint/api/chatroom/${roomId}/message?size=20`;
+  let url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/message?size=20`;
   if (targetId !== 0) {
     url += `&targetId=${targetId}`;
   }
@@ -190,7 +190,7 @@ export async function getChatHistory(
 export async function uploadChatImage(roomId: string, image: File) {
   const formData = new FormData();
   formData.append('multipartFile', image);
-  const url = `/endpoint/api/chatroom/${roomId}/message/image`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/message/image`;
   const response = await fetch(url, {
     method: 'POST',
     body: formData,
@@ -202,7 +202,7 @@ export async function uploadChatImage(roomId: string, image: File) {
 
 // 채팅룸 방장 권한위임 API
 export async function delegateRoomOwner(roomId: string, userId: string) {
-  const url = `/endpoint/api/chatroom/${roomId}/manager`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}/manager`;
   const response = await fetch(url, {
     method: 'PUT',
     body: JSON.stringify({
@@ -222,7 +222,7 @@ export async function delegateRoomOwner(roomId: string, userId: string) {
 
 // 채팅룸 삭제 API
 export async function deleteChatRoom(roomId: string) {
-  const url = `/endpoint/api/chatroom/${roomId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/${roomId}`;
   const response = await fetch(url, { method: 'DELETE' });
   if (response.status === 400) {
     throw new Error('채팅방 삭제는 채팅방 참여자가 없어야 가능해요.🐶');

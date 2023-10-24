@@ -9,7 +9,7 @@ import {
 
 // 게시글 업로드 API
 export async function postBoard(postBoardData: PostBoardType) {
-  const url = `/endpoint/api/board/register`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/board/register`;
   const response = await fetch(url, {
     method: 'POST',
     credentials: 'include',
@@ -31,7 +31,7 @@ export async function postImageBoard(
   boardId: number,
   postImageData: PostImageType,
 ) {
-  const url = `/endpoint/api/file/upload?boardId=${boardId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/file/upload?boardId=${boardId}`;
   const response = await fetch(url, {
     method: 'POST',
     credentials: 'include',
@@ -50,7 +50,7 @@ export async function postImageBoard(
 
 // 게시글리스트 무한스크롤로 가져오는 API
 export async function getBoardList(pageParam: number) {
-  const url = `/endpoint/api/board/list?pageSize=5&pageNumber=${pageParam}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/board/list?pageSize=5&pageNumber=${pageParam}`;
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('게시글을 불러오지 못했어요.🥲 잠시후 다시 시도해주세요.');
@@ -60,7 +60,7 @@ export async function getBoardList(pageParam: number) {
 
 // 단일 게시글 가져오는 API
 export async function getBoard(boardId: number): Promise<Board> {
-  const url = `/endpoint/api/board/${boardId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/board/${boardId}`;
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('게시글을 불러오지 못했어요.🥲 잠시후 다시 시도해주세요.');
@@ -70,7 +70,7 @@ export async function getBoard(boardId: number): Promise<Board> {
 
 // 게시글 삭제하는 API
 export async function deleteBoard(boardId: number) {
-  const url = `/endpoint/api/board/remove/${boardId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/board/remove/${boardId}`;
   const response = await fetch(url, { method: 'DELETE' });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요한 서비스입니다.');
@@ -85,7 +85,7 @@ export async function deleteBoard(boardId: number) {
 
 // 댓글 업로드 API
 export async function postComment(postCommentData: PostCommentType) {
-  const url = `/endpoint/api/reply/register`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/reply/register`;
   const response = await fetch(url, {
     method: 'POST',
     credentials: 'include',
@@ -110,7 +110,7 @@ export async function getCommentList(
   pageParam: number,
   boardId: number,
 ): Promise<CommentList> {
-  let url = `/endpoint/api/reply/list?boardId=${boardId}&pageSize=3`;
+  let url = `${process.env.NEXT_PUBLIC_API_URL}/api/reply/list?boardId=${boardId}&pageSize=3`;
   if (pageParam) {
     url += `&pageNumber=${pageParam}`;
   }
@@ -123,7 +123,7 @@ export async function getCommentList(
 
 // 댓글 삭제 API
 export async function deleteComment(boardId: number, replyId: number) {
-  const url = `/endpoint/api/reply/remove/${boardId}/${replyId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/reply/remove/${boardId}/${replyId}`;
   const response = await fetch(url, { method: 'DELETE' });
   if (!response.ok) {
     throw new Error('댓글을 삭제하지 못했어요.🥲 잠시후 다시 시도해주세요.');
@@ -132,7 +132,7 @@ export async function deleteComment(boardId: number, replyId: number) {
 
 // 게시글 북마크하는 API
 export async function addBookmarkBoard(boardId: number) {
-  const url = `/endpoint/api/bookmark/add?boardId=${boardId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/bookmark/add?boardId=${boardId}`;
   const response = await fetch(url, { method: 'POST' });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요한 서비스입니다.');
@@ -147,7 +147,7 @@ export async function addBookmarkBoard(boardId: number) {
 
 // 게시글 북마크 삭제하는 API
 export async function deleteBookmarkBoard(boardId: number) {
-  const url = `/endpoint/api/bookmark/delete?boardId=${boardId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/bookmark/delete?boardId=${boardId}`;
   const response = await fetch(url, { method: 'DELETE' });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요한 서비스입니다.');
@@ -162,7 +162,7 @@ export async function deleteBookmarkBoard(boardId: number) {
 
 // 게시글 좋아요 API
 export async function updateBoardLike(boardId: number) {
-  const url = `/endpoint/api/boardLike/like?boardId=${boardId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/boardLike/like?boardId=${boardId}`;
   const response = await fetch(url, { method: 'POST' });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요한 서비스입니다.');
@@ -175,7 +175,7 @@ export async function updateBoardLike(boardId: number) {
 
 // 게시글 좋아요 삭제 API
 export async function deleteBoardLike(boardId: number) {
-  const url = `/endpoint/api/boardLike/deleteLike?boardId=${boardId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/boardLike/deleteLike?boardId=${boardId}`;
   const response = await fetch(url, { method: 'DELETE' });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요한 서비스입니다.');

@@ -6,10 +6,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const nextConfig = {
   async rewrites() {
+    if (process.env.NODE_ENV === 'production') return;
     return [
       {
         source: '/endpoint/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_DEV_API_URL}/:path*`,
       },
     ];
   },

@@ -1,7 +1,7 @@
 import { AuthError } from '@/lib/error';
 
 export async function getMyBoardList(pageNumber: number) {
-  let url = `/endpoint/api/board/myPage?pageSize=4`;
+  let url = `${process.env.NEXT_PUBLIC_API_URL}/api/board/myPage?pageSize=4`;
   if (pageNumber !== 0) {
     url += `&pageNumber=${pageNumber}`;
   }
@@ -24,7 +24,7 @@ export async function getMyBoardList(pageNumber: number) {
 }
 
 export async function getBookmarkedBoardList(pageNumber: number) {
-  let url = `/endpoint/api/bookmark/list?pageSize=4`;
+  let url = `${process.env.NEXT_PUBLIC_API_URL}/api/bookmark/list?pageSize=4`;
   if (pageNumber !== 0) {
     url += `&pageNumber=${pageNumber}`;
   }

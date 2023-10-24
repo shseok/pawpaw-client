@@ -6,7 +6,7 @@ import { AuthError } from '../lib/error';
 
 export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
   try {
-    const url = `/endpoint/api/chatroom/recommended`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/recommended`;
     const response = await fetch(url);
     if (response.status === 401) {
       throw new AuthError('로그인이 필요한 서비스입니다.');
@@ -27,7 +27,7 @@ export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
 
 export async function getEnteredChatList(): Promise<EnteredChatList[]> {
   try {
-    const url = `/endpoint/api/chatroom/participated`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/participated`;
     const response = await fetch(url);
 
     if (response.status === 401) {
@@ -48,7 +48,7 @@ export async function getEnteredChatList(): Promise<EnteredChatList[]> {
 }
 
 export async function getTrendingChatList(beforeId: number, size: number) {
-  let url = `/endpoint/api/chatroom/trending?size=${size}`;
+  let url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/trending?size=${size}`;
   if (beforeId !== 0) {
     url += `&beforeId=${beforeId}`;
   }
