@@ -153,6 +153,7 @@ export default function Profile({ title }: { title: string }) {
       router.push(`/auth/complete`);
     } catch (e) {
       if (e instanceof Error) {
+        setIsLoading(false);
         Toast.error(e.message);
       }
     }

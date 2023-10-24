@@ -58,6 +58,7 @@ export default function FindChange() {
       } catch (e) {
         if (e instanceof Error) {
           Toast.error(e.message);
+          setIsLoading(false);
         }
       }
     }

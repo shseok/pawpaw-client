@@ -43,6 +43,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
       setTimer(180);
     } catch (e) {
       if (e instanceof Error) {
+        setIsLoading(false);
         Toast.error(e.message);
       }
     }
