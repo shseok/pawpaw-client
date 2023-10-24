@@ -51,7 +51,7 @@ export async function postImageBoard(
 // 게시글리스트 무한스크롤로 가져오는 API
 export async function getBoardList(pageParam: number) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/board/list?pageSize=5&pageNumber=${pageParam}`;
-  const response = await fetch(url);
+  const response = await fetch(url, { credentials: 'include' });
   if (!response.ok) {
     throw new Error('게시글을 불러오지 못했어요.🥲 잠시후 다시 시도해주세요.');
   }
@@ -61,7 +61,7 @@ export async function getBoardList(pageParam: number) {
 // 단일 게시글 가져오는 API
 export async function getBoard(boardId: number): Promise<Board> {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/board/${boardId}`;
-  const response = await fetch(url);
+  const response = await fetch(url, { credentials: 'include' });
   if (!response.ok) {
     throw new Error('게시글을 불러오지 못했어요.🥲 잠시후 다시 시도해주세요.');
   }
@@ -124,7 +124,10 @@ export async function getCommentList(
 // 댓글 삭제 API
 export async function deleteComment(boardId: number, replyId: number) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/reply/remove/${boardId}/${replyId}`;
-  const response = await fetch(url, { method: 'DELETE' });
+  const response = await fetch(url, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
   if (!response.ok) {
     throw new Error('댓글을 삭제하지 못했어요.🥲 잠시후 다시 시도해주세요.');
   }
@@ -133,7 +136,7 @@ export async function deleteComment(boardId: number, replyId: number) {
 // 게시글 북마크하는 API
 export async function addBookmarkBoard(boardId: number) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/bookmark/add?boardId=${boardId}`;
-  const response = await fetch(url, { method: 'POST' });
+  const response = await fetch(url, { method: 'POST', credentials: 'include' });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요한 서비스입니다.');
   }
@@ -148,7 +151,10 @@ export async function addBookmarkBoard(boardId: number) {
 // 게시글 북마크 삭제하는 API
 export async function deleteBookmarkBoard(boardId: number) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/bookmark/delete?boardId=${boardId}`;
-  const response = await fetch(url, { method: 'DELETE' });
+  const response = await fetch(url, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요한 서비스입니다.');
   }
@@ -163,7 +169,7 @@ export async function deleteBookmarkBoard(boardId: number) {
 // 게시글 좋아요 API
 export async function updateBoardLike(boardId: number) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/boardLike/like?boardId=${boardId}`;
-  const response = await fetch(url, { method: 'POST' });
+  const response = await fetch(url, { method: 'POST', credentials: 'include' });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요한 서비스입니다.');
   }
@@ -176,7 +182,10 @@ export async function updateBoardLike(boardId: number) {
 // 게시글 좋아요 삭제 API
 export async function deleteBoardLike(boardId: number) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/boardLike/deleteLike?boardId=${boardId}`;
-  const response = await fetch(url, { method: 'DELETE' });
+  const response = await fetch(url, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
   if (response.status === 401) {
     throw new AuthError('로그인이 필요한 서비스입니다.');
   }
