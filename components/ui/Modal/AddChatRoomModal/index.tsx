@@ -1,0 +1,174 @@
+'use client';
+
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { ModalProps } from '@/types/types';
+import useInput from '@/hooks/common/useInput';
+import XIcon from '@/public/svgs/X.svg';
+import useImageUpload from '@/hooks/common/useImageUpload';
+import { postChatRoom } from '@/service/chatRoom';
+import LoadingIcon from '@/public/svgs/loading.svg';
+import Toast from '@/utils/notification';
+import { FlexBox, Divider, Button, Modal } from '../../ui';
+import HashTagInput from './HashTagInput';
+import ImageDisplay from './ImageDisplay';
+import MobileHeader from './MobileHeader';
+import OptionRadioGroup from './OptionRadioGroup';
+
+interface FormData {
+  name: string;
+  description: string;
+}
+
+export default function AddChatRoomModal({ open, onClose }: ModalProps) {
+  const [tag, onChangeTag, resetTag] = useInput('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [tagList, setTagList] = useState<string[]>([]);
+  const { handleImageUpload, imageFile, imagePreview } = useImageUpload();
+  const [option, setOption] = useState('1');
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const handleRadioOption = (value: string) => {
+    setOption(value);
+  };
+  const onCreateChatRoom = async (data: FormData) => {
+    const { name, description } = data;
+    setIsLoading(true);
+    try {
+      const { chatroomId } = await postChatRoom({
+        image: imageFile as File,
+        body: {
+          name,
+          description,
+          hashTagList: tagList,
+          searchable: true,
+          locationLimit: true,
+        },
+      });
+      if (chatroomId) {
+        Toast.success('채팅룸 오픈! 🦊');
+        router.push(`/chat/${chatroomId}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) Toast.error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    const LIMIT_IMAGE_SIZE = 2097152;
+    if (!imageFile) {
+      Toast.error('커버이미지를 업로드 해주세요. 🐈');
+      return;
+    }
+    if (imageFile.size > LIMIT_IMAGE_SIZE) {
+      Toast.error('2MB 이상 이미지는 업로드할 수 없어요.');
+      return;
+    }
+    onCreateChatRoom(data);
+  };
+  return (
+    <Modal open={open} onClose={onClose}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+          }
+        }}
+        className="flex flex-col w-screen tablet:w-[800px] h-screen tablet:h-[720px]"
+      >
+        <div className="self-end hidden tablet:block">
+          <button type="button" onClick={onClose}>
+            <XIcon className="w-8 h-8 fill-white" />
+          </button>
+        </div>
+        <div className="flex flex-col h-full gap-3 bg-white p-9 tablet:rounded-[10px] overflow-y-auto">
+          <MobileHeader onClose={onClose} />
+
+          <FlexBox
+            direction="column"
+            align="start"
+            className="order-2 gap-2 tablet:order-1"
+          >
+            <input
+              type="text"
+              className="w-full p-0 border-none header3 focus:ring-0 text-grey-500"
+              placeholder="공개채팅방 이름을 입력해 주세요."
+              {...register('name', {
+                required: '채팅방 이름을 입력해주세요.🥹',
+                maxLength: {
+                  value: 30,
+                  message: '채팅방 이름은 30글자를 초과할 수 없어요.🥲',
+                },
+              })}
+            />
+            {errors.name && (
+              <span className="text-red animate-fadeIn">
+                {errors.name.message}
+              </span>
+            )}
+            <Divider type="horizontal" />
+            <input
+              type="text"
+              placeholder="채팅방에 대해 소개해 주세요"
+              className="w-full p-0 border-none body1 focus:ring-0 text-grey-500"
+              {...register('description', {
+                required: '채팅방 소개를 입력해주세요.🥹',
+                maxLength: {
+                  value: 30,
+                  message: '채팅방 소개는 30자를 초과할 수 없어요.🥲',
+                },
+              })}
+            />
+            {errors.description && (
+              <span className="text-red animate-fadeIn">
+                {errors.description.message}
+              </span>
+            )}
+            <HashTagInput
+              onChangeTag={onChangeTag}
+              reset={resetTag}
+              setTagList={setTagList}
+              tag={tag}
+              tagList={tagList}
+            />
+          </FlexBox>
+
+          <FlexBox className="order-1 tablet:order-2">
+            <ImageDisplay
+              image={imagePreview}
+              onChangeImage={handleImageUpload}
+            />
+          </FlexBox>
+          <OptionRadioGroup
+            option={option}
+            onChangeOption={handleRadioOption}
+          />
+          <FlexBox align="end" className="h-full z-[999] w-full gap-5 order-4">
+            <Button variant="secondary" fullWidth onClickAction={onClose}>
+              취소
+            </Button>
+            <Button fullWidth type="submit">
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <LoadingIcon className="animate-spin" />
+                  채팅방 만드는중..<div className="animate-bounce">🐶</div>
+                </div>
+              ) : (
+                '확인'
+              )}
+            </Button>
+          </FlexBox>
+        </div>
+      </form>
+    </Modal>
+  );
+}
