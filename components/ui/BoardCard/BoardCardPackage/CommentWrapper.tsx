@@ -32,7 +32,7 @@ export function BoardCardCommentWrapper({
   const postNewComment = () => {
     commentMutate({
       boardId,
-      parentId: boardId,
+      parentId: 0,
       content: commentText,
     });
     setCommentText('');
