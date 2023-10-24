@@ -2,12 +2,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Board } from '@/types/types';
 import { BoardCard } from '@/components/ui/BoardCard/BoardCardPackage';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import FlexBox from '../FlexBox';
 
 export default function FeedBoardCard({ board }: { board: Board }) {
-  const router = useRouter();
-
   return (
     <FlexBox
       direction="column"
@@ -27,9 +25,9 @@ export default function FeedBoardCard({ board }: { board: Board }) {
           likedCount={board.likedCount}
           isLiked={board.boardLiked}
         >
-          <div
+          <Link
             className="flex flex-col justify-start items-start max-h-[74px] overflow-hidden w-full hover:cursor-pointer"
-            onClick={() => router.push(`/board/${board.id}`)}
+            href={`/board/${board.id}`}
           >
             {board.replyListDto?.map((comment) => (
               <BoardCard.Comments
@@ -38,7 +36,7 @@ export default function FeedBoardCard({ board }: { board: Board }) {
                 content={comment.content}
               />
             ))}
-          </div>
+          </Link>
         </BoardCard.BoardCardCommentWrapper>
       </BoardCard.Content>
     </FlexBox>
