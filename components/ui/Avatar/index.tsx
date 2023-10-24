@@ -18,13 +18,15 @@ export default function Avatar({ size = 'base', image, name }: AvatarType) {
   const avatarSize = avatarSizeVariants[size];
 
   return (
-    <Image
-      src={image ?? '/images/default.avif'}
-      alt={name}
-      width={40}
-      height={40}
-      priority
-      className={`object-cover rounded-full ${avatarSize}`}
-    />
+    <div className={`relative ${avatarSize}`}>
+      <Image
+        src={image ?? '/images/default.avif'}
+        alt={name}
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        priority
+        className="object-cover rounded-full absoulte"
+      />
+    </div>
   );
 }
