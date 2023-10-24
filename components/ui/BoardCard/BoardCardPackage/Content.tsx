@@ -70,7 +70,7 @@ export default function BoardCardContent({
     </FlexBox>
   );
 
-  if (imgs.length > 0) {
+  if (imgs?.length > 0) {
     // 이미지가 있는 경우
     return (
       // eslint-disable-next-line react/jsx-no-useless-fragment
