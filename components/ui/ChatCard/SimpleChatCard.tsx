@@ -21,7 +21,7 @@ export default function SimpleChatCard({ ...info }: ChatList) {
     }
   };
   return (
-    <ChatCard className="w-96">
+    <ChatCard>
       <ChatCard.Header justify="between">
         <div className="flex items-center w-full gap-1">
           <ChatCard.Title title={name} />
