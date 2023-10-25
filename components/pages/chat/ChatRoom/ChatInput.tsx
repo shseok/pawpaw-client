@@ -1,6 +1,6 @@
 import { useRef, useEffect, ChangeEvent, useState } from 'react';
-import PaperPlaneIcon from '@/public/PaperPlaneTilt.svg';
-import CameraIcon from '@/public/Camera.svg';
+import PaperPlaneIcon from '@/public/svgs/PaperPlaneTilt.svg';
+import CameraIcon from '@/public/svgs/Camera.svg';
 import useImageUpload from '@/hooks/common/useImageUpload';
 import ImageUploadModal from '@/components/ui/Modal/ImageUploadModal';
 

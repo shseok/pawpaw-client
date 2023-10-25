@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={myFont.className}>
       <head>
-        <link rel="icon" href="/image.png" />
+        <link rel="icon" href="/images/image.png" />
       </head>
       <ReactQueryProvider>
         <body>

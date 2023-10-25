@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { sendEmailChangeVerificationLink, findUserEmail } from '@/service/auth';
 import Toast from '@/utils/notification';
-import LoadingIcon from '@/public/loading.svg';
+import LoadingIcon from '@/public/svgs/loading.svg';
 import TabButton from './TabButton';
 import BottomButton from '../BottomButton';
 
@@ -86,18 +86,18 @@ export default function FindChange() {
         {activeTab === 'findId' ? (
           <div className="flex flex-col justify-center">
             <div className="flex flex-col gap-3">
-              <p className="header3 text-primary-200 text-center">
+              <p className="text-center header3 text-primary-200">
                 아이디 찾기 완료
               </p>
-              <p className="body1 text-grey800 text-center">
+              <p className="text-center body1 text-grey800">
                 입력하신 정보와 일치하는 아이디를 확인하세요.
               </p>
             </div>
             <div className="flex flex-col gap-2 justify-center mt-10 bg-[#F7F8F9] h-[96px]">
-              <p className="header4 text-grey-800 text-center">
+              <p className="text-center header4 text-grey-800">
                 {result.email}
               </p>
-              <p className="caption2 text-primary-200 text-center">{`${result.registrationDate} 에 가입함`}</p>
+              <p className="text-center caption2 text-primary-200">{`${result.registrationDate} 에 가입함`}</p>
             </div>
           </div>
         ) : (
@@ -121,7 +121,7 @@ export default function FindChange() {
     form: (
       <div>
         {activeTab === 'findId' && (
-          <p className="caption2 text-grey-400 pt-6 text-center break-keep">
+          <p className="pt-6 text-center caption2 text-grey-400 break-keep">
             회원 가입 시 등록하신 휴대폰 번호로 아이디를 찾을 수 있습니다.
             <br className="hidden 2xs:block" /> 아래 정보를 입력해주세요.
           </p>
@@ -172,7 +172,7 @@ export default function FindChange() {
   };
   return (
     <>
-      <div className="w-full flex items-center">
+      <div className="flex items-center w-full">
         <TabButton
           activeTab={activeTab}
           tabName="findId"

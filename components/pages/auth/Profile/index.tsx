@@ -7,10 +7,8 @@ import { SPECIES } from '@/constant/pets';
 import useInput from '@/hooks/common/useInput';
 import { useGeneralRegisterStore } from '@/hooks/stores/useGeneralRegisterStore';
 import { useIdentityStore } from '@/hooks/stores/useIdentityStore';
-import DefaultImg from '@/public/Auth/dog.svg';
-import Pencil from '@/public/Auth/pencil.svg';
-import LoadingIcon from '@/public/loading.svg';
-import Cancel from '@/public/X.svg';
+import DefaultImg from '@/public/svgs/Auth/dog.svg';
+import Pencil from '@/public/svgs/Auth/pencil.svg';
 import {
   createUserWithEmailAndPassword,
   createUserWithSocialLogin,
@@ -22,6 +20,8 @@ import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { shallow } from 'zustand/shallow';
+import Cancel from '@/public/svgs/X.svg';
+import LoadingIcon from '@/public/svgs/loading.svg';
 
 export default function Profile({ title }: { title: string }) {
   const {

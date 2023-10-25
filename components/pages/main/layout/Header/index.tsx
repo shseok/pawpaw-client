@@ -4,9 +4,9 @@ import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/utils/common';
 import useGetPathname from '@/hooks/common/useGetPathname';
-import Search from '@/public/sidebar/magnifying-glass.svg';
-import Alert from '@/public/sidebar/bell.svg';
-import Logo from '@/public/logo.svg';
+import Search from '@/public/svgs/sidebar/magnifying-glass.svg';
+import Alert from '@/public/svgs/sidebar/bell.svg';
+import Logo from '@/public/svgs/logo.svg';
 
 export default function Header() {
   const pathname = useGetPathname();

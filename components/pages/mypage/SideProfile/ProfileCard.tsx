@@ -2,10 +2,10 @@ import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import Divider from '@/components/ui/Divider';
 import FlexBox from '@/components/ui/FlexBox';
-import EditIcon from '@/public/MyPage/editIcon.svg';
-import LocationIcon from '@/public/MyPage/locationIcon.svg';
-import PreferenceIcon from '@/public/MyPage/preferenceIcon.svg';
-import PuppyIcon from '@/public/MyPage/puppyIcon.svg';
+import EditIcon from '@/public/svgs/MyPage/editIcon.svg';
+import LocationIcon from '@/public/svgs/MyPage/locationIcon.svg';
+import PreferenceIcon from '@/public/svgs/MyPage/preferenceIcon.svg';
+import PuppyIcon from '@/public/svgs/MyPage/puppyIcon.svg';
 import { UserInfo } from '@/types/types';
 
 export default function ProfileCard({ user }: { user: UserInfo }) {

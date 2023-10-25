@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import { Species } from '@/types/types';
-import DropdownIcon from '@/public/Auth/arrow-drop-down.svg';
+import DropdownIcon from '@/public/svgs/Auth/arrow-drop-down.svg';
 import Button from '../../Button';
 
 interface Props {

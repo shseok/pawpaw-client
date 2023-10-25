@@ -1,4 +1,4 @@
-import ArrowLeftIcon from '@/public/arrow-left.svg';
+import ArrowLeftIcon from '@/public/svgs/arrow-left.svg';
 import useGetChatRoomUserList from '@/hooks/queries/useGetChatRoomUserList';
 import { usePathname } from 'next/navigation';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';

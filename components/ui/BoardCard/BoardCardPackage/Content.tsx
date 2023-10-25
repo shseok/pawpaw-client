@@ -5,8 +5,8 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import CaretLeft from 'public/CaretLeft.svg';
-import CaretRight from 'public/CaretRight.svg';
+import CaretLeft from '@/public/svgs/CaretLeft.svg';
+import CaretRight from '@/public/svgs/CaretRight.svg';
 import { useRouter } from 'next/navigation';
 import FlexBox from '../../FlexBox';
 import Divider from '../../Divider';

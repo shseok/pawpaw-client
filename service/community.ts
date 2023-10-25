@@ -7,7 +7,7 @@ import { AuthError } from '../lib/error';
 export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
   try {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/recommended`;
-    const response = await fetch(url);
+    const response = await fetch(url, { credentials: 'include' });
     if (response.status === 401) {
       throw new AuthError('로그인이 필요한 서비스입니다.');
     }
@@ -28,7 +28,7 @@ export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
 export async function getEnteredChatList(): Promise<EnteredChatList[]> {
   try {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/participated`;
-    const response = await fetch(url);
+    const response = await fetch(url, { credentials: 'include' });
 
     if (response.status === 401) {
       throw new AuthError('로그인이 필요한 서비스입니다.');

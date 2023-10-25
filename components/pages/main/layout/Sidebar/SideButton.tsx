@@ -1,10 +1,10 @@
 import { SidebarProps } from '@/types/types';
-import Feed from '@/public/sidebar/feed.svg';
-import Community from '@/public/sidebar/chat.svg';
-import Pawzone from '@/public/sidebar/map-pin.svg';
-import Mypage from '@/public/sidebar/user-circle.svg';
-import Search from '@/public/sidebar/magnifying-glass.svg';
-import Notice from '@/public/sidebar/bell.svg';
+import Feed from '@/public/svgs/sidebar/feed.svg';
+import Community from '@/public/svgs/sidebar/chat.svg';
+import Pawzone from '@/public/svgs/sidebar/map-pin.svg';
+import Mypage from '@/public/svgs/sidebar/user-circle.svg';
+import Search from '@/public/svgs/sidebar/magnifying-glass.svg';
+import Notice from '@/public/svgs/sidebar/bell.svg';
 import { cn } from '@/utils/common';
 
 const buttonMaps = {

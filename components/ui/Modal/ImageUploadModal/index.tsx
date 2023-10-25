@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { uploadChatImage } from '@/service/chatRoom';
 import { useState } from 'react';
-import LoadingIcon from '@/public/loading.svg';
+import LoadingIcon from '@/public/svgs/loading.svg';
 import prettyBytes from 'pretty-bytes';
 import Toast from '@/utils/notification';
 import Modal from '..';

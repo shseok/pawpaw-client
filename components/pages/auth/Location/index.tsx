@@ -9,8 +9,8 @@ import useInput from '@/hooks/common/useInput';
 import { useEffect } from 'react';
 import { Button, SearchInput } from '@/components/ui/ui';
 import { getLocationKoreanName } from '@/service/map';
-import Detect from '@/public/Auth/detect.svg';
 import ConfirmLocationModal from '@/components/ui/Modal/ConfirmLocationModal';
+import Detect from '@/public/svgs/Auth/detect.svg';
 import ProgressBar from '../ProgressBar';
 import LocationList from '../LocationList';
 import BottomButton from '../BottomButton';
@@ -83,7 +83,7 @@ export default function Location({ title }: { title: string }) {
             fullWidth
             onClickAction={handleCurrentLocationClick}
           >
-            <div className="flex justify-center items-center gap-1">
+            <div className="flex items-center justify-center gap-1">
               <Detect className="fill-grey-800" />
               현재 위치로 설정
             </div>

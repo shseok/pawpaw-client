@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import PlusIcon from '@/public/plus.svg';
+import PlusIcon from '@/public/svgs/plus.svg';
 import AddChatRoomModal from '@/components/ui/Modal/AddChatRoomModal';
 
 export default function AddChatRoomButton() {

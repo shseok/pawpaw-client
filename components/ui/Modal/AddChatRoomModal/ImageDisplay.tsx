@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
-import CameraIcon from '@/public/Camera.svg';
+import CameraIcon from '@/public/svgs/Camera.svg';
 
 interface ImageDisplayProps {
   image?: string;

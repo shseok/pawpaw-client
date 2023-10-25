@@ -1,8 +1,8 @@
 'use client';
 
-import KakaoTalk from '@/public/Auth/kakao.svg';
-import Naver from '@/public/Auth/naver.svg';
-import Google from '@/public/Auth/google.svg';
+import KakaoTalk from '@/public/svgs/Auth/kakao.svg';
+import Naver from '@/public/svgs/Auth/naver.svg';
+import Google from '@/public/svgs/Auth/google.svg';
 
 interface Props {
   hasBorder?: string;

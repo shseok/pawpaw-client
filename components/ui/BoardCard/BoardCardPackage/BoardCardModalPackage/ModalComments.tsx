@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Avatar from '@/components/ui/Avatar';
 import useDeleteComment from '@/hooks/mutations/useDeleteComment';
-import DotsIcon from 'public/DotsIcon.svg';
+import DotsIcon from '@/public/svgs/DotsIcon.svg';
 import FlexBox from '../../../FlexBox';
 import Modal from '../../../Modal';
 

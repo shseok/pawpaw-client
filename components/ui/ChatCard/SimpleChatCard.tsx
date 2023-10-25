@@ -1,5 +1,5 @@
-import ShareIcon from '@/public/share.svg';
-import BadgeIcon from '@/public/Badge.svg';
+import ShareIcon from '@/public/svgs/share.svg';
+import BadgeIcon from '@/public/svgs/Badge.svg';
 import { ChatList } from '@/types/types';
 import copyToClipBoard from '@/utils/copyToClipBoard';
 import { joinChatRoom } from '@/service/chatRoom';

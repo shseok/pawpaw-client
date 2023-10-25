@@ -1,5 +1,5 @@
-import Logo from '@/public/logo.svg';
-import SmallLogo from '@/public/sidebar/small-logo.svg';
+import Logo from '@/public/svgs/logo.svg';
+import SmallLogo from '@/public/svgs/sidebar/small-logo.svg';
 import { cn } from '@/utils/common';
 import Link from 'next/link';
 

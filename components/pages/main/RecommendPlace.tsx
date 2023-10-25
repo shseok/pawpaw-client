@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useJsApiLoader, GoogleMap } from '@react-google-maps/api';
 import Image from 'next/image';
 import FlexBox from '@/components/ui/FlexBox';
-import ArrowClockIcon from '@/public/ArrowClockwise.svg';
+import ArrowClockIcon from '@/public/svgs/ArrowClockwise.svg';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 
 type RecommendedPlaceDetail = google.maps.places.PlaceResult;
@@ -101,7 +101,7 @@ export default function RecommendPlace() {
           src={
             placeDetail?.photos
               ? placeDetail.photos[0].getUrl()
-              : '/default.png'
+              : '/images/default.png'
           }
           alt={placeDetail?.name ?? '매장 사진'}
           width={300}

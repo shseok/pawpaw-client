@@ -1,6 +1,6 @@
 import { cn } from '@/utils/common';
-import Check from '@/public/Auth/check.svg';
-import Alert from '@/public/Auth/alert.svg';
+import Check from '@/public/svgs/Auth/check.svg';
+import Alert from '@/public/svgs/Auth/alert.svg';
 import React from 'react';
 
 export interface InputProps
