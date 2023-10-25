@@ -4,42 +4,28 @@ import {
   CommentList,
   PostBoardType,
   PostCommentType,
-  PostImageType,
 } from '@/types/types';
 
 // 게시글 업로드 API
 export async function postBoard(postBoardData: PostBoardType) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/board/register`;
-  const response = await fetch(url, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(postBoardData),
-  });
-  if (!response.ok) {
-    throw new Error(
-      '게시글을 업로드하지 못했어요.🥲 잠시후 다시 시도해주세요.',
-    );
-  }
-  return response.json();
-}
+  const formData = new FormData();
+  const { registerDto } = postBoardData;
+  formData.append(
+    'registerDto',
+    new Blob([JSON.stringify({ ...registerDto })], {
+      type: 'application/json',
+    }),
+  );
 
-// 게시글 이미지 업로드 API (이후 기능 추가 예정)
-export async function postImageBoard(
-  boardId: number,
-  postImageData: PostImageType,
-) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/file/upload?boardId=${boardId}`;
   const response = await fetch(url, {
     method: 'POST',
     credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(postImageData),
+    body: formData,
   });
+  if (response.status === 413) {
+    throw new Error('이미지 크기는 2MB를 초과할 수 없어요.😢');
+  }
   if (!response.ok) {
     throw new Error(
       '게시글을 업로드하지 못했어요.🥲 잠시후 다시 시도해주세요.',
