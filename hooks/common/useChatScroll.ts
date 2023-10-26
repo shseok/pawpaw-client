@@ -5,7 +5,7 @@ interface ChatScrollType {
   bottomRef: React.RefObject<HTMLDivElement>;
   beforeChatLoadMore: () => void;
   chatListRef: React.RefObject<HTMLDivElement>;
-  loadMoreRef: React.RefObject<HTMLDivElement>;
+  shouldLoadMore: boolean;
 }
 
 export default function useChatScroll({
@@ -13,27 +13,46 @@ export default function useChatScroll({
   bottomRef,
   beforeChatLoadMore,
   chatListRef,
-  loadMoreRef,
+  shouldLoadMore,
 }: ChatScrollType) {
   const scrollRecod = useRef(0);
   const chatNodes = useRef(0);
   const loadMore = useRef(false);
 
+  /** 채팅이 없을시에 즉 스크롤이 없을경우 API요청이 두번되는 버그가 발생하여 기존코드를 제거하였으며 리팩토링진행하였습니다. */
+  // useEffect(() => {
+  //   const loadMoreObserber = new IntersectionObserver(
+  //     ([{ isIntersecting }]) => {
+  //       if (isIntersecting) {
+  //         beforeChatLoadMore();
+  //         loadMore.current = true;
+  //       }
+  //     },
+  //   );
+  //   const trigger = loadMoreRef.current!;
+  //   loadMoreObserber.observe(trigger);
+  //   return () => {
+  //     loadMoreObserber.unobserve(trigger);
+  //   };
+  // }, [beforeChatLoadMore, loadMoreRef]);
+
   useEffect(() => {
-    const loadMoreObserber = new IntersectionObserver(
-      ([{ isIntersecting }]) => {
-        if (isIntersecting) {
-          beforeChatLoadMore();
-          loadMore.current = true;
-        }
-      },
-    );
-    const trigger = loadMoreRef.current!;
-    loadMoreObserber.observe(trigger);
-    return () => {
-      loadMoreObserber.unobserve(trigger);
+    const topDiv = chatContainerRef?.current;
+
+    const handleScroll = () => {
+      const scrollTop = topDiv?.scrollTop;
+      if (scrollTop === 0 && shouldLoadMore) {
+        beforeChatLoadMore();
+        loadMore.current = true;
+      }
     };
-  }, [beforeChatLoadMore, loadMoreRef]);
+
+    topDiv?.addEventListener('scroll', handleScroll);
+
+    return () => {
+      topDiv?.removeEventListener('scroll', handleScroll);
+    };
+  }, [shouldLoadMore, beforeChatLoadMore, chatContainerRef]);
 
   useEffect(() => {
     const bottom = bottomRef.current!;

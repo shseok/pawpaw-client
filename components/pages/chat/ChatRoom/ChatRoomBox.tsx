@@ -15,18 +15,22 @@ export default function ChatRoomBox({
   currentChatList: ChatType[];
 }) {
   const roomId = usePathname().split('/')[2];
-  const { data: chatHistory, fetchNextPage } = useGetChatHistory(roomId);
+  const {
+    data: chatHistory,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useGetChatHistory(roomId);
   const { data: userInfo } = useGetUserInfo();
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const chatListRef = useRef<HTMLDivElement>(null);
-  const loadMoreRef = useRef<HTMLDivElement>(null);
   useChatScroll({
     chatContainerRef,
     bottomRef,
     beforeChatLoadMore: fetchNextPage,
     chatListRef,
-    loadMoreRef,
+    shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
   });
 
   const mergedChatList = [...(chatHistory?.pages ?? []), ...currentChatList];
@@ -38,7 +42,6 @@ export default function ChatRoomBox({
       className="flex flex-col flex-1 p-4 overflow-y-scroll "
       ref={chatContainerRef}
     >
-      <div ref={loadMoreRef} />
       <div className="flex flex-col" ref={chatListRef}>
         {Object.entries(chatListWithDateSection).map(
           ([date, chatList], index) => (
