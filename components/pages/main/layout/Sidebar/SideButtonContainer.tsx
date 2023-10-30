@@ -40,7 +40,7 @@ export default function SideButtonContainer({
         buttonType="Search"
         activeButton={activeButton}
         isOpenSidebar={isSidebarOpen}
-        clickHandler={() => clickHandler(pathname)}
+        clickHandler={() => clickHandler('Search')}
       />
       <SideButton
         buttonType="Notice"
