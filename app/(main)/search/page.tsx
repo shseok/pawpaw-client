@@ -1,9 +1,5 @@
-import ContentTab from '../@modal/(.)search/_components/ContentTab';
+import { redirect } from 'next/navigation';
 
 export default function Page() {
-  return (
-    <div>
-      <ContentTab />
-    </div>
-  );
+  redirect('/');
 }

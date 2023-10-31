@@ -6,9 +6,10 @@ import SearchQueryInput from './_components/SearchQueryInput';
 export default function Search({
   searchParams,
 }: {
-  searchParams: { chatromms: string; query: string };
+  searchParams: { query: string };
 }) {
   const { query } = searchParams;
+
   return (
     <SearchModal>
       <SearchQueryInput />

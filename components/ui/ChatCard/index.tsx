@@ -25,7 +25,7 @@ export default function ChatCardWrapper({
     <FlexBox
       direction="column"
       className={cn(
-        'w-full shadow-chatCard max-w-[517px] max-h-[538px] h-full rounded-[10px] gap-3 p-4 sm:p-6',
+        'w-full shadow-chatCard max-h-[538px] h-full rounded-[10px] gap-3 p-4 sm:p-6',
         className && className,
       )}
     >

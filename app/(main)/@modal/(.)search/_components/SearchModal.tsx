@@ -3,7 +3,7 @@
 
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import React from 'react';
 
 export default function SearchModal({
@@ -12,6 +12,8 @@ export default function SearchModal({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
+  if (!pathname.includes('search')) return null;
   return (
     <div className="fixed inset-0 z-50">
       <div

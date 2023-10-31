@@ -18,7 +18,7 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
     hasSchedule,
   } = list;
   return (
-    <Link href={`/chat/${id}`} className="w-fit">
+    <Link href={`/chat/${id}`} className="w-full">
       <ChatCard>
         <Image
           src={coverUrl ?? '/images/default.png'}

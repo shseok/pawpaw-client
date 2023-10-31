@@ -7,6 +7,7 @@ import BadgeIcon from '@/public/svgs/Badge.svg';
 import { RecommendedChatList } from '@/types/types';
 import { joinChatRoom } from '@/service/chatRoom';
 import copyToClipBoard from '@/utils/copyToClipBoard';
+import Toast from '@/utils/notification';
 import { ChatCard } from '.';
 import { Button, Divider, TagList } from '../ui';
 
@@ -23,10 +24,16 @@ export default function NormalChatCard({ ...list }: RecommendedChatList) {
   const router = useRouter();
   const enterChatRoom = async () => {
     if (window.confirm('채팅방에 입장하시겠습니까?')) {
-      await joinChatRoom(id);
-      router.push(`/chat/${id}`);
+      try {
+        await joinChatRoom(id);
+      } catch (error) {
+        if (error instanceof Error) {
+          Toast.error(error.message);
+          return;
+        }
+      }
     }
-    return false;
+    router.push(`/chat/${id}`);
   };
   return (
     <ChatCard>

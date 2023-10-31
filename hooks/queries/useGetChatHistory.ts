@@ -7,6 +7,7 @@ export default function useGetChatHistory(roomId: string) {
     useInfiniteQuery({
       queryKey: [queryKeys.CHAT_HISTORY_LIST, roomId],
       queryFn: ({ pageParam = 0 }) => getChatHistory(roomId, pageParam),
+      enabled: !!roomId,
       refetchOnWindowFocus: false,
       getNextPageParam: (history) => {
         const lowestId = history.content.sort((a, b) => a.id - b.id).at(0)?.id;
