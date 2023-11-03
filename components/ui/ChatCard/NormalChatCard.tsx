@@ -29,7 +29,7 @@ export default function NormalChatCard({ ...list }: RecommendedChatList) {
     return false;
   };
   return (
-    <ChatCard>
+    <ChatCard className="border">
       <ChatCard.Header justify="between">
         <div className="flex items-center gap-1">
           <ChatCard.Title title={name} />
