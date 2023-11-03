@@ -139,3 +139,6 @@ body {
     width: 400px;
   }
 }
+.keen-slider {
+  overflow: visible !important;
+}
