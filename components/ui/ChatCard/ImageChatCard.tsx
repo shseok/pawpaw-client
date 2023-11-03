@@ -18,16 +18,21 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
     hasSchedule,
   } = list;
   return (
-    <Link href={`/chat/${id}`} className="w-full">
-      <ChatCard className="border">
+    <Link
+      href={`/chat/${id}`}
+      className="flex flex-col border rounded-[10px] h-[518px]"
+    >
+      <div className="relative w-full h-2/3">
         <Image
           src={coverUrl ?? '/images/default.png'}
           alt={name}
-          width={300}
-          height={200}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
-          className="w-full  h-80 rounded-[10px]"
+          className="absolute object-fill h-full rounded-t-[10px]"
         />
+      </div>
+      <ChatCard className="h-1/3">
         <ChatCard.Header justify="between">
           <ChatCard.Title title={name} />
           <p className="text-gray-400 body2">

@@ -11,7 +11,7 @@ export default async function RecommendChatList() {
       <Carousel>
         {recommendChatList.map((list) => (
           <div
-            className="max-w-full min-w-full keen-slider__slide"
+            className="max-w-full min-w-full h-fit keen-slider__slide"
             key={list.id}
           >
             <NormalChatCard {...list} />
