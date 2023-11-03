@@ -35,7 +35,7 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
       <ChatCard className="h-1/3">
         <ChatCard.Header justify="between">
           <ChatCard.Title title={name} />
-          <p className="text-gray-400 body2">
+          <p className="text-gray-400 truncate body2">
             {lastChatTime
               ? `최근 대화 ${lastChatTime}`
               : '최근 대화가 없어요.🥹'}

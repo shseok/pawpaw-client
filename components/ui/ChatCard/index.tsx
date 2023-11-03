@@ -35,14 +35,14 @@ export default function ChatCardWrapper({
 
 function Header({ children, justify }: ChatCardHeaderProp) {
   return (
-    <FlexBox justify={justify} align="center" className="w-full">
+    <FlexBox justify={justify} align="center" className="w-full ">
       {children}
     </FlexBox>
   );
 }
 
 function Title({ title }: { title: string }) {
-  return <p className="header3">{title}</p>;
+  return <p className="truncate header3">{title}</p>;
 }
 
 function Body({ children }: { children: React.ReactNode }) {
