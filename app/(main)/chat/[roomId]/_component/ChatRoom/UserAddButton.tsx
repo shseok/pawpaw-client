@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import UserAddModal from '../../../ui/Modal/UserAddModal/UserAddModal';
+import UserAddModal from '../../../../../../components/ui/Modal/UserAddModal/UserAddModal';
 
 export default function UserAddButton() {
   const [open, setOpen] = useState(false);

@@ -7,11 +7,20 @@ const generateOptions = () =>
     headers: { Cookie: `ACCESS=${cookies().get('ACCESS')?.value}` },
   }) as const;
 export async function fetchEnteredChatList(): Promise<EnteredChatList[]> {
+  const options = generateOptions();
+
   const url = `${process.env.SERVER_API_URL}/api/chatroom/participated`;
+  // await new Promise<void>((resolve) => {
+  //   setTimeout(() => {
+  //     resolve();
+  //   }, 1000);
+  // });
+
   const response = await fetch(url, {
-    credentials: 'include',
-    headers: { Cookie: `ACCESS=${cookies().get('ACCESS')?.value}` },
+    ...options,
+    cache: 'no-store',
   });
+
   return response.json();
 }
 
@@ -25,5 +34,6 @@ export async function fetchRecommendedChatList(): Promise<
     ...options,
     next: { revalidate: REVALIDATE_TIME },
   });
+
   return response.json();
 }

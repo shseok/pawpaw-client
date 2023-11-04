@@ -1,4 +1,4 @@
-import ChatUser from '../../../pages/chat/ChatRoom/ChatUser';
+import ChatUser from '../../../../app/(main)/chat/[roomId]/_component/ChatRoom/ChatUser';
 
 interface SearchedUserListType {
   userList: {

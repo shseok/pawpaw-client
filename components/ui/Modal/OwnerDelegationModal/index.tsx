@@ -1,7 +1,7 @@
 import { ModalProps } from '@/types/types';
 import useGetChatRoomUserList from '@/hooks/queries/useGetChatRoomUserList';
 import { usePathname } from 'next/navigation';
-import ChatUser from '@/components/pages/chat/ChatRoom/ChatUser';
+import ChatUser from '@/app/(main)/chat/[roomId]/_component/ChatRoom/ChatUser';
 import { useState } from 'react';
 import useDelegateRoomOwner from '@/hooks/mutations/useDelegateRoomOwner';
 import { Button, Modal } from '@/components/ui/ui';
