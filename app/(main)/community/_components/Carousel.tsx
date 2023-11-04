@@ -1,8 +1,9 @@
 'use client';
 
 import { useKeenSlider } from 'keen-slider/react';
+import 'keen-slider/keen-slider.min.css';
 
-export default function Carousel({ children }: { children: React.ReactNode }) {
+export function Carousel({ children }: { children: React.ReactNode }) {
   const [ref] = useKeenSlider({
     breakpoints: {
       '(min-width: 400px)': {
@@ -18,8 +19,14 @@ export default function Carousel({ children }: { children: React.ReactNode }) {
   });
 
   return (
-    <div className="keen-slider" ref={ref}>
+    <ul className="w-full keen-slider" ref={ref}>
       {children}
-    </div>
+    </ul>
+  );
+}
+
+export function CarouselSlide({ children }: { children: React.ReactNode }) {
+  return (
+    <li className="max-w-full min-w-full keen-slider__slide">{children}</li>
   );
 }

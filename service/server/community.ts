@@ -10,11 +10,6 @@ export async function fetchEnteredChatList(): Promise<EnteredChatList[]> {
   const options = generateOptions();
 
   const url = `${process.env.SERVER_API_URL}/api/chatroom/participated`;
-  // await new Promise<void>((resolve) => {
-  //   setTimeout(() => {
-  //     resolve();
-  //   }, 1000);
-  // });
 
   const response = await fetch(url, {
     ...options,

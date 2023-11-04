@@ -1,27 +1,23 @@
+'use client';
+
 import ImageChatCard from '@/components/ui/ChatCard/ImageChatCard';
-import 'keen-slider/keen-slider.min.css';
-import { fetchEnteredChatList } from '@/service/server/community';
-import Carousel from './Carousel';
+import useGetEnteredChatList from '@/hooks/queries/useGetEnteredChatList';
+import EnteredChatLoading from '@/components/ui/Loading/EnteredChatLoading';
+import { Carousel, CarouselSlide } from './Carousel';
 
-export default async function EnteredChatList() {
-  const chatList = await fetchEnteredChatList();
+export default function EnteredChatList() {
+  const { data: chatList, isLoading } = useGetEnteredChatList();
 
+  if (isLoading) return <EnteredChatLoading />;
+  if (chatList?.length === 0)
+    return <div className="w-full header3">현재 참여중인 채팅방이 없어요.</div>;
   return (
-    // <div>
     <Carousel>
-      {chatList.length === 0 ? (
-        <div className="w-full header4">현재 참여중인 채팅방이 없어요.</div>
-      ) : (
-        chatList.map((list) => (
-          <div
-            className="max-w-full min-w-full keen-slider__slide"
-            key={list.id}
-          >
-            <ImageChatCard {...list} />
-          </div>
-        ))
-      )}
+      {chatList?.map((list) => (
+        <CarouselSlide key={list.id}>
+          <ImageChatCard {...list} />
+        </CarouselSlide>
+      ))}
     </Carousel>
-    // </div>
   );
 }

@@ -1,5 +1,3 @@
-'use client';
-
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import { leaveChatRoom } from '@/service/chatRoom';
@@ -11,8 +9,13 @@ export default function LeaveChatRoomModal({
   closeModal: () => void;
 }) {
   const roomId = usePathname().split('/')[2];
-  const onLeaveChatRoom = () => {
-    leaveChatRoom(roomId);
+  const onLeaveChatRoom = async () => {
+    try {
+      await leaveChatRoom(roomId);
+      window.location.replace('/community');
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <FlexBox

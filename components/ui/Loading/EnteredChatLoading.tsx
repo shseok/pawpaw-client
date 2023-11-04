@@ -2,10 +2,10 @@ import { Skeleton, Divider } from '../ui';
 
 export default function EnteredChatLoading() {
   return (
-    <div>
-      <div className="shadow-chatCard w-full max-w-[517px] h-full max-h-[538px] rounded-[10px]">
+    <ul className="flex min-w-full gap-5 ">
+      <li className="border w-full h-full max-h-[538px] max-w-[518px] rounded-[10px]">
+        <Skeleton className="rounded-t-[10px] w-full h-80" />
         <div className="flex flex-col gap-4 p-5">
-          <Skeleton className="rounded-[10px] w-full h-80" />
           <div className="flex items-center justify-between">
             <Skeleton className="w-40 h-6 rounded-lg" />
             <Skeleton className="w-20 h-6 rounded-lg" />
@@ -19,7 +19,7 @@ export default function EnteredChatLoading() {
             <Skeleton className="w-10 h-10 rounded-full" />
           </div>
         </div>
-      </div>
-    </div>
+      </li>
+    </ul>
   );
 }

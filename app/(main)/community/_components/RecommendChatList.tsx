@@ -1,21 +1,22 @@
-import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
-import 'keen-slider/keen-slider.min.css';
-import { fetchRecommendedChatList } from '@/service/server/community';
-import Carousel from './Carousel';
+'use client';
 
-export default async function RecommendChatList() {
-  const recommendChatList = await fetchRecommendedChatList();
+import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
+import useGetRecommendChatList from '@/hooks/queries/useGetRecommendChatList';
+import RecommendChatLoading from '@/components/ui/Loading/RecommendChatLoading';
+import { Carousel, CarouselSlide } from './Carousel';
+
+export default function RecommendChatList() {
+  const { data: recommendChatList, isLoading } = useGetRecommendChatList();
+
+  if (isLoading) return <RecommendChatLoading />;
 
   return (
     <div>
       <Carousel>
-        {recommendChatList.map((list) => (
-          <div
-            className="max-w-full min-w-full h-fit keen-slider__slide"
-            key={list.id}
-          >
+        {recommendChatList?.map((list) => (
+          <CarouselSlide key={list.id}>
             <NormalChatCard {...list} />
-          </div>
+          </CarouselSlide>
         ))}
       </Carousel>
     </div>

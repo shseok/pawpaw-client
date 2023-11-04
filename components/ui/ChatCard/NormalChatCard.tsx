@@ -1,12 +1,13 @@
 'use client';
 
-/* eslint-disable no-alert */
 import { useRouter } from 'next/navigation';
 import ShareIcon from '@/public/svgs/share.svg';
 import BadgeIcon from '@/public/svgs/Badge.svg';
 import { RecommendedChatList } from '@/types/types';
 import { joinChatRoom } from '@/service/chatRoom';
 import copyToClipBoard from '@/utils/copyToClipBoard';
+import { useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '@/constant/query-keys';
 import { ChatCard } from '.';
 import { Button, Divider, TagList } from '../ui';
 
@@ -21,9 +22,11 @@ export default function NormalChatCard({ ...list }: RecommendedChatList) {
     participantNumber,
   } = list;
   const router = useRouter();
+  const queryClient = useQueryClient();
   const enterChatRoom = async () => {
     if (window.confirm('채팅방에 입장하시겠습니까?')) {
       await joinChatRoom(id);
+      queryClient.invalidateQueries([queryKeys.ENTERED_CHAT_LIST]);
       router.push(`/chat/${id}`);
     }
     return false;
