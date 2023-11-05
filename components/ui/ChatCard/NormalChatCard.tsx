@@ -39,6 +39,7 @@ export default function NormalChatCard({ ...list }: RecommendedChatList) {
           <BadgeIcon />
         </div>
         <button
+          aria-label="Copy Button"
           type="button"
           onClick={() =>
             copyToClipBoard(`${process.env.NEXT_PUBLIC_CLIENT_URL}/chat/${id}`)

@@ -22,14 +22,14 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
       href={`/chat/${id}`}
       className="flex flex-col border rounded-[10px] h-[518px]"
     >
-      <div className="relative w-full h-2/3">
+      <div className="relative w-full overflow-hidden h-2/3">
         <Image
           src={coverUrl ?? '/images/default.png'}
           alt={name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
-          className="absolute object-fill h-full rounded-t-[10px]"
+          className="object-cover rounded-t-[10px]"
         />
       </div>
       <ChatCard className="h-1/3">
