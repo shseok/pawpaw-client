@@ -35,7 +35,7 @@ export default function ChatCardWrapper({
 
 function Header({ children, justify }: ChatCardHeaderProp) {
   return (
-    <FlexBox justify={justify} align="center" className="w-full ">
+    <FlexBox justify={justify} align="center" className="w-full truncate">
       {children}
     </FlexBox>
   );
