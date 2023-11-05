@@ -3,7 +3,8 @@
 import ImageChatCard from '@/components/ui/ChatCard/ImageChatCard';
 import useGetEnteredChatList from '@/hooks/queries/useGetEnteredChatList';
 import EnteredChatLoading from '@/components/ui/Loading/EnteredChatLoading';
-import { Carousel, CarouselSlide } from './Carousel';
+import { SwiperSlide } from 'swiper/react';
+import Carousel from './Carousel';
 
 export default function EnteredChatList() {
   const { data: chatList, isLoading } = useGetEnteredChatList();
@@ -14,9 +15,9 @@ export default function EnteredChatList() {
   return (
     <Carousel>
       {chatList?.map((list) => (
-        <CarouselSlide key={list.id}>
+        <SwiperSlide key={list.id}>
           <ImageChatCard {...list} />
-        </CarouselSlide>
+        </SwiperSlide>
       ))}
     </Carousel>
   );

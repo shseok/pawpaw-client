@@ -6,7 +6,8 @@ export default function useGetRecommendChatList() {
   const { data, isLoading } = useQuery({
     queryKey: [queryKeys.RECOMMEND_CHAT_LIST],
     queryFn: getRecommendedChatList,
-    staleTime: 1000 * 60,
+    staleTime: 1000 * 60 * 5,
+    refetchInterval: 1000 * 60,
     select(list) {
       return list.slice(0, 10);
     },

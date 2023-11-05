@@ -32,21 +32,24 @@ export default function NormalChatCard({ ...list }: RecommendedChatList) {
     return false;
   };
   return (
-    <ChatCard className="border">
+    <ChatCard>
       <ChatCard.Header justify="between">
+        <ChatCard.Title title={name} />
+
         <div className="flex items-center gap-1">
-          <ChatCard.Title title={name} />
           <BadgeIcon />
+          <button
+            aria-label="Copy Button"
+            type="button"
+            onClick={() =>
+              copyToClipBoard(
+                `${process.env.NEXT_PUBLIC_CLIENT_URL}/chat/${id}`,
+              )
+            }
+          >
+            <ShareIcon className="w-6 h-6" />
+          </button>
         </div>
-        <button
-          aria-label="Copy Button"
-          type="button"
-          onClick={() =>
-            copyToClipBoard(`${process.env.NEXT_PUBLIC_CLIENT_URL}/chat/${id}`)
-          }
-        >
-          <ShareIcon className="w-6 h-6" />
-        </button>
       </ChatCard.Header>
       <ChatCard.Body>
         <ChatCard.Description description={description} />

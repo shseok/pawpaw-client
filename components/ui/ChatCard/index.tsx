@@ -42,7 +42,7 @@ function Header({ children, justify }: ChatCardHeaderProp) {
 }
 
 function Title({ title }: { title: string }) {
-  return <p className="truncate header3">{title}</p>;
+  return <p className="header3">{title}</p>;
 }
 
 function Body({ children }: { children: React.ReactNode }) {

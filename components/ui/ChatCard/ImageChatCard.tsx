@@ -20,7 +20,7 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
   return (
     <Link
       href={`/chat/${id}`}
-      className="flex flex-col border rounded-[10px] h-[518px]"
+      className="flex flex-col rounded-[10px] h-[518px]"
     >
       <div className="relative w-full overflow-hidden h-2/3">
         <Image
