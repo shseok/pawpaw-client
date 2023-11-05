@@ -1,4 +1,4 @@
-import ShareIcon from '@/public/svgs/share.svg';
+import ShareIcon from '@/public/svgs/ShareNetwork.svg';
 import BadgeIcon from '@/public/svgs/Badge.svg';
 import { ChatList } from '@/types/types';
 import copyToClipBoard from '@/utils/copyToClipBoard';

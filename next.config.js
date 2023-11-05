@@ -6,7 +6,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const nextConfig = {
   async rewrites() {
-    if (process.env.NODE_ENV === 'production') return [];
+    // if (process.env.NODE_ENV === 'production') return [];
     return [
       {
         source: '/endpoint/:path*',

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import ShareIcon from '@/public/svgs/share.svg';
+import ShareIcon from '@/public/svgs/ShareNetwork.svg';
 import BadgeIcon from '@/public/svgs/Badge.svg';
 import { RecommendedChatList } from '@/types/types';
 import { joinChatRoom } from '@/service/chatRoom';
