@@ -18,10 +18,7 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
     hasSchedule,
   } = list;
   return (
-    <Link
-      href={`/chat/${id}`}
-      className="flex flex-col rounded-[10px] h-[518px]"
-    >
+    <Link href={`/chat/${id}`} className="flex flex-col h-[518px]">
       <div className="relative w-full overflow-hidden h-2/3">
         <Image
           src={coverUrl ?? '/images/default.png'}
@@ -32,7 +29,7 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
           className="object-cover rounded-t-[10px]"
         />
       </div>
-      <ChatCard className="h-1/3">
+      <ChatCard className="rounded-t-none h-1/3">
         <ChatCard.Header justify="between">
           <ChatCard.Title title={name} />
           <p className="text-gray-400 truncate body2">
