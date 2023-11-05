@@ -29,7 +29,7 @@ export default function ProfileCard({ user }: { user: UserInfo }) {
       <FlexBox direction="column" className="p-2">
         <FlexBox className="gap-1">
           <LocationIcon />
-          <div className="header3 text-grey-400">{user.position.name}</div>
+          <div className="header3 text-grey-400">{user.position.address}</div>
         </FlexBox>
         <Divider type="horizontal" />
       </FlexBox>

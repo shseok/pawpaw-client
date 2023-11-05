@@ -207,7 +207,7 @@ export interface UserInfo {
   role: string;
   nickname: string;
   briefIntroduction: string;
-  position: { latitude: number; longitude: number; name: string };
+  position: Position;
   imageUrl: string;
 }
 export interface ChatRoomUserList {
