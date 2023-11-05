@@ -148,7 +148,7 @@ export interface PetInfo {
 export interface Position {
   latitude: number;
   longitude: number;
-  name: string;
+  address: string;
 }
 
 export type EmailAuthParams = Omit<AuthParams, 'body'> & {
@@ -207,7 +207,7 @@ export interface UserInfo {
   role: string;
   nickname: string;
   briefIntroduction: string;
-  position: { latitude: number; longitude: number; name: string };
+  position: Position;
   imageUrl: string;
 }
 export interface ChatRoomUserList {

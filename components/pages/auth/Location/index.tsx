@@ -46,7 +46,7 @@ export default function Location({ title }: { title: string }) {
       setPosition({
         lat: latitude,
         lng: longitude,
-        name: locationName.koAddress,
+        address: locationName.koAddress,
       });
       setValueByInput(locationName.koAddress);
       setSearchHistory(locationName.koAddress);

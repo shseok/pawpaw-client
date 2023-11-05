@@ -6,7 +6,7 @@ import { Species } from '@/types/types';
 export interface GeneralRegisterStore {
   allCheked: boolean;
   checkList: boolean[];
-  position: { lat: number; lng: number; name: string };
+  position: { lat: number; lng: number; address: string };
   searchHistory: string;
   nickname: string;
   petInfo: {
@@ -20,7 +20,11 @@ export interface GeneralRegisterStore {
   setPassword: (password: string) => void;
   setAllCheked: (checked: boolean) => void;
   setCheckList: (index: number, checked: boolean) => void;
-  setPosition: (position: { lat: number; lng: number; name: string }) => void;
+  setPosition: (position: {
+    lat: number;
+    lng: number;
+    address: string;
+  }) => void;
   setSearchHistory: (searchHistory: string) => void;
   setNickname: (nickname: string) => void;
   setPetInfo: (info: { name: string; species: Species }) => void;
@@ -32,7 +36,7 @@ export const useGeneralRegisterStore =
     devtools((set) => ({
       allCheked: false,
       checkList: Array(termList.length).fill(false),
-      position: { lat: 0, lng: 0, name: '' },
+      position: { lat: 0, lng: 0, address: '' },
       searchHistory: '',
       nickname: '',
       petInfo: {
@@ -59,7 +63,7 @@ export const useGeneralRegisterStore =
           newCheckList[index] = checked;
           return { ...store, checkList: newCheckList };
         }),
-      setPosition: (position: { lat: number; lng: number; name: string }) =>
+      setPosition: (position: { lat: number; lng: number; address: string }) =>
         set((store) => ({ ...store, position })),
       setSearchHistory: (searchHistory: string) =>
         set((store) => ({ ...store, searchHistory })),
