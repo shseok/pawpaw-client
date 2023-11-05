@@ -7,6 +7,9 @@ export default function useGetRecommendChatList() {
     queryKey: [queryKeys.RECOMMEND_CHAT_LIST],
     queryFn: getRecommendedChatList,
     staleTime: 1000 * 60,
+    select(list) {
+      return list.slice(0, 10);
+    },
   });
   return { data, isLoading };
 }

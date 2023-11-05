@@ -9,16 +9,13 @@ export default function RecommendChatList() {
   const { data: recommendChatList, isLoading } = useGetRecommendChatList();
 
   if (isLoading) return <RecommendChatLoading />;
-
   return (
-    <div>
-      <Carousel>
-        {recommendChatList?.map((list) => (
-          <CarouselSlide key={list.id}>
-            <NormalChatCard {...list} />
-          </CarouselSlide>
-        ))}
-      </Carousel>
-    </div>
+    <Carousel>
+      {recommendChatList?.map((list) => (
+        <CarouselSlide key={list.id}>
+          <NormalChatCard {...list} />
+        </CarouselSlide>
+      ))}
+    </Carousel>
   );
 }

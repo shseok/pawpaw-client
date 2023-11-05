@@ -18,9 +18,8 @@ export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
   } catch (error) {
     if (error instanceof AuthError) {
       window.location.replace('/auth/login');
-      alert(error.message);
+      Toast.error(error.message);
     }
-    console.error(error);
     throw error;
   }
 }
