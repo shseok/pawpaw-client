@@ -34,7 +34,7 @@ export default function LocationList({ value }: Props) {
 
   const handleClick = (location: string) => {
     const { lat, lng } = locationInfo?.location ?? { lat: 0, lng: 0 };
-    setPosition({ lat, lng, name: location });
+    setPosition({ lat, lng, address: location });
   };
 
   const renderLocationList = () => {
@@ -53,8 +53,8 @@ export default function LocationList({ value }: Props) {
             <CheckList
               option={idx}
               text={location}
-              isChecked={location === position.name}
-              isShow={location === position.name}
+              isChecked={location === position.address}
+              isShow={location === position.address}
               setCheck={() => handleClick(location)}
               className="gap-[4px]"
             />

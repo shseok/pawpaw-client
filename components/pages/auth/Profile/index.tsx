@@ -105,7 +105,7 @@ export default function Profile({ title }: { title: string }) {
             position: {
               latitude: position.lat,
               longitude: position.lng,
-              name: position.name,
+              address: position.address,
             },
             nickname: profileName,
             noImage: false,
@@ -130,7 +130,7 @@ export default function Profile({ title }: { title: string }) {
             position: {
               latitude: position.lat,
               longitude: position.lng,
-              name: position.name,
+              address: position.address,
             },
             phoneNumber,
             nickname: profileName,

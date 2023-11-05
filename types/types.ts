@@ -148,7 +148,7 @@ export interface PetInfo {
 export interface Position {
   latitude: number;
   longitude: number;
-  name: string;
+  address: string;
 }
 
 export type EmailAuthParams = Omit<AuthParams, 'body'> & {
