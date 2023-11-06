@@ -1,3 +1,5 @@
+'use client';
+
 import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import { Species } from '@/types/types';
 import DropdownIcon from '@/public/svgs/Auth/arrow-drop-down.svg';

@@ -1,6 +1,6 @@
-import ChatRoom from '@/components/pages/chat/ChatRoom/ChatRoom';
-import ChatUserList from '@/components/pages/chat/ChatRoom/ChatUserList';
-import ScheduleList from '@/components/pages/chat/Schedule/ScheduleList';
+import ChatRoom from '@/app/(main)/chat/[roomId]/_component/ChatRoom/ChatRoom';
+import ChatUserList from '@/app/(main)/chat/[roomId]/_component/ChatRoom/ChatUserList';
+import ScheduleList from '@/app/(main)/chat/[roomId]/_component/Schedule/ScheduleList';
 import { ChatRoomInfo } from '@/types/types';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';

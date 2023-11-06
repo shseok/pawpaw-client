@@ -12,6 +12,7 @@ export default function SidebarLogo({
   return (
     <Link
       href="/"
+      aria-label="Move to Mainpage"
       className={`${
         isSidebarOpen ? 'mt-8 mb-10' : 'mt-8 mb-11'
       } flex flex-row justify-center`}

@@ -18,19 +18,21 @@ export default function ImageChatCard({ ...list }: EnteredChatList) {
     hasSchedule,
   } = list;
   return (
-    <Link href={`/chat/${id}`} className="w-fit">
-      <ChatCard>
+    <Link href={`/chat/${id}`} className="flex flex-col h-[518px]">
+      <div className="relative w-full overflow-hidden h-2/3">
         <Image
           src={coverUrl ?? '/images/default.png'}
           alt={name}
-          width={300}
-          height={200}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
-          className="w-full  h-80 rounded-[10px]"
+          className="object-cover rounded-t-[10px]"
         />
+      </div>
+      <ChatCard className="rounded-t-none h-1/3">
         <ChatCard.Header justify="between">
           <ChatCard.Title title={name} />
-          <p className="text-gray-400 body2">
+          <p className="text-gray-400 truncate body2">
             {lastChatTime
               ? `최근 대화 ${lastChatTime}`
               : '최근 대화가 없어요.🥹'}

@@ -6,7 +6,7 @@ export default function useGetEnteredChatList() {
   const { data, isLoading } = useQuery({
     queryKey: [queryKeys.ENTERED_CHAT_LIST],
     queryFn: getEnteredChatList,
-    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 3,
   });
   return { data, isLoading };
 }
