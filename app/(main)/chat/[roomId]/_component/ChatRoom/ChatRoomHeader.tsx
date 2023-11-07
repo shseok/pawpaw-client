@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import ArrowLeftIcon from '@/public/svgs/arrow-left.svg';
 import FlexBox from '@/components/ui/FlexBox';
+import React from 'react';
 import ChatDropdownButton from './ChatDropdownButton';
 
-export default function ChatRoomHeader({ title }: { title: string }) {
+const ChatRoomHeader = function ChatRoomHeader({ title }: { title: string }) {
   return (
     <FlexBox
       as="header"
@@ -20,4 +21,5 @@ export default function ChatRoomHeader({ title }: { title: string }) {
       <ChatDropdownButton />
     </FlexBox>
   );
-}
+};
+export default React.memo(ChatRoomHeader);
