@@ -4,7 +4,14 @@ import { Dispatch, Fragment, SetStateAction, useState } from 'react';
 import Dropdown from '@/components/ui/Dropdown/Dropdown';
 import DotsIcon from '@/public/svgs/tabler_dots.svg';
 import Modal from '@/components/ui/Modal';
-import ScheduleAddModal from '../../../../../../components/ui/Modal/ScheduleAddModal/ScheduleAddModal';
+import dynamic from 'next/dynamic';
+
+const ScheduleAddModal = dynamic(
+  () => import('@/components/ui/Modal/ScheduleAddModal/ScheduleAddModal'),
+  {
+    ssr: false,
+  },
+);
 
 function ScheduleAddOption({
   setIsOpen,
@@ -32,11 +39,10 @@ export default function ScheduleDropdownButton() {
           ))}
         </Dropdown.Menu>
       </Dropdown>
-      {isOpen && (
-        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-          <ScheduleAddModal closeModal={() => setIsOpen(false)} />
-        </Modal>
-      )}
+
+      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+        <ScheduleAddModal closeModal={() => setIsOpen(false)} />
+      </Modal>
     </>
   );
 }

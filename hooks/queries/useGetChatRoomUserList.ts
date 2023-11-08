@@ -7,6 +7,7 @@ export default function useGetChatRoomUserList(chatRoomId: string) {
     queryKey: [queryKeys.CHATROOM_USER_LIST, chatRoomId],
     queryFn: () => getChatroomUserList(chatRoomId),
     refetchOnWindowFocus: false,
+    staleTime: Infinity,
     enabled: !!chatRoomId,
   });
   return { data, isLoading };

@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { format, startOfDay, endOfDay } from 'date-fns';
-import Button from '@/components/ui/Button';
-import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/svgs/X.svg';
 import useInput from '@/hooks/common/useInput';
 import DatePicker from '@/components/ui/DatePicker';
 import { usePathname } from 'next/navigation';
 import useCreateSchedule from '@/hooks/mutations/useCreateSchedule';
 import LoadingIcon from '@/public/svgs/loading.svg';
+import { Button, FlexBox } from '@/components/ui/ui';
 import TimeSelect from './TimeSelect';
 
 export default function ScheduleAddModal({

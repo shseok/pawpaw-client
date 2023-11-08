@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import OwnerDelegationModal from '@/components/ui/Modal/OwnerDelegationModal';
+import dynamic from 'next/dynamic';
+import Modal from '@/components/ui/Modal';
+
+const OwnerDelegationModal = dynamic(
+  () => import('@/components/ui/Modal/OwnerDelegationModal'),
+);
 
 export default function DelegateOwnerButton() {
   const [open, setOpen] = useState(false);
@@ -16,7 +21,9 @@ export default function DelegateOwnerButton() {
       >
         방장넘기기
       </button>
-      <OwnerDelegationModal open={open} onClose={() => setOpen(false)} />
+      <Modal onClose={() => setOpen(false)} open={open}>
+        <OwnerDelegationModal onClose={() => setOpen(false)} />
+      </Modal>
     </>
   );
 }
