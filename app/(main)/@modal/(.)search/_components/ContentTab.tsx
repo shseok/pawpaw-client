@@ -1,38 +1,33 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-
 'use client';
 
 import { cn } from '@/utils/common';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const links = [
-  { name: '채팅방', href: 'chatrooms' },
-  { name: '게시물', href: 'boards' },
-  { name: '유저', href: 'user' },
+  { name: '전체', href: '/search' },
+  { name: '채팅방', href: '/search/chatrooms' },
+  { name: '게시물', href: '/search/boards' },
+  { name: '유저', href: '/search/users' },
 ];
 
 export default function ContentTab() {
   const pathname = usePathname();
-  const params = useSearchParams();
-  const currentPath = params.toString().split('=')[0];
-  const { replace } = useRouter();
   return (
     <nav>
-      <ul className="flex">
+      <ul className="flex ">
         {links.map((link) => (
-          <li
-            onClick={() =>
-              replace(`${pathname}?${link.href}`, { scroll: false })
-            }
-            key={link.name}
-            className={cn(
-              'text-grey-300 header4 p-3 border-b-2 cursor-pointer',
-              link.href === currentPath &&
-                'text-primary-200 border-primary-200',
-            )}
-          >
-            {link.name}
+          <li key={link.name} className="flex w-full">
+            <Link
+              href={link.href}
+              className={cn(
+                'text-grey-300 p-2 flex-1 text-center header4  border-b-2 cursor-pointer',
+                link.href === pathname && 'text-primary-200 border-primary-200',
+              )}
+              replace
+            >
+              {link.name}
+            </Link>
           </li>
         ))}
       </ul>

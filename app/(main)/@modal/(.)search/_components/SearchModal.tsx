@@ -17,7 +17,7 @@ export default function SearchModal({
   return (
     <div className="fixed inset-0 z-50">
       <div
-        className="fixed top-0 bottom-0 right-0 w-1/2 bg-black opacity-50"
+        className="fixed top-0 bottom-0 right-0 w-1/2 bg-black opacity-70"
         onClick={() => router.back()}
       />
       <div className="fixed top-0 bottom-0 left-0 flex flex-col w-full h-full gap-4 bg-white sm:w-2/3 p-7">

@@ -1,10 +1,10 @@
 import Divider from '@/components/ui/Divider';
-import { fetchFilteredBoards } from '@/service/server/chatRoom';
 import format from 'date-fns/format';
 import Image from 'next/image';
 import LikeIcon from '@/public/svgs/like.svg';
 import CommentIcon from '@/public/svgs/ChatCircle.svg';
 import Link from 'next/link';
+import { fetchFilteredBoards } from '@/service/server/chatroom';
 
 export default async function BoardList({ query }: { query: string }) {
   const boards = await fetchFilteredBoards(query);

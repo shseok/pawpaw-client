@@ -2,10 +2,8 @@
 
 import useInput from '@/hooks/common/useInput';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import SearchIcon from '@/public/svgs/search.svg';
-import InputDeleteIcon from '@/public/svgs/input-delete.svg';
 import { useState, useEffect } from 'react';
-import SearchHistory from './SearchHistory';
+import { SearchInput } from '@/components/ui/ui';
 
 export default function SearchQueryInput() {
   const [history, setHistory] = useState<string[]>(
@@ -29,13 +27,13 @@ export default function SearchQueryInput() {
     if (history.includes(searchTerm)) return;
     setHistory([...history, searchTerm]);
   };
-  const removeSearchHistory = (searchTerm: string) => {
-    const removedSearchHistory = history.filter((item) => item !== searchTerm);
-    setHistory(removedSearchHistory);
-  };
-  const clearSearchHistory = () => {
-    setHistory([]);
-  };
+  // const removeSearchHistory = (searchTerm: string) => {
+  //   const removedSearchHistory = history.filter((item) => item !== searchTerm);
+  //   setHistory(removedSearchHistory);
+  // };
+  // const clearSearchHistory = () => {
+  //   setHistory([]);
+  // };
   const handleSearch = () => {
     const params = new URLSearchParams(searchParams);
     if (text) {
@@ -47,36 +45,16 @@ export default function SearchQueryInput() {
   };
 
   return (
-    <>
-      <div className="relative w-full">
-        <input
-          type="text"
-          value={text}
-          onChange={onChangeText}
-          className="rounded-[10px] w-full focus:ring-0 py-3 pr-20"
-          onKeyUp={(event) => {
-            if (event.key === 'Enter') {
-              handleSearch();
-              addSearchHistory(text);
-            }
-          }}
-        />
-        <div className="absolute inset-y-0 flex gap-2 right-4">
-          {text && (
-            <button type="button" onClick={reset}>
-              <InputDeleteIcon className="w-6 h-6" />
-            </button>
-          )}
-          <button type="button">
-            <SearchIcon className="w-6 h-6" />
-          </button>
-        </div>
-      </div>
-      <SearchHistory
-        history={history}
-        removeSearchTerm={removeSearchHistory}
-        clearSearchHistory={clearSearchHistory}
-      />
-    </>
+    <SearchInput
+      onClickSearchIcon={handleSearch}
+      value={text}
+      resetValue={reset}
+      placeholder="채팅방, 게시물 또는 유저를 검색할 수 있어요.🐾"
+      onChangeValue={onChangeText}
+      onPressEnter={() => {
+        handleSearch();
+        addSearchHistory(text);
+      }}
+    />
   );
 }
