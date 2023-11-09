@@ -2,7 +2,7 @@
 
 import useInput from '@/hooks/common/useInput';
 import { CompatClient } from '@stomp/stompjs';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ChatType } from '@/types/types';
 import useSocket from '@/hooks/common/useSocket';
 import { useQueryClient } from '@tanstack/react-query';
@@ -21,6 +21,7 @@ export default function ChatRoom({
 }) {
   const [currentChatList, setCurrentChatList] = useState<ChatType[]>([]);
   const [chatText, onChangeValue, resetValue] = useInput('');
+
   const stompClient = useRef<CompatClient>();
   const { createClient } = useSocket();
   const queryClient = useQueryClient();
@@ -38,7 +39,9 @@ export default function ChatRoom({
     resetValue();
   };
 
-  const handleOnKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleTextAreaKeyPress = (
+    e: React.KeyboardEvent<HTMLTextAreaElement>,
+  ) => {
     if (e.key === 'Enter' && e.shiftKey) {
       return;
     }
@@ -75,7 +78,7 @@ export default function ChatRoom({
       <ChatInput
         onChangeValue={onChangeValue}
         sendChat={sendChat}
-        handleOnKeyPress={handleOnKeyPress}
+        handleOnKeyPress={handleTextAreaKeyPress}
         chatText={chatText}
       />
     </div>

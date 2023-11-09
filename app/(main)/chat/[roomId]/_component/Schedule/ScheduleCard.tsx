@@ -60,12 +60,12 @@ export default function ScheduleCard({
       >
         <div className="caption4">
           <p>
-            {format(new Date(startDate), '시작: yyyy-MM-dd hh:mm (eee) ', {
+            {format(new Date(startDate), '시작: yyyy-MM-dd HH:mm (eee) ', {
               locale: ko,
             })}
           </p>
           <p>
-            {format(new Date(endDate), '종료: yyyy-MM-dd hh:mm (eee)', {
+            {format(new Date(endDate), '종료: yyyy-MM-dd HH:mm (eee)', {
               locale: ko,
             })}
           </p>
