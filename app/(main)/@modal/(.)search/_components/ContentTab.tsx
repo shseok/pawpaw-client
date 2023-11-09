@@ -9,6 +9,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 const links = [
   { name: '채팅방', href: 'chatrooms' },
   { name: '게시물', href: 'boards' },
+  { name: '유저', href: 'user' },
 ];
 
 export default function ContentTab() {
