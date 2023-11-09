@@ -59,11 +59,9 @@ export async function leaveChatRoom(roomId: string) {
   if (response.status === 400) {
     Toast.error('방장은 채팅방 삭제만 가능해요.');
   }
-  if (response.ok) {
-    window.location.replace('/community');
-  } else {
+  if (!response.ok) {
     console.error(response.status);
-    throw new Error(`서버오류:${response.status}`);
+    throw new Error(`잠시후 다시 시도해주세요.`);
   }
 }
 

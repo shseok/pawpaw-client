@@ -20,11 +20,10 @@ export default function Avatar({ size = 'base', image, name }: AvatarType) {
   return (
     <div className={`relative ${avatarSize}`}>
       <Image
-        src={image ?? '/images/default.avif'}
+        src={image}
         alt={name}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        priority
         className="object-cover rounded-full absoulte"
       />
     </div>

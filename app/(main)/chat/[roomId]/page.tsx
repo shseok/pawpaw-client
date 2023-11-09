@@ -1,21 +1,8 @@
-import ChatRoom from '@/components/pages/chat/ChatRoom/ChatRoom';
-import ChatUserList from '@/components/pages/chat/ChatRoom/ChatUserList';
-import ScheduleList from '@/components/pages/chat/Schedule/ScheduleList';
-import { ChatRoomInfo } from '@/types/types';
+import ChatRoom from '@/app/(main)/chat/[roomId]/_component/ChatRoom/ChatRoom';
+import ChatUserList from '@/app/(main)/chat/[roomId]/_component/ChatRoom/ChatUserList';
+import ScheduleList from '@/app/(main)/chat/[roomId]/_component/Schedule/ScheduleList';
+import getChatRoomInfo from '@/service/server/chatroom';
 import { Metadata } from 'next';
-import { cookies } from 'next/headers';
-
-// 쿠키에 접근해야해서 해당파일에서 fetch 함수를 작성하였습니다.
-async function getChatRoomInfo(roomId: string): Promise<ChatRoomInfo> {
-  const url = `${process.env.SERVER_API_URL}/api/chatroom/${roomId}`;
-  const response = await fetch(url, {
-    credentials: 'include',
-    headers: {
-      Cookie: `ACCESS=${cookies().get('ACCESS')?.value}`,
-    },
-  });
-  return response.json();
-}
 
 export async function generateMetadata({
   params,

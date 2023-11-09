@@ -18,9 +18,8 @@ export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
   } catch (error) {
     if (error instanceof AuthError) {
       window.location.replace('/auth/login');
-      alert(error.message);
+      Toast.error(error.message);
     }
-    console.error(error);
     throw error;
   }
 }
@@ -28,6 +27,7 @@ export async function getRecommendedChatList(): Promise<RecommendedChatList[]> {
 export async function getEnteredChatList(): Promise<EnteredChatList[]> {
   try {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/api/chatroom/participated`;
+
     const response = await fetch(url, { credentials: 'include' });
 
     if (response.status === 401) {
@@ -42,7 +42,6 @@ export async function getEnteredChatList(): Promise<EnteredChatList[]> {
       window.location.replace('/auth/login');
       Toast.error(error.message);
     }
-    console.error(error);
     throw error;
   }
 }
@@ -66,7 +65,6 @@ export async function getTrendingChatList(beforeId: number, size: number) {
       window.location.replace('/auth/login');
       alert(error.message);
     }
-    console.error(error);
     throw error;
   }
 }

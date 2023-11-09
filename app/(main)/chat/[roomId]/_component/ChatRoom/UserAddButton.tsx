@@ -1,7 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import UserAddModal from '../../../ui/Modal/UserAddModal/UserAddModal';
+import Modal from '@/components/ui/Modal';
+import dynamic from 'next/dynamic';
+
+const UserAddModal = dynamic(
+  () => import('@/components/ui/Modal/UserAddModal/UserAddModal'),
+  { ssr: false },
+);
 
 export default function UserAddButton() {
   const [open, setOpen] = useState(false);
@@ -18,7 +24,9 @@ export default function UserAddButton() {
       >
         초대
       </button>
-      <UserAddModal open={open} onClose={() => setOpen(false)} />
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <UserAddModal onClose={() => setOpen(false)} />
+      </Modal>
     </>
   );
 }

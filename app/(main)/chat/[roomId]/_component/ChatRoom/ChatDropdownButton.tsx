@@ -7,8 +7,12 @@ import ArrowRightIcon from '@/public/svgs/arrow-right.svg';
 import Modal from '@/components/ui/Modal';
 import LeaveChatRoomModal from '@/components/ui/Modal/LeaveChatRoomModal';
 import copyToClipBoard from '@/utils/copyToClipBoard';
-import ScheduleListMobile from '../Schedule/ScheduleListMobile';
-import ChatUserListMobile from './ChatUserListMobile';
+import dynamic from 'next/dynamic';
+
+const ScheduleListMobile = dynamic(
+  () => import('../Schedule/ScheduleListMobile'),
+);
+const ChatUserListMobile = dynamic(() => import('./ChatUserListMobile'));
 
 type ModalType = '채팅방 나가기' | '인원' | '스케줄' | '';
 type ModalActionType = Dispatch<SetStateAction<ModalType>>;

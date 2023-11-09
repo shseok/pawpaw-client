@@ -6,8 +6,7 @@ export default function useGetScheduleList(roomId: string) {
   const { data, isLoading } = useQuery({
     queryKey: [queryKeys.SCHEDULE_LIST, roomId],
     queryFn: () => getScheduleList(roomId),
-    staleTime: 60 * 1000 * 5,
-    refetchInterval: 10000,
+    staleTime: 60 * 1000 * 3,
   });
   return { data, isLoading };
 }

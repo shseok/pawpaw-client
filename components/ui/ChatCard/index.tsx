@@ -22,21 +22,20 @@ export default function ChatCardWrapper({
   className?: string;
 }) {
   return (
-    <FlexBox
-      direction="column"
+    <div
       className={cn(
-        'w-full shadow-chatCard max-h-[538px] h-full rounded-[10px] gap-3 p-4 sm:p-6',
+        'flex flex-col w-full shadow-chatCard  h-full rounded-[10px] gap-2 p-4 sm:p-6',
         className && className,
       )}
     >
       {children}
-    </FlexBox>
+    </div>
   );
 }
 
 function Header({ children, justify }: ChatCardHeaderProp) {
   return (
-    <FlexBox justify={justify} align="center" className="w-full">
+    <FlexBox justify={justify} align="center" className="w-full truncate">
       {children}
     </FlexBox>
   );

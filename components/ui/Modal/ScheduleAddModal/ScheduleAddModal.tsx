@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { format, startOfDay, endOfDay } from 'date-fns';
-import Button from '@/components/ui/Button';
-import FlexBox from '@/components/ui/FlexBox';
 import XIcon from '@/public/svgs/X.svg';
 import useInput from '@/hooks/common/useInput';
 import DatePicker from '@/components/ui/DatePicker';
 import { usePathname } from 'next/navigation';
 import useCreateSchedule from '@/hooks/mutations/useCreateSchedule';
 import LoadingIcon from '@/public/svgs/loading.svg';
+import { Button, FlexBox } from '@/components/ui/ui';
+import Toast from '@/utils/notification';
 import TimeSelect from './TimeSelect';
 
 export default function ScheduleAddModal({
@@ -31,7 +31,13 @@ export default function ScheduleAddModal({
       setEndDate(endOfDay(endDate));
     }
   }, [isAlldayChecked]);
+
   const createNewSchedule = () => {
+    const isStartDateCorrect = startDate > new Date();
+    if (!isStartDateCorrect) {
+      Toast.error('시작날짜는 현재시간 이전으로는 설정할 수 없어요.');
+      return;
+    }
     scheduleMutate({
       roomId,
       scheduleInfo: {

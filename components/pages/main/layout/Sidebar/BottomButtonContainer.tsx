@@ -45,7 +45,8 @@ export default function BottomButtonContainer({
       <div className="relative w-full h-12 bg-grey-200">
         <button
           type="button"
-          className="hidden desktop:flex justify-center items-center absolute top-1/2 -translate-y-1/2 right-3 bg-white rounded-full w-6 h-6"
+          aria-label="Sidebar Toggle Button"
+          className="absolute items-center justify-center hidden w-6 h-6 -translate-y-1/2 bg-white rounded-full desktop:flex top-1/2 right-3"
           onClick={handleClick}
         >
           <ArrowRightIcon

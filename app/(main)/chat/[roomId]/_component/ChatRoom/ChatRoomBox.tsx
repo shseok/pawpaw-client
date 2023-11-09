@@ -2,14 +2,14 @@ import { usePathname } from 'next/navigation';
 import useGetChatHistory from '@/hooks/queries/useGetChatHistory';
 import { ChatType } from '@/types/types';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
-import { Fragment, useRef } from 'react';
+import React, { Fragment, useRef } from 'react';
 
 import makeDateSection from '@/utils/makeDateSection';
 
 import useChatScroll from '@/hooks/common/useChatScroll';
 import ChatItem from './ChatItem';
 
-export default function ChatRoomBox({
+const ChatRoomBox = function ChatRoomBox({
   currentChatList,
 }: {
   currentChatList: ChatType[];
@@ -58,4 +58,5 @@ export default function ChatRoomBox({
       <div ref={bottomRef} />
     </div>
   );
-}
+};
+export default React.memo(ChatRoomBox);
