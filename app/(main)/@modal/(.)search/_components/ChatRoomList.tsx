@@ -17,7 +17,7 @@ export default async function ChatRoomList({ query }: { query: string }) {
           </p>
         </div>
       )}
-      <div className="grid h-full grid-cols-1 gap-4 p-2 overflow-auto sm:grid-cols-2 ">
+      <div className="grid h-full grid-cols-1 gap-4 p-2 sm:grid-cols-2 ">
         {isExistChatRoom &&
           chatrooms.map((chatroom) => (
             <NormalChatCard key={chatroom.id} {...chatroom} />

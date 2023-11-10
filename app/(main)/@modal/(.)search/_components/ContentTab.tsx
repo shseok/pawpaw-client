@@ -2,7 +2,7 @@
 
 import { cn } from '@/utils/common';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 const links = [
   { name: '전체', href: '/search' },
@@ -13,8 +13,6 @@ const links = [
 
 export default function ContentTab() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const query = searchParams.get('query');
 
   return (
     <nav>
@@ -24,12 +22,13 @@ export default function ContentTab() {
             <Link
               href={{
                 pathname: link.href,
-                query: { query },
               }}
               passHref
               className={cn(
                 'text-grey-300 p-2 flex-1 text-center header4  border-b-2 cursor-pointer',
                 link.href === pathname && 'text-primary-200 border-primary-200',
+                link.href !== pathname &&
+                  'hover:text-primary-100 hover:border-primary-100',
               )}
               replace
             >

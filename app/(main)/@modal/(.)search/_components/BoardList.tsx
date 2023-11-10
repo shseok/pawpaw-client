@@ -6,11 +6,17 @@ import CommentIcon from '@/public/svgs/ChatCircle.svg';
 import Link from 'next/link';
 import { fetchFilteredBoards } from '@/service/server/chatroom';
 
-export default async function BoardList({ query }: { query: string }) {
-  const boards = await fetchFilteredBoards(query);
+export default async function BoardList({
+  query,
+  page,
+}: {
+  query: string;
+  page: string;
+}) {
+  const boards = await fetchFilteredBoards(query, Number(page));
 
   return (
-    <div className="flex flex-col h-full gap-4 pb-20 mt-3">
+    <div className="flex flex-col h-full gap-4 mt-3">
       <span className="header4">게시글 {boards.content.length}건</span>
       <div className="grid grid-cols-1 gap-4 overflow-y-auto sm:grid-cols-2">
         {boards.content.map((board) => (

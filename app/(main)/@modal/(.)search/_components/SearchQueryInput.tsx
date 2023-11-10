@@ -36,6 +36,7 @@ export default function SearchQueryInput() {
   // };
   const handleSearch = () => {
     const params = new URLSearchParams(searchParams);
+    params.set('page', '1');
     if (text) {
       params.set('query', text);
     } else {
