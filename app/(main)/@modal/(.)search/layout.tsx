@@ -10,7 +10,9 @@ export default function SearchLayout({
 }) {
   return (
     <SearchModal>
-      <SearchQueryInput />
+      <header>
+        <SearchQueryInput />
+      </header>
       <ContentTab />
       {children}
     </SearchModal>

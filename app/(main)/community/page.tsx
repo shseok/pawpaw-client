@@ -3,7 +3,7 @@ import EnteredChatList from '@/app/(main)/community/_components/EnteredChatList'
 import RecommendChatList from '@/app/(main)/community/_components/RecommendChatList';
 import TrendingChatList from '@/app/(main)/community/_components/TrendingChatList';
 import AddChatRoomButton from '@/app/(main)/community/_components/AddChatRoomButton';
-import fetchUserInfo from '@/service/server/user';
+import { fetchUserInfo } from '@/service/server/user';
 
 export const metadata: Metadata = {
   title: 'pawpaw | Comunity',
