@@ -15,8 +15,8 @@ export default function ContentTab() {
   const pathname = usePathname();
 
   return (
-    <nav>
-      <ul className="flex ">
+    <nav className="mt-2">
+      <ul className="flex">
         {links.map((link) => (
           <li key={link.name} className="flex w-full">
             <Link

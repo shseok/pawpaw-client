@@ -4,6 +4,7 @@ import useInput from '@/hooks/common/useInput';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { SearchInput } from '@/components/ui/ui';
+import SearchHistory from './SearchHistory';
 
 export default function SearchQueryInput() {
   const [history, setHistory] = useState<string[]>(
@@ -27,13 +28,13 @@ export default function SearchQueryInput() {
     if (history.includes(searchTerm)) return;
     setHistory([...history, searchTerm]);
   };
-  // const removeSearchHistory = (searchTerm: string) => {
-  //   const removedSearchHistory = history.filter((item) => item !== searchTerm);
-  //   setHistory(removedSearchHistory);
-  // };
-  // const clearSearchHistory = () => {
-  //   setHistory([]);
-  // };
+  const removeSearchHistory = (searchTerm: string) => {
+    const removedSearchHistory = history.filter((item) => item !== searchTerm);
+    setHistory(removedSearchHistory);
+  };
+  const clearSearchHistory = () => {
+    setHistory([]);
+  };
   const handleSearch = () => {
     const params = new URLSearchParams(searchParams);
     params.set('page', '1');
@@ -46,16 +47,23 @@ export default function SearchQueryInput() {
   };
 
   return (
-    <SearchInput
-      onClickSearchIcon={handleSearch}
-      value={text}
-      resetValue={reset}
-      placeholder="채팅방, 게시물 또는 유저를 검색할 수 있어요.🐾"
-      onChangeValue={onChangeText}
-      onPressEnter={() => {
-        handleSearch();
-        addSearchHistory(text);
-      }}
-    />
+    <>
+      <SearchInput
+        onClickSearchIcon={handleSearch}
+        value={text}
+        resetValue={reset}
+        placeholder="채팅방, 게시물 또는 유저를 검색할 수 있어요.🐾"
+        onChangeValue={onChangeText}
+        onPressEnter={() => {
+          handleSearch();
+          addSearchHistory(text);
+        }}
+      />
+      <SearchHistory
+        history={history}
+        clearSearchHistory={clearSearchHistory}
+        removeSearchTerm={removeSearchHistory}
+      />
+    </>
   );
 }

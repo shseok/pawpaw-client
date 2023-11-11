@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-
 import { usePathname, useRouter } from 'next/navigation';
+import XIcon from '@/public/svgs/X.svg';
 
 export default function SearchHistory({
   history,
@@ -16,39 +14,42 @@ export default function SearchHistory({
   const { replace } = useRouter();
 
   return (
-    <div className="flex flex-col w-full gap-2">
+    <div className="flex flex-col w-full gap-2 mt-2">
       <div className="flex justify-between">
         <span className="header4">최근 검색</span>
-        <button
-          type="button"
-          className="header4 text-grey-400"
-          onClick={clearSearchHistory}
-        >
-          전체삭제
-        </button>
+        {history.length !== 0 && (
+          <button
+            type="button"
+            className="header4 text-grey-400"
+            onClick={clearSearchHistory}
+          >
+            전체삭제
+          </button>
+        )}
       </div>
-      <div className="flex flex-wrap items-center gap-2">
+      <ul className="flex items-center gap-2 p-2 overflow-auto">
         {history.map((search) => (
-          <div
+          <li
             key={search}
             className="flex items-center px-2 py-1 gap-1 border border-primary-200 text-primary-200 rounded-[10px]"
           >
-            <div
-              onClick={() => replace(`${pathname}?query=${search}`)}
+            <button
+              type="button"
+              onClick={() => replace(`${pathname}?query=${search}&page=1`)}
               className="cursor-pointer"
             >
               {search}
-            </div>
+            </button>
             <button
               type="button"
               className=""
               onClick={() => removeSearchTerm(search)}
             >
-              X
+              <XIcon className="w-4 h-4" />
             </button>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

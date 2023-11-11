@@ -83,6 +83,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     params.set('page', pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
+  if (!totalPages) return null;
   return (
     <div className="inline-flex mx-auto">
       <PaginationArrow
@@ -90,25 +91,23 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
         href={createPageURL(currentPage - 1)}
         isDisabled={currentPage <= 1}
       />
-      <div>
-        <div className="flex -space-x-px">
-          {allPages.map((page, index) => {
-            let position: PaginationPosition | undefined;
-            if (index === 0) position = 'first';
-            if (index === allPages.length - 1) position = 'last';
-            if (allPages.length === 1) position = 'single';
-            if (page === '...') position = 'middle';
-            return (
-              <PaginationNumber
-                key={page}
-                href={createPageURL(page)}
-                page={page}
-                position={position}
-                isActive={currentPage === page}
-              />
-            );
-          })}
-        </div>
+      <div className="flex -space-x-px">
+        {allPages.map((page, index) => {
+          let position: PaginationPosition | undefined;
+          if (index === 0) position = 'first';
+          if (index === allPages.length - 1) position = 'last';
+          if (allPages.length === 1) position = 'single';
+          if (page === '...') position = 'middle';
+          return (
+            <PaginationNumber
+              key={page}
+              href={createPageURL(page)}
+              page={page}
+              position={position}
+              isActive={currentPage === page}
+            />
+          );
+        })}
       </div>
       <PaginationArrow
         direction="right"
