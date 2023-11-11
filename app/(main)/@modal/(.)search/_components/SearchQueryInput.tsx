@@ -17,10 +17,11 @@ export default function SearchQueryInput() {
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  // pathname에 따라서 다양한 placeholder을 랜더링하게 해줄수있는 함수
   const handlePlaceholder = () => {
     let placeholder = '채팅방 또는 게시물을 검색할 수 있어요.🐾';
     if (pathname.split('/').includes('chatrooms')) {
-      placeholder = '채팅방을 검색하고 새로운 사람들과 소통해보세요..🐾';
+      placeholder = '채팅방을 검색하고 새로운 사람들과 소통해보세요.🐾';
     }
     if (pathname.split('/').includes('boards')) {
       placeholder = '흥미로운 게시물을 검색할 수 있어요.🐾';

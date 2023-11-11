@@ -49,7 +49,7 @@ function PaginationNumber({
 }: {
   page: number | string;
   href: string;
-  position?: 'first' | 'last' | 'middle' | 'single';
+  position?: PaginationPosition;
   isActive: boolean;
 }) {
   const className = cn(
