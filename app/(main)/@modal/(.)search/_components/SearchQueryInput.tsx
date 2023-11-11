@@ -22,8 +22,9 @@ export default function SearchQueryInput() {
     localStorage.setItem('history', JSON.stringify(history));
   }, [history]);
 
-  //* *로컬스토리지에 없는 단어라면 로컬스토리지에 검색한 단어 추가 */
+  // 로컬스토리지에 없는 단어라면 로컬스토리지에 검색한 단어 추가
   const addSearchHistory = (searchTerm: string) => {
+    if (!searchTerm) return;
     // 이미 검색했던거라면 검색기록 추가x
     if (history.includes(searchTerm)) return;
     setHistory([...history, searchTerm]);
@@ -42,6 +43,7 @@ export default function SearchQueryInput() {
       params.set('query', text);
     } else {
       params.delete('query');
+      params.delete('page');
     }
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   };

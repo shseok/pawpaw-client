@@ -11,7 +11,7 @@ export default function useGetBoardList() {
     Board
   >({
     queryKey: [queryKeys.BOARD_LIST],
-    firstPageParam: 0,
+    firstPageParam: 1,
     queryFn: getBoardList,
     getNextPageParamFn: (boardList) =>
       boardList.last ? undefined : boardList.number + 1,

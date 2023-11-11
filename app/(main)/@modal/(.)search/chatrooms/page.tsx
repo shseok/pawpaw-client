@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { fetchChatRoomsPage } from '@/service/server/chatroom';
-import ChatRoomList from '../_components/ChatRoomList';
+import ChatRoomList from './_components/ChatRoomList';
 import Pagination from '../_components/Pagination';
 
 export default async function Page({

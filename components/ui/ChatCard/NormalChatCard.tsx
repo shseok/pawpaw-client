@@ -62,7 +62,7 @@ export default function NormalChatCard({ ...list }: RecommendedChatList) {
           name={managerName}
           participants={participantNumber}
         />
-        <Button onClickAction={enterChatRoom}>입장하기</Button>
+        <Button onClickAction={enterChatRoom}>입장</Button>
       </div>
     </ChatCard>
   );

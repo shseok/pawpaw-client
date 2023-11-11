@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { fetchBoardsPages } from '@/service/server/chatroom';
-import BoardList from '../_components/BoardList';
+import BoardList from './_components/BoardList';
 import Pagination from '../_components/Pagination';
 
 export default async function Page({

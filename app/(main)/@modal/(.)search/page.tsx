@@ -1,24 +1,22 @@
 import { Suspense } from 'react';
-import ChatRoomList from './_components/ChatRoomList';
+import SlicedChatRoomList from './chatrooms/_components/SlicedChatRoomList';
+import SlicedBoardList from './boards/_components/SlicedBoardList';
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { query: string };
+  searchParams: { query: string; page: string };
 }) {
-  const { query } = searchParams;
-  const searchQuery = query ?? '강아지';
+  const { query, page } = searchParams;
 
   return (
-    <main className="flex flex-col h-full overflow-y-auto scrollbar-hide">
-      <section className="overflow-y-hidden h-3/5">
-        <Suspense fallback={<div>loaindg...</div>}>
-          <ChatRoomList query={searchQuery} />
-        </Suspense>
-      </section>
-      <section>
-        <div>게시글목록</div>
-      </section>
+    <main className="flex flex-col h-full p-2 overflow-y-auto">
+      <Suspense fallback={<div>loading...</div>}>
+        <SlicedChatRoomList query={query} />
+      </Suspense>
+      <Suspense fallback={<div>loading...</div>}>
+        <SlicedBoardList query={query} page={page} />
+      </Suspense>
     </main>
   );
 }

@@ -85,7 +85,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   };
   if (!totalPages) return null;
   return (
-    <div className="inline-flex mx-auto">
+    <div className="inline-flex pt-2 mx-auto">
       <PaginationArrow
         direction="left"
         href={createPageURL(currentPage - 1)}
