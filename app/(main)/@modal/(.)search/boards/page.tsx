@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { fetchBoardsPages } from '@/service/server/chatroom';
 import BoardList from './_components/BoardList';
 import Pagination from '../_components/Pagination';
+import BoardsLoading from './_components/BoardsLoading';
 
 export default async function Page({
   searchParams,
@@ -14,7 +15,7 @@ export default async function Page({
   return (
     <>
       <section className="h-full overflow-y-auto">
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<BoardsLoading />}>
           <BoardList query={query} page={page} />
         </Suspense>
       </section>

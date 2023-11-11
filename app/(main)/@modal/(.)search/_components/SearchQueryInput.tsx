@@ -17,6 +17,16 @@ export default function SearchQueryInput() {
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  const handlePlaceholder = () => {
+    let placeholder = '채팅방 또는 게시물을 검색할 수 있어요.🐾';
+    if (pathname.split('/').includes('chatrooms')) {
+      placeholder = '채팅방을 검색하고 새로운 사람들과 소통해보세요..🐾';
+    }
+    if (pathname.split('/').includes('boards')) {
+      placeholder = '흥미로운 게시물을 검색할 수 있어요.🐾';
+    }
+    return placeholder;
+  };
   // 검색기록 상태에 변화가 있다면 해당 변화를 로컬스토리지도 최신화 시켜준다.
   useEffect(() => {
     localStorage.setItem('history', JSON.stringify(history));
@@ -54,7 +64,7 @@ export default function SearchQueryInput() {
         onClickSearchIcon={handleSearch}
         value={text}
         resetValue={reset}
-        placeholder="채팅방, 게시물 또는 유저를 검색할 수 있어요.🐾"
+        placeholder={handlePlaceholder()}
         onChangeValue={onChangeText}
         onPressEnter={() => {
           handleSearch();

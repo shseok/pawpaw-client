@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { fetchChatRoomsPage } from '@/service/server/chatroom';
 import ChatRoomList from './_components/ChatRoomList';
 import Pagination from '../_components/Pagination';
+import ChatRoomsLoading from './_components/ChatRoomsLoading';
 
 export default async function Page({
   searchParams,
@@ -14,7 +15,7 @@ export default async function Page({
   return (
     <>
       <section className="h-full overflow-y-auto">
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<ChatRoomsLoading />}>
           <ChatRoomList query={query} />
         </Suspense>
       </section>
