@@ -18,7 +18,7 @@ export async function fetchFilteredChatRooms(
   const response = await fetch(url, options);
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch ChatRoomList Error Code: ${response.status}`,
+      `Failed to fetch ChatRoomList Error Code:${response.status}`,
     );
   }
   return response.json();
