@@ -1,6 +1,6 @@
 import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
 import NotFoundIcon from '@/public/svgs/MagnifyingGlass.svg';
-import { fetchFilteredChatRooms } from '@/service/server/chatroom';
+import { fetchFilteredChatRooms } from '@/service/server/chatRoom';
 
 export default async function ChatRoomList({ query }: { query: string }) {
   const chatrooms = await fetchFilteredChatRooms(query);

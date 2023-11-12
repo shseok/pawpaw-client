@@ -1,4 +1,4 @@
-import { fetchFilteredBoards } from '@/service/server/chatroom';
+import { fetchFilteredBoards } from '@/service/server/chatRoom';
 import NotFoundIcon from '@/public/svgs/MagnifyingGlass.svg';
 import BoardCard from './BoardCard';
 

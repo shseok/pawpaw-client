@@ -1,4 +1,4 @@
-import { fetchFilteredBoards } from '@/service/server/chatroom';
+import { fetchFilteredBoards } from '@/service/server/chatRoom';
 import BoardCard from './BoardCard';
 
 export default async function SlicedBoardList({

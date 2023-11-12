@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { fetchBoardsPages } from '@/service/server/chatroom';
+import { fetchBoardsPages } from '@/service/server/chatRoom';
 import BoardList from './_components/BoardList';
 import Pagination from '../_components/Pagination';
 import BoardsLoading from './_components/BoardsLoading';

@@ -1,5 +1,5 @@
 import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
-import { fetchFilteredChatRooms } from '@/service/server/chatroom';
+import { fetchFilteredChatRooms } from '@/service/server/chatRoom';
 
 export default async function SlicedChatRoomList({ query }: { query: string }) {
   const chatrooms = await fetchFilteredChatRooms(query);

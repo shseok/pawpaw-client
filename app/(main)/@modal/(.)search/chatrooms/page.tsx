@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { fetchChatRoomsPage } from '@/service/server/chatroom';
+import { fetchChatRoomsPage } from '@/service/server/chatRoom';
 import ChatRoomList from './_components/ChatRoomList';
 import Pagination from '../_components/Pagination';
 import ChatRoomsLoading from './_components/ChatRoomsLoading';
