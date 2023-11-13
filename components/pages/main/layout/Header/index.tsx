@@ -20,11 +20,11 @@ export default function Header() {
         <Logo className="w-20 h-[23.72px]" />
       </Link>
       <div className="flex flex-row mr-5 flex-nowra sm:mr-10">
-        <Link href={pathname} className="mr-[18px]">
-          <Search className="fill-grey-500 w-6 h-6" />
+        <Link href="/search" className="mr-[18px]">
+          <Search className="w-6 h-6 fill-grey-500" />
         </Link>
         <Link href={pathname}>
-          <Alert className="fill-grey-500 w-6 h-6" />
+          <Alert className="w-6 h-6 fill-grey-500" />
         </Link>
       </div>
     </header>

@@ -1,7 +1,8 @@
 import ChatRoom from '@/app/(main)/chat/[roomId]/_component/ChatRoom/ChatRoom';
 import ChatUserList from '@/app/(main)/chat/[roomId]/_component/ChatRoom/ChatUserList';
 import ScheduleList from '@/app/(main)/chat/[roomId]/_component/Schedule/ScheduleList';
-import getChatRoomInfo from '@/service/server/chatroom';
+import { getChatRoomInfo } from '@/service/server/chatRoom';
+
 import { Metadata } from 'next';
 
 export async function generateMetadata({

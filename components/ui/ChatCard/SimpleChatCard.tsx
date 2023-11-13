@@ -4,6 +4,7 @@ import { ChatList } from '@/types/types';
 import copyToClipBoard from '@/utils/copyToClipBoard';
 import { joinChatRoom } from '@/service/chatRoom';
 import { useRouter } from 'next/navigation';
+import Toast from '@/utils/notification';
 import { ChatCard } from '.';
 import Button from '../Button';
 
@@ -16,7 +17,9 @@ export default function SimpleChatCard({ ...info }: ChatList) {
         await joinChatRoom(id);
         router.push(`/chat/${id}`);
       } catch (error) {
-        console.error(error);
+        if (error instanceof Error) {
+          Toast.error(error.message);
+        }
       }
     }
   };

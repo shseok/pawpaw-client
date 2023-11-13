@@ -41,6 +41,9 @@ export async function joinChatRoom(id: number) {
   if (response.status === 401) {
     throw new Error('로그인이 필요한 서비스입니다.');
   }
+  if (response.status === 409) {
+    throw new Error('이미 참여중인 채팅방 입니다.');
+  }
   if (!response.ok) {
     console.error(response.status);
     throw new Error(`채팅룸에 입장하지 못했어요. 잠시후 다시 시도해주세요.`);
