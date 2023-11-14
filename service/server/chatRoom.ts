@@ -10,18 +10,21 @@ const ITEM_PER_PAGE = 6;
 
 // 페이지별로 나누어져있는 채팅방 요청 함수
 export async function fetchFilteredChatRooms(
-  query: string,
-): Promise<ChatList[]> {
+  query: string = ' ',
+  page: number = 1,
+): Promise<ChatList> {
   const options = generateOptions();
 
-  const url = `${process.env.SERVER_API_URL}/api/chatroom/search?query=${query}`;
+  const url = `${process.env.SERVER_API_URL}/api/chatroom/search?query=${query}&size=${ITEM_PER_PAGE}&page=${page}`;
   const response = await fetch(url, options);
+
   if (!response.ok) {
     throw new Error(
       `Failed to fetch ChatRoomList Error Code:${response.status}`,
     );
   }
-  return response.json();
+  const data = await response.json();
+  return data;
 }
 // 페이지별로 나누어져있는 게시글 요청 함수
 export async function fetchFilteredBoards(
@@ -62,7 +65,7 @@ export async function fetchChatRoomsPage(query: string) {
     );
   }
   const data = await response.json();
-  const totalPage = Math.ceil(data.length / ITEM_PER_PAGE);
+  const totalPage = Math.ceil(data.content.length / ITEM_PER_PAGE);
   return totalPage;
 }
 

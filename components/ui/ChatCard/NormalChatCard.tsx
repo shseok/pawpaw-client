@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import ShareIcon from '@/public/svgs/ShareNetwork.svg';
 import BadgeIcon from '@/public/svgs/Badge.svg';
-import { RecommendedChatList } from '@/types/types';
+import { ChatListType } from '@/types/types';
 import { joinChatRoom } from '@/service/chatRoom';
 import copyToClipBoard from '@/utils/copyToClipBoard';
 import { useQueryClient } from '@tanstack/react-query';
@@ -11,7 +11,7 @@ import { queryKeys } from '@/constant/query-keys';
 import { ChatCard } from '.';
 import { Button, Divider, TagList } from '../ui';
 
-export default function NormalChatCard({ ...list }: RecommendedChatList) {
+export default function NormalChatCard({ ...list }: ChatListType) {
   const {
     description,
     hashTagList,

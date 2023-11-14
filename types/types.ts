@@ -169,7 +169,7 @@ export interface VerificationParams {
   recipient: string;
   birthday: string;
 }
-export interface ChatList {
+export interface ChatListType {
   id: number;
   name: string;
   description: string;
@@ -177,7 +177,9 @@ export interface ChatList {
   managerName: string;
   managerImageUrl: string;
   participantNumber: number;
-  trendingId: number;
+}
+export interface ChatList {
+  content: ChatListType[];
 }
 export interface RecommendedChatList extends ChatList {}
 export interface EnteredChatList extends ChatList {
