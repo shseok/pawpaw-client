@@ -1,4 +1,4 @@
-import { BoardList, ChatList, ChatRoomInfo } from '@/types/types';
+import { BoardList, ChatRoomInfo, TrendingChatList } from '@/types/types';
 import { cookies } from 'next/headers';
 
 const generateOptions = () =>
@@ -12,7 +12,7 @@ const ITEM_PER_PAGE = 6;
 export async function fetchFilteredChatRooms(
   query: string = ' ',
   page: number = 1,
-): Promise<ChatList> {
+): Promise<TrendingChatList> {
   const options = generateOptions();
 
   const url = `${process.env.SERVER_API_URL}/api/chatroom/search?query=${query}&size=${ITEM_PER_PAGE}&page=${page}`;
