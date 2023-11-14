@@ -2,9 +2,15 @@ import NormalChatCard from '@/components/ui/ChatCard/NormalChatCard';
 import NotFoundIcon from '@/public/svgs/MagnifyingGlass.svg';
 import { fetchFilteredChatRooms } from '@/service/server/chatRoom';
 
-export default async function ChatRoomList({ query }: { query: string }) {
-  const chatrooms = await fetchFilteredChatRooms(query);
-  const isExistChatRoom = chatrooms.length !== 0;
+export default async function ChatRoomList({
+  query,
+  page,
+}: {
+  query: string;
+  page?: string;
+}) {
+  const chatrooms = await fetchFilteredChatRooms(query, Number(page) || 1);
+  const isExistChatRoom = chatrooms.content.length !== 0;
   if (!chatrooms) return null;
   return (
     <div className="flex flex-col h-full gap-4 pb-20 mt-3">
@@ -18,7 +24,7 @@ export default async function ChatRoomList({ query }: { query: string }) {
       )}
       {isExistChatRoom && (
         <div className="grid h-full grid-cols-1 gap-4 p-2 sm:grid-cols-2 ">
-          {chatrooms.map((chatroom) => (
+          {chatrooms.content.map((chatroom) => (
             <NormalChatCard key={chatroom.id} {...chatroom} />
           ))}
         </div>

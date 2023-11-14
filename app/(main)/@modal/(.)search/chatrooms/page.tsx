@@ -7,16 +7,15 @@ import ChatRoomsLoading from './_components/ChatRoomsLoading';
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { query: string };
+  searchParams: { query: string; page: string };
 }) {
-  const { query } = searchParams;
+  const { query, page } = searchParams;
   const totalPage = await fetchChatRoomsPage(query);
-
   return (
     <>
       <section className="h-full overflow-y-auto">
         <Suspense fallback={<ChatRoomsLoading />}>
-          <ChatRoomList query={query} />
+          <ChatRoomList query={query} page={page} />
         </Suspense>
       </section>
       <Pagination totalPages={totalPage} />
