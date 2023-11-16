@@ -180,3 +180,28 @@ export async function deleteBoardLike(boardId: number) {
   }
   return response.json();
 }
+
+// 게시글 신고
+export async function reportBoard(boardId: number): Promise<boolean> {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/report?boardId=${boardId}`;
+  const response = await fetch(url, { method: 'POST', credentials: 'include' });
+  if (!response.ok) {
+    throw new Error('	게시글 신고에 실패했습니다. 잠시후 다시 시도해주세요.');
+  }
+  return response.json();
+}
+
+// 게시글 신고 취소
+export async function cancelReportBoard(boardId: number): Promise<boolean> {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/report?boardId=${boardId}`;
+  const response = await fetch(url, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
+  if (!response.ok) {
+    throw new Error(
+      '	게시글 신고 취소에 실패했습니다. 잠시후 다시 시도해주세요.',
+    );
+  }
+  return response.json();
+}
