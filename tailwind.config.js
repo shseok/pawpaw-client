@@ -62,6 +62,8 @@ module.exports = {
       boxShadow: {
         chatCard: '0px 0px 20px 0px #00000014',
         dropdown: '0px 0px 14px 0px #07D5801A',
+        searchBar:
+          '0 1px 2px rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15)',
       },
       screens: {
         '2xs': '430px',
