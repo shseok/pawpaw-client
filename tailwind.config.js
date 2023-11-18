@@ -58,6 +58,12 @@ module.exports = {
       },
       borderColor: {
         DEFAULT: '#E9EBED',
+        primary: {
+          300: '#08995C',
+          200: '#0ABE7D',
+          100: '#CFF4D2',
+          50: '#F5FFF6',
+        },
       },
       boxShadow: {
         chatCard: '0px 0px 20px 0px #00000014',
