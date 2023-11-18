@@ -1,11 +1,17 @@
+import { cn } from '@/utils/common';
 import { useDropdown } from './Dropdown';
 
 interface DropdownItemType {
   children: React.ReactNode | string;
+  buttonStyle?: string;
   event?: () => void;
 }
 
-export default function Item({ children, event }: DropdownItemType) {
+export default function Item({
+  children,
+  buttonStyle,
+  event,
+}: DropdownItemType) {
   const { closeDropdown } = useDropdown();
   const eventHandler = () => {
     if (event) {
@@ -16,7 +22,7 @@ export default function Item({ children, event }: DropdownItemType) {
   return (
     <li className="w-full rounded-[10px] hover:bg-primary-50 active:bg-primary-100">
       <button
-        className="w-full p-3 text-left body1"
+        className={cn('w-full p-3 text-left body1', buttonStyle)}
         type="button"
         onClick={eventHandler}
       >

@@ -24,6 +24,7 @@ export interface Board {
   userImageUrl: string;
   boardLiked: boolean;
   bookmarked: boolean;
+  reported: boolean;
   createdDate: string;
   modifiedDate: string;
 }

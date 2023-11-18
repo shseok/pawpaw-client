@@ -28,6 +28,7 @@ export default function BoardCardHeader({ board }: { board: Board }) {
         boardId={board.id}
         isMyBoard={board.userId === user?.userId}
         isBookmarked={board.bookmarked}
+        isReported={board.reported}
       />
     </FlexBox>
   );
