@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PawzonePage() {
   return (
-    <main className="flex-1 flex w-full relative bg-white">
+    <main className="relative bg-white">
       <SearchArea />
       <Map />
     </main>

@@ -56,7 +56,7 @@ export default function ScheduleCard({
       <FlexBox
         justify="between"
         align="center"
-        className="gap-2 border-l-[5px] border-l-yellow border w-full rounded-r-[10px] p-4"
+        className="gap-2 border-l-[5px] border-l-yellow-100 border w-full rounded-r-[10px] p-4"
       >
         <div className="caption4">
           <p>

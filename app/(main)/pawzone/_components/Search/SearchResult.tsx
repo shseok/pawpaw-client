@@ -4,8 +4,8 @@ import CardList from './CardList';
 export default function SearchResult() {
   const count = 0;
   return (
-    <div className="w-[460px] h-full bg-white shadow-searchBar">
-      <div className="pt-[120px] h-full px-[30px] pb-[30px]">
+    <div className="w-[460px] h-full bg-white shadow-searchTab absolute top-0 left-0 z-[1] pt-[120px]">
+      <div className="pb-4 h-full px-[30px] overflow-y-scroll">
         <p className="header4 text-grey-800 mb-4">
           검색결과 <span className="text-primary-200">{`${count}건`}</span>
         </p>
