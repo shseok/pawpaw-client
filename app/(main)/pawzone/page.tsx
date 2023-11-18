@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import SearchArea from './_components/Search';
 import Map from './_components/Map';
+import SearchBar from './_components/Search/SearchBar';
 
 export const metadata: Metadata = {
   title: 'pawpaw | Zone',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function PawzonePage() {
   return (
     <main className="relative bg-white">
-      <SearchArea />
+      <SearchBar />
       <Map />
     </main>
   );
