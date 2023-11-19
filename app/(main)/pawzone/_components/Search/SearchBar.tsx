@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation';
 import { SearchInput } from '@/components/ui/ui';
 import useInput from '@/hooks/common/useInput';
 
-export default function SearchBar({ initPlace }: { initPlace?: string }) {
-  const [place, onChangePlace, resetInput] = useInput(initPlace ?? '');
+export default function SearchBar({ initPlace = '' }: { initPlace?: string }) {
+  const [place, onChangePlace, resetInput] = useInput(initPlace);
   const router = useRouter();
   const searchPlace = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
-    router.push(`/pawzone/${place}`);
+    router.push(`/pawzone/search/${place}`);
   };
   const onReset = () => {
     resetInput();

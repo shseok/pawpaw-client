@@ -23,7 +23,7 @@ export default function Card({
 }: Props) {
   return (
     <li className="shadow-chatCard rounded-[10px]">
-      <Link href="" className="flex flex-col gap-4 p-5">
+      <Link href="/pawzone/place" className="flex flex-col gap-4 p-5">
         <div className="flex">
           <div className="rounded-[10px] flex gap-[1px] bg-yellow-30 py-1 px-2">
             <Bookmark className="w-[22px] h-[22px] fill-yellow-100" />
