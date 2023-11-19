@@ -1,11 +1,7 @@
 import React from 'react';
 import CardList from './CardList';
 
-interface Props {
-  searchText: string;
-}
-
-export default function SearchResult({ searchText }: Props) {
+export default function SearchResult() {
   const count = 0;
   return (
     <div className="w-[460px] h-full bg-white shadow-searchTab absolute top-0 left-0 z-[1] pt-[120px]">

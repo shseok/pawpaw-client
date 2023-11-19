@@ -1,14 +1,12 @@
 'use client';
 
-import { useState, useEffect, ChangeEvent } from 'react';
 import { cn } from '@/utils/common';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { SearchInput } from '@/components/ui/ui';
 import useInput from '@/hooks/common/useInput';
 
-export default function SearchBar() {
-  const initPlace = usePathname().split('/')[2] ?? '';
-  const [place, onChangePlace, resetInput, setPlace] = useInput(initPlace);
+export default function SearchBar({ initPlace }: { initPlace?: string }) {
+  const [place, onChangePlace, resetInput] = useInput(initPlace ?? '');
   const router = useRouter();
   const searchPlace = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
@@ -16,17 +14,11 @@ export default function SearchBar() {
   };
   const onReset = () => {
     resetInput();
-    // intercept routing에서만 적용
+    // dynamic routing일 경우만 뒤로 갔을 때, pawzone으로 이동
     if (initPlace) {
-      router.back();
+      router.push('/pawzone');
     }
   };
-
-  // intercept routing에서 검색어초기화 후 뒤로 갔을 때, 검색어 초기화를 위함
-  useEffect(() => {
-    console.log('searchBar', initPlace);
-    setPlace(initPlace);
-  }, [initPlace]);
 
   return (
     <form onSubmit={searchPlace} className="z-[2] absolute top-0 left-0">
