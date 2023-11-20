@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Clock from '@/public/svgs/Pawzone/clock.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
-import Bookmark from '@/public/svgs/Pawzone/bookmark.svg';
+import Chip from '../Chip';
 
 interface Props {
   tag?: string[];
@@ -23,12 +23,10 @@ export default function Card({
 }: Props) {
   return (
     <li className="shadow-chatCard rounded-[10px]">
-      <Link href="/pawzone/place" className="flex flex-col gap-4 p-5">
-        <div className="flex">
-          <div className="rounded-[10px] flex gap-[1px] bg-yellow-30 py-1 px-2">
-            <Bookmark className="w-[22px] h-[22px] fill-yellow-100" />
-            <p className="body3 text-grey-800">저장 많은</p>
-          </div>
+      <Link href={`/pawzone/place/${name}`} className="flex flex-col gap-4 p-5">
+        <div className="flex gap-2">
+          <Chip type="hot" />
+          <Chip type="clean" />
         </div>
         <div className="flex gap-4">
           <Image

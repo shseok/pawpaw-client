@@ -1,15 +1,28 @@
 import React from 'react';
 import CardList from '../Search/CardList';
+import Image from 'next/image';
+import PlaceContents from './PlaceContents';
 
-export default function PlaceScreen() {
+interface Props {
+  imageSrc: string;
+}
+
+export default function PlaceScreen({ imageSrc }: Props) {
   return (
-    <div className="w-[460px] h-full bg-white shadow-searchTab absolute top-0 left-0 z-[1]">
-      <div className="pb-4 h-full px-[30px] overflow-y-scroll">
-        <p className="header4 text-grey-800 mb-4">
-          {/* 검색결과 <span className="text-primary-200">{`${count}건`}</span> */}
-        </p>
-        <CardList />
-      </div>
+    <div className="flex flex-col">
+      <Image
+        width={460}
+        height={460}
+        src={imageSrc}
+        alt={'test'}
+        className="object-fill"
+      />
+      <PlaceContents
+        name="탑골공원"
+        address="서울 종로구 종로 99 탑골공원"
+        rating={4.8}
+        time="09:00 ~ 18:00"
+      />
     </div>
   );
 }
