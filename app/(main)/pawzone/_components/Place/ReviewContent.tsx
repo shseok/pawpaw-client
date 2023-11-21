@@ -2,6 +2,7 @@ import WarningCircle from '@/public/svgs/Pawzone/warning_circle.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
 import RatioBar from './RatioBar';
 import Divider from '@/components/ui/Divider';
+import ReviewCard from './ReviewCard';
 
 interface Props {
   rating: number;
@@ -37,6 +38,28 @@ export default function ReviewContent({ rating, images }: Props) {
           <RatioBar title="안전해요" ratio={100} />
         </div>
       </div>
+      {/* 이미지 스라이더 */}
+      <ReviewCard
+        name="애옹맘"
+        subName="2살 초코"
+        description="AI 추천이랑 잘 맞는다고 뜨길래 친구 꼬셔서 한번 방문해보았습니다~ 역시 쾌적하고 좋더라구요! 강아지 산책도 많이 시키고 있던데 숨겨진 핫플인가 싶었어요. 친구네 강아지도 신났는지 여기저기 엄청 돌아다녔어요 한번 꼭 방문해보세요! 추천합니다!!"
+        rating={5}
+        ImageSrc="https://ldb-phinf.pstatic.net/20230912_108/16945174495700yKn7_JPEG/IMG_2586.jpeg"
+      />
+      <ReviewCard
+        name="애옹맘"
+        subName="2살 초코"
+        description="AI 추천이랑 잘 맞는다고 뜨길래 친구 꼬셔서 한번 방문해보았습니다~ 역시 쾌적하고 좋더라구요! 강아지 산책도 많이 시키고 있던데 숨겨진 핫플인가 싶었어요. 친구네 강아지도 신났는지 여기저기 엄청 돌아다녔어요 한번 꼭 방문해보세요! 추천합니다!!"
+        rating={5}
+        ImageSrc="https://ldb-phinf.pstatic.net/20230912_108/16945174495700yKn7_JPEG/IMG_2586.jpeg"
+      />
+      <ReviewCard
+        name="애옹맘"
+        subName="2살 초코"
+        description="AI 추천이랑 잘 맞는다고 뜨길래 친구 꼬셔서 한번 방문해보았습니다~ 역시 쾌적하고 좋더라구요! 강아지 산책도 많이 시키고 있던데 숨겨진 핫플인가 싶었어요. 친구네 강아지도 신났는지 여기저기 엄청 돌아다녔어요 한번 꼭 방문해보세요! 추천합니다!!"
+        rating={5}
+        ImageSrc="https://ldb-phinf.pstatic.net/20230912_108/16945174495700yKn7_JPEG/IMG_2586.jpeg"
+      />
     </div>
   );
 }
