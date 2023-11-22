@@ -29,22 +29,35 @@ export default function Card({
           <Chip type="clean" />
         </div>
         <div className="flex gap-4">
-          <Image
-            src={imageSrc}
-            alt="test"
-            width={120}
-            height={120}
-            className="object-fill rounded-[10px]"
-          />
+          <div className="relative min-w-[120px] w-[120px] h-[120px]">
+            <Image
+              src={imageSrc}
+              alt="test"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover rounded-[10px]"
+            />
+          </div>
           <div className="flex flex-col gap-2">
             <p className="header3 text-grey-800">{name}</p>
             <p className="body4 text-grey-800">{address}</p>
-            <p className="flex items-center gap-1 body3 text-grey-800">
+            {/* 한줄로 처리하고 세부 페이지 들어가면 거기서 여러 데이터 보여주는 걸로 */}
+            <p className="flex  items-start gap-1 body3 text-grey-800">
               <span>
                 <Clock className="w-5 h-5" />
               </span>
-              {time}
-              <span className="body2">연중 무휴</span>
+              <span
+                className="overflow-hidden overflow-ellipsis max-h-[18px]"
+                style={{
+                  WebkitLineClamp: 1,
+                  display: '-webkit-box',
+                  WebkitBoxOrient: 'vertical',
+                }}
+              >
+                {time}
+              </span>
+              {/* <span className="body2">연중 무휴</span> */}
             </p>
             <p className="flex items-center gap-[3px] body2 text-grey-800">
               <Star className="w-[18px] h-[18px] fill-yellow-100" />
