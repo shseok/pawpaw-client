@@ -44,9 +44,9 @@ export default function ReviewModal({ open, onClose }: ModalProps) {
           <div className="flex flex-col gap-4">
             <p className="body1 text-grey-600">이 장소가 어떠셨나요?</p>
             <div className="flex flex-wrap gap-3">
-              {REVIEW_KEYWORDS.map((keyword) => (
+              {REVIEW_KEYWORDS.map(({ text, emoji }) => (
                 <Button variant="ghost">
-                  <span className="body2 text-grey-800 gap-3">{keyword}</span>
+                  <span className="body2 text-grey-800 gap-3">{`${text} ${emoji}`}</span>
                 </Button>
               ))}
             </div>
@@ -59,8 +59,14 @@ export default function ReviewModal({ open, onClose }: ModalProps) {
                 사진 첨부하기{' '}
                 <span className="caption2 text-grey-500">{`(최대 5장)`}</span>
               </p>
-              <textarea onChange={onChangeValue} value={text} />
             </Button>
+            <textarea
+              onChange={onChangeValue}
+              value={text}
+              placeholder="다른 사용자들에게 도움이 되도록 장소에 대한 솔직한 리뷰를 작성해주세요."
+              // className="bg-primary-50 w-full h-[77px] resize-none header4 text-grey-500 placeholder:text-grey-300 border-none focus:ring-primary-300"
+              className="w-full py-4 px-5 rounded-[10px] border outline-none border-grey-200 focus:ring-0 focus:border-grey-200 scrollbar-hide h-[240px] resize-none"
+            />
           </div>
           {/* BUTTON SECTION */}
           <div className="flex gap-3">
