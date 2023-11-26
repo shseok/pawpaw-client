@@ -4,14 +4,22 @@ import { useState } from 'react';
 import { ModalProps } from '@/types/types';
 import X from '@/public/svgs/X.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
+import Camera from '@/public/svgs/Camera.svg';
 import { Button, Modal } from '../../ui';
 import { cn } from '@/utils/common';
 import { MAX_STAR_NUM, REVIEW_KEYWORDS } from '@/constant/place';
 import useInput from '@/hooks/common/useInput';
+import useImageUpload from '@/hooks/common/useImageUpload';
+import Image from 'next/image';
 
 export default function ReviewModal({ open, onClose }: ModalProps) {
   const [starNum, setStarNum] = useState(0);
-  const [text, onChangeValue, resetValue] = useInput('');
+  const [text, onChangeValue] = useInput('');
+  const {
+    handleImageUpload,
+    imageFile: images,
+    imagePreview: previews,
+  } = useImageUpload({ option: 'multiple' });
   return (
     <Modal open={open} onClose={onClose}>
       <div className="flex flex-col max-w-[440px] h-screen py-[44px]">
@@ -54,12 +62,40 @@ export default function ReviewModal({ open, onClose }: ModalProps) {
           {/* REVIEW SECTION */}
           <div className="flex flex-col gap-4">
             <p className="body1 text-grey-600">리뷰</p>
-            <Button variant="ghost">
+            <label
+              htmlFor="review-image"
+              className="flex items-center justify-center gap-1 cursor-pointer bg-white border border-grey-200 text-primary-800 hover:border-grey-200 hover:bg-primary-50 rounded-[10px] py-2"
+            >
+              <Camera className="w-4 h-4" />
               <p className="body2 text-grey-800">
                 사진 첨부하기{' '}
                 <span className="caption2 text-grey-500">{`(최대 5장)`}</span>
               </p>
-            </Button>
+              <input
+                type="file"
+                id="review-image"
+                onChange={handleImageUpload}
+                className="hidden"
+                accept="image/*"
+                multiple
+              />
+            </label>
+            {previews && (
+              <div className="flex gap-2 ">
+                {previews.map((preview) => (
+                  <div className="relative w-[100px] h-[100px]">
+                    <Image
+                      src={preview}
+                      alt="test"
+                      fill
+                      priority
+                      sizes="100vw"
+                      className="object-cover rounded-[10px]"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
             <textarea
               onChange={onChangeValue}
               value={text}

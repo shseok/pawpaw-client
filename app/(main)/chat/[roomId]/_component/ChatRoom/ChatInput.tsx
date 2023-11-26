@@ -19,7 +19,7 @@ export default function MessageInput({
 }: MessageInputType) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [imageUploadModalOpen, setImageUploadModalOpen] = useState(false);
-  const { handleImageUpload, imageFile } = useImageUpload();
+  const { handleImageUpload, imageFile } = useImageUpload({ option: 'single' });
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';

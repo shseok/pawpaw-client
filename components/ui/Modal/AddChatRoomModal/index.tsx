@@ -26,7 +26,9 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
   const [tag, onChangeTag, resetTag] = useInput('');
   const [isLoading, setIsLoading] = useState(false);
   const [tagList, setTagList] = useState<string[]>([]);
-  const { handleImageUpload, imageFile, imagePreview } = useImageUpload();
+  const { handleImageUpload, imageFile, imagePreview } = useImageUpload({
+    option: 'single',
+  });
   const [option, setOption] = useState('1');
   const router = useRouter();
   const {
