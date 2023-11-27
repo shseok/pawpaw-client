@@ -51,6 +51,28 @@ const useImageUpload = <T extends Option>({
     }
   };
 
-  return { imagePreview, setImagePreview, imageFile, handleImageUpload };
+  /* 다수 이미지 중 특정 이미지 삭제를 위한 함수이며, 이미지 미리보기와 이미지 파일을 삭제한다.
+   */
+  const handleImageDelete = (index: number) => {
+    setImagePreview((prev) => {
+      const result = prev ? [...prev] : [];
+      result.splice(index, 1);
+      return result as T extends 'single' ? string : string[];
+    });
+    setImageFile((prev) => {
+      const result = prev ? [...(prev as File[])] : [];
+      result.splice(index, 1);
+      return result as T extends 'single' ? File : File[];
+    });
+  };
+
+  return {
+    imagePreview,
+    setImagePreview,
+    imageFile,
+    setImageFile,
+    handleImageUpload,
+    handleImageDelete,
+  };
 };
 export default useImageUpload;
