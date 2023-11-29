@@ -22,5 +22,11 @@ export default function middleware(req: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/', '/community', '/chat/:path*', '/auth/:path*'],
+  matcher: [
+    '/',
+    '/community',
+    '/chat/:path*',
+    '/auth/:path*',
+    '/pawzone/:path*',
+  ],
 };
