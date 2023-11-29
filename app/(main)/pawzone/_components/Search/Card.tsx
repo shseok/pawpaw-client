@@ -5,6 +5,7 @@ import Star from '@/public/svgs/Pawzone/star.svg';
 import Chip from '../Chip';
 
 interface Props {
+  idx: number;
   tag?: string[];
   name: string;
   imageSrc: string;
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function Card({
+  idx,
   tag,
   name,
   imageSrc,
@@ -23,7 +25,7 @@ export default function Card({
 }: Props) {
   return (
     <li className="shadow-chatCard rounded-[10px]">
-      <Link href={`/pawzone/place/${name}`} className="flex flex-col gap-4 p-5">
+      <Link href={`/pawzone/place/${idx}`} className="flex flex-col gap-4 p-5">
         <div className="flex gap-2">
           <Chip type="hot" />
           <Chip type="clean" />

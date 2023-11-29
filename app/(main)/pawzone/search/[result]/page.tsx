@@ -7,10 +7,11 @@ interface Props {
 }
 
 export default function PlacePage({ params: { result } }: Props) {
+  const keyword = decodeURI(result);
   return (
     <>
-      <SearchBar initPlace={decodeURI(result)} />
-      <SearchResult />;
+      <SearchBar initPlace={keyword} />
+      <SearchResult place={keyword} />;
     </>
   );
 }
