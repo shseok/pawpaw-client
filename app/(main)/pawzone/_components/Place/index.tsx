@@ -9,15 +9,14 @@ import copyToClipBoard from '@/utils/copyToClipBoard';
 import Divider from '@/components/ui/Divider';
 import { useState } from 'react';
 import ReviewContent from './ReviewContent';
+import { Place } from '@/types/types';
 
 interface Props {
-  name: string;
-  address: string;
+  place: Place;
   time: string;
-  rating: number;
 }
 
-export default function PlaceContents({ name, address, time, rating }: Props) {
+export default function PlaceContents({ place, time }: Props) {
   const [isBookmark, setIsBookmark] = useState(false);
   return (
     <div className="px-[30px] pb-[30px] bg-white rounded-t-lg-5 h-full flex flex-col flex-1 gap-4">
@@ -26,8 +25,8 @@ export default function PlaceContents({ name, address, time, rating }: Props) {
         <Chip type="clean" />
       </div>
       <div className="flex flex-col gap-2">
-        <p className="header3 text-grey-800">{name}</p>
-        <p className="body4 text-grey-800">{address}</p>
+        <p className="header3 text-grey-800">{place.name}</p>
+        <p className="body4 text-grey-800">{place.position.address}</p>
         <p className="flex items-center gap-1 body3 text-grey-800">
           <span>
             <Clock className="w-5 h-5" />
@@ -37,7 +36,7 @@ export default function PlaceContents({ name, address, time, rating }: Props) {
         </p>
         <p className="flex items-center gap-[3px] body2 text-grey-800">
           <Star className="w-[18px] h-[18px] fill-yellow-100" />
-          {rating}
+          {place.score ? Math.round(place.score * 10) / 10 : 0}
         </p>
       </div>
       <div className="flex border border-grey-200 rounded-[10px] py-2 items-center">
@@ -66,7 +65,7 @@ export default function PlaceContents({ name, address, time, rating }: Props) {
         </button>
       </div>
       <Divider type="horizontal" className="my-3" />
-      <ReviewContent rating={rating} images={['', '']} />
+      <ReviewContent place={place} />
     </div>
   );
 }

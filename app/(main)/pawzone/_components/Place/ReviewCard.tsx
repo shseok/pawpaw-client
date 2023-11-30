@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Star from '@/public/svgs/Pawzone/star.svg';
+import ImageSlider from './ImageSlider';
+import { cn } from '@/utils/common';
 
 interface Props {
   ImageSrc: string;
@@ -7,6 +9,7 @@ interface Props {
   subName: string;
   rating: number;
   description: string;
+  placeReviewImageList?: string[];
 }
 
 export default function ReviewCard({
@@ -15,6 +18,7 @@ export default function ReviewCard({
   subName,
   rating,
   description,
+  placeReviewImageList,
 }: Props) {
   return (
     <div className="flex flex-col gap-3">
@@ -35,16 +39,22 @@ export default function ReviewCard({
           </p>
           <div className="flex gap-1 items-center">
             <div className="flex">
-              <Star className="w-[18px] h-[18px] fill-yellow-100" />
-              <Star className="w-[18px] h-[18px] fill-yellow-100" />
-              <Star className="w-[18px] h-[18px] fill-yellow-100" />
-              <Star className="w-[18px] h-[18px] fill-yellow-100" />
-              <Star className="w-[18px] h-[18px] fill-yellow-100" />
+              {Array.from({ length: 5 }, (_, index) => (
+                <Star
+                  className={cn(
+                    'w-[18px] h-[18px] fill-grey-200',
+                    index < rating && 'fill-yellow-100',
+                  )}
+                />
+              ))}
             </div>
             <p className="body2 text-grey-800">{rating}</p>
           </div>
         </div>
       </div>
+      {placeReviewImageList && placeReviewImageList.length > 0 && (
+        <ImageSlider urls={placeReviewImageList} />
+      )}
       <p className="body4 text-grey-800 mb-5">{description}</p>
     </div>
   );

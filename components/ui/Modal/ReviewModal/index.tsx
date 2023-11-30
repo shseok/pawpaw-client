@@ -1,23 +1,59 @@
 'use client';
 
 import { useState } from 'react';
-import { ModalProps } from '@/types/types';
+import { ModalProps, Review } from '@/types/types';
 import X from '@/public/svgs/X.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
 import Camera from '@/public/svgs/Camera.svg';
+import LoadingIcon from '@/public/svgs/loading.svg';
 import { Button, Modal } from '../../ui';
 import { cn } from '@/utils/common';
 import { MAX_STAR_NUM, REVIEW_KEYWORDS } from '@/constant/place';
 import useInput from '@/hooks/common/useInput';
 import useImageUpload from '@/hooks/common/useImageUpload';
 import ImageSlider from '@/app/(main)/pawzone/_components/Place/ImageSlider';
+import useMutateReview from '@/hooks/mutations/useMutateReview';
+import { useParams } from 'next/navigation';
 
-export default function ReviewModal({ open, onClose }: ModalProps) {
-  const [starNum, setStarNum] = useState(0);
-  const [text, onChangeValue] = useInput('');
-  const [checkKeywords, setCheckKeywords] = useState(
-    Array.from({ length: REVIEW_KEYWORDS.length }, () => false),
-  );
+interface Props extends ModalProps {
+  myInfo: Review | null;
+}
+
+const defaultInfo = {
+  score: 0,
+  content: '',
+  accessible: false,
+  quiet: false,
+  safe: false,
+  scenic: false,
+  clean: false,
+  comfortable: false,
+};
+
+export default function ReviewModal({ open, onClose, myInfo }: Props) {
+  const initInfo = myInfo
+    ? {
+        score: myInfo.score,
+        content: myInfo.content,
+        accessible: myInfo.accessible,
+        quiet: myInfo.quiet,
+        safe: myInfo.safe,
+        scenic: myInfo.scenic,
+        clean: myInfo.clean,
+        comfortable: myInfo.comfortable,
+      }
+    : defaultInfo;
+  console.log(initInfo);
+  const [starNum, setStarNum] = useState(initInfo.score);
+  const [text, onChangeValue] = useInput(initInfo.content);
+  const [checkKeywords, setCheckKeywords] = useState([
+    initInfo.scenic,
+    initInfo.quiet,
+    initInfo.comfortable,
+    initInfo.accessible,
+    initInfo.clean,
+    initInfo.safe,
+  ]);
   const {
     imageFile: images,
     imagePreview: previews,
@@ -26,6 +62,11 @@ export default function ReviewModal({ open, onClose }: ModalProps) {
     handleImageUpload,
     handleImageDelete,
   } = useImageUpload({ option: 'multiple' });
+  const params = useParams();
+  const { mutate: mutateReview, isLoading } = useMutateReview({
+    closeModal: onClose,
+    placeId: parseInt(params.placeId as string),
+  });
   const initState = () => {
     setImageFiles([]);
     setImagePreviews([]);
@@ -41,8 +82,18 @@ export default function ReviewModal({ open, onClose }: ModalProps) {
   };
   const register = () => {
     console.log('리뷰 등록', images, text, starNum, checkKeywords);
+    mutateReview({
+      score: starNum,
+      content: text,
+      scenic: checkKeywords[0],
+      quiet: checkKeywords[1],
+      clean: checkKeywords[4],
+      comfortable: checkKeywords[2],
+      safe: checkKeywords[5],
+      accessible: checkKeywords[3],
+      images,
+    });
     initState();
-    onClose();
   };
   return (
     <Modal open={open} onClose={onClose} isClickableOverlay={false}>
@@ -61,7 +112,11 @@ export default function ReviewModal({ open, onClose }: ModalProps) {
             <p className="body1 text-grey-600">{`별점 (${starNum}/5)`}</p>
             <div className="flex gap-3 justify-center">
               {Array.from({ length: MAX_STAR_NUM }).map((_, index) => (
-                <button type="button" onClick={() => setStarNum(index + 1)}>
+                <button
+                  type="button"
+                  onClick={() => setStarNum(index + 1)}
+                  key={index}
+                >
                   <Star
                     className={cn(
                       'w-10 h-10 fill-grey-200',
@@ -87,6 +142,7 @@ export default function ReviewModal({ open, onClose }: ModalProps) {
                     })
                   }
                   className={checkKeywords[index] ? 'bg-primary-50' : ''}
+                  key={index}
                 >
                   <p
                     className={cn(
@@ -146,8 +202,16 @@ export default function ReviewModal({ open, onClose }: ModalProps) {
             <Button variant="secondary" fullWidth onClickAction={cancel}>
               취소
             </Button>
-            <Button fullWidth onClickAction={register}>
-              등록
+            <Button
+              fullWidth
+              onClickAction={register}
+              className="flex justify-center"
+            >
+              {isLoading ? (
+                <LoadingIcon className="w-5 h-5 animate-spin" />
+              ) : (
+                '등록'
+              )}
             </Button>
           </div>
         </div>
