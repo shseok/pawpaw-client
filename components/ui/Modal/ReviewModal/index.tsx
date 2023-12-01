@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ModalProps, Review } from '@/types/types';
 import X from '@/public/svgs/X.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
@@ -14,6 +14,7 @@ import useImageUpload from '@/hooks/common/useImageUpload';
 import ImageSlider from '@/app/(main)/pawzone/_components/Place/ImageSlider';
 import useMutateReview from '@/hooks/mutations/useMutateReview';
 import { useParams } from 'next/navigation';
+import { convertUrlsToFiles } from '@/utils/convertUrlsToFiles';
 
 interface Props extends ModalProps {
   myInfo: Review | null;
@@ -31,28 +32,17 @@ const defaultInfo = {
 };
 
 export default function ReviewModal({ open, onClose, myInfo }: Props) {
-  const initInfo = myInfo
-    ? {
-        score: myInfo.score,
-        content: myInfo.content,
-        accessible: myInfo.accessible,
-        quiet: myInfo.quiet,
-        safe: myInfo.safe,
-        scenic: myInfo.scenic,
-        clean: myInfo.clean,
-        comfortable: myInfo.comfortable,
-      }
-    : defaultInfo;
-  console.log(initInfo);
-  const [starNum, setStarNum] = useState(initInfo.score);
-  const [text, onChangeValue] = useInput(initInfo.content);
+  const [starNum, setStarNum] = useState(defaultInfo.score);
+  const [text, onChangeValue, _, setValueByInput] = useInput(
+    defaultInfo.content,
+  );
   const [checkKeywords, setCheckKeywords] = useState([
-    initInfo.scenic,
-    initInfo.quiet,
-    initInfo.comfortable,
-    initInfo.accessible,
-    initInfo.clean,
-    initInfo.safe,
+    defaultInfo.scenic,
+    defaultInfo.quiet,
+    defaultInfo.comfortable,
+    defaultInfo.accessible,
+    defaultInfo.clean,
+    defaultInfo.safe,
   ]);
   const {
     imageFile: images,
@@ -62,10 +52,38 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
     handleImageUpload,
     handleImageDelete,
   } = useImageUpload({ option: 'multiple' });
+
+  useEffect(() => {
+    if (!myInfo) return;
+    setStarNum(myInfo.score);
+    setValueByInput(myInfo.content);
+    setCheckKeywords([
+      myInfo.scenic,
+      myInfo.quiet,
+      myInfo.comfortable,
+      myInfo.accessible,
+      myInfo.clean,
+      myInfo.safe,
+    ]);
+    if (myInfo.placeReviewImageList.length === 0) return;
+    const imageUrls = myInfo.placeReviewImageList.map(
+      (image) => image.imageUrl,
+    );
+    convertUrlsToFiles(imageUrls)
+      .then((files) => {
+        setImageFiles(files);
+        setImagePreviews(imageUrls);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [myInfo]);
+
   const params = useParams();
   const { mutate: mutateReview, isLoading } = useMutateReview({
     closeModal: onClose,
     placeId: parseInt(params.placeId as string),
+    mode: myInfo ? 'edit' : 'create',
   });
   const initState = () => {
     setImageFiles([]);
@@ -81,7 +99,6 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
     onClose();
   };
   const register = () => {
-    console.log('리뷰 등록', images, text, starNum, checkKeywords);
     mutateReview({
       score: starNum,
       content: text,
@@ -92,9 +109,13 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
       safe: checkKeywords[5],
       accessible: checkKeywords[3],
       images,
+      placeReviewImageIdList: myInfo
+        ? myInfo.placeReviewImageList.map((list) => list.id)
+        : undefined,
     });
     initState();
   };
+  const title = myInfo ? '리뷰 수정' : '리뷰 작성';
   return (
     <Modal open={open} onClose={onClose} isClickableOverlay={false}>
       <div className="flex flex-col max-w-[440px] h-screen py-[44px]">
@@ -105,7 +126,7 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
         </div>
         <div className="flex flex-col h-full gap-7 bg-white p-9 rounded-[10px] overflow-y-auto overflow-x-hidden">
           <header className="flex items-center py-2">
-            <span className="flex-1 header2 text-grey-800">리뷰 작성</span>
+            <span className="flex-1 header2 text-grey-800">{title}</span>
           </header>
           {/* STAR SECITON */}
           <div>

@@ -168,3 +168,41 @@ export async function createPlaceReviewImage({
     }
   }
 }
+
+// 장소 리뷰 이미지 삭제
+export async function deletePlaceReviewImage({
+  placeId,
+  placeReviewId,
+  placeReviewImageIdList,
+}: {
+  placeId: number;
+  placeReviewId: number;
+  placeReviewImageIdList: number[];
+}) {
+  const queryString = stringify(
+    { placeReviewImageIdList },
+    { arrayFormat: 'repeat', addQueryPrefix: true },
+  );
+  console.log(queryString);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/place/${placeId}/review/${placeReviewId}/image`.concat(
+      queryString,
+    ),
+    {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('로그인이 필요한 서비스입니다.');
+    } else if (response.status === 404) {
+      throw new Error('존재하지 않는 장소리뷰입니다.');
+    } else {
+      throw new Error('장소 리뷰 이미지 삭제에 실패하였습니다.');
+    }
+  }
+}

@@ -337,3 +337,64 @@ export interface SearchPlaceParams {
   longMin: number;
   longMax: number;
 }
+
+export interface ReviewList {
+  size: number;
+  content: Review[];
+  number: number;
+  sort: Sort;
+  numberOfElements: number;
+  pageable: Pageable;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
+
+export interface Review {
+  placeReviewId: number;
+  reviewerId: string;
+  reviewerNickname: string;
+  reviewerBriefIntroduction: string;
+  reviewerImageUrl: string;
+  placeReviewImageList: PlaceReviewImageList[];
+  score: number;
+  content: string;
+  accessible: boolean;
+  quiet: boolean;
+  safe: boolean;
+  scenic: boolean;
+  clean: boolean;
+  comfortable: boolean;
+}
+
+export interface PlaceReviewImageList {
+  id: number;
+  imageUrl: string;
+}
+
+export interface Pageable {
+  offset: number;
+  sort: Sort;
+  pageSize: number;
+  paged: boolean;
+  pageNumber: number;
+  unpaged: boolean;
+}
+
+export interface Sort {
+  empty: boolean;
+  unsorted: boolean;
+  sorted: boolean;
+}
+
+export interface ReviewMutateParams {
+  placeId: number;
+  score: number;
+  scenic: boolean;
+  quiet: boolean;
+  clean: boolean;
+  comfortable: boolean;
+  safe: boolean;
+  accessible: boolean;
+  content: string;
+}
