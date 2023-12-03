@@ -54,34 +54,6 @@ export default function Map() {
   const latitude = location?.coordinates?.lat ?? 0;
   const longitude = location?.coordinates?.lng ?? 0;
   const defaultLocation = { lat: latitude, lng: longitude };
-  // const points = places.map((place) => ({
-  //   type: 'Feature',
-  //   properties: {
-  //     cluster: false,
-  //     placeId: place.id,
-  //     category: 'cafe',
-  //   },
-  //   geometry: {
-  //     type: 'Point',
-  //     coordinates: [
-  //       parseFloat(place.position.longitude.toString()),
-  //       parseFloat(place.position.latitude.toString()),
-  //     ] as [number, number],
-  //   },
-  // }));
-  // const [zoom, setZoom] = useState(10);
-  // const [clusterBounds, setClusterBounds] = useState<number[]>([]);
-
-  // const { clusters, supercluster } = useSupercluster({
-  //   points,
-  //   bounds: clusterBounds,
-  //   zoom,
-  //   options: { radius: 75, maxZoom: 20 },
-  // });
-  // useEffect(() => {
-  //   console.log(clusters);
-  //   console.log(supercluster);
-  // }, [clusters, supercluster]);
 
   useEffect(() => {
     async function getLocation() {
@@ -96,6 +68,8 @@ export default function Map() {
   }, [defaultLocation.lat, defaultLocation.lng]);
 
   const [selectedMarker, setSelectedMarker] = useState<{
+    name: string;
+    rating: number;
     lat: number;
     lng: number;
   } | null>(null);
@@ -130,12 +104,12 @@ export default function Map() {
               // setClusterBounds([nw.lng(), se.lat(), se.lng(), nw.lat()]);
             });
           }}
-          onZoomChanged={() => {
-            if (!mapRef.current) return;
-            const zoom = mapRef.current.getZoom();
-            if (!zoom) return;
-            // setZoom(zoom);
-          }}
+          // onZoomChanged={() => {
+          //   if (!mapRef.current) return;
+          //   const zoom = mapRef.current.getZoom();
+          //   if (!zoom) return;
+          //   // setZoom(zoom);
+          // }}
         >
           {places.map((place) => (
             <MarkerF
@@ -144,15 +118,22 @@ export default function Map() {
                 lng: place.position.longitude,
               }}
               key={place.id}
-              onClick={() => {
+              // onClick={() => {
+              //   setCenter({
+              //     lat: place.position.latitude,
+              //     lng: place.position.longitude,
+              //   });
+              // }}
+              onMouseOver={() => {
                 setSelectedMarker({
+                  name: place.name,
+                  rating: place.score ?? 0,
                   lat: place.position.latitude,
                   lng: place.position.longitude,
                 });
-                setCenter({
-                  lat: place.position.latitude,
-                  lng: place.position.longitude,
-                });
+              }}
+              onMouseOut={() => {
+                setSelectedMarker(null);
               }}
             />
           ))}
@@ -160,64 +141,14 @@ export default function Map() {
             <InfoWindowF
               position={selectedMarker}
               options={{ pixelOffset: new window.google.maps.Size(0, -25) }}
-              onCloseClick={() => setSelectedMarker(null)}
+              // onCloseClick={() => setSelectedMarker(null)}
             >
               <AnyReactComponent
-                text="수박이와 함께할 수 있는 장소"
-                rating={3.5}
+                text={selectedMarker.name}
+                rating={selectedMarker.rating}
               />
             </InfoWindowF>
           )}
-          {/* {clusters.map((cluster) => {
-            const [longitude, latitude] = cluster.geometry.coordinates;
-            const { cluster: isCluster, point_count: pointCount } =
-              cluster.properties;
-            if (isCluster) {
-              return (
-                <MarkerF
-                  key={cluster.id}
-                  position={{ lat: latitude, lng: longitude }}
-                  onClick={() => {
-                    const expansionZoom = Math.min(
-                      supercluster.getClusterExpansionZoom(cluster.id),
-                      20,
-                    );
-                    mapRef.current?.setZoom(expansionZoom);
-                    mapRef.current?.panTo({
-                      lat: latitude,
-                      lng: longitude,
-                    });
-                  }}
-                >
-                  <div
-                    className="bg-primary-200 rounded-full p-2"
-                    style={{
-                      width: `${10 + (pointCount / points.length) * 20}px`,
-                      height: `${10 + (pointCount / points.length) * 20}px`,
-                    }}
-                  >
-                    <span className="caption1 text-grey-800">{pointCount}</span>
-                  </div>
-                </MarkerF>
-              );
-            }
-            return (
-              <MarkerF
-                key={cluster.properties.placeId}
-                position={{ lat: latitude, lng: longitude }}
-                onClick={() => {
-                  setSelectedMarker({
-                    lat: latitude,
-                    lng: longitude,
-                  });
-                  setCenter({
-                    lat: latitude,
-                    lng: longitude,
-                  });
-                }}
-              />
-            );
-          })} */}
         </GoogleMap>
       </LoadScript>
       <ConfirmLocationModal
