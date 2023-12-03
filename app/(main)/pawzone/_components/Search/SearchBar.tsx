@@ -4,12 +4,24 @@ import { cn } from '@/utils/common';
 import { useRouter } from 'next/navigation';
 import { SearchInput } from '@/components/ui/ui';
 import useInput from '@/hooks/common/useInput';
+import { usePlaceModalStore } from '@/hooks/stores/usePlaceModalStore';
+import { shallow } from 'zustand/shallow';
+import Toast from '@/utils/notification';
 
 export default function SearchBar({ initPlace = '' }: { initPlace?: string }) {
+  const { isOpen } = usePlaceModalStore(
+    (state) => ({ isOpen: state.isOpen, setIsOpen: state.setIsOpen }),
+    shallow,
+  );
   const [place, onChangePlace, resetInput] = useInput(initPlace);
   const router = useRouter();
   const searchPlace = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
+    if (place.length < 2) {
+      Toast.error('2글자 이상 입력해주세요.');
+      return;
+    }
+    // 2글자부터 검색 가능
     router.push(`/pawzone/search/${place}`);
   };
   const onReset = () => {
@@ -19,6 +31,8 @@ export default function SearchBar({ initPlace = '' }: { initPlace?: string }) {
       router.push('/pawzone');
     }
   };
+
+  if (!isOpen) return null;
 
   return (
     <form onSubmit={searchPlace} className="z-[2] absolute top-0 left-0">
