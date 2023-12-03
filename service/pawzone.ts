@@ -66,7 +66,7 @@ export async function getPlaceReviewList({
   return data;
 }
 
-// 장소 리뷰 조회 (자신)
+// 내 장소 리뷰 조회
 export async function getMyPlaceReview({ placeId }: { placeId: number }) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/place/${placeId}/myReview`,
@@ -90,6 +90,26 @@ export async function getMyPlaceReview({ placeId }: { placeId: number }) {
   }
   const data = (await response.json()) as Review;
   return data;
+}
+
+// 내 장소 리뷰 삭제
+export async function deleteMyPlaceReview({ placeId }: { placeId: number }) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/place/${placeId}/myReview`,
+    {
+      method: 'DELETE',
+      credentials: 'include',
+    },
+  );
+  if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('로그인이 필요한 서비스입니다.');
+    } else if (response.status === 404) {
+      throw new Error('리뷰가 존재하지 않습니다.');
+    } else {
+      throw new Error('장소 리뷰 삭제에 실패하였습니다.');
+    }
+  }
 }
 
 // 장소 리뷰 생성 or 수정

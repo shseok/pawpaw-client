@@ -3,12 +3,18 @@ import Star from '@/public/svgs/Pawzone/star.svg';
 import RatioBar from './RatioBar';
 import ReviewCard from './ReviewCard';
 import ImageSlider from './ImageSlider';
-import WriteReviewButton from './WriteReviewButton';
 import useGetReviewList from '@/hooks/queries/useGetReviewList';
-import { getMyPlaceReview, getPlaceReviewList } from '@/service/pawzone';
+import {
+  deleteMyPlaceReview,
+  getMyPlaceReview,
+  getPlaceReviewList,
+} from '@/service/pawzone';
 import { useEffect, useState } from 'react';
 import { Review, Place } from '@/types/types';
 import ReviewModal from '@/components/ui/Modal/ReviewModal';
+import { REVIEW_KEYWORDS } from '@/constant/place';
+import ReviewButton from './ReviewButton';
+import Toast from '@/utils/notification';
 
 interface Props {
   place: Place;
@@ -30,11 +36,30 @@ export default function ReviewContent({
   const [content, setContent] = useState<Review[]>([]);
   const [myReview, setMyReview] = useState<Review | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const ratioArr = [
+    scenicRatio,
+    quietRatio,
+    comfortableRatio,
+    accessibleRatio,
+    cleanRatio,
+    safeRatio,
+  ];
   // const { data, isLoading, Observer } = useGetReviewList({
   //   placeId: id,
   //   size: 5,
   // });
-  const handleWriteReviewClick = () => setIsOpen(!isOpen);
+  const handleReviewMutate = () => setIsOpen(!isOpen);
+  const handleReviewDelete = async () => {
+    try {
+      await deleteMyPlaceReview({ placeId: id });
+      setMyReview(null);
+      Toast.success('리뷰가 삭제되었습니다.');
+    } catch (e) {
+      if (e instanceof Error) {
+        Toast.error(e.message);
+      }
+    }
+  };
   useEffect(() => {
     const fetchReviewList = async () => {
       const { content } = await getPlaceReviewList({ placeId: id, size: 5 });
@@ -54,9 +79,9 @@ export default function ReviewContent({
           <div className="flex flex-col items-center justify-center gap-2">
             <WarningCircle className="w-12 h-12 fill-grey-300" />
             <p className="body-4 text-grey-300">아직 등록된 리뷰가 없습니다.</p>
-            <WriteReviewButton
+            <ReviewButton
               mode={myReview ? 'edit' : 'write'}
-              handleToggle={handleWriteReviewClick}
+              handleToggle={handleReviewMutate}
             />
           </div>
         ) : (
@@ -69,40 +94,24 @@ export default function ReviewContent({
                     {score ? Math.round(score * 10) / 10 : 0}
                   </p>
                 </div>
-                <WriteReviewButton
-                  mode={myReview ? 'edit' : 'write'}
-                  handleToggle={handleWriteReviewClick}
-                />
+                <div className="flex items-center gap-1">
+                  <ReviewButton
+                    mode="delete"
+                    handleToggle={handleReviewDelete}
+                  />
+                  <ReviewButton
+                    mode={myReview ? 'edit' : 'write'}
+                    handleToggle={handleReviewMutate}
+                  />
+                </div>
               </div>
               <div className="flex flex-col rounded-[10px] shadow-chatCard p-5 gap-2">
-                <RatioBar
-                  title="경치가 좋아요"
-                  ratio={scenicRatio ? Math.round(scenicRatio * 100) : 0}
-                />
-                <RatioBar
-                  title="조용해요"
-                  ratio={quietRatio ? Math.round(quietRatio * 100) : 0}
-                />
-                <RatioBar
-                  title="편안해요"
-                  ratio={
-                    comfortableRatio ? Math.round(comfortableRatio * 100) : 0
-                  }
-                />
-                <RatioBar
-                  title="접근성이 좋아요"
-                  ratio={
-                    accessibleRatio ? Math.round(accessibleRatio * 100) / 10 : 0
-                  }
-                />
-                <RatioBar
-                  title="깨끗해요"
-                  ratio={cleanRatio ? Math.round(cleanRatio * 100) : 0}
-                />
-                <RatioBar
-                  title="안전해요"
-                  ratio={safeRatio ? Math.round(safeRatio * 100) : 0}
-                />
+                {Array.from({ length: REVIEW_KEYWORDS.length }, (_, index) => (
+                  <RatioBar
+                    title={REVIEW_KEYWORDS[index].text}
+                    ratio={Math.round((ratioArr[index] ?? 0) * 100)}
+                  />
+                ))}
               </div>
             </div>
             <ImageSlider urls={imageUrlList} />
