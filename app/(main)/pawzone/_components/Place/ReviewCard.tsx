@@ -41,6 +41,7 @@ export default function ReviewCard({
             <div className="flex">
               {Array.from({ length: 5 }, (_, index) => (
                 <Star
+                  key={index}
                   className={cn(
                     'w-[18px] h-[18px] fill-grey-200',
                     index < rating && 'fill-yellow-100',

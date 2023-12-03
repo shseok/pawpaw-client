@@ -7,6 +7,8 @@ import { searchPlace } from '@/service/pawzone';
 import { shallow } from 'zustand/shallow';
 import { useLocationStore } from '@/hooks/stores/useLocationStore';
 import Toast from '@/utils/notification';
+import { usePlaceModalStore } from '@/hooks/stores/usePlaceModalStore';
+import ModalButton from '../ModalButton';
 
 interface Props {
   place: string;
@@ -20,6 +22,10 @@ export default function SearchResult({ place }: Props) {
       places: state.places,
       setPlaces: state.setPlaces,
     }),
+    shallow,
+  );
+  const { isOpen, setIsOpen } = usePlaceModalStore(
+    (state) => ({ isOpen: state.isOpen, setIsOpen: state.setIsOpen }),
     shallow,
   );
   const [isLoading, setIsLoading] = useState(false);
@@ -51,18 +57,23 @@ export default function SearchResult({ place }: Props) {
 
   console.log(center, bounds);
   return (
-    <div className="w-[460px] h-full bg-white shadow-searchTab absolute top-0 left-0 z-[1] pt-[120px]">
-      {isLoading ? (
-        <LoadingIcon className="w-5 h-5 animate-spin" />
-      ) : (
-        <div className="pb-4 h-full px-[30px] overflow-y-scroll">
-          <p className="header4 text-grey-800 mb-4">
-            검색결과{' '}
-            <span className="text-primary-200">{`${places.length}건`}</span>
-          </p>
-          <CardList list={places} />
+    <>
+      {isOpen && (
+        <div className="w-[460px] h-full bg-white shadow-searchTab absolute top-0 left-0 z-[1] pt-[120px]">
+          {isLoading ? (
+            <LoadingIcon className="w-5 h-5 animate-spin" />
+          ) : (
+            <div className="pb-4 h-full px-[30px] overflow-y-scroll">
+              <p className="header4 text-grey-800 mb-4">
+                검색결과{' '}
+                <span className="text-primary-200">{`${places.length}건`}</span>
+              </p>
+              <CardList list={places} />
+            </div>
+          )}
         </div>
       )}
-    </div>
+      <ModalButton isOpen={isOpen} setIsOpen={setIsOpen} />
+    </>
   );
 }
