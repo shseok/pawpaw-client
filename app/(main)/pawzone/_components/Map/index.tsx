@@ -13,6 +13,7 @@ import {
 } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
 import { shallow } from 'zustand/shallow';
+// import useSupercluster from 'use-supercluster';
 
 const KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY;
 
@@ -38,8 +39,10 @@ const AnyReactComponent = ({
 );
 
 export default function Map() {
-  const { places, setCenter, setBounds } = useLocationStore(
+  const { mapRef, center, places, setCenter, setBounds } = useLocationStore(
     (state) => ({
+      mapRef: state.mapRef,
+      center: state.center,
       places: state.places,
       setCenter: state.setCenter,
       setBounds: state.setBounds,
@@ -51,6 +54,34 @@ export default function Map() {
   const latitude = location?.coordinates?.lat ?? 0;
   const longitude = location?.coordinates?.lng ?? 0;
   const defaultLocation = { lat: latitude, lng: longitude };
+  // const points = places.map((place) => ({
+  //   type: 'Feature',
+  //   properties: {
+  //     cluster: false,
+  //     placeId: place.id,
+  //     category: 'cafe',
+  //   },
+  //   geometry: {
+  //     type: 'Point',
+  //     coordinates: [
+  //       parseFloat(place.position.longitude.toString()),
+  //       parseFloat(place.position.latitude.toString()),
+  //     ] as [number, number],
+  //   },
+  // }));
+  // const [zoom, setZoom] = useState(10);
+  // const [clusterBounds, setClusterBounds] = useState<number[]>([]);
+
+  // const { clusters, supercluster } = useSupercluster({
+  //   points,
+  //   bounds: clusterBounds,
+  //   zoom,
+  //   options: { radius: 75, maxZoom: 20 },
+  // });
+  // useEffect(() => {
+  //   console.log(clusters);
+  //   console.log(supercluster);
+  // }, [clusters, supercluster]);
 
   useEffect(() => {
     async function getLocation() {
@@ -79,27 +110,32 @@ export default function Map() {
         <GoogleMap
           options={{ disableDefaultUI: true, zoomControl: true }}
           mapContainerStyle={{ width: '100%', height: '100%' }}
-          center={defaultLocation}
+          center={center}
           zoom={14}
           onLoad={(map) => {
+            mapRef.current = map;
             map.addListener('tilesloaded', () => {
               const bounds = map.getBounds();
-              // const center = map.getCenter();
-              if (!bounds) return;
+              const center = map.getCenter();
+              if (!bounds || !center) return;
               const sw = bounds.getSouthWest();
               const ne = bounds.getNorthEast();
-              console.log(sw, ne);
-              // setCenter({ lat: center.lat(), lng: center.lng() });
+              const se = bounds.getSouthWest();
+              const nw = bounds.getNorthEast();
+              setCenter({ lat: center.lat(), lng: center.lng() });
               setBounds({
                 sw: { lat: sw.lat(), lng: sw.lng() },
                 ne: { lat: ne.lat(), lng: ne.lng() },
               });
+              // setClusterBounds([nw.lng(), se.lat(), se.lng(), nw.lat()]);
             });
           }}
-          // onCenterChanged={(e) => {
-          //   setCenter(e.center.toJSON());
-          //   setBounds(e.bounds.toJSON());
-          // }}
+          onZoomChanged={() => {
+            if (!mapRef.current) return;
+            const zoom = mapRef.current.getZoom();
+            if (!zoom) return;
+            // setZoom(zoom);
+          }}
         >
           {places.map((place) => (
             <MarkerF
@@ -132,6 +168,56 @@ export default function Map() {
               />
             </InfoWindowF>
           )}
+          {/* {clusters.map((cluster) => {
+            const [longitude, latitude] = cluster.geometry.coordinates;
+            const { cluster: isCluster, point_count: pointCount } =
+              cluster.properties;
+            if (isCluster) {
+              return (
+                <MarkerF
+                  key={cluster.id}
+                  position={{ lat: latitude, lng: longitude }}
+                  onClick={() => {
+                    const expansionZoom = Math.min(
+                      supercluster.getClusterExpansionZoom(cluster.id),
+                      20,
+                    );
+                    mapRef.current?.setZoom(expansionZoom);
+                    mapRef.current?.panTo({
+                      lat: latitude,
+                      lng: longitude,
+                    });
+                  }}
+                >
+                  <div
+                    className="bg-primary-200 rounded-full p-2"
+                    style={{
+                      width: `${10 + (pointCount / points.length) * 20}px`,
+                      height: `${10 + (pointCount / points.length) * 20}px`,
+                    }}
+                  >
+                    <span className="caption1 text-grey-800">{pointCount}</span>
+                  </div>
+                </MarkerF>
+              );
+            }
+            return (
+              <MarkerF
+                key={cluster.properties.placeId}
+                position={{ lat: latitude, lng: longitude }}
+                onClick={() => {
+                  setSelectedMarker({
+                    lat: latitude,
+                    lng: longitude,
+                  });
+                  setCenter({
+                    lat: latitude,
+                    lng: longitude,
+                  });
+                }}
+              />
+            );
+          })} */}
         </GoogleMap>
       </LoadScript>
       <ConfirmLocationModal

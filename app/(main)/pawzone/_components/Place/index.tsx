@@ -7,9 +7,11 @@ import Share from '@/public/svgs/ShareNetwork.svg';
 import Chip from '../Chip';
 import copyToClipBoard from '@/utils/copyToClipBoard';
 import Divider from '@/components/ui/Divider';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReviewContent from './ReviewContent';
 import { Place } from '@/types/types';
+import { shallow } from 'zustand/shallow';
+import { useLocationStore } from '@/hooks/stores/useLocationStore';
 
 interface Props {
   place: Place;
@@ -18,6 +20,23 @@ interface Props {
 
 export default function PlaceContents({ place, time }: Props) {
   const [isBookmark, setIsBookmark] = useState(false);
+  const { mapRef, setPlaces, setCenter } = useLocationStore(
+    (state) => ({
+      mapRef: state.mapRef,
+      setCenter: state.setCenter,
+      setPlaces: state.setPlaces,
+    }),
+    shallow,
+  );
+  useEffect(() => {
+    if (!mapRef) return;
+    setCenter({
+      lat: place.position.latitude,
+      lng: place.position.longitude,
+    });
+    setPlaces([place]);
+  }, [mapRef]);
+
   return (
     <div className="px-[30px] pb-[30px] bg-white rounded-t-lg-5 h-full flex flex-col flex-1 gap-4">
       <div className="flex gap-2">
