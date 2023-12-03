@@ -12,6 +12,8 @@ import ReviewContent from './ReviewContent';
 import { Place } from '@/types/types';
 import { shallow } from 'zustand/shallow';
 import { useLocationStore } from '@/hooks/stores/useLocationStore';
+import { createPlaceBookmark, deletePlaceBookmark } from '@/service/pawzone';
+import Toast from '@/utils/notification';
 
 interface Props {
   place: Place;
@@ -62,8 +64,17 @@ export default function PlaceContents({ place, time }: Props) {
         <button
           type="button"
           className="flex-1 flex justify-center"
-          onClick={() => {
-            setIsBookmark(!isBookmark);
+          onClick={async () => {
+            try {
+              isBookmark
+                ? await deletePlaceBookmark({ placeId: place.id })
+                : await createPlaceBookmark({ placeId: place.id });
+              setIsBookmark(!isBookmark);
+            } catch (e) {
+              if (e instanceof Error) {
+                Toast.error(e.message);
+              }
+            }
           }}
         >
           {isBookmark ? (

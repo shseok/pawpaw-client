@@ -206,3 +206,47 @@ export async function deletePlaceReviewImage({
     }
   }
 }
+
+// 장소 즐겨찾기 추가
+export async function createPlaceBookmark({ placeId }: { placeId: number }) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/place/${placeId}/bookmarks`,
+    {
+      method: 'POST',
+      credentials: 'include',
+    },
+  );
+  if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('로그인이 필요한 서비스입니다.');
+    } else if (response.status === 404) {
+      throw new Error('존재하지 않는 장소입니다.');
+    } else if (response.status === 409) {
+      throw new Error('이미 북마크한 장소입니다.');
+    } else {
+      throw new Error('장소 즐겨찾기 추가에 실패하였습니다.');
+    }
+  }
+}
+
+// 장소 즐겨찾기 삭제
+export async function deletePlaceBookmark({ placeId }: { placeId: number }) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/place/${placeId}/bookmarks`,
+    {
+      method: 'DELETE',
+      credentials: 'include',
+    },
+  );
+  if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('로그인이 필요한 서비스입니다.');
+    } else if (response.status === 404) {
+      throw new Error('존재하지 않는 장소입니다.');
+    } else if (response.status === 409) {
+      throw new Error('북마크하지 않은 장소입니다.');
+    } else {
+      throw new Error('장소 즐겨찾기 삭제에 실패하였습니다.');
+    }
+  }
+}
