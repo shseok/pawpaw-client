@@ -53,6 +53,10 @@ export default function SearchResult({ place }: Props) {
       }
     };
     fetchData();
+
+    return () => {
+      setPlaces([]);
+    };
   }, [center, bounds]);
 
   console.log(center, bounds);
