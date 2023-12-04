@@ -11,7 +11,7 @@ export default function PlacePage({ params: { result } }: Props) {
   return (
     <>
       <SearchBar initPlace={keyword} />
-      <SearchResult place={keyword} />;
+      <SearchResult place={keyword} />
     </>
   );
 }

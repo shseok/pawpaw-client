@@ -91,7 +91,7 @@ export default function ReviewContent({
                 <div className="flex items-center gap-2">
                   <Star className="w-7 h-7 fill-yellow-100" />
                   <p className="header2 text-grey-800">
-                    {score ? Math.round(score * 10) / 10 : 0}
+                    {Math.round((score ?? 0) * 10) / 10}
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
@@ -110,6 +110,7 @@ export default function ReviewContent({
                   <RatioBar
                     title={REVIEW_KEYWORDS[index].text}
                     ratio={Math.round((ratioArr[index] ?? 0) * 100)}
+                    key={index}
                   />
                 ))}
               </div>

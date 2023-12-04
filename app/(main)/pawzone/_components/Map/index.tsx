@@ -94,14 +94,11 @@ export default function Map() {
               if (!bounds || !center) return;
               const sw = bounds.getSouthWest();
               const ne = bounds.getNorthEast();
-              const se = bounds.getSouthWest();
-              const nw = bounds.getNorthEast();
               setCenter({ lat: center.lat(), lng: center.lng() });
               setBounds({
                 sw: { lat: sw.lat(), lng: sw.lng() },
                 ne: { lat: ne.lat(), lng: ne.lng() },
               });
-              // setClusterBounds([nw.lng(), se.lat(), se.lng(), nw.lat()]);
             });
           }}
           // onZoomChanged={() => {
@@ -127,7 +124,7 @@ export default function Map() {
               onMouseOver={() => {
                 setSelectedMarker({
                   name: place.name,
-                  rating: place.score ?? 0,
+                  rating: place.score ? Math.round(place.score * 10) / 10 : 0,
                   lat: place.position.latitude,
                   lng: place.position.longitude,
                 });

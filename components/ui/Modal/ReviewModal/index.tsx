@@ -98,6 +98,7 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
     initState();
     onClose();
   };
+
   const register = () => {
     mutateReview({
       score: starNum,
