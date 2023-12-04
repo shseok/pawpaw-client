@@ -9,6 +9,7 @@ import { useLocationStore } from '@/hooks/stores/useLocationStore';
 import Toast from '@/utils/notification';
 import { usePlaceModalStore } from '@/hooks/stores/usePlaceModalStore';
 import ModalButton from '../ModalButton';
+import { CATEGORY_MAP } from '@/constant/place';
 
 interface Props {
   place: string;
@@ -34,9 +35,11 @@ export default function SearchResult({ place }: Props) {
       if (!bounds.sw.lat || !bounds.sw.lng || !bounds.ne.lat || !bounds.ne.lng)
         return;
       try {
+        const query = CATEGORY_MAP[place] ? undefined : place;
+        const placeType = CATEGORY_MAP[place] || undefined;
         const res = await searchPlace({
-          query: place,
-          // placeType: 'CAFE',
+          query,
+          placeType,
           latMin: bounds.sw.lat,
           latMax: bounds.ne.lat,
           longMin: bounds.sw.lng,

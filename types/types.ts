@@ -328,9 +328,9 @@ export interface Position {
   address: string;
 }
 
-type PlaceType = 'RESTAURANT' | 'CAFE' | 'PARK';
+export type PlaceType = 'RESTAURANT' | 'CAFE' | 'PARK';
 export interface SearchPlaceParams {
-  query: string;
+  query?: string;
   placeType?: PlaceType;
   latMin: number;
   latMax: number;

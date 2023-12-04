@@ -7,13 +7,20 @@ import useInput from '@/hooks/common/useInput';
 import { usePlaceModalStore } from '@/hooks/stores/usePlaceModalStore';
 import { shallow } from 'zustand/shallow';
 import Toast from '@/utils/notification';
+import CategoryButton from './CategoryButton';
 
-export default function SearchBar({ initPlace = '' }: { initPlace?: string }) {
+interface Props {
+  initPlace?: string;
+  isCategory?: boolean;
+}
+
+export default function SearchBar({ initPlace = '', isCategory = false }: Props) {
   const { isOpen } = usePlaceModalStore(
     (state) => ({ isOpen: state.isOpen, setIsOpen: state.setIsOpen }),
     shallow,
   );
-  const [place, onChangePlace, resetInput] = useInput(initPlace);
+  const [place, onChangePlace, resetInput, setValueByInput] =
+    useInput(initPlace);
   const router = useRouter();
   const searchPlace = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
@@ -45,6 +52,22 @@ export default function SearchBar({ initPlace = '' }: { initPlace?: string }) {
           onClickSearchIcon={searchPlace}
           className={cn('focus-primary', !!place ? null : 'shadow-searchBar')}
         />
+        {isCategory && (
+          <div className="flex gap-2 items-center">
+            <CategoryButton
+              type="RESTAURANT"
+              handleSearchPlace={() => setValueByInput('맛집')}
+            />
+            <CategoryButton
+              type="CAFE"
+              handleSearchPlace={() => setValueByInput('카페')}
+            />
+            <CategoryButton
+              type="PARK"
+              handleSearchPlace={() => setValueByInput('공원')}
+            />
+          </div>
+        )}
       </div>
     </form>
   );
