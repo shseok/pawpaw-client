@@ -1,29 +1,64 @@
 import { Place } from '@/types/types';
 import Card from './Card';
+import { getPlaceTimeString } from '@/utils/getPlaceTimeText';
 
 interface Props {
   list: Place[];
 }
 
 export default function CardList({ list }: Props) {
-  const inputText =
-    '브레이크타임\\n20:30 라스트오더\\n1,3주/토요일휴무\\t11:00 - 21:00\\n15:00 - 17:00 브레이크타임\\n20:30 라스트오더\\n화\\n▪︎\\t11:00 - 21:00\\n15:00 - 17:00 브레이크타임\\n20:30 라스트오더\\n1,3주/토요일휴무\\t11:00 - 21:00\\n15:00 - 17:00 브레이크타임\\n20:30 라스트오더\\n수\\n▪︎\\t11:00 - 21:00\\n15:00 - 17:00 브레이크타임\\n20:30 라스트오더\\n1,3주/토요일휴무\\t11:00 - 21:00\\n15:00 - 17:00 브레이크타임\\n20:30 라스트오더\\n목\\n▪︎\\t11:00 - 21:00\\n15:00 - 17:00 브레이크타임\\n20:30 라스트오더\\n1,3주/토요일휴무\\t11:00 - 21:00\\n15:00 - 17:00 브레이크타임\\n20:30 라스트오더\\n금\\n▪︎\\t11:00 - 21:00\\n15:00 - 17:00 브레이크타임\\n20:30 라스트오더\\n1,3주/토요일휴무\\t11:00 - 21:00\\n15:00 - 17:00 브레이크타임\\n20:30 라스트오더'
-      .replace(/\\n/g, '\n')
-      .replace(/\\t/g, '\t');
-  // console.log(inputText);
   return (
     <ul className="flex flex-col gap-4">
-      {list.map((place) => (
-        <Card
-          idx={place.id}
-          imageSrc={place.imageUrlList[0]}
-          name={place.name}
-          address={place.position.address}
-          rating={place.score ?? 0}
-          time={inputText}
-          key={place.id}
-        />
-      ))}
+      {list.map((place) => {
+        const {
+          id,
+          imageUrlList,
+          name,
+          position: { address },
+          score,
+          monOpen,
+          monClose,
+          monLastOrder,
+          tueOpen,
+          tueClose,
+          tueLastOrder,
+          wedOpen,
+          wedClose,
+          wedLastOrder,
+          thuOpen,
+          thuClose,
+          thuLastOrder,
+          friOpen,
+          friClose,
+          friLastOrder,
+          satOpen,
+          satClose,
+          satLastOrder,
+          sunOpen,
+          sunClose,
+          sunLastOrder,
+        } = place;
+        const timeString = getPlaceTimeString({
+          mon: { open: monOpen, close: monClose, lastOrder: monLastOrder },
+          tue: { open: tueOpen, close: tueClose, lastOrder: tueLastOrder },
+          wed: { open: wedOpen, close: wedClose, lastOrder: wedLastOrder },
+          thu: { open: thuOpen, close: thuClose, lastOrder: thuLastOrder },
+          fri: { open: friOpen, close: friClose, lastOrder: friLastOrder },
+          sat: { open: satOpen, close: satClose, lastOrder: satLastOrder },
+          sun: { open: sunOpen, close: sunClose, lastOrder: sunLastOrder },
+        });
+        return (
+          <Card
+            idx={id}
+            imageSrc={imageUrlList[0]}
+            name={name}
+            address={address}
+            rating={score}
+            time={timeString}
+            key={place.id}
+          />
+        );
+      })}
     </ul>
   );
 }

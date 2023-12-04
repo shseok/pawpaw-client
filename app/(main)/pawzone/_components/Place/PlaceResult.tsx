@@ -31,7 +31,7 @@ export default function PlaceResult({ item }: { item: Place }) {
                 />
                 <div className="absolute bottom-0 left-0 h-[30px] w-full bg-white rounded-t-[20px]" />
               </div>
-              <PlaceContents place={item} time="09:00 ~ 18:00" />
+              <PlaceContents place={item} />
             </div>
           </div>
         </div>

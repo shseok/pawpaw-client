@@ -11,7 +11,7 @@ interface Props {
   imageSrc: string;
   address: string;
   time: string;
-  rating: number;
+  rating: number | null;
 }
 
 export default function Card({
@@ -45,12 +45,12 @@ export default function Card({
             <p className="header3 text-grey-800">{name}</p>
             <p className="body4 text-grey-800">{address}</p>
             {/* 한줄로 처리하고 세부 페이지 들어가면 거기서 여러 데이터 보여주는 걸로 */}
-            <p className="flex  items-start gap-1 body3 text-grey-800">
+            <p className="flex items-center gap-1">
               <span>
                 <Clock className="w-5 h-5" />
               </span>
               <span
-                className="overflow-hidden overflow-ellipsis max-h-[18px]"
+                className="overflow-hidden overflow-ellipsis body3 text-grey-800"
                 style={{
                   WebkitLineClamp: 1,
                   display: '-webkit-box',
@@ -59,11 +59,10 @@ export default function Card({
               >
                 {time}
               </span>
-              {/* <span className="body2">연중 무휴</span> */}
             </p>
             <p className="flex items-center gap-[3px] body2 text-grey-800">
               <Star className="w-[18px] h-[18px] fill-yellow-100" />
-              {rating}
+              {rating ? Math.round(rating * 10) / 10 : '리뷰 없음'}
             </p>
           </div>
         </div>
