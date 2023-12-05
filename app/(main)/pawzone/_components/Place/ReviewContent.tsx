@@ -74,7 +74,7 @@ export default function ReviewContent({
         <p className="header3 text-grey-800">이 장소에 대한 리뷰 😀</p>
         {isLoading ? (
           <div className="w-full flex justify-center">
-            <LoadingIcon className="w-10 h-10 animate-spin" />
+            <LoadingIcon className="w-10 h-10 animate-spin fill-primary-200" />
           </div>
         ) : reviews.length < 1 ? (
           <div className="flex flex-col items-center justify-center gap-2">
@@ -140,7 +140,7 @@ export default function ReviewContent({
       </div>
       <Observer>
         <div className="w-full flex justify-center">
-          <LoadingIcon className="w-10 h-10 animate-spin" />
+          <LoadingIcon className="w-10 h-10 animate-spin fill-primary-200" />
         </div>
       </Observer>
     </>

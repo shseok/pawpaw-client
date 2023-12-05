@@ -1,6 +1,6 @@
 'use client';
 
-import MarkerIcon from '@/public/svgs/pawzone/marker.svg';
+import MarkerIcon from '@/public/svgs/pawzone/park.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
 import ConfirmLocationModal from '@/components/ui/Modal/ConfirmLocationModal';
 import useGeolocation from '@/hooks/common/useGeolocation';
@@ -32,7 +32,9 @@ const AnyReactComponent = ({
       <span className="caption1 text-grey-800">{text}</span>
       <div className="flex gap-[2px]">
         <Star className="w-[14px] h-[14px] fill-yellow-100" />
-        <span className="caption3 text-grey-800">{rating}</span>
+        <span className="caption3 text-grey-800">
+          {rating ? rating : '평가 없음'}
+        </span>
       </div>
     </div>
   </div>
