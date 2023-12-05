@@ -37,14 +37,14 @@ export async function searchPlace({
 // 장소 리뷰 조회 (타인)
 export async function getPlaceReviewList({
   placeId,
-  beforeId,
+  beforeReviewId,
   size,
 }: {
   placeId: number;
-  beforeId?: number;
+  beforeReviewId?: number;
   size: number;
 }) {
-  const queryParams = beforeId ? { beforeId, size } : { size };
+  const queryParams = beforeReviewId ? { beforeReviewId, size } : { size };
   const queryString = stringify(queryParams, { addQueryPrefix: true });
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/place/${placeId}/review`.concat(
@@ -67,7 +67,11 @@ export async function getPlaceReviewList({
 }
 
 // 내 장소 리뷰 조회
-export async function getMyPlaceReview({ placeId }: { placeId: number }) {
+export async function getMyPlaceReview({
+  placeId,
+}: {
+  placeId: number;
+}): Promise<Review | null> {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/place/${placeId}/myReview`,
     {
@@ -79,14 +83,10 @@ export async function getMyPlaceReview({ placeId }: { placeId: number }) {
     if (response.status === 401) {
       throw new Error('로그인이 필요한 서비스입니다.');
     } else if (response.status === 404) {
-      throw new Error('존재하지 않는 장소입니다');
+      return null;
     } else {
       throw new Error('장소 리뷰 조회에 실패하였습니다.');
     }
-  }
-  // response body가 없는 경우 > 자신의 리뷰가 없는 경우
-  if (response.status === 204) {
-    return null;
   }
   const data = (await response.json()) as Review;
   return data;

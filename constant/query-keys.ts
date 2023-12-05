@@ -12,4 +12,5 @@ export const queryKeys = {
   MY_BOARD_LIST: 'myBoards',
   MY_BOOKMARKED_LIST: 'myBookmarkedBoards',
   USER_INFO: 'userInfo',
+  REVIEW_LIST: 'reviewList',
 };

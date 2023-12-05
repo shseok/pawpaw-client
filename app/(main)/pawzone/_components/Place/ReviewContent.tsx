@@ -1,14 +1,11 @@
 import WarningCircle from '@/public/svgs/Pawzone/warning_circle.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
+import LoadingIcon from '@/public/svgs/loading.svg';
 import RatioBar from './RatioBar';
 import ReviewCard from './ReviewCard';
 import ImageSlider from './ImageSlider';
 import useGetReviewList from '@/hooks/queries/useGetReviewList';
-import {
-  deleteMyPlaceReview,
-  getMyPlaceReview,
-  getPlaceReviewList,
-} from '@/service/pawzone';
+import { deleteMyPlaceReview, getMyPlaceReview } from '@/service/pawzone';
 import { useEffect, useState } from 'react';
 import { Review, Place } from '@/types/types';
 import ReviewModal from '@/components/ui/Modal/ReviewModal';
@@ -33,7 +30,6 @@ export default function ReviewContent({
     imageUrlList,
   },
 }: Props) {
-  const [content, setContent] = useState<Review[]>([]);
   const [myReview, setMyReview] = useState<Review | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const ratioArr = [
@@ -44,10 +40,10 @@ export default function ReviewContent({
     cleanRatio,
     safeRatio,
   ];
-  // const { data, isLoading, Observer } = useGetReviewList({
-  //   placeId: id,
-  //   size: 5,
-  // });
+  const { data, isLoading, Observer } = useGetReviewList({
+    placeId: id,
+    size: 5,
+  });
   const handleReviewMutate = () => setIsOpen(!isOpen);
   const handleReviewDelete = async () => {
     try {
@@ -62,20 +58,25 @@ export default function ReviewContent({
   };
   useEffect(() => {
     const fetchReviewList = async () => {
-      const { content } = await getPlaceReviewList({ placeId: id, size: 5 });
       const myReview = await getMyPlaceReview({ placeId: id });
       setMyReview(myReview);
-      setContent(content);
     };
 
     fetchReviewList();
   }, []);
 
+  const otherReviews = data?.pages.flatMap((item) => item.content);
+  const reviews = [...(myReview ? [myReview] : []), ...(otherReviews ?? [])];
+
   return (
     <>
       <div className="flex flex-col gap-7 overflow-x-hidden">
         <p className="header3 text-grey-800">이 장소에 대한 리뷰 😀</p>
-        {content.length < 1 ? (
+        {isLoading ? (
+          <div className="w-full flex justify-center">
+            <LoadingIcon className="w-10 h-10 animate-spin" />
+          </div>
+        ) : reviews.length < 1 ? (
           <div className="flex flex-col items-center justify-center gap-2">
             <WarningCircle className="w-12 h-12 fill-grey-300" />
             <p className="body-4 text-grey-300">아직 등록된 리뷰가 없습니다.</p>
@@ -116,27 +117,16 @@ export default function ReviewContent({
               </div>
             </div>
             <ImageSlider urls={imageUrlList} />
-            {/* 자신의 리뷰 */}
-            {myReview && (
-              <ReviewCard
-                name={myReview.reviewerNickname}
-                subName="2살 초코"
-                description={myReview.content}
-                rating={myReview.score}
-                ImageSrc={myReview.reviewerImageUrl}
-                placeReviewImageList={myReview.placeReviewImageList.map(
-                  (obj) => obj.imageUrl,
-                )}
-                key={myReview.placeReviewId}
-              />
-            )}
-            {content.map((review) => (
+            {reviews?.map((review) => (
               <ReviewCard
                 name={review.reviewerNickname}
                 subName="2살 초코"
                 description={review.content}
                 rating={review.score}
                 ImageSrc={review.reviewerImageUrl}
+                placeReviewImageList={review.placeReviewImageList.map(
+                  (obj) => obj.imageUrl,
+                )}
                 key={review.placeReviewId}
               />
             ))}
@@ -148,13 +138,11 @@ export default function ReviewContent({
           myInfo={myReview}
         />
       </div>
-      {/* <Observer>
-        <div className="flex justify-center">
-          <button type="button" className="body2 text-grey-800">
-            리뷰 더보기
-          </button>
+      <Observer>
+        <div className="w-full flex justify-center">
+          <LoadingIcon className="w-10 h-10 animate-spin" />
         </div>
-      </Observer> */}
+      </Observer>
     </>
   );
 }
