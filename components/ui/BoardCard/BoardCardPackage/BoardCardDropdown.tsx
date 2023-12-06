@@ -3,20 +3,26 @@ import copyToClipBoard from '@/utils/copyToClipBoard';
 import useAddBookmark from '@/hooks/mutations/useAddBookmark';
 import useDeleteBookmark from '@/hooks/mutations/useDeleteBookmark';
 import useDeleteBoard from '@/hooks/mutations/useDeleteBoard';
+import useReportBoard from '@/hooks/mutations/useReportBoard';
 import { Dropdown } from '../../ui';
+
+interface BoardCardDropdownProps {
+  boardId: number;
+  isMyBoard: boolean;
+  isBookmarked: boolean;
+  isReported: boolean;
+}
 
 export default function BoardCardDropdown({
   boardId,
   isMyBoard,
   isBookmarked,
-}: {
-  boardId: number;
-  isMyBoard: boolean;
-  isBookmarked: boolean;
-}) {
+  isReported,
+}: BoardCardDropdownProps) {
   const { mutate: addBookmark } = useAddBookmark();
   const { mutate: deleteBookmark } = useDeleteBookmark();
   const { mutate: deleteBoard } = useDeleteBoard(boardId);
+  const { report, cancelReport } = useReportBoard(boardId);
 
   return (
     <Dropdown>
@@ -38,7 +44,14 @@ export default function BoardCardDropdown({
         </Dropdown.Item>
         {isMyBoard ? (
           <Dropdown.Item event={() => deleteBoard()}>삭제하기</Dropdown.Item>
-        ) : null}
+        ) : (
+          <Dropdown.Item
+            event={() => (isReported ? cancelReport() : report())}
+            buttonStyle={isReported ? 'text-red' : ''}
+          >
+            {isReported ? '신고취소' : '신고하기'}
+          </Dropdown.Item>
+        )}
       </Dropdown.Menu>
     </Dropdown>
   );
