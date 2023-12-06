@@ -49,6 +49,7 @@ export default function OwnerDelegationModal({
                 : ''
             }`}
           >
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor={`delegation-${user.userId}`}>
               <input
                 id={`delegation-${user.userId}`}

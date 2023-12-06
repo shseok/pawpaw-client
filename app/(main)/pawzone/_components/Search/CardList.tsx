@@ -1,6 +1,6 @@
 import { Place } from '@/types/types';
-import Card from './Card';
 import { getPlaceTimeString } from '@/utils/getPlaceTimeText';
+import Card from './Card';
 
 interface Props {
   list: Place[];

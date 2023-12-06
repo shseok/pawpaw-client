@@ -6,15 +6,15 @@ import X from '@/public/svgs/X.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
 import Camera from '@/public/svgs/Camera.svg';
 import LoadingIcon from '@/public/svgs/loading.svg';
-import { Button, Modal } from '../../ui';
+import { useParams } from 'next/navigation';
 import { cn } from '@/utils/common';
-import { MAX_STAR_NUM, REVIEW_KEYWORDS } from '@/constant/place';
+import { convertUrlsToFiles } from '@/utils/convertUrlsToFiles';
 import useInput from '@/hooks/common/useInput';
 import useImageUpload from '@/hooks/common/useImageUpload';
-import ImageSlider from '@/app/(main)/pawzone/_components/Place/ImageSlider';
 import useMutateReview from '@/hooks/mutations/useMutateReview';
-import { useParams } from 'next/navigation';
-import { convertUrlsToFiles } from '@/utils/convertUrlsToFiles';
+import { MAX_STAR_NUM, REVIEW_KEYWORDS } from '@/constant/place';
+import ImageSlider from '@/app/(main)/pawzone/_components/Place/ImageSlider';
+import { Button, Modal } from '../../ui';
 
 interface Props extends ModalProps {
   myInfo: Review | null;
@@ -33,7 +33,7 @@ const defaultInfo = {
 
 export default function ReviewModal({ open, onClose, myInfo }: Props) {
   const [starNum, setStarNum] = useState(defaultInfo.score);
-  const [text, onChangeValue, _, setValueByInput] = useInput(
+  const [text, onChangeValue, , setValueByInput] = useInput(
     defaultInfo.content,
   );
   const [checkKeywords, setCheckKeywords] = useState([
@@ -77,12 +77,12 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
       .catch((error) => {
         console.error(error);
       });
-  }, [myInfo]);
+  }, [myInfo, setImageFiles, setImagePreviews, setValueByInput]);
 
   const params = useParams();
   const { mutate: mutateReview, isLoading } = useMutateReview({
     closeModal: onClose,
-    placeId: parseInt(params.placeId as string),
+    placeId: parseInt(params.placeId as string, 10),
     mode: myInfo ? 'edit' : 'create',
   });
   const initState = () => {
@@ -94,7 +94,7 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
     );
   };
   const cancel = () => {
-    console.log('리뷰 취소');
+    // console.log('리뷰 취소');
     initState();
     onClose();
   };
@@ -121,7 +121,11 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
     <Modal open={open} onClose={onClose} isClickableOverlay={false}>
       <div className="flex flex-col max-w-[440px] h-screen py-[44px]">
         <div className="self-end">
-          <button type="button" onClick={onClose}>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close Review Modal"
+          >
             <X className="w-8 h-8 fill-white" />
           </button>
         </div>
@@ -137,7 +141,9 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
                 <button
                   type="button"
                   onClick={() => setStarNum(index + 1)}
+                  // eslint-disable-next-line react/no-array-index-key
                   key={index}
+                  aria-label="Set Star"
                 >
                   <Star
                     className={cn(
@@ -153,7 +159,7 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
           <div className="flex flex-col gap-4">
             <p className="body1 text-grey-600">이 장소가 어떠셨나요?</p>
             <div className="flex flex-wrap gap-3">
-              {REVIEW_KEYWORDS.map(({ text, emoji }, index) => (
+              {REVIEW_KEYWORDS.map(({ text: keyword, emoji }, index) => (
                 <Button
                   variant="ghost"
                   onClickAction={() =>
@@ -164,6 +170,7 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
                     })
                   }
                   className={checkKeywords[index] ? 'bg-primary-50' : ''}
+                  // eslint-disable-next-line react/no-array-index-key
                   key={index}
                 >
                   <p
@@ -172,7 +179,7 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
                       checkKeywords[index] && 'text-primary-200',
                     )}
                   >
-                    <span>{text}</span>
+                    <span>{keyword}</span>
                     <span>{emoji}</span>
                   </p>
                 </Button>
@@ -189,7 +196,7 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
               <Camera className="w-4 h-4" />
               <p className="body2 text-grey-800">
                 사진 첨부하기{' '}
-                <span className="caption2 text-grey-500">{`(최대 5장)`}</span>
+                <span className="caption2 text-grey-500">(최대 5장)</span>
               </p>
               <input
                 type="file"

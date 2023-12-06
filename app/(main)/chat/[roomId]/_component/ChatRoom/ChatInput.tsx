@@ -41,6 +41,7 @@ export default function MessageInput({
 
   return (
     <div className="relative flex items-center w-full px-8 mb-6">
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="uploadImage" className="absolute cursor-pointer left-14">
         <CameraIcon className="w-8 h-8" />
         <input
@@ -65,6 +66,7 @@ export default function MessageInput({
           messageEmpty ? 'cursor-not-allowed' : ''
         }`}
         disabled={messageEmpty}
+        aria-label="Send Message"
       >
         <PaperPlaneIcon
           className={`w-8 h-8 duration-200 ${

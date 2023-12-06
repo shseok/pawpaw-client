@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Star from '@/public/svgs/Pawzone/star.svg';
-import ImageSlider from './ImageSlider';
 import { cn } from '@/utils/common';
+import ImageSlider from './ImageSlider';
 
 interface Props {
   ImageSrc: string;

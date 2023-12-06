@@ -88,7 +88,11 @@ export default function AddChatRoomModal({ open, onClose }: ModalProps) {
         className="flex flex-col w-screen tablet:w-[800px] h-screen tablet:h-[720px]"
       >
         <div className="self-end hidden tablet:block">
-          <button type="button" onClick={onClose}>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close Chat Room Modal"
+          >
             <XIcon className="w-8 h-8 fill-white" />
           </button>
         </div>

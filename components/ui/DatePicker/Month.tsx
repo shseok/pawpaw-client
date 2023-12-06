@@ -26,15 +26,27 @@ export default function Month({
       <div className="flex items-center justify-between w-full p-2">
         <span className="flex gap-1 caption1">
           {format(selectedDate, 'yyyy')}
-          <button type="button" onClick={onChangePickerType}>
+          <button
+            type="button"
+            onClick={onChangePickerType}
+            aria-label="Change Pick Type"
+          >
             <CaretDownIcon className="w-4 h-4" />
           </button>
         </span>
         <div>
-          <button type="button" onClick={onPrevYear}>
+          <button
+            type="button"
+            onClick={onPrevYear}
+            aria-label="Click Previous Year"
+          >
             <CaretLeftIcon className="w-4 h-4" />
           </button>
-          <button type="button" onClick={onNextYear}>
+          <button
+            type="button"
+            onClick={onNextYear}
+            aria-label="Click Next Year"
+          >
             <CaretRightIcon className="w-4 h-4" />
           </button>
         </div>

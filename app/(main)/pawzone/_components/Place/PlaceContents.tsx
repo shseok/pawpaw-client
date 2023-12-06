@@ -1,22 +1,22 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Clock from '@/public/svgs/Pawzone/clock.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
 import EmptyStar from '@/public/svgs/Pawzone/empty_star.svg';
 import Share from '@/public/svgs/ShareNetwork.svg';
 import Arrow from '@/public/svgs/Auth/arrow-drop-down.svg';
-import Chip from '../Chip';
+import { cn } from '@/utils/common';
 import copyToClipBoard from '@/utils/copyToClipBoard';
+import { getKoreanPlaceTimeArray } from '@/utils/getPlaceTimeText';
 import Divider from '@/components/ui/Divider';
-import { useEffect, useState } from 'react';
-import ReviewContent from './ReviewContent';
 import { Place } from '@/types/types';
 import { shallow } from 'zustand/shallow';
 import { useLocationStore } from '@/hooks/stores/useLocationStore';
 import { createPlaceBookmark, deletePlaceBookmark } from '@/service/pawzone';
 import Toast from '@/utils/notification';
-import { getKoreanPlaceTimeArray } from '@/utils/getPlaceTimeText';
-import { cn } from '@/utils/common';
+import ReviewContent from './ReviewContent';
+import Chip from '../Chip';
 
 export default function PlaceContents({ place }: { place: Place }) {
   const [isBookmark, setIsBookmark] = useState(place.bookmarked);
@@ -72,18 +72,18 @@ export default function PlaceContents({ place }: { place: Place }) {
     },
   });
 
-   useEffect(() => {
-     if (!mapRef.current) return;
-     mapRef.current.addListener('tilesloaded', () => {
-       console.log('tilesloaded');
-       setCenter({
-         lat: place.position.latitude,
-         lng: place.position.longitude,
-       });
-     });
+  useEffect(() => {
+    if (!mapRef || !mapRef.current) return;
+    mapRef.current.addListener('tilesloaded', () => {
+      // console.log('tilesloaded');
+      setCenter({
+        lat: place.position.latitude,
+        lng: place.position.longitude,
+      });
+    });
 
-     setPlaces([place]);
-   }, [mapRef.current]);
+    setPlaces([place]);
+  }, [mapRef, setCenter, setPlaces]);
 
   return (
     <div className="px-[30px] pb-[30px] bg-white rounded-t-lg-5 h-full flex flex-col flex-1 gap-4">
@@ -98,9 +98,10 @@ export default function PlaceContents({ place }: { place: Place }) {
           <Clock className="w-5 h-5" />
           <ul className="transition-transform duration-400">
             {timeArray.map((d, idx) => (
-              <li key={idx}>
+              <li key={d}>
                 {idx === 0 ? (
                   <button
+                    type="button"
                     className="flex items-center gap-2"
                     onClick={handleButtonClick}
                   >
@@ -137,9 +138,11 @@ export default function PlaceContents({ place }: { place: Place }) {
           className="flex-1 flex justify-center"
           onClick={async () => {
             try {
-              isBookmark
-                ? await deletePlaceBookmark({ placeId: place.id })
-                : await createPlaceBookmark({ placeId: place.id });
+              if (isBookmark) {
+                await deletePlaceBookmark({ placeId: place.id });
+              } else {
+                await createPlaceBookmark({ placeId: place.id });
+              }
               setIsBookmark(!isBookmark);
             } catch (e) {
               if (e instanceof Error) {
@@ -161,6 +164,7 @@ export default function PlaceContents({ place }: { place: Place }) {
           onClick={() =>
             copyToClipBoard(`https://www.paw-paw.xyz/place/탑골공원`)
           }
+          aria-label="Share Place Url"
         >
           <Share className="w-6 h-6" />
         </button>

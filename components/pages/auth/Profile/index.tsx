@@ -220,6 +220,7 @@ export default function Profile({ title }: { title: string }) {
                     type="button"
                     onClick={CancelImageSelect}
                     className="absolute top-0 right-0"
+                    aria-label="Cancel Image Select"
                   >
                     <Cancel className="w-4 h-4 fill-grey-400" />
                   </button>
@@ -231,6 +232,7 @@ export default function Profile({ title }: { title: string }) {
                 type="button"
                 onClick={handleImageUploadButtonClick}
                 className="cursor-pointer rounded-full border border-grey-200 w-[38px] h-[38px] bg-white absolute bottom-0 right-0"
+                aria-label="Upload Image"
               >
                 <Pencil className="absolute transform -translate-x-1/2 -translate-y-1/2 fill-grey-200 top-1/2 left-1/2" />
               </button>

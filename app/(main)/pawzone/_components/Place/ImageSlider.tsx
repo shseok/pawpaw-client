@@ -2,9 +2,8 @@
 
 import X from '@/public/svgs/X.svg';
 import Image from 'next/image';
-import { Swiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { SwiperSlide } from 'swiper/react';
 import { cn } from '@/utils/common';
 
 interface Props {
@@ -25,7 +24,7 @@ export default function ImageSlider({
   return (
     <Swiper slidesPerView={3.5} spaceBetween={8} centerInsufficientSlides>
       {urls.map((url, idx) => (
-        <SwiperSlide key={idx}>
+        <SwiperSlide key={url}>
           <div className={cn('relative', wrapperClassName)}>
             {!isDeletableImage ? (
               <Image
@@ -39,8 +38,10 @@ export default function ImageSlider({
             ) : (
               <>
                 <button
+                  type="button"
                   className="absolute top-0 right-0 w-7 h-7 flex justify-center items-center bg-grey-600 cursor-pointer z-10"
                   onClick={deleteImage ? () => deleteImage(idx) : () => {}}
+                  aria-label="Delete Image"
                 >
                   <X className="w-5 h-5 fill-white" />
                 </button>

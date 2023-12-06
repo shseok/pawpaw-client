@@ -52,7 +52,11 @@ export default function BoardModal({ boardId }: { boardId: number }) {
     >
       <FlexBox direction="column" className="gap-4">
         <FlexBox justify="end" className="w-full">
-          <button type="button" onClick={() => router.back()}>
+          <button
+            type="button"
+            onClick={() => router.back()}
+            aria-label="Close Board Modal"
+          >
             <XIcon className="w-8 h-8" />
           </button>
         </FlexBox>

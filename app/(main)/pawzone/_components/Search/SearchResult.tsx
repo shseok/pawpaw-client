@@ -1,15 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import LoadingIcon from '@/public/svgs/loading.svg';
-import CardList from './CardList';
 import { searchPlace } from '@/service/pawzone';
 import { shallow } from 'zustand/shallow';
+import LoadingIcon from '@/public/svgs/loading.svg';
 import { useLocationStore } from '@/hooks/stores/useLocationStore';
-import Toast from '@/utils/notification';
 import { usePlaceModalStore } from '@/hooks/stores/usePlaceModalStore';
-import ModalButton from '../ModalButton';
+import Toast from '@/utils/notification';
 import { CATEGORY_MAP } from '@/constant/place';
+import ModalButton from '../ModalButton';
+import CardList from './CardList';
 
 interface Props {
   place: string;
@@ -60,9 +60,9 @@ export default function SearchResult({ place }: Props) {
     return () => {
       setPlaces([]);
     };
-  }, [center, bounds]);
+  }, [center, bounds, setPlaces]);
 
-  console.log(center, bounds);
+  // console.log(center, bounds);
   return (
     <>
       {isOpen && (

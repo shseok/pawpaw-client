@@ -1,7 +1,5 @@
 'use client';
 
-import MarkerIcon from '@/public/svgs/pawzone/park.svg';
-import Star from '@/public/svgs/Pawzone/star.svg';
 import ConfirmLocationModal from '@/components/ui/Modal/ConfirmLocationModal';
 import useGeolocation from '@/hooks/common/useGeolocation';
 import { useLocationStore } from '@/hooks/stores/useLocationStore';
@@ -13,32 +11,10 @@ import {
 } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
 import { shallow } from 'zustand/shallow';
+import Marker from './Marker';
 // import useSupercluster from 'use-supercluster';
 
 const KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY;
-
-const AnyReactComponent = ({
-  text,
-  rating,
-}: {
-  text: string;
-  rating: number;
-}) => (
-  <div className="flex min-w-[126px] justify-center items-center bg-white rounded-[100px] border border-primary-200 p-2 gap-1">
-    <div className="bg-primary-200 rounded-full p-2">
-      <MarkerIcon className="w-[22px] h-[22px] fill-white" />
-    </div>
-    <div className="flex flex-col">
-      <span className="caption1 text-grey-800">{text}</span>
-      <div className="flex gap-[2px]">
-        <Star className="w-[14px] h-[14px] fill-yellow-100" />
-        <span className="caption3 text-grey-800">
-          {rating ? rating : '평가 없음'}
-        </span>
-      </div>
-    </div>
-  </div>
-);
 
 export default function Map() {
   const { mapRef, center, places, setCenter, setBounds } = useLocationStore(
@@ -57,17 +33,18 @@ export default function Map() {
   const longitude = location?.coordinates?.lng ?? 0;
   const defaultLocation = { lat: latitude, lng: longitude };
 
+  // init map location
   useEffect(() => {
     async function getLocation() {
       await getLocationData();
     }
     getLocation();
-  }, []);
+  }, [getLocationData]);
 
   useEffect(() => {
     if (!defaultLocation.lat || !defaultLocation.lng) return;
     setCenter({ lat: defaultLocation.lat, lng: defaultLocation.lng });
-  }, [defaultLocation.lat, defaultLocation.lng]);
+  }, [defaultLocation.lat, defaultLocation.lng, setCenter]);
 
   const [selectedMarker, setSelectedMarker] = useState<{
     name: string;
@@ -91,12 +68,12 @@ export default function Map() {
           onLoad={(map) => {
             mapRef.current = map;
             map.addListener('tilesloaded', () => {
-              const bounds = map.getBounds();
-              const center = map.getCenter();
-              if (!bounds || !center) return;
-              const sw = bounds.getSouthWest();
-              const ne = bounds.getNorthEast();
-              setCenter({ lat: center.lat(), lng: center.lng() });
+              const mapBounds = map.getBounds();
+              const mapCenter = map.getCenter();
+              if (!mapBounds || !mapCenter) return;
+              const sw = mapBounds.getSouthWest();
+              const ne = mapBounds.getNorthEast();
+              setCenter({ lat: mapCenter.lat(), lng: mapCenter.lng() });
               setBounds({
                 sw: { lat: sw.lat(), lng: sw.lng() },
                 ne: { lat: ne.lat(), lng: ne.lng() },
@@ -142,7 +119,7 @@ export default function Map() {
               options={{ pixelOffset: new window.google.maps.Size(0, -25) }}
               // onCloseClick={() => setSelectedMarker(null)}
             >
-              <AnyReactComponent
+              <Marker
                 text={selectedMarker.name}
                 rating={selectedMarker.rating}
               />

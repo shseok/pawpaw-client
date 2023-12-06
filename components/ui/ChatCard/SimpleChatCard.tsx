@@ -33,6 +33,7 @@ export default function SimpleChatCard({ ...info }: ChatList) {
         <button
           type="button"
           onClick={() => copyToClipBoard(`https://www.paw-paw.xyz/chat/${id}`)}
+          aria-label="Share Chat Url"
         >
           <ShareIcon className="w-6 h-6" />
         </button>

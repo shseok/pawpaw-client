@@ -1,12 +1,11 @@
 'use client';
 
-import { Place } from '@/types/types';
 import Image from 'next/image';
-import React from 'react';
-import PlaceContents from './PlaceContents';
-import ModalButton from '../ModalButton';
+import { Place } from '@/types/types';
 import { usePlaceModalStore } from '@/hooks/stores/usePlaceModalStore';
 import { shallow } from 'zustand/shallow';
+import PlaceContents from './PlaceContents';
+import ModalButton from '../ModalButton';
 
 export default function PlaceResult({ item }: { item: Place }) {
   const { name, imageUrlList } = item;

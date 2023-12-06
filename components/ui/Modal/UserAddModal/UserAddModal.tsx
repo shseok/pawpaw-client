@@ -39,7 +39,11 @@ export default function UserAddModal({ onClose }: { onClose: () => void }) {
       className="w-screen tablet:w-[672px] gap-4  h-screen"
     >
       <div className="self-end hidden tablet:block">
-        <button type="button" onClick={onClose}>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close User Add Modal"
+        >
           <XIcon className="w-8 h-8 fill-white" />
         </button>
       </div>
@@ -52,6 +56,7 @@ export default function UserAddModal({ onClose }: { onClose: () => void }) {
             type="button"
             className="block tablet:hidden"
             onClick={onClose}
+            aria-label="Close User Add Modal"
           >
             <ArrowLeftIcon className="w-6 h-6" />
           </button>

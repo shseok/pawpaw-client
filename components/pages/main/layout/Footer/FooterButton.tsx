@@ -48,6 +48,7 @@ export default function FooterButton({
         type="button"
         className="w-[18x] h-[18px] mb-1"
         onClick={clickHandler}
+        aria-label="Click Footer Button"
       >
         <ButtonIcon className={buttonStyle} />
       </button>

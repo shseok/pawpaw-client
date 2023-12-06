@@ -49,6 +49,7 @@ export default function SocialButton({
       type="button"
       className={buttonStyle}
       onClick={() => handleLogin(socialProvider)}
+      aria-label="Social Login"
     >
       <ButtonIcon className={sizes[size].svg} />
     </button>

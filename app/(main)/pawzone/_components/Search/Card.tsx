@@ -6,7 +6,7 @@ import Chip from '../Chip';
 
 interface Props {
   idx: number;
-  tag?: string[];
+  // tag?: string[];
   name: string;
   imageSrc: string;
   address: string;
@@ -16,7 +16,7 @@ interface Props {
 
 export default function Card({
   idx,
-  tag,
+  // tag,
   name,
   imageSrc,
   address,
@@ -26,6 +26,7 @@ export default function Card({
   return (
     <li className="shadow-chatCard rounded-[10px]">
       <Link href={`/pawzone/place/${idx}`} className="flex flex-col gap-4 p-5">
+        {/* tag 기능 활성화시 적용 */}
         <div className="flex gap-2">
           <Chip type="hot" />
           <Chip type="clean" />

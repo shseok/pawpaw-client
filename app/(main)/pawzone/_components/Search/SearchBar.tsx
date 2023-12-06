@@ -14,7 +14,10 @@ interface Props {
   isCategory?: boolean;
 }
 
-export default function SearchBar({ initPlace = '', isCategory = false }: Props) {
+export default function SearchBar({
+  initPlace = '',
+  isCategory = false,
+}: Props) {
   const { isOpen } = usePlaceModalStore(
     (state) => ({ isOpen: state.isOpen, setIsOpen: state.setIsOpen }),
     shallow,
@@ -50,7 +53,10 @@ export default function SearchBar({ initPlace = '', isCategory = false }: Props)
           resetValue={onReset}
           placeholder="반려동물을 위한 장소를 찾아보세요!"
           onClickSearchIcon={searchPlace}
-          className={cn('focus-primary', !!place ? null : 'shadow-searchBar')}
+          className={cn(
+            'focus-primary',
+            place !== '' ? null : 'shadow-searchBar',
+          )}
         />
         {isCategory && (
           <div className="flex gap-2 items-center">
