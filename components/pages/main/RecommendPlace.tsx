@@ -108,7 +108,7 @@ export default function RecommendPlace() {
             }
             alt={placeDetail?.name ?? '매장 사진'}
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority
             className=" rounded-[10px] object-cover"
           />

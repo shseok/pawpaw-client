@@ -6,7 +6,7 @@ import ImageSlider from './ImageSlider';
 interface Props {
   ImageSrc: string;
   name: string;
-  subName: string;
+  subName?: string;
   rating: number;
   description: string;
   placeReviewImageList?: string[];
@@ -28,7 +28,8 @@ export default function ReviewCard({
             src={ImageSrc}
             alt="Uploaded Profile"
             fill
-            sizes="100vw"
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover w-full h-full rounded-full"
           />
         </div>

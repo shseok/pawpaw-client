@@ -25,7 +25,8 @@ export default function PlaceResult({ item }: { item: Place }) {
                   src={imageUrlList[0]}
                   alt={name}
                   fill
-                  sizes="100vw"
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover"
                 />
                 <div className="absolute bottom-0 left-0 h-[30px] w-full bg-white rounded-t-[20px]" />

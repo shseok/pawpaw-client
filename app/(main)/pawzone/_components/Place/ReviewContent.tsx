@@ -113,7 +113,7 @@ export default function ReviewContent({
         {reviews?.map((review) => (
           <ReviewCard
             name={review.reviewerNickname}
-            subName="2살 초코"
+            // subName="2살 초코"
             description={review.content}
             rating={review.score}
             ImageSrc={review.reviewerImageUrl}
