@@ -77,7 +77,7 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
       .catch((error) => {
         console.error(error);
       });
-  }, [myInfo, setImageFiles, setImagePreviews, setValueByInput]);
+  }, [myInfo]);
 
   const params = useParams();
   const { mutate: mutateReview, isLoading } = useMutateReview({

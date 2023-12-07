@@ -83,7 +83,7 @@ export default function PlaceContents({ place }: { place: Place }) {
     });
 
     setPlaces([place]);
-  }, [mapRef, setCenter, setPlaces]);
+  }, [mapRef]);
 
   return (
     <div className="px-[30px] pb-[30px] bg-white rounded-t-lg-5 h-full flex flex-col flex-1 gap-4">
