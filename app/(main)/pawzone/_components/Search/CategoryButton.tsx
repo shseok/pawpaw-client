@@ -1,11 +1,11 @@
 import ParkIcon from '@/public/svgs/pawzone/park.svg';
 import CafeIcon from '@/public/svgs/pawzone/cafe.svg';
 import RestaurantIcon from '@/public/svgs/pawzone/restaurant.svg';
+import { useRouter } from 'next/navigation';
 
 type PlaceType = keyof typeof placeMap;
 interface Props {
   type: PlaceType;
-  handleSearchPlace: () => void;
 }
 
 const categoryType = {
@@ -20,13 +20,16 @@ const placeMap = {
   PARK: ParkIcon,
 } as const;
 
-export default function CategoryButton({ type, handleSearchPlace }: Props) {
+export default function CategoryButton({ type }: Props) {
+  const router = useRouter();
   const ButtonIcon = placeMap[type];
   return (
     <button
-      type="submit"
+      type="button"
       className="flex gap-1 items-center mt-4 py-2 px-[22px] bg-white rounded-[500px] shadow-searchBar"
-      onClick={handleSearchPlace}
+      onClick={() => {
+        router.push(`/pawzone/search/${categoryType[type]}`);
+      }}
     >
       <ButtonIcon className="w-[22px] h-[22px] fill-primary-200" />
       <span className="body4 text-grey-800">{categoryType[type]}</span>

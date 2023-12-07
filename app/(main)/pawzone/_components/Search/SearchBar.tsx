@@ -22,8 +22,7 @@ export default function SearchBar({
     (state) => ({ isOpen: state.isOpen, setIsOpen: state.setIsOpen }),
     shallow,
   );
-  const [place, onChangePlace, resetInput, setValueByInput] =
-    useInput(initPlace);
+  const [place, onChangePlace, resetInput] = useInput(initPlace);
   const router = useRouter();
   const searchPlace = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
@@ -60,18 +59,9 @@ export default function SearchBar({
         />
         {isCategory && (
           <div className="flex gap-2 items-center">
-            <CategoryButton
-              type="RESTAURANT"
-              handleSearchPlace={() => setValueByInput('맛집')}
-            />
-            <CategoryButton
-              type="CAFE"
-              handleSearchPlace={() => setValueByInput('카페')}
-            />
-            <CategoryButton
-              type="PARK"
-              handleSearchPlace={() => setValueByInput('공원')}
-            />
+            <CategoryButton type="RESTAURANT" />
+            <CategoryButton type="CAFE" />
+            <CategoryButton type="PARK" />
           </div>
         )}
       </div>
