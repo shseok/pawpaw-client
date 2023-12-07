@@ -6,7 +6,7 @@ import X from '@/public/svgs/X.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
 import Camera from '@/public/svgs/Camera.svg';
 import LoadingIcon from '@/public/svgs/loading.svg';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { cn } from '@/utils/common';
 import { convertUrlsToFiles } from '@/utils/convertUrlsToFiles';
 import useInput from '@/hooks/common/useInput';
@@ -32,6 +32,7 @@ const defaultInfo = {
 };
 
 export default function ReviewModal({ open, onClose, myInfo }: Props) {
+  const router = useRouter();
   const [starNum, setStarNum] = useState(defaultInfo.score);
   const [text, onChangeValue, , setValueByInput] = useInput(
     defaultInfo.content,
@@ -114,6 +115,7 @@ export default function ReviewModal({ open, onClose, myInfo }: Props) {
         ? myInfo.placeReviewImageList.map((list) => list.id)
         : undefined,
     });
+    router.refresh();
     initState();
   };
   const title = myInfo ? '리뷰 수정' : '리뷰 작성';
