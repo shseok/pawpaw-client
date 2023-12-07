@@ -8,6 +8,7 @@ import {
   InfoWindowF,
   LoadScript,
   MarkerF,
+  useLoadScript,
 } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
 import { shallow } from 'zustand/shallow';
@@ -15,6 +16,7 @@ import Marker from './Marker';
 // import useSupercluster from 'use-supercluster';
 
 const KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY;
+const libraries = ['places'];
 
 export default function Map() {
   const { mapRef, center, places, setCenter, setBounds } = useLocationStore(
@@ -32,6 +34,11 @@ export default function Map() {
   const latitude = location?.coordinates?.lat ?? 0;
   const longitude = location?.coordinates?.lng ?? 0;
   const defaultLocation = { lat: latitude, lng: longitude };
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY as string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    libraries: libraries as any,
+  });
 
   // init map location
   useEffect(() => {
@@ -39,7 +46,7 @@ export default function Map() {
       await getLocationData();
     }
     getLocation();
-  }, [getLocationData]);
+  }, []);
 
   useEffect(() => {
     if (!defaultLocation.lat || !defaultLocation.lng) return;
@@ -59,7 +66,7 @@ export default function Map() {
 
   return (
     <div className="w-full h-full flex items-center justify-center absolute top-0 left-0">
-      <LoadScript googleMapsApiKey={KEY}>
+      {isLoaded && (
         <GoogleMap
           options={{ disableDefaultUI: true, zoomControl: true }}
           mapContainerStyle={{ width: '100%', height: '100%' }}
@@ -126,7 +133,7 @@ export default function Map() {
             </InfoWindowF>
           )}
         </GoogleMap>
-      </LoadScript>
+      )}
       <ConfirmLocationModal
         open={isOpen}
         onClose={async () => {
