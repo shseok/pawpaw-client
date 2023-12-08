@@ -3,14 +3,8 @@
 import ConfirmLocationModal from '@/components/ui/Modal/ConfirmLocationModal';
 import useGeolocation from '@/hooks/common/useGeolocation';
 import { useLocationStore } from '@/hooks/stores/useLocationStore';
-import {
-  GoogleMap,
-  InfoWindowF,
-  LoadScript,
-  MarkerF,
-  useLoadScript,
-} from '@react-google-maps/api';
-import { useEffect, useState } from 'react';
+import { GoogleMap, useLoadScript } from '@react-google-maps/api';
+import { useEffect } from 'react';
 import { shallow } from 'zustand/shallow';
 import Marker from './Marker';
 // import useSupercluster from 'use-supercluster';
@@ -53,12 +47,12 @@ export default function Map() {
     setCenter({ lat: defaultLocation.lat, lng: defaultLocation.lng });
   }, [defaultLocation.lat, defaultLocation.lng, setCenter]);
 
-  const [selectedMarker, setSelectedMarker] = useState<{
-    name: string;
-    rating: number;
-    lat: number;
-    lng: number;
-  } | null>(null);
+  // const [selectedMarker, setSelectedMarker] = useState<{
+  //   name: string;
+  //   rating: number;
+  //   lat: number;
+  //   lng: number;
+  // } | null>(null);
 
   if (!KEY) {
     throw new Error('Google Map API key is missing');
@@ -95,32 +89,41 @@ export default function Map() {
           // }}
         >
           {places.map((place) => (
-            <MarkerF
+            // <MarkerF
+            //   position={{
+            //     lat: place.position.latitude,
+            //     lng: place.position.longitude,
+            //   }}
+            //   key={place.id}
+            //   // onClick={() => {
+            //   //   setCenter({
+            //   //     lat: place.position.latitude,
+            //   //     lng: place.position.longitude,
+            //   //   });
+            //   // }}
+            //   onMouseOver={() => {
+            //     setSelectedMarker({
+            //       name: place.name,
+            //       rating: place.score ? Math.round(place.score * 10) / 10 : 0,
+            //       lat: place.position.latitude,
+            //       lng: place.position.longitude,
+            //     });
+            //   }}
+            //   onMouseOut={() => {
+            //     setSelectedMarker(null);
+            //   }}
+            // />
+            <Marker
               position={{
                 lat: place.position.latitude,
                 lng: place.position.longitude,
               }}
               key={place.id}
-              // onClick={() => {
-              //   setCenter({
-              //     lat: place.position.latitude,
-              //     lng: place.position.longitude,
-              //   });
-              // }}
-              onMouseOver={() => {
-                setSelectedMarker({
-                  name: place.name,
-                  rating: place.score ? Math.round(place.score * 10) / 10 : 0,
-                  lat: place.position.latitude,
-                  lng: place.position.longitude,
-                });
-              }}
-              onMouseOut={() => {
-                setSelectedMarker(null);
-              }}
+              text={place.name}
+              rating={place.score}
             />
           ))}
-          {selectedMarker && (
+          {/* {selectedMarker && (
             <InfoWindowF
               position={selectedMarker}
               options={{ pixelOffset: new window.google.maps.Size(0, -25) }}
@@ -131,7 +134,7 @@ export default function Map() {
                 rating={selectedMarker.rating}
               />
             </InfoWindowF>
-          )}
+          )} */}
         </GoogleMap>
       )}
       <ConfirmLocationModal
