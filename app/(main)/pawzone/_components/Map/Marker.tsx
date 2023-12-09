@@ -42,7 +42,7 @@ export default function Marker({ position, text, rating, placeIndex }: Props) {
           <div className="flex gap-[2px] w-max">
             <Star className="w-[14px] h-[14px] fill-yellow-100" />
             <span className="caption3 text-grey-800">
-              {rating || '평가 없음'}
+              {rating ? Math.round(rating * 10) / 10 : '평가 없음'}
             </span>
           </div>
         </div>

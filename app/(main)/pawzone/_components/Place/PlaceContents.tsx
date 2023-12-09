@@ -21,9 +21,8 @@ import Chip from '../Chip';
 export default function PlaceContents({ place }: { place: Place }) {
   const [isBookmark, setIsBookmark] = useState(place.bookmarked);
   const [isTimeOpen, setIsTimeOpen] = useState(false);
-  const { mapRef, setPlaces, setCenter } = useLocationStore(
+  const { setPlaces, setCenter } = useLocationStore(
     (state) => ({
-      mapRef: state.mapRef,
       setCenter: state.setCenter,
       setPlaces: state.setPlaces,
     }),
@@ -73,17 +72,12 @@ export default function PlaceContents({ place }: { place: Place }) {
   });
 
   useEffect(() => {
-    if (!mapRef || !mapRef.current) return;
-    mapRef.current.addListener('tilesloaded', () => {
-      // console.log('tilesloaded');
-      setCenter({
-        lat: place.position.latitude,
-        lng: place.position.longitude,
-      });
-    });
-
     setPlaces([place]);
-  }, [mapRef]);
+    setCenter({
+      lat: place.position.latitude,
+      lng: place.position.longitude,
+    });
+  }, []);
 
   return (
     <div className="px-[30px] pb-[30px] bg-white rounded-t-lg-5 h-full flex flex-col flex-1 gap-4">
