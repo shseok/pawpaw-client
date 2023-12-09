@@ -5,6 +5,9 @@ export default function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const query = pathname === '/' ? '' : `?next=${pathname}`;
   const isAuthPath = pathname.startsWith('/auth');
+  if (pathname === '/pawzone') {
+    return NextResponse.next();
+  }
   if (isAuthPath && hasToken) {
     // 유저가 토큰을 가지고 auth 페이지에 접근하면 홈으로 리디렉션
     if (pathname.startsWith('/auth/complete')) {
@@ -20,7 +23,6 @@ export default function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
   matcher: [
     '/',
