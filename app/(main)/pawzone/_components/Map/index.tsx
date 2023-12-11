@@ -79,7 +79,6 @@ export default function Map() {
   if (!KEY) {
     throw new Error('Google Map API key is missing');
   }
-  console.log(clusters.length);
   return (
     <div className="w-full h-full flex items-center justify-center absolute top-0 left-0">
       {isLoaded && (
