@@ -37,11 +37,20 @@ export default function SearchInput({
       />
       <div className="absolute inset-y-0 top-0 flex gap-2 right-4">
         {value && (
-          <button type="button" onClick={resetValue}>
+          <button
+            type="button"
+            onClick={resetValue}
+            aria-label="Delete Search Input"
+          >
             <InputDeleteIcon className="w-5 h-5 " />
           </button>
         )}
-        <button type="button" className="" onClick={onClickSearchIcon}>
+        <button
+          type="button"
+          className=""
+          onClick={onClickSearchIcon}
+          aria-label="Search Words"
+        >
           <SearchIcon className="w-6 h-6" />
         </button>
       </div>

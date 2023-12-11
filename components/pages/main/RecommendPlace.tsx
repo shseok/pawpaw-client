@@ -1,25 +1,23 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
-import { useJsApiLoader, GoogleMap } from '@react-google-maps/api';
+import { useCallback, useState } from 'react';
 import Image from 'next/image';
-import FlexBox from '@/components/ui/FlexBox';
+import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import ArrowClockIcon from '@/public/svgs/ArrowClockwise.svg';
+import FlexBox from '@/components/ui/FlexBox';
 import useGetUserInfo from '@/hooks/queries/useGetUserInfo';
 
 type RecommendedPlaceDetail = google.maps.places.PlaceResult;
+
+const libraries = ['places'];
 
 export default function RecommendPlace() {
   const [placeDetail, setPlaceDetail] = useState<RecommendedPlaceDetail>();
   const [placesArray, setPlacesArray] = useState<RecommendedPlaceDetail[]>([]);
   const [distance, setDistance] = useState('');
   const { data } = useGetUserInfo();
-
-  const libraries = useMemo(() => ['places'], []);
-  const { isLoaded } = useJsApiLoader({
-    language: 'KO',
-    id: 'google-map-script',
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY as string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     libraries: libraries as any,
   });
@@ -92,25 +90,32 @@ export default function RecommendPlace() {
         <p>
           <span className="text-primary-300">수박이</span>와 가기 좋은 장소
         </p>
-        <button type="button" onClick={changePlaceByIndex}>
+        <button
+          type="button"
+          onClick={changePlaceByIndex}
+          aria-label="Change Place"
+        >
           <ArrowClockIcon />
         </button>
       </h3>
       <div className="w-full rounded-[10px] shadow-chatCard p-5 h-64 gap-5 flex flex-col">
-        <Image
-          src={
-            placeDetail?.photos
-              ? placeDetail.photos[0].getUrl()
-              : '/images/default.png'
-          }
-          alt={placeDetail?.name ?? '매장 사진'}
-          width={300}
-          height={100}
-          priority
-          className="w-full h-32 rounded-[10px] object-fill"
-        />
+        <div className="relative w-full h-[149px]">
+          <Image
+            src={
+              placeDetail?.photos
+                ? placeDetail.photos[0].getUrl()
+                : '/images/default.png'
+            }
+            alt={placeDetail?.name ?? '매장 사진'}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority
+            className=" rounded-[10px] object-cover"
+          />
+        </div>
+
         <div className="hidden">
-          {isLoaded && <GoogleMap onLoad={(map) => onMapLoad(map)} />}
+          {isLoaded && data && <GoogleMap onLoad={(map) => onMapLoad(map)} />}
         </div>
         <FlexBox direction="column" align="start" className="w-full gap-1">
           <div className="flex gap-1">

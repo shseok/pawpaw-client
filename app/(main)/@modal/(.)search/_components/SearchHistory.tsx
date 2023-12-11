@@ -44,6 +44,7 @@ export default function SearchHistory({
               type="button"
               className=""
               onClick={() => removeSearchTerm(search)}
+              aria-label="Delete Search History"
             >
               <XIcon className="w-4 h-4" />
             </button>

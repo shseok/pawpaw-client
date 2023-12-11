@@ -58,7 +58,7 @@ export default function ConfirmForm({ setIsActive }: Props) {
           birthday: birthDay,
           recipient: phoneNumber,
         });
-        alert('다시 인증해주세요.');
+        Toast.error('다시 인증해주세요.');
         setIsDuplicatedRequest(false);
         inputRef.current?.focus();
       } catch (e) {

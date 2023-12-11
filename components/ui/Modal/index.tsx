@@ -11,6 +11,7 @@ interface ModalProps {
   children: ReactNode;
   open: boolean;
   onClose: () => void;
+  isClickableOverlay?: boolean;
 }
 function Overlay({
   children,
@@ -31,7 +32,12 @@ function Overlay({
 function ModalWrapper({ children }: { children: ReactNode }) {
   return <div onClick={(event) => event.stopPropagation()}>{children}</div>;
 }
-export default function Modal({ children, open, onClose }: ModalProps) {
+export default function Modal({
+  children,
+  open,
+  onClose,
+  isClickableOverlay = true,
+}: ModalProps) {
   const [modalRoot, setModalRoot] = useState<Element | null>(null);
 
   useEffect(() => {
@@ -59,7 +65,7 @@ export default function Modal({ children, open, onClose }: ModalProps) {
   return createPortal(
     <>
       {open && (
-        <Overlay onClose={onClose}>
+        <Overlay onClose={isClickableOverlay ? onClose : () => {}}>
           <FocusLock>
             <ModalWrapper>{children}</ModalWrapper>
           </FocusLock>

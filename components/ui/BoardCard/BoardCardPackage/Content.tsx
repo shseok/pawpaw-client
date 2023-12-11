@@ -93,12 +93,20 @@ export default function BoardCardContent({
                 className="rounded-[20px]"
               />
               <FlexBox className="absolute top-1/2 left-3 bg-white/50 rounded-[20px]">
-                <button type="button" onClick={downImgNum}>
+                <button
+                  type="button"
+                  onClick={downImgNum}
+                  aria-label="Down Image Num"
+                >
                   <CaretLeft className="w-6 h-6 fill-grey-400 hover:fill-white" />
                 </button>
               </FlexBox>
               <FlexBox className="absolute top-1/2 right-3 bg-white/50 rounded-[20px]">
-                <button type="button" onClick={upImgNum}>
+                <button
+                  type="button"
+                  onClick={upImgNum}
+                  aria-label="Up Image Num"
+                >
                   <CaretRight className="w-6 h-6 fill-grey-400 hover:fill-white" />
                 </button>
               </FlexBox>

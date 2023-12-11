@@ -46,7 +46,11 @@ export default function BoardCardModalComments({
           </div>
           <FlexBox className="gap-1" align="start">
             <div className="caption2 text-grey-500">1일전</div>
-            <button type="button" onClick={() => setShowSmallModal(true)}>
+            <button
+              type="button"
+              onClick={() => setShowSmallModal(true)}
+              aria-label="Show Comment Modal"
+            >
               <DotsIcon className="hidden w-4 h-4 group-hover:block" />
             </button>
             <Modal

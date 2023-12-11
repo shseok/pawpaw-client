@@ -52,7 +52,7 @@ export default function ScheduleAddModal({
   return (
     <FlexBox direction="column" className=" w-screen md:w-[672px] gap-4 ">
       <div className="self-end hidden md:block">
-        <button type="button" onClick={closeModal}>
+        <button type="button" onClick={closeModal} aria-label="Close User Add Modal">
           <XIcon className="w-8 h-8 fill-white" />
         </button>
       </div>

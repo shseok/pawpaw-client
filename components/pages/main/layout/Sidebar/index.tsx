@@ -18,7 +18,7 @@ export default function Sidebar() {
   return (
     <nav
       className={cn(
-        'sticky left-0 top-0 h-screen hidden tablet:block tablet:w-24 desktop:w-64 bg-grey-100',
+        'sticky left-0 top-0 h-screen hidden tablet:block tablet:w-24 desktop:w-64 bg-grey-100 z-10',
         toggle
           ? 'tablet:w-24 desktop:w-64 transtion-none'
           : 'tablet:w-24 desktop:w-24 transition-width duration-200 ease-in-out',

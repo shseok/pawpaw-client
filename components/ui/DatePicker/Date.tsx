@@ -25,15 +25,27 @@ export default function Date({
       <div className="flex items-center justify-between px-3">
         <div className="flex gap-1 caption1">
           <span>{format(selectedDate, 'MMM yyyy')}</span>
-          <button type="button" onClick={onChangePickerType}>
+          <button
+            type="button"
+            onClick={onChangePickerType}
+            aria-label="Change Pick Type"
+          >
             <CaretDownIcon className="w-4 h-4" />
           </button>
         </div>
         <div className="flex gap-2">
-          <button type="button" onClick={prevMonth}>
+          <button
+            type="button"
+            onClick={prevMonth}
+            aria-label="Click Previous Month"
+          >
             <CaretLeftIcon className="w-4 h-4 fill-grey-400" />
           </button>
-          <button type="button" onClick={nextMonth}>
+          <button
+            type="button"
+            onClick={nextMonth}
+            aria-label="Click Next Month"
+          >
             <CaretRightIcon className="w-4 h-4 fill-grey-400" />
           </button>
         </div>

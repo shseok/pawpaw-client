@@ -34,8 +34,12 @@ module.exports = {
           200: '#0ABE7D',
           100: '#CFF4D2',
           50: '#F5FFF6',
+          30: '#0ABE7D4D',
         },
-        yellow: '#FFD232',
+        yellow: {
+          100: '#FFD232',
+          30: '#FFD2324D',
+        },
         purple: '#B85FFF',
         red: '#FF3257',
         grey: {
@@ -58,10 +62,20 @@ module.exports = {
       },
       borderColor: {
         DEFAULT: '#E9EBED',
+        primary: {
+          300: '#08995C',
+          200: '#0ABE7D',
+          100: '#CFF4D2',
+          50: '#F5FFF6',
+        },
       },
       boxShadow: {
         chatCard: '0px 0px 20px 0px #00000014',
         dropdown: '0px 0px 14px 0px #07D5801A',
+        searchTab:
+          '0 1px 2px rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15)',
+        searchBar:
+          '0 1px 2px rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15)',
       },
       screens: {
         '2xs': '430px',

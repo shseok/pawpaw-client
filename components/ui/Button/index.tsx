@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/utils/common';
 import Link from 'next/link';
 import { MouseEventHandler, ReactNode } from 'react';
 
@@ -47,7 +48,14 @@ export default function Button({
   const disabledClass = disabled
     ? `opacity-50 cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-400 disabled:border-none`
     : '';
-  const styles = `rounded-[10px] ${sizeClass} ${fwClass} ${variantClass} ${disabledClass} ${className}`;
+  const styles = cn(
+    'rounded-[10px]',
+    sizeClass,
+    fwClass,
+    variantClass,
+    disabledClass,
+    className,
+  );
   return to ? (
     <Link href={to} className={`${styles} text-center`}>
       {children}
