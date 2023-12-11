@@ -10,7 +10,6 @@ import { stringify } from 'qs';
 export async function createUserWithSocialLogin(params: AuthParams) {
   const formData = new FormData();
   const { body, image } = params;
-  console.log(body);
   formData.append(
     'body',
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),
@@ -41,7 +40,6 @@ export async function createUserWithSocialLogin(params: AuthParams) {
 export async function createUserWithEmailAndPassword(params: EmailAuthParams) {
   const formData = new FormData();
   const { body, image } = params;
-  console.log(body);
   formData.append(
     'body',
     new Blob([JSON.stringify({ ...body })], { type: 'application/json' }),

@@ -106,12 +106,6 @@ export default function Map() {
               setZoom(mapZoom);
             });
           }}
-          // onZoomChanged={() => {
-          //   if (!mapRef.current) return;
-          //   const zoom = mapRef.current.getZoom();
-          //   if (!zoom) return;
-          //   // setZoom(zoom);
-          // }}
         >
           {clusters.map((cluster) => {
             const [lng, lat] = cluster.geometry.coordinates;

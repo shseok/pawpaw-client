@@ -1,4 +1,4 @@
-import MarkerIcon from '@/public/svgs/pawzone/park.svg';
+import MarkerIcon from '@/public/svgs/Pawzone/park.svg';
 import Star from '@/public/svgs/Pawzone/star.svg';
 import { OverlayView } from '@react-google-maps/api';
 import { useRouter } from 'next/navigation';

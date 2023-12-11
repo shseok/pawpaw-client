@@ -203,7 +203,6 @@ export async function deletePlaceReviewImage({
     { placeReviewImageIdList },
     { arrayFormat: 'repeat', addQueryPrefix: true },
   );
-  console.log(queryString);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/place/${placeId}/review/${placeReviewId}/image`.concat(
       queryString,

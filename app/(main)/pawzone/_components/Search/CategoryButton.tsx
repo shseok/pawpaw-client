@@ -1,6 +1,6 @@
-import ParkIcon from '@/public/svgs/pawzone/park.svg';
-import CafeIcon from '@/public/svgs/pawzone/cafe.svg';
-import RestaurantIcon from '@/public/svgs/pawzone/restaurant.svg';
+import ParkIcon from '@/public/svgs/Pawzone/park.svg';
+import CafeIcon from '@/public/svgs/Pawzone/cafe.svg';
+import RestaurantIcon from '@/public/svgs/Pawzone/restaurant.svg';
 import { useRouter } from 'next/navigation';
 
 type PlaceType = keyof typeof placeMap;
